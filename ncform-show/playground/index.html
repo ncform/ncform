@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ncform playground</title>
+    <link rel="stylesheet" href="../assets/index.css">
+</head>
+<style>
+  * {margin: 0; padding: 0;}
+  .invalid-feedback {
+    margin-top: .25rem;
+    font-size: .875rem;
+    color: #dc3545;
+  }
+</style>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo">
+    <playground></playground>
+  </div>
+  <script type="text/javascript" src="../assets/ace.js"></script>
+  <script type="text/javascript" src="../assets/vue.min.js"></script>
+  <script type="text/javascript" src="../assets/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../assets/vueNcform.min.js"></script>
+  <script type="text/javascript" src="../assets/ncformStdComps.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/mockjs"></script>
+  <script src="https://unpkg.com/js-url"></script>
+  <script type="text/javascript" src="../assets/playground.js"></script>
+  <script type="text/javascript">
+
+    Mock.mock(/getProvinces/, function (options) {
+      return [{ "id": 1, "name": "广东" }, { "id": 2, "name": "北京" }]
+    })
+    Mock.mock(/getCities/, function (options) {
+      let params = url('?', options.url) || {};
+      let result = {
+        1: [{ id: 10, name: '广州' }, { id: 20, name: '汕头' }],
+        2: [{ id: 30, name: '北京' }]
+      }
+      let res = result[params.provinceId] || [];
+      return res.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
+    })
+
+    Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      components: {
+        playground: playground
+      }
+    });
+  </script>
+</body>
+</html>
