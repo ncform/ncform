@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <title>select widget</title>
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" v-cloak>
+    <ncform :form-schema="formSchema" v-model="model"></ncform>
+  </div>
+
+  <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+  <script type="text/javascript" src="../../dist/select.js"></script>
+  <script type="text/javascript" src="../../dist/object.js"></script>
+
+  <script type="text/javascript">
+    Vue.use(vueNcform, { extComponents: { object, select } });
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchema: {
+          "type": "object",
+          "properties": {
+            "province": {
+              "type": "string",
+              "ui": {
+                "widget": "select",
+                "widgetConfig": {
+                  "itemLabelField": "name",
+                  "itemValueField": "id",
+                  "enumSourceRemote": {
+                    "remoteUrl": "/api/test/getProvinces",
+                    "paramName": "keyword"
+                  }
+                }
+              }
+            },
+            "city": {
+              "type": "string",
+              "ui": {
+                "widget": "select",
+                "widgetConfig": {
+                  "itemLabelField": "name",
+                  "itemValueField": "id",
+                  "enumSourceRemote": {
+                    "remoteUrl": "/api/test/getCities",
+                    "paramName": "keyword",
+                    "otherParams": {
+                      "provinceId": "dx: {{$root.province}}"
+                    },
+                    selectFirstItem: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        model: {
+          province: 2,
+          city: 30
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>
