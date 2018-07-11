@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "nice form",
   "homepage": "",
   "author": "daniel.xiao",
@@ -57,7 +57,7 @@
     "dist"
   ],
   "dependencies": {
-    "@ncform/ncform-common": "^0.0.1",
+    "@ncform/ncform-common": "^0.1.0",
     "extend": "^3.0.1",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8"

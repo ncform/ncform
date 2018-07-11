@@ -1,7 +1,7 @@
 {
   "name": "ncform-show",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "ncform show",
   "homepage": "",
   "author": "daniel",
@@ -59,9 +59,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ncform/ncform": "^0.0.1",
-    "@ncform/ncform-common": "^0.0.1",
-    "@ncform/ncform-theme-elementui": "^0.0.1",
+    "@ncform/ncform": "^0.1.0",
+    "@ncform/ncform-common": "^0.1.0",
+    "@ncform/ncform-theme-elementui": "^0.1.0",
     "ace-builds": "^1.2.9",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8"
