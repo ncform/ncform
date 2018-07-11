@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform-common",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "ncform common",
   "main": "dist/ncformCommon.min.js",
   "scripts": {
@@ -61,5 +61,8 @@
     "extend": "^3.0.1",
     "lodash-es": "^4.17.4",
     "power-assert": "^1.4.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
