@@ -1,22 +1,22 @@
-## ncform配置详解
+## ncform配置详解
 
 ```js
 {
   title: '表单名称', // 根节点：表单名称
   description: '表单描述', // 根节点：表单描述
   type: 'object', // 根节点：只能是object
-  properties: { // 根节点：表单字段
+  properties: { // 根节点：表单字段
     firstName: {
       
-      /* 数据 */
+      /* 数据 */
       type: 'string', // 数据类型 string / number / integer / boolean / object / array 
-      value: '', // 数据的值
+      value: '', // 数据的值
       default: '', // 数据的默认值，value为空的时候取该值
 
       /* UI */
       ui: {
 
-        columns: 6, // 占用列数，一共12列。6代表占一半
+        columns: 6, // 占用列数，一共12列。6代表占一半
         label: 'First Name', // 标签内容
         showLabel: true, // 是否显示标签（当为false不显示时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
@@ -98,7 +98,7 @@
         maxProperties,
         minProperties,
 
-        /* 自定义的验证规则 */
+        /* 自定义的验证规则 */
         customRule: [{
           script: '', // 【支持dx表达式】
           errMsg: '', // 验证错误信息
@@ -112,12 +112,12 @@
       },
     }
   },
-  globalConfig: { // 根节点：全局配置
+  globalConfig: { // 根节点：全局配置
     style: { // 全局样式配置
       formCls: '', // form class
       invalidFeedbackCls: '', // invalid feedback class 
     },
-    constants: { // 全局常量配置，可在dx表达中通过{{$const.}}来访问，如{{$const.userName}}
+    constants: { // 全局常量配置，可在dx表达中通过{{$const.}}来访问，如{{$const.userName}}
       userName: 'daniel'
     }
   }

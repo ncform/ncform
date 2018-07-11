@@ -20,7 +20,7 @@ npm i ncform ncform-common --save
 npm i ncform-theme-elementui element-ui --save 
 ```
 
-2.import
+2.import
 ```
 import Vue from 'vue';
 import vueNcform from 'ncform';
@@ -111,13 +111,13 @@ Vue.use(vueNcform, { extComponents: ncformStdComps });
 
 ## 特性
 
-- 配置生成：一个JSON数据结构完整描述一个表单的UI及其交互行为，表单的开发工作就完成了
+- 配置生成：一个JSON数据结构完整描述一个表单的UI及其交互行为，表单的开发工作就完成了
 
-- 灵活互动：通过强大的`dx表达式`，表单控件可灵活与其它表单控件进行互动
+- 灵活互动：通过强大的`dx表达式`，表单控件可灵活与其它表单控件进行互动
 
 - 标准组件：ncform定义了一套标准的表单组件配置规范，未经扩展即可满足你90%以上的表单开发需求
 
-- 校验丰富：自带常用的十几种验证规则，满足你90%以上的表单验证需求
+- 校验丰富：自带常用的十几种验证规则，满足你90%以上的表单验证需求
 
 - 扩展友好：表单的组件和校验规则都可灵活扩展，并且提供了工具简化扩展工作
 
@@ -129,7 +129,7 @@ Vue.use(vueNcform, { extComponents: ncformStdComps });
 
 - [How to extend](./EXT-DOC.md)
 
-## 解决痛点
+## 解决痛点
 
 后台管理系统中绝大部分的功能不是查询列表，就是录入表单。  
 表单的开发是一种无趣的，无营养的，高消耗的重复体力活，费时费力。  
@@ -154,13 +154,13 @@ SO，为了提高表单开发效率，减少失误，提高表单规范和健壮
 
 为了解决以上问题，走上了造轮子之路。。。
 
-## 为什么不用标准的json-schema？
+## 为什么不用标准的json-schema？
 
 因为json-schema是面向数据(data)而非表单(ui)，对于声明一个表单不太友好。  
 
 对于一个表单，关心的是有哪些表单项，表单项长啥样，校验规则怎样，这些都跟字段相关，在一处管理最直观
 
-来个简单的对比：
+来个简单的对比：
 
 - json-schema例子：
 
@@ -170,7 +170,7 @@ SO，为了提高表单开发效率，减少失误，提高表单规范和健壮
 
 ![ncform sample](http://daniel-test.image.alimmdn.com/ncform/ncform-sample@400w?spm=a312x.7755591.0.0.502b4e08LPhKHt)
 
-json-schema对于验证规则，声明在各个地方，不好管理。而ncform都集中在rules。这种设计也便于后面开发表单制作IDE
+json-schema对于验证规则，声明在各个地方，不好管理。而ncform都集中在rules。这种设计也便于后面开发表单制作IDE
 
 ## dx表达式：
 
@@ -190,7 +190,7 @@ disabled: 'dx: {{$root.persons[i].age}} < 18'
 disabled: 'dx: {{$root.persons[i + 1].age}} < 18'
 ```
 
-- 访问全局配置中的常量数据，例子:
+- 访问全局配置中的常量数据，例子:
 
 ```
 disabled: 'dx: {{$root.person.age}} === {{$const.max}}'

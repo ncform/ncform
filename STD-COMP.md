@@ -1,6 +1,6 @@
 # Standard Components
 
-如果你不太喜欢冷冰冰的文字描述，可点击 [互动版本](https://vipshop.github.io/ncform/ncform-theme-elementui/index.html)
+如果你不太喜欢冷冰冰的文字描述，可点击 [互动版本](https://vipshop.github.io/ncform/ncform-theme-elementui/index.html)
 
 ## control components
 
@@ -27,7 +27,7 @@
 
 ```js
 {
-  type: 'text', // 显示类型，可选值：[text | number | password | file]
+  type: 'text', // 显示类型，可选值：[text | number | password | file]
   prefixIcon: '', // 前图标样式名
   suffixIcon: '', // 后图标样式名
   modelField: '', // 当值为对象时使用（即使用compound.prependSelect或compound.appendSelect）
@@ -259,9 +259,9 @@
 
 ```js
 {
-  disableAdd: true, // 是否禁止添加项
+  disableAdd: true, // 是否禁止添加项
   disableDel: true, // 是否禁止删除项
-  disableReorder: true, // 是否禁止排序
+  disableReorder: true, // 是否禁止排序
   collapsed: false, // 是否默认折叠
   disableCollapse: false, // 是否允许折叠
   addTxt: 'Add', // 新建文字
@@ -273,9 +273,9 @@
 
 ```js
 {
-  disableAdd: true, // 是否禁止添加项
+  disableAdd: true, // 是否禁止添加项
   disableDel: true, // 是否禁止删除项
-  disableReorder: true, // 是否禁止排序
+  disableReorder: true, // 是否禁止排序
   collapsed: false, // 是否默认折叠
   disableCollapse: false, // 是否允许折叠
   addTxt: 'Add', // 新建文字
@@ -287,7 +287,7 @@
 
 ```js
 {
-  disableAdd: true, // 是否禁止添加项
+  disableAdd: true, // 是否禁止添加项
   disableDel: true, // 是否禁止删除项
   tabPosition: 'top', // 可选值：left / top
   collapsed: false, // 是否默认折叠

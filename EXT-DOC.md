@@ -52,7 +52,7 @@ rules: {
 npm i ncform-common --save
 ```
 
-2.Implement the control
+2.Implement the control
 ```
 # myCustomComp.vue
 
