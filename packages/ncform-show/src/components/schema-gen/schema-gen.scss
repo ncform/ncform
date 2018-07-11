@@ -1,0 +1,21 @@
+.schema-gen {
+	.header {
+		margin: 20px;
+		h3 {
+			display: inline-block;
+			margin-right: 10px;
+		}
+	}
+
+	.main {
+		&.alert {
+			margin-top: 20px;
+		}
+	}
+
+	.area{
+		width: 100%;
+		height: 600px;
+		overflow: scroll;
+	}
+}

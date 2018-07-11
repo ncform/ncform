@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>vue-ncform Example</title>
+
+  <!--TODO: 可自己扩展替换掉样式-->
+  <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" class="container">
+    <ncform :form-schema="formSchema" v-model="formSchema.value" :form-name="'form1'"></ncform>
+    <button class="btn btn-primary" @click="submit()">提交</button>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+  <script type="text/javascript">
+    Vue.use(vueNcform)
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchema: {
+          globalConfig: {
+            constants: {
+              len: 10
+            }
+          },
+          type: 'object',
+          properties: {
+            person: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  firstname: {
+                    type: 'string',
+
+                    ui: {
+                      columns: 6,
+
+                      label: 'firstname',
+                      placeholder: 'your username',
+                      description: 'fill you firstname and lastname',
+                      help: {
+                        show: true,
+                        text: 'Help'
+                      },
+
+                    },
+                    rules: {
+                      required: true
+                    },
+                  },
+                  lastname: { type: 'string', ui: { columns: 6 } }
+                },
+                ui: {
+                  label: 'people'
+                }
+              },
+              widget: 'array'
+            },
+            username: {
+              type: 'string',
+
+              ui: {
+                columns: 6,
+
+                label: 'Username',
+                placeholder: 'your username',
+                description: 'fill you firstname and lastname',
+                help: {
+                  show: true,
+                  text: 'Help'
+                }
+              },
+              rules: {
+                required: true
+              },
+            },
+            email: {
+              type: 'string',
+              ui: {
+                columns: 6,
+                label: 'email'
+              },
+              rules: {
+                required: {
+                  value: 'dx: !!({{$root.username}} && {{$root.username}}.length > 2)',
+                  errMsg: '必填啦'
+                },
+                email: {
+                  value: true,
+                  errMsg: 'Format error.'
+                },
+                customRule: [
+                  {
+                    script: 'dx: {{$root.email}}.length > {{$const.len}}',
+                    errMsg: '长度不够'
+                  }
+                ]
+              },
+            },
+            num1: {
+              type: 'number',
+              default: 10,
+              ui: {
+                columns: 6,
+              },
+              rules: {
+                minimum: 9,
+                customRule: [
+                  {
+                    script: 'dx: {{$root.num1}} > {{$root.num2}}',
+                    errMsg: 'num1 必须大于 num2',
+                    linkItems: [ // 当触发校验时，同时触发这些关联的项进行校验
+                      {
+                        fieldPath: 'num2', // 关联项, 支持dx表达式
+                        customRuleIdx: 0 // 触发该项的自定义验证规则的索引
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            num2: {
+              type: 'number',
+              default: 10,
+              ui: {
+                columns: 6,
+              },
+              rules: {
+                customRule: [
+                  {
+                    script: 'dx: {{$root.num1}} > {{$root.num2}}',
+                    errMsg: 'num2 必须小于 num1',
+                    linkItems: [ // 当触发校验时，同时触发这些关联的项进行校验
+                      {
+                        fieldPath: 'num1', // 关联项, 支持dx表达式
+                        customRuleIdx: 0 // 触发该项的自定义验证规则的索引
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+
+            // 例子：字段关联对象和数组的字段
+            num_a: {
+              type: 'string',
+              ui: {
+                columns: 4,
+                description: 'try to fill b',
+                linkFields: [
+                  {
+                    fieldPath: 'num_b',
+                    rules: ['required']
+                  },
+                  {
+                    fieldPath: 'num_c[i].c1',
+                    rules: ['required']
+                  }
+                ]
+              }
+            },
+            num_b: {
+              type: 'string',
+              ui: {
+                columns: 4,
+              },
+              rules: {
+                required: {
+                  value: 'dx: {{$root.num_a}} === "b"'
+                }
+              }
+            },
+            num_c: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  c1: {
+                    type: 'string',
+                    ui: {
+                      noLabelSpace: true
+                    },
+                    rules: {
+                      required: {
+                        value: 'dx: {{$root.num_a}} === "b"'
+                      }
+                    }
+                  }
+                }
+              },
+              ui: {
+                columns: 4,
+                showLegend: false,
+              },
+            },
+
+            // 例子：大小相比较，校验相互影响的经典例子
+            num_a1: {
+              type: 'number',
+              ui: {
+                columns: 6,
+                description: 'a > b',
+                linkFields: [
+                  {
+                    fieldPath: 'num_b1',
+                    rules: ['maximum']
+                  }
+                ]
+              },
+              rules: {
+                minimum: {
+                  value: 'dx: {{$root.num_b1}} || 0',
+                  errMsg: 'a 要大于 b'
+                }
+              }
+            },
+            num_b1: {
+              type: 'number',
+              ui: {
+                columns: 6,
+                description: 'b < a',
+                linkFields: [
+                  {
+                    fieldPath: 'num_a1',
+                    rules: ['minimum']
+                  }
+                ]
+              },
+              rules: {
+                maximum: {
+                  value: 'dx: {{$root.num_a1}} || 0',
+                  errMsg: 'b 要小于 a'
+                }
+              }
+            },
+
+            // 例子：数组里项目之间的交互影响
+            num_arr: {
+              type: 'array',
+              ui: {
+                showLegend: false
+              },
+              items: {
+                type: 'object',
+                properties: {
+                  num_a: {
+                    type: 'number',
+                    ui: {
+                      columns: 6,
+                      description: 'a > b',
+                      linkFields: [
+                        {
+                          fieldPath: 'num_arr[i].num_b',
+                          rules: ['maximum']
+                        }
+                      ]
+                    },
+                    rules: {
+                      minimum: {
+                        value: 'dx: {{$root.num_arr[i].num_b}} || 0',
+                        errMsg: 'a 要大于 b'
+                      }
+                    }
+                  },
+                  num_b: {
+                    type: 'number',
+                    ui: {
+                      columns: 6,
+                      description: 'a > b',
+                      linkFields: [
+                        {
+                          fieldPath: 'num_arr[i].num_a',
+                          rules: ['minimum']
+                        }
+                      ]
+                    },
+                    rules: {
+                      maximum: {
+                        value: 'dx: {{$root.num_arr[i].num_a}} || 0',
+                        errMsg: 'a 要大于 b'
+                      }
+                    }
+                  }
+                }
+              },
+            },
+
+            arrNums: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  num1: {
+                    type: 'number',
+                    default: 10,
+                    ui: {
+                      columns: 6,
+                    },
+                    rules: {
+                      customRule: [
+                        {
+                          script: 'dx: {{$root.arrNums[i].num1}} > {{$root.arrNums[i].num2}}',
+                          errMsg: 'num1 必须大于 num2',
+                          linkItems: [ // 当触发校验时，同时触发这些关联的项进行校验
+                            {
+                              fieldPath: 'arrNums[i].num2', // 关联项, 支持dx表达式
+                              customRuleIdx: 0 // 触发该项的自定义验证规则的索引
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  num2: {
+                    type: 'number',
+                    default: 10,
+                    ui: {
+                      columns: 6,
+                    },
+                    rules: {
+                      customRule: [
+                        {
+                          script: 'dx: {{$root.arrNums[i].num1}} > {{$root.arrNums[i].num2}}',
+                          errMsg: 'num2 必须小于 num1',
+                          linkItems: [ // 当触发校验时，同时触发这些关联的项进行校验
+                            {
+                              fieldPath: 'arrNums[i].num1', // 关联项, 支持dx表达式
+                              customRuleIdx: 0 // 触发该项的自定义验证规则的索引
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          // value: {
+          //   person: [{}, {}],
+          //   username: '',
+          //   email: ''
+          // }
+        }
+      },
+      methods: {
+        submit() {
+          this.$ncformValidate('form1').then(data => {
+            console.log('validation msg:', data);
+            if (data.result) {
+              console.log(JSON.stringify(this.$data.formSchema.value, null, 2));
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

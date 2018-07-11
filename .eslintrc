@@ -1,0 +1,21 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "no-underscore-dangle": 0,
+    "no-unused-vars": 1,
+    "no-param-reassign": 1,
+    "no-eval": 1,
+    "class-methods-use-this": 1,
+    "no-restricted-syntax": 1,
+    "global-require": 1
+  }
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>vue-ncform Example</title>
+
+  <!--可自己扩展替换掉样式-->
+  <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" style="padding: 8px">
+    <ncform :form-schema="formSchema" v-model="formSchema.value"></ncform>
+
+    <button class="btn btn-primary" @click="submit()">提交</button>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+
+  <script type="text/javascript">
+    // 这里只作示例，实际的扩展请使用ncform-common中的mixins
+    let extComponents = {
+      'sayHi': {
+        mixins: [ncformCommon.mixins.vue.controlMixin],
+        template: '<div>hi {{modelVal}}</div>',
+        props: {
+          value: {
+            type: [String]
+          },
+        },
+      }
+    }
+
+    Vue.use(vueNcform, { extComponents });
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchema: {
+          type: 'object',
+          properties: {
+            username: {
+              type: 'string',
+              ui: {
+                label: 'Username',
+              }
+            },
+            msg: {
+              type: 'string',
+              ui: {
+                label: 'message',
+                widget: 'sayHi'
+              }
+            }
+          },
+          value: {
+            "username": "daniel",
+            "msg": 'daniel'
+          }
+        },
+      },
+      methods: {
+        submit() {
+          console.log(JSON.stringify(this.$data.formSchema.value, null, 2));
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

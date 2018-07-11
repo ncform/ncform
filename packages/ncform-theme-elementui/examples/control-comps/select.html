@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <title>select widget</title>
+
+  <link rel="stylesheet" href="../demo.css">
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" v-cloak>
+    <div v-for="(item, idx) in formSchemas">
+      <h4 class="demo_title">{{item.title}}</h4>
+      <div class="demo_item-wrapper">
+        <div>
+          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+          <small>value: {{item.schema.value}}</small>
+        </div>
+        <div>
+          <pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
+        </div>
+        <div>
+          <pre>{{item.detail}}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+  <script src="https://unpkg.com/mockjs"></script>
+  <script src="https://unpkg.com/js-url"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+  <script type="text/javascript" src="../../dist/select.js"></script>
+  <script type="text/javascript" src="../../dist/object.js"></script>
+
+  <script type="text/javascript">
+    Mock.mock(/getMoney/, function (options) {
+      let params = url('?', options.url) || {};
+      let result = [{ id: 1, name: '1元' }, { id: 2, name: '2元' }];
+      return result.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
+    })
+
+    Vue.use(vueNcform, { extComponents: { object, select } });
+
+    let formSchemas = [
+      {
+        title: '默认状态',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'boolean',
+              ui: {
+                widget: 'select'
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '提供值',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'boolean',
+              value: true,
+              ui: {
+                widget: 'select'
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] readonly: 只读状态',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'boolean',
+              ui: {
+                widget: 'select',
+                readonly: true
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] disabled: 禁用状态',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'boolean',
+              ui: {
+                widget: 'select',
+                disabled: true
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] placeholder: 文字占位符',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'string',
+              ui: {
+                widget: 'select',
+                widgetConfig: {
+                  placeholder: 'select your choice',
+                  enumSource: [{ value: 1, label: 'option1' }, { value: 2, label: 'option2' }],
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] clearable: 带清除按钮. 默认值: true',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'string',
+              ui: {
+                widget: 'select',
+                widgetConfig: {
+                  clearable: true,
+                  enumSource: [{ value: 1, label: 'option1' }, { value: 2, label: 'option2' }],
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] multiple: 是否支持多选. 默认值: false',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'array',
+              ui: {
+                widget: 'select',
+                widgetConfig: {
+                  multiple: true,
+                  enumSource: [{ value: 1, label: 'option1' }, { value: 2, label: 'option2' }, { value: 3, label: 'option3' }],
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] filterable: 过滤器. 默认值: false',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'string',
+              ui: {
+                widget: 'select',
+                widgetConfig: {
+                  filterable: true,
+                  enumSource: [{ value: 1, label: 'option1' }, { value: 2, label: 'option2' }, { value: 3, label: 'option3' }]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] itemTemplate: 自定义模板',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'string',
+              ui: {
+                widget: 'select',
+                widgetConfig: {
+                  itemTemplate: '<span>{{item.label}} : {{item.value}}</span>',
+                  enumSource: [{ value: 1, label: 'option1' }, { value: 2, label: 'option2' }, { value: 3, label: 'option3' }],
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] enumSource: 可选项使用本地数据源.',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'string',
+              ui: {
+                widget: 'select',
+                widgetConfig: {
+                  enumSource: [{ value: 1, label: 'option1' }, { value: 2, label: 'option2' }, { value: 3, label: 'option3' }]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] enumSourceRemote: 使用远程数据源',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'number',
+              ui: {
+                widget: 'select',
+                widgetConfig: {
+                  itemLabelField: 'name', // 项数据表示label的字段
+                  itemValueField: 'id', // 项数据表示value的字段
+                  enumSourceRemote: {
+                    // 远程数据源
+                    remoteUrl: "/api/test/getMoney", // 如果是远程访问，则填写该url
+                    paramName: "keyword", // 请求参数名，默认是keyword
+                    otherParams: {}, // 其它请求的参数，支持字符串表达式
+                    resField: "", // 响应结果的字段
+                    selectFirstItem: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        detail: `
+itemLabelField: 数据源的每一项显示的标签的字段，默认值是label. 例子中就是name
+
+itemValueField: 数据源的每一项显示的值的字段，默认值是value. 例子中就是id
+
+remoteUrl: 远程接口url
+
+paramName: 请求参数名，默认是keyword
+
+otherParams: 其它请求参数，值支持 dx表达式 。如{countryId: 'dx: {{$root.countryId}}'}
+
+resField: 数据源读取返回数据的哪个字段，如例子返回[{ id: 1, name: '1元' }, ...]，则填写空字符串
+
+selectFirstItem: 默认选中第一项， 默认值是false
+        `
+      },
+      {
+        title: '[属性] filterLocal: 只搜索本地数据. 默认值: true',
+        schema: {
+          type: 'object',
+          properties: {
+            choice: {
+              type: 'array',
+              ui: {
+                widget: 'select',
+                widgetConfig: {
+                  filterLocal: true,
+                  filterable: true,
+                  itemLabelField: 'name', // 项数据表示label的字段
+                  itemValueField: 'id', // 项数据表示value的字段
+                  enumSourceRemote: {
+                    // 远程数据源
+                    remoteUrl: "/api/test/getMoney", // 如果是远程访问，则填写该url
+                  }
+                }
+              }
+            }
+          }
+        },
+        detail: `例子中数据源是远程数据源，但输入keyword时不会每次都从远程加载数据，只会从第一次从远程加载的数据源中进行筛选`
+      },
+    ]
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchemas: _.cloneDeep(formSchemas),
+        originFormSchemas: formSchemas
+      }
+    });
+  </script>
+
+</body>
+
+</html>

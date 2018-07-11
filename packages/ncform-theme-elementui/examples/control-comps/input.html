@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <title>input widget</title>
+
+  <link rel="stylesheet" href="../demo.css">
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" v-cloak>
+    <div v-for="(item, idx) in formSchemas">
+      <h4 class="demo_title">{{item.title}}</h4>
+      <div class="demo_item-wrapper">
+        <div>
+          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+          <small>value: {{item.schema.value}}</small>
+        </div>
+        <div>
+          <pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
+        </div>
+        <div>
+          <pre>{{item.detail}}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+  <script src="https://unpkg.com/mockjs"></script>
+  <script src="https://unpkg.com/js-url"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+  <script type="text/javascript" src="../../dist/input.js"></script>
+  <script type="text/javascript" src="../../dist/object.js"></script>
+
+  <script type="text/javascript">
+
+    Mock.mock(/getDomains/, function (options) {
+      return [{ id: 1, label: '.cn' }, { id: 2, label: '.com' }, { id: 3, label: '.net' }];
+    })
+    Mock.mock(/getKeywords/, function (options) {
+      let params = url('?', options.url) || {};
+      let result = [
+        { value: 'oppo' },
+        { value: 'xiaomi' },
+        { value: 'iphone' },
+        { value: 'iphone x' },
+        { value: 'iphone 6s' },
+      ];
+      return { data: result.filter(item => item.value.indexOf(params.keyword) >= 0) };
+    })
+
+    Vue.use(vueNcform, { extComponents: { object, input } });
+
+    let formSchemas = [
+      {
+        title: '默认状态',
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+            }
+          }
+        }
+      },
+      {
+        title: '提供值',
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              value: 'daniel',
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h'
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] readonly: 只读状态',
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              ui: {
+                readonly: true
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] disabled: 禁用状态',
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              ui: {
+                disabled: true
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] placeholder: 占位显示',
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              ui: {
+                placeholder: 'fill your name'
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] type: 显示类型. 可选值：[text | number | password]',
+        schema: {
+          type: 'object',
+          properties: {
+            password: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  type: 'password'
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] prefixIcon: 前图标样式名',
+        schema: {
+          type: 'object',
+          properties: {
+            keyword: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  prefixIcon: 'el-icon-search'
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] suffixIcon: 前图标样式名',
+        schema: {
+          type: 'object',
+          properties: {
+            date: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  suffixIcon: 'el-icon-date'
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] autocomplete 以及 enumSource: 根据输入从本地加载匹配的提示信息',
+        schema: {
+          type: 'object',
+          properties: {
+            keyword: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  autocomplete: {
+                    itemValueField: 'keyword', // 项数据表示value的字段
+                    itemTemplate: '<span>-> {{item.keyword}}</span>',
+                    enumSource: [{ keyword: 'iphone1' }, { keyword: 'iphone x' }, { keyword: 'oppo' }]
+                  }
+                }
+              }
+            }
+          }
+        },
+        detail: `
+itemTemplate: 显示数据项的模板，如"<span>-> {{item.keyword}}</span>"
+
+itemValueField: 数据源的每一项显示的标签的字段，默认值是value. 例子中就是keyword
+        `
+      },
+      {
+        title: '[属性] autocomplete.enumSourceRemote: 根据输入从远程加载匹配的提示信息',
+        schema: {
+          type: 'object',
+          properties: {
+            keyword: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  autocomplete: {
+                    itemValueField: 'value', // 项数据表示value的字段
+                    itemTemplate: '',
+                    enumSourceRemote: {
+                      remoteUrl: '/api/input/getKeywords', // 如果是远程访问，则填写该url
+                      paramName: 'keyword', // 请求参数名，默认是keyword
+                      resField: 'data', // 响应结果的字段
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        detail: `
+remoteUrl: 远程接口url
+
+paramName: 请求参数名，默认是keyword
+
+resField: 数据源读取返回数据的哪个字段，如例子返回{data: [{ value: 'iphone', label: 'iphone' }, ...]}，则填写data
+        `
+      },
+      {
+        title: '[属性] compound.prependLabel: 组合Input的前置标签',
+        schema: {
+          type: 'object',
+          properties: {
+            keyword: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  compound: {
+                    prependLabel: 'http://',
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] compound.appendLabel: 组合Input的后置标签',
+        schema: {
+          type: 'object',
+          properties: {
+            keyword: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  compound: {
+                    appendLabel: 'go',
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] compound.prependIcon: 前置图标样式',
+        schema: {
+          type: 'object',
+          properties: {
+            keyword: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  compound: {
+                    prependIcon: 'el-icon-search',
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] compound.appendIcon: 后置图标样式',
+        schema: {
+          type: 'object',
+          properties: {
+            keyword: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  compound: {
+                    appendIcon: 'el-icon-search',
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] compound.prependSelect: 前置下拉框 / 本地数据源',
+        schema: {
+          type: 'object',
+          properties: {
+            user: {
+              type: 'object',
+              ui: {
+                widget: 'input',
+                widgetConfig: {
+                  modelField: 'name',
+                  compound: {
+                    prependSelect: { // 前置下拉框，使用该种的数据必须是对象
+                      itemLabelField: 'label', // 项数据表示label的字段
+                      itemValueField: 'value', // 项数据表示value的字段
+                      enumSource: [{ value: 1, label: '男' }, { value: 2, label: '女' }], // 本地数据源
+                      modelField: 'gender' // 用于绑定input value值的某个属性
+                    }
+                  }
+                }
+              },
+            }
+          }
+        },
+        detail: `
+注意：
+1. type必须为object类型
+2. 必须指定 modelField 和 compound.prependSelect.modelField
+        `
+      },
+      {
+        title: '[属性] compound.appendSelect: 后置下拉框 / 远程数据源',
+        schema: {
+          type: 'object',
+          properties: {
+            site: {
+              type: 'object',
+              ui: {
+                widget: 'input',
+                widgetConfig: {
+                  modelField: 'host',
+                  compound: {
+                    appendSelect: { // 前置下拉框，使用该种的数据必须是对象
+                      itemLabelField: 'label', // 项数据表示label的字段
+                      itemValueField: 'id', // 项数据表示value的字段
+                      enumSourceRemote: { // 远程数据源
+                        remoteUrl: '/api/input/getDomains', // 如果是远程访问，则填写该url
+                        resField: '', // 响应结果的字段
+                      },
+                      modelField: 'domain' // 用于绑定input value值的某个属性
+                    }
+                  }
+                }
+              },
+            }
+          }
+        },
+        detail: `
+当返回数据即为显示的结果时，resField为空。如例子中返回结果为[{ id: 1, label: '.cn' }, ...]
+        `
+      },
+      {
+        title: '[属性] upload',
+        schema: {
+          type: 'object',
+          properties: {
+            fileUrl: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  type: 'file',
+                  upload: {
+                    uploadUrl: 'http://houyi-api-admin.vip.vip.com/adminII.php/Pic/upLoadPic', // 上传的地址
+                    resField: 'data.data.url', // 获取返回结果的字段,
+                    fileField: 'pic',
+                    data: {
+                      is_slices: 0,
+                    }, // 上传时附带的额外参数
+                    accept: '.jpg,.png', // 接受上传的文件类型
+                    constraint: { // 约束
+                      width: 100, // 图片宽度
+                      height: 100, // 图片高度
+                      sizeFixed: false, // 图片尺寸约束的大小是否按固定值，当为false时按比例
+                      maxSize: 0, // 最大图片大小，单位KB，0代表不限
+                      minSize: 0 // 最小图片大小，单位KB，0代表不限
+                    },
+                    uploadText: '点击上传' //  上传按钮的名称
+                  }
+                }
+              }
+            }
+          }
+        },
+        detail: `
+注意：当type="file"时，upload属性的优先级最高
+upload各字段的描述如下：
+- uploadUrl：上传文件的地址
+- resField：获取返回文件上传后的地址的字段
+- fileField: 表示文件的字段，默认是file
+- data：上传时附带的额外参数
+- accept：接受上传的文件类型
+- constraint：上传文件约束
+  - width： 图片宽度，仅图片类型有效
+  - height： 图片高度，仅图片类型有效
+  - sizeFixed： 图片尺寸约束的大小是否按固定值，当为false时按比例，默认为true
+  - maxSize：上传文件最大大小，默认值为0，代表不限，单位KB
+  - minSize：上传文件最小大小，默认值为0，代表不限，单位KB
+- uploadText：上传按钮的名称，默认是"点击上传"
+`
+      },
+    ]
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchemas: _.cloneDeep(formSchemas),
+        originFormSchemas: formSchemas
+      }
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+{
+  "name": "@ncform/ncform-common",
+  "version": "0.0.1",
+  "description": "ncform common",
+  "main": "dist/ncformCommon.min.js",
+  "scripts": {
+    "test": "mocha --recursive --require ./test/unit/testHelper.js -t 5000",
+    "test-browser": "gulp test-browser",
+    "watch": "gulp watch",
+    "build": "gulp build",
+    "coverage": "gulp coverage",
+    "watch-build": "gulp watch-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "daniel.xiao",
+  "license": "MIT",
+  "homepage": "",
+  "devDependencies": {
+    "babel-core": "6.14.0",
+    "babel-loader": "6.2.5",
+    "babel-polyfill": "6.13.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-register": "6.14.0",
+    "chai": "3.5.0",
+    "del": "2.2.2",
+    "glob": "7.0.6",
+    "gulp": "3.9.1",
+    "gulp-eslint": "3.0.1",
+    "gulp-filter": "4.0.0",
+    "gulp-istanbul": "1.1.1",
+    "gulp-livereload": "3.8.1",
+    "gulp-load-plugins": "1.2.4",
+    "gulp-mocha": "3.0.1",
+    "gulp-plumber": "1.1.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sourcemaps": "1.6.0",
+    "gulp-uglify": "2.0.0",
+    "isparta": "4.0.0",
+    "json-loader": "0.5.4",
+    "mocha": "3.0.2",
+    "sinon": "1.17.5",
+    "sinon-chai": "2.8.0",
+    "webpack": "1.13.2",
+    "webpack-stream": "3.2.0"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "babelBoilerplateOptions": {
+    "entryFileName": "index.js",
+    "mainVarName": "ncformCommon"
+  },
+  "dependencies": {
+    "assert": "^1.4.1",
+    "extend": "^3.0.1",
+    "lodash-es": "^4.17.4",
+    "power-assert": "^1.4.4"
+  }
+}

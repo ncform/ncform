@@ -1,0 +1,27 @@
+<div class="playground">
+  <el-row>
+    <el-col :span="12">
+        模板：
+      <el-select v-model="selectVal" placeholder="请选择" @change="templateChange">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
+      <el-button type="primary" @click="createForm">生成表单</el-button>
+    </el-col>
+    <el-col :span="12">
+      <el-button type="success" @click="getFormData">获取表单数据</el-button>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="12">
+      <div class="editorArea">
+        <div ref="editor" class="editor">{{jsonValue}}</div>
+      </div>
+    </el-col>
+    <el-col :span="12">
+      <div class="previewArea">
+        <ncform :form-schema="ncformSchema" v-model="ncformValue" form-name="preview-form"></ncform>
+      </div>
+    </el-col>
+  </el-row>
+</div>

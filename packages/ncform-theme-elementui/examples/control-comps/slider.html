@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <title>slider widget</title>
+
+  <link rel="stylesheet" href="../demo.css">
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" v-cloak>
+    <div v-for="(item, idx) in formSchemas">
+      <h4 class="demo_title">{{item.title}}</h4>
+      <div class="demo_item-wrapper">
+        <div>
+          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+          <small>value: {{item.schema.value}}</small>
+        </div>
+        <div>
+          <pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
+        </div>
+        <div>
+          <pre>{{item.detail}}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+  <script type="text/javascript" src="../../dist/slider.js"></script>
+  <script type="text/javascript" src="../../dist/object.js"></script>
+
+  <script type="text/javascript">
+    Vue.use(vueNcform, { extComponents: { object, slider } });
+
+    let formSchemas = [
+      {
+        title: '默认状态',
+        schema: {
+          type: 'object',
+          properties: {
+            age: {
+              type: 'number',
+              ui: {
+                widget: 'slider'
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '提供值',
+        schema: {
+          type: 'object',
+          properties: {
+            age: {
+              type: 'number',
+              value: 20,
+              ui: {
+                widget: 'slider'
+              }
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h'
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] readonly: 只读状态',
+        schema: {
+          type: 'object',
+          properties: {
+            age: {
+              type: 'number',
+              value: 20,
+              ui: {
+                widget: 'slider',
+                readonly: true
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] disabled: 禁用状态',
+        schema: {
+          type: 'object',
+          properties: {
+            age: {
+              type: 'number',
+              value: 20,
+              ui: {
+                widget: 'slider',
+                disabled: true
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] min: 最小值. 默认值: 0',
+        schema: {
+          type: 'object',
+          properties: {
+            age: {
+              type: 'number',
+              ui: {
+                widget: 'slider',
+                widgetConfig: {
+                  min: -2
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] max: 最大值. 默认值: 100',
+        schema: {
+          type: 'object',
+          properties: {
+            age: {
+              type: 'number',
+              ui: {
+                widget: 'slider',
+                widgetConfig: {
+                  max: 2
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] step: 步长. 默认值: 1',
+        schema: {
+          type: 'object',
+          properties: {
+            age: {
+              type: 'number',
+              ui: {
+                widget: 'slider',
+                widgetConfig: {
+                  step: 2
+                }
+              }
+            }
+          }
+        }
+      },
+    ]
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchemas: _.cloneDeep(formSchemas),
+        originFormSchemas: formSchemas
+      }
+    });
+  </script>
+
+</body>
+
+</html>

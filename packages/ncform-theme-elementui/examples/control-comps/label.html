@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+	<title>label widget</title>
+
+	<link rel="stylesheet" href="../demo.css">
+
+	<!-- 引入样式 -->
+	<link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+
+	<!--演示区域-->
+	<div id="demo" v-cloak>
+		<div v-for="(item, idx) in formSchemas">
+			<h4 class="demo_title">{{item.title}}</h4>
+			<div class="demo_item-wrapper">
+				<div>
+					<ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+					<small>value: {{item.schema.value}}</small>
+				</div>
+				<div>
+					<pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
+				</div>
+				<div>
+					<pre>{{item.detail}}</pre>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+	<script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+	<script type="text/javascript" src="../../dist/label.js"></script>
+	<script type="text/javascript" src="../../dist/object.js"></script>
+
+	<script type="text/javascript">
+		Vue.use(vueNcform, { extComponents: { object, label } });
+
+		let formSchemas = [
+			{
+				title: '默认状态',
+				schema: {
+					type: 'object',
+					properties: {
+						label: {
+							type: 'string',
+							default: 'some text',
+							ui: {
+								widget: 'label'
+							}
+						}
+					}
+				}
+			},
+			{
+				title: '提供值',
+				schema: {
+					type: 'object',
+					properties: {
+						label: {
+							type: 'string',
+							value: 'some text',
+							ui: {
+								widget: 'label',
+							}
+						}
+					},
+					ui: {
+						widgetConfig: {
+							layout: 'h'
+						}
+					}
+				}
+			},
+			{
+				title: '[属性] multiLine: 超过一行时是否多行显示，默认为false',
+				schema: {
+					type: 'object',
+					properties: {
+						label: {
+							type: 'string',
+							value: 'React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.',
+							ui: {
+								widget: 'label',
+								widgetConfig: {
+									multiLine: true
+								}
+							}
+						}
+					}
+				}
+			}
+		]
+
+		// Bootstrap the app
+		new Vue({
+			el: '#demo',
+			data: {
+				formSchemas: _.cloneDeep(formSchemas),
+				originFormSchemas: formSchemas
+			}
+		});
+	</script>
+
+</body>
+
+</html>

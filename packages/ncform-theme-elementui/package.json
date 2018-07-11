@@ -1,0 +1,71 @@
+{
+  "name": "@ncform/ncform-theme-elementui",
+  "version": "0.0.1",
+  "description": "ncform theme element-ui",
+  "homepage": "",
+  "author": "daniel.xiao; kyle.lo; swan",
+  "main": "dist/ncformStdComps.min.js",
+  "keywords": [
+    "ncform",
+    "theme",
+    "element-ui"
+  ],
+  "devDependencies": {
+    "@ncform/ncform": "^0.0.1",
+    "autoprefixer": "^6.0.2",
+    "axios": "^0.17.1",
+    "babel-core": "^6.2.21",
+    "babel-eslint": "^6.0.4",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-transform-runtime": "^6.3.13",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-power-assert": "^1.0.0",
+    "babel-runtime": "^6.3.19",
+    "browser-sync": "^2.9.1",
+    "concat": "^1.0.0",
+    "css-loader": "^0.23.1",
+    "csswring": "^4.0.0",
+    "eslint": "~2.2.0",
+    "eslint-loader": "^1.0.0",
+    "eslint-plugin-html": "^1.5.3",
+    "file-loader": "^0.8.5",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-sequence": "^0.4.6",
+    "html-loader": "^0.5.1",
+    "map-stream": "0.0.6",
+    "mocha": "^4.0.1",
+    "node-libs-browser": "^1.0.0",
+    "node-sass": "^4.5.3",
+    "postcss-loader": "^0.8.0",
+    "postcss-sprites": "^4.0.0",
+    "power-assert": "^1.4.4",
+    "rimraf": "~2.5.0",
+    "sass-loader": "^6.0.6",
+    "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "vue-hot-reload-api": "^2.0.6",
+    "vue-html-loader": "^1.1.0",
+    "vue-loader": "^8.7.1",
+    "vue-style-loader": "^1.0.0",
+    "webpack": "^1.12.1"
+  },
+  "scripts": {
+    "dev": "gulp dev",
+    "build": "gulp build",
+    "watch-build": "gulp watch-build",
+    "release": "NODE_ENV=production gulp build"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@ncform/ncform-common": "^0.0.1",
+    "element-ui": "^2.0.7",
+    "lodash-es": "^4.16.2",
+    "vue": "^2.1.8"
+  }
+}

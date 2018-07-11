@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <title>checkbox widget</title>
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../demo.css">
+  <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" v-cloak>
+    <div v-for="(item, idx) in formSchemas">
+      <h4 class="demo_title">{{item.title}}</h4>
+      <div class="demo_item-wrapper">
+        <div>
+          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+          <small>value: {{item.schema.value}}</small>
+        </div>
+        <div>
+          <pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
+        </div>
+        <div>
+          <pre>{{item.detail}}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+  <script src="https://unpkg.com/mockjs"></script>
+  <script src="https://unpkg.com/js-url"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+  <script type="text/javascript" src="../../dist/checkbox.js"></script>
+  <script type="text/javascript" src="../../dist/object.js"></script>
+
+  <script type="text/javascript">
+    Mock.mock(/getItems/, function (options) {
+      return { result: [{ id: 1, label: 'iphone' }, { id: 2, label: 'xiaomi' }, { id: 3, label: 'oppo' }] };
+    })
+
+    Vue.use(vueNcform, { extComponents: { object, checkbox } });
+
+    let formSchemas = [
+      {
+        title: '默认状态',
+        schema: {
+          type: 'object',
+          properties: {
+            ok: {
+              type: 'boolean',
+              ui: {
+                widget: 'checkbox'
+              }
+            }
+          }
+        },
+        detail: `支持的数据类型为：boolean 和 array`
+      },
+      {
+        title: '提供值',
+        schema: {
+          type: 'object',
+          properties: {
+            ok: {
+              type: 'boolean',
+              value: true,
+              ui: {
+                widget: 'checkbox'
+              }
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h'
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] readonly: 只读状态',
+        schema: {
+          type: 'object',
+          properties: {
+            ok: {
+              type: 'boolean',
+              ui: {
+                readonly: true,
+                widget: 'checkbox',
+              }
+            }
+          }
+        },
+        detail: `readonly：当没选中任何值，无展示值`
+      },
+      {
+        title: '[属性] disabled: 禁用状态',
+        schema: {
+          type: 'object',
+          properties: {
+            ok: {
+              type: 'boolean',
+              ui: {
+                widget: 'checkbox',
+                disabled: true
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] enumSource: 可选项本地数据源.',
+        schema: {
+          type: 'object',
+          properties: {
+            colors: {
+              type: 'array',
+              ui: {
+                widget: 'checkbox',
+                widgetConfig: {
+                  enumSource: [{ value: 1, label: 'red' }, { value: 2, label: 'green' }, { value: 3, label: 'blue' }]
+                }
+              }
+            }
+          }
+        },
+      },
+      {
+        title: '[属性] enumSourceRemote: 可选项远程数据源。',
+        schema: {
+          type: 'object',
+          properties: {
+            phones: {
+              type: 'array',
+              ui: {
+                widget: 'checkbox',
+                widgetConfig: {
+                  itemValueField: 'id', // 值字段
+                  itemLabelField: 'label', // 显示字段
+                  enumSourceRemote: {
+                    remoteUrl: '/api/radio/getItems', // 如果是远程访问，则填写该url
+                    resField: 'result',
+                  }
+                }
+              }
+            }
+          }
+        },
+        detail: `
+
+itemValueField: 值字段，默认是value. 例子中是id
+
+itemLabelField: 显示字段，默认是label. 例子中是label
+
+remoteUrl: 远程接口url
+
+resField: 数据源读取返回数据的哪个字段，如例子返回{result: [{ id: 1, label: "iphone" }, ...]}，则填写result
+        `
+      },
+      {
+        title: '[属性] selectAll: 是否显示全选.',
+        schema: {
+          type: 'object',
+          properties: {
+            colors: {
+              type: 'array',
+              ui: {
+                widget: 'checkbox',
+                widgetConfig: {
+                  selectAll: true,
+                  enumSource: [{ value: 1, label: 'red' }, { value: 2, label: 'green' }, { value: 3, label: 'blue' }]
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] type: 显示类型. 可选值 [checkbox | button]，默认值 checkbox',
+        schema: {
+          type: 'object',
+          properties: {
+            colors: {
+              type: 'array',
+              ui: {
+                widget: 'checkbox',
+                widgetConfig: {
+                  type: 'button',
+                  enumSource: [{ value: 1, label: 'red' }, { value: 2, label: 'green' }, { value: 3, label: 'blue' }]
+                }
+              }
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h'
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] arrangement: 可选项展示排列方式. 可选值 [v | h]，默认值 h',
+        schema: {
+          type: 'object',
+          properties: {
+            colors: {
+              type: 'array',
+              ui: {
+                widget: 'checkbox',
+                widgetConfig: {
+                  arrangement: 'v',
+                  enumSource: [{ value: 1, label: 'red' }, { value: 2, label: 'green' }, { value: 3, label: 'blue' }]
+                }
+              }
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h'
+            }
+          }
+        }
+      },
+    ]
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchemas: _.cloneDeep(formSchemas),
+        originFormSchemas: formSchemas
+      }
+    });
+  </script>
+
+</body>
+
+</html>

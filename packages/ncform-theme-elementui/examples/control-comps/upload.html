@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <title>Component Example</title>
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../demo.css">
+  <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" v-cloak>
+    <div v-for="(item, idx) in formSchemas">
+      <h4 class="demo_title">{{item.title}}</h4>
+      <div class="demo_item-wrapper">
+        <div>
+          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+          <small>value: {{item.schema.value}}</small>
+        </div>
+        <div>
+          <pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
+          <!-- <pre>{{JSON.stringify(item.schema, null, 2)}}</pre> -->
+        </div>
+
+        <div>
+          <pre>{{item.detail}}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+  <script src="https://unpkg.com/mockjs"></script>
+  <script src="https://unpkg.com/js-url"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+  <script type="text/javascript" src="../../dist/upload.js"></script>
+  <script type="text/javascript" src="../../dist/object.js"></script>
+
+  <script type="text/javascript">
+
+    Mock.mock(/getFileInfo/, function (options) {
+      return { data: { name: 'shoe.jpg', url: '//a.vpimg2.com/upload/upimg2/ued/cxy/xinke/02-sport.jpg' } };
+    })
+
+    Vue.use(vueNcform, { extComponents: { object, upload } });
+
+    let formSchemas = [
+      {
+        title: '默认状态',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload'
+              }
+            }
+          }
+        },
+        detail: `支持的数据类型为：array`
+      },
+      {
+        title: '提供值',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              value: [
+                { name: '女装.jpg', url: '//a.vpimg2.com/upload/merchandise/pdc/176/162/8951543587594162176/0/2152212-5.jpg' },
+              ],
+              ui: {
+                widget: 'upload'
+              }
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h'
+            }
+          }
+        },
+        detail: `
+default：传入文件列表数组，其中数组必须含有这2个字段：
+
+name：文件名
+
+url：文件地址
+          `
+      },
+      {
+        title: '[属性] readonly: 只读状态',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              value: [],
+              ui: {
+                widget: 'upload',
+                readonly: true
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] disabled: 禁用状态',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                disabled: true,
+                widgetConfig: {
+                  showFileList: true
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] uploadUrl: 必选参数，上传的地址.',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                }
+              }
+            }
+          }
+        },
+        detail: `thumbnail-mode 模式下此参数无效`
+      },
+      {
+        title: '[属性] autoUpload: 是否在选取文件后立即进行上传. 默认 false',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  autoUpload: true
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] data: 上传时附带的额外参数.',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  data: {
+                    a: 123,
+                    b: 'sample'
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] resField: 数据源读取返回文件数据的哪个字段. 例如： {name: "xx", url: "aaa"}',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  resField: 'data' // 接口返回获取{name: 'xx', url: 'aaa'}结构的路径
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] fileNameField: 数据源读取返回带有文件数据的字段resField下的文件名字段. 默认 "name"',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  resField: 'data', // 接口返回获取结构的路径
+                  fileNameField: 'name' // 接口返回获取结构的路径
+                }
+              }
+            }
+          }
+        },
+        detail: `如果上传接口返回的结构数据无该字段，将使用原文件的上传名`
+      },
+      {
+        title: '[属性] fileUrlField: 数据源读取返回带有文件数据的字段resField下的 文件地址 字段. 默认 "url"',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  resField: 'data', // 接口返回获取结构的路径
+                  fileUrlField: 'url' // 接口返回获取结构的路径
+                }
+              }
+            }
+          }
+        },
+        detail: `如果上传接口返回的结构数据无该字段，将使用原文件的blob地址`
+      },
+      {
+        title: '[属性] fileField: 表示文件的字段，默认是file',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  resField: 'data', // 接口返回获取结构的路径
+                  fileUrlField: 'url', // 接口返回获取结构的路径
+                  fileField: 'file'
+                }
+              }
+            }
+          }
+        },
+        detail: `如果上传接口返回的结构数据无该字段，将使用原文件的blob地址`
+      },
+      {
+        title: '[属性] showFileList: 是否显示已上传文件列表. 默认 false',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              value: [
+                { name: '女装.jpg', url: '//a.vpimg2.com/upload/merchandise/pdc/176/162/8951543587594162176/0/2152212-5.jpg' },
+              ],
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  showFileList: true
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] listType: 图片列表缩略图. 可选值 [text | picture]，默认值 text',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              value: [
+                { name: '女装.jpg', url: '//a.vpimg2.com/upload/merchandise/pdc/176/162/8951543587594162176/0/2152212-5.jpg' },
+              ],
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  showFileList: true, // 显示已上传文件列表
+                  listType: 'picture'
+                }
+              }
+            }
+          }
+        },
+        detail: `在开启 showFileList 的前提下，方可使用 listType`
+      },
+      {
+        title: '[属性] drag: 是否启用拖拽上传. 默认值 false',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  drag: true
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] limit: 最大允许上传个数. 默认值为1',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  limit: 4
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] multiple: 是否支持多选文件.',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  limit: 4,
+                  multiples: true
+                }
+              }
+            }
+          }
+        },
+        detail: `在限制个数 limit > 1 的前提下，使用 multiples`
+      },
+      {
+        title: '[属性] accept: 接受上传的文件类型.',
+        schema: {
+          type: 'object',
+          properties: {
+            files: {
+              type: 'array',
+              ui: {
+                widget: 'upload',
+                widgetConfig: {
+                  uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                  accept: '.jpg'
+                }
+              }
+            }
+          }
+        },
+        detail: `thumbnail-mode 模式下此参数无效`
+      },
+    ]
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchemas: _.cloneDeep(formSchemas),
+        originFormSchemas: formSchemas
+      }
+    });
+    //       multipleFile: {
+    //         multiple: true, // 是否支持多选
+    //         limit: 4, // 最大允许上传个数
+    //         accept: '.jpg', // 接受上传的文件类型
+    //       },
+    //       interface: {
+    //         uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+    //         data: {}, // 上传时附带的额外参数
+    //         resField: 'data.url' // 接口返回获取{name: 'xx', url: 'aaa'}结构的路径
+    //       }
+    //     }
+    //   }
+    // });
+  </script>
+
+</body>
+
+</html>

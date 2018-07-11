@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>vue-ncform Example</title>
+
+  <!--TODO: 可自己扩展替换掉样式-->
+  <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" class="container">
+    <div v-for="formSchema in formSchemas">
+      <ncform :form-schema="formSchema" v-model="formSchema.value"></ncform>
+      <button class="btn btn-primary" @click="submit(formSchema.value)">提交</button>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+  <script type="text/javascript">
+    Vue.use(vueNcform)
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchemas: [
+          {
+            type: 'object',
+            properties: {
+              person: {
+                type: 'object',
+                ui: {
+                  legend: 'Info'
+                },
+                properties: {
+                  name: {
+                    type: 'object',
+                    properties: {
+                      firstname: {
+                        ui: {
+                          columns: 6,
+
+                          label: 'Firstname',
+                          placeholder: 'firstname',
+                          description: 'Fill in the firstname',
+                          help: {
+                            show: true,
+                            text: 'help'
+                          }
+                        }
+                      }
+                    },
+                    ui: {
+                      legend: 'Name'
+                    }
+                  },
+                  email: {
+                    type: 'string',
+                    ui: {
+                      columns: 6,
+                      label: 'Email'
+                    }
+                  },
+                  company: {
+                    type: 'object',
+                    properties: {
+                      compName: {
+                        type: 'string',
+                        ui: {
+                          columns: 6,
+
+                          label: 'Company Name',
+                          placeholder: 'Company Name',
+                          description: 'Fill in the company Name',
+                        }
+                      }
+                    },
+                    ui: {
+                      legend: 'Company'
+                    }
+                  }
+                }
+              }
+            },
+            value: {
+              "person": {
+                "name": {
+                  "firstname": "daniel"
+                },
+                "email": "daniel.xiao@dx.com",
+                "company": {
+                  "compName": "dx"
+                }
+              }
+            }
+          },
+          {
+            type: 'object',
+            properties: {
+              person: {
+                type: 'object',
+                ui: {
+                  legend: 'Info',
+                  widgetConfig: {
+                    layout: 'h',
+                    labelWidth: '120px'
+                  }
+                },
+                properties: {
+                  name: {
+                    type: 'object',
+                    properties: {
+                      firstname: {
+                        ui: {
+                          label: 'Firstname',
+                          placeholder: 'firstname',
+                          description: 'Fill in the firstname',
+                          help: {
+                            show: true,
+                            text: '?'
+                          }
+                        }
+                      }
+                    },
+                    ui: {
+                      legend: 'Name',
+                      widgetConfig: {
+                        layout: 'h',
+                        labelWidth: '120px'
+                      }
+                    }
+                  },
+                  email: {
+                    type: 'string',
+                    ui: {
+                      label: 'Email'
+                    }
+                  },
+                  company: {
+                    type: 'object',
+                    properties: {
+                      compName: {
+                        type: 'string',
+                        ui: {
+                          label: 'Company Name',
+                          placeholder: 'Company Name',
+                          description: 'Fill in the company Name',
+                        }
+                      }
+                    },
+                    ui: {
+                      legend: 'Company',
+                      widgetConfig: {
+                        layout: 'h',
+                        labelWidth: '120px'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            value: {
+              "person": {
+                "name": {
+                  "firstname": "daniel"
+                },
+                "email": "daniel.xiao@dx.com",
+                "company": {
+                  "compName": "dx"
+                }
+              }
+            }
+          }
+        ]
+      },
+      methods: {
+        submit(val) {
+          console.log(JSON.stringify(val, null, 2));
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

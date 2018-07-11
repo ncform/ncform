@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>vue-ncform Example</title>
+
+  <!--TODO: 可自己扩展替换掉样式-->
+  <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo" class="container">
+    <div v-for="formSchema in formSchemas">
+      <ncform :form-schema="formSchema" v-model="formSchema.value"></ncform>
+      <button class="btn btn-primary" @click="submit(formSchema.value)">提交</button>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+  <script type="text/javascript">
+    Vue.use(vueNcform)
+
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchemas: [
+          {
+            type: 'object',
+            properties: {
+              person: {
+                type: 'object',
+                ui: {
+                  legend: 'Login',
+                  widgetConfig: {
+                    // collapsed: true,
+                    // disableCollapse: true
+                  }
+                },
+                properties: {
+                  email: {
+                    type: 'string',
+                    ui: {
+                      columns: 6,
+
+                      label: 'Email',
+                      placeholder: 'email',
+                      description: 'Fill in the email',
+                      help: {
+                        show: true,
+                        text: 'help'
+                      },
+                      itemClass: 'addon-class-name',
+
+                      widgetConfig: {
+                        type: 'email'
+                      }
+                    },
+                    rules: {
+                      required: true
+                    }
+                  },
+                  username: {
+                    type: 'string',
+                    ui: {
+                      columns: 6,
+
+                      label: 'Username',
+                      placeholder: 'Username',
+                      description: 'Fill in the username',
+                    },
+                  },
+                  password: {
+                    type: 'string',
+                    ui: {
+                      columns: 6,
+                      label: 'Password',
+                      placeholder: 'passowrd',
+                      description: 'Fill in the password',
+
+                      widgetConfig: {
+                        type: 'password'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            value: {
+              "person": {
+                "email": "daniel.xiao@dx.com",
+                "password": "111111"
+              }
+            }
+          },
+          {
+            type: 'object',
+            properties: {
+              person: {
+                type: 'object',
+                ui: {
+                  legend: 'Login',
+                  widgetConfig: {
+                    layout: 'h'
+                  }
+                },
+                properties: {
+                  email: {
+                    type: 'string',
+                    ui: {
+                      columns: 6,
+
+                      label: 'Email',
+                      placeholder: 'email',
+                      description: 'Fill in the email',
+                      help: {
+                        show: true,
+                        text: '?'
+                      },
+
+                      widgetConfig: {
+                        type: 'email'
+                      }
+                    },
+                    rules: {
+                      required: true
+                    }
+                  },
+                  username: {
+                    type: 'string',
+                    ui: {
+                      columns: 6,
+
+                      label: 'Username',
+                      placeholder: 'Username',
+                      description: 'Fill in the username',
+                    },
+                  },
+                  password: {
+                    type: 'string',
+                    ui: {
+                      label: 'Password',
+                      placeholder: 'passowrd',
+                      description: 'Fill in the password',
+
+                      widgetConfig: {
+                        type: 'password'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            value: {
+              "person": {
+                "email": "daniel.xiao@dx.com",
+                "password": "111111"
+              }
+            }
+          }
+        ]
+      },
+      methods: {
+        submit(val) {
+          console.log(JSON.stringify(val, null, 2));
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

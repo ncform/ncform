@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ncform components document</title>
+  <link rel="stylesheet" href="/examples/demo.css">
+  <link rel="stylesheet" href="../node_modules/element-ui/lib/theme-chalk/index.css">
+
+  <script type="text/javascript" src="../node_modules/vue/dist/vue.min.js"></script>
+</head>
+
+<body>
+
+  <h2 style="margin-left: 25px; color: #5A5E66">ncform standard components</h2>
+
+  <div style="display: flex" class="doc" v-cloak>
+    <div style="flex:1">
+      <ul class="el-menu el-menu-vertical-demo">
+        <li class="el-submenu is-opened">
+          <div class="el-submenu__title" style="padding-left: 20px;"><i class="el-icon-star-on"></i><span>Controls</span></div>
+          <ul class="el-menu">
+            <li v-for="item in controls" class="el-menu-item" :class="{'is-active': currentUrl === item.url}" @click="goto(item.url)">
+              {{item.name}}
+            </li>
+            <!-- Don't touch me - controls -->
+          </ul>
+        </li>
+        <li class="el-submenu is-opened">
+          <div class="el-submenu__title" style="padding-left: 20px;"><i class="el-icon-star-on"></i><span>Layouts</span></div>
+          <ul class="el-menu">
+            <li v-for="item in layouts" class="el-menu-item" :class="{'is-active': currentUrl === item.url}" @click="goto(item.url)">
+              {{item.name}}
+            </li>
+            <!-- Don't touch me - layouts -->
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div style="flex:5">
+      <iframe :src="currentUrl" style="width: 100%; border: none; height: 100%"></iframe>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    new Vue({
+      el: '.doc',
+      data: {
+        controls: [
+          { "url": "/examples/control-comps/input.html", "name": "input" },
+          { "url": "/examples/control-comps/input-number.html", "name": "input-number" },
+          { "url": "/examples/control-comps/textarea.html", "name": "textarea" },
+          { "url": "/examples/control-comps/select.html", "name": "select" },
+          { "url": "/examples/control-comps/color-picker.html", "name": "color-picker" },
+          { "url": "/examples/control-comps/date-picker.html", "name": "date-picker" },
+          { "url": "/examples/control-comps/slider.html", "name": "slider" },
+          { "url": "/examples/control-comps/rate.html", "name": "rate" },
+          { "url": "/examples/control-comps/radio.html", "name": "radio" },
+          { "url": "/examples/control-comps/checkbox.html", "name": "checkbox" },
+          { "url": "/examples/control-comps/upload.html", "name": "upload" },
+          { "url": "/examples/control-comps/label.html", "name": "label" }],
+        layouts: [
+          { "url": "/examples/layout-comps/object.html", "name": "object" },
+          { "url": "/examples/layout-comps/array.html", "name": "array" },
+          { "url": "/examples/layout-comps/array-table.html", "name": "array-table" },
+          { "url": "/examples/layout-comps/array-tabs.html", "name": "array-tabs" }
+        ],
+        currentUrl: ''
+      },
+      methods: {
+        goto(url) {
+          this.$data.currentUrl = url;
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>

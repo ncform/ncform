@@ -1,0 +1,18 @@
+.playground {
+    padding: 8px;
+}
+.editorArea{
+    margin: 8px 0 0;
+    border: 1px solid #d8dce5;
+    border-left: none;
+}
+.previewArea{
+    margin: 8px 0 0;
+    /* min-height: 650px; */
+}
+
+.editor{
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+}

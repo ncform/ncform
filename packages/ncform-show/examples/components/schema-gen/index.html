@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ncform Schema Generator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #demo {
+      margin: 0 20px;
+    }
+  </style>
+  <link rel="stylesheet" href="../../../node_modules/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+
+  <!--演示区域-->
+  <div id="demo">
+    <schema-gen></schema-gen>
+  </div>
+
+
+  <script type="text/javascript" src="../../../node_modules/ace-builds/src-min-noconflict/ace.js"></script>
+  <script type="text/javascript" src="../../../node_modules/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script type="text/javascript" src="../../../dist/schemaGen.js"></script>
+  <script type="text/javascript">
+    Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      components: {
+        schemaGen: schemaGen
+      }
+    });
+  </script>
+</body>
+
+</html>
