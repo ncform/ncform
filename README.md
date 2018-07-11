@@ -16,17 +16,17 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 1.install
 ```
-npm i ncform ncform-common --save
-npm i ncform-theme-elementui element-ui --save 
+npm i @ncform/ncform @ncform/ncform-common --save
+npm i @ncform/ncform-theme-elementui element-ui --save 
 ```
 
 2.import
 ```
 import Vue from 'vue';
-import vueNcform from 'ncform';
+import vueNcform from '@ncform/ncform';
 
 import 'element-ui';
-import ncformStdComps from 'ncform-theme-elementui';
+import ncformStdComps from '@ncform/ncform-theme-elementui';
 
 Vue.use(vueNcform, { extComponents: ncformStdComps });
 ```
@@ -74,11 +74,11 @@ Vue.use(vueNcform, { extComponents: ncformStdComps });
 
   <script type="text/javascript" src="path/to/vue.js"></script>
 
-  <script type="text/javascript" src="path/to/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="path/to/ncform/dist/vueNcform.min.js"></script>
+  <script type="text/javascript" src="path/to/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="path/to/@ncform/ncform/dist/vueNcform.min.js"></script>
 
   <script type="text/javascript" src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="path/to/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+  <script type="text/javascript" src="path/to/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
   
   <script type="text/javascript">
     Vue.use(vueNcform, { extComponents: ncformStdComps });

@@ -4,14 +4,14 @@
 
 1.Install ncform-common
 ```
-npm i ncform-common --save
+npm i @ncform/ncform-common --save
 ```
 
 2.Extend ValidationRule class
 ```
 # myCustomRule.js
 
-import ncformCommon from 'ncform-common';
+import ncformCommon from '@ncform/ncform-common';
 
 class MyCustomRule extends ncformCommon.ValidationRule {
 
@@ -49,7 +49,7 @@ rules: {
 
 1.Install ncform-common
 ```
-npm i ncform-common --save
+npm i @ncform/ncform-common --save
 ```
 
 2.Implement the control
@@ -75,7 +75,7 @@ npm i ncform-common --save
 
 <script>
 
-import ncformCommon from 'ncform-common';
+import ncformCommon from '@ncform/ncform-common';
 
 export default {
   mixins: [ncformCommon.mixins.vue.controlMixin],
@@ -133,7 +133,7 @@ ui: {
 
 <script>
 
-import ncformCommon from 'ncform-common';
+import ncformCommon from '@ncform/ncform-common';
 
 export default {
   mixins: [ncformCommon.mixins.vue.controlMixin],
