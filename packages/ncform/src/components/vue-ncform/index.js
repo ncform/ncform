@@ -20,7 +20,6 @@ module.exports = {
    * ]
    */
   install: (Vue, options = { extComponents: {}, extRules: [] }) => {
-
     window.__$ncform = {}; // 属于ncform的全局变量
 
     window.__$ncform.__ncFormsGlobalList = {};
