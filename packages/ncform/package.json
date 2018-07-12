@@ -1,8 +1,7 @@
 {
   "name": "@ncform/ncform",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "nice form",
-  "homepage": "",
   "author": "daniel.xiao",
   "main": "dist/vueNcform.min.js",
   "keywords": [
@@ -17,6 +16,10 @@
     "release": "NODE_ENV=production gulp build",
     "test": "mocha --recursive --require ./test/testHelper.js -t 5000",
     "watch-build": "gulp watch-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vipshop/ncform.git"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.2",
@@ -54,10 +57,11 @@
   },
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "dependencies": {
-    "@ncform/ncform-common": "^0.1.4",
+    "@ncform/ncform-common": "^0.1.6",
     "extend": "^3.0.1",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8"

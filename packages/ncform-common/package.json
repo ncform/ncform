@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform-common",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "ncform common",
   "main": "dist/ncformCommon.min.js",
   "scripts": {
@@ -14,12 +14,17 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/vipshop/ncform.git"
   },
-  "keywords": [],
+  "keywords": [
+    "json",
+    "form",
+    "automatic",
+    "json-schema",
+    "ncform"
+  ],
   "author": "daniel.xiao",
   "license": "MIT",
-  "homepage": "",
   "devDependencies": {
     "babel-core": "6.14.0",
     "babel-loader": "6.2.5",
