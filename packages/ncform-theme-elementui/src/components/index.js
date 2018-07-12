@@ -18,7 +18,7 @@ import array from "./layout-comps/array.vue";
 import arrayTabs from "./layout-comps/array-tabs.vue";
 // Don't touch me - import layouts
 
-export default {
+const components = {
   input,
   radio,
   checkbox,
@@ -39,3 +39,6 @@ export default {
   arrayTabs
   // Don't touch me - export layouts
 };
+
+export default components;
+module.exports = components;
