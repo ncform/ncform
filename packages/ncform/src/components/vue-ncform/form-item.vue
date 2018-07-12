@@ -84,6 +84,10 @@
       opacity: 0.2;
     }
   }
+
+  .invalid-feedback {
+    color: #f56c6c;
+  }
 </style>
 
 <script>

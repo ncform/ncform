@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "dev": "gulp dev",
+    "build": "gulp build",
     "release": "NODE_ENV=production gulp build",
     "test": "mocha --recursive --require ./test/testHelper.js -t 5000",
     "watch-build": "gulp watch-build"

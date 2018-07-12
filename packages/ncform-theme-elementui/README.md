@@ -3,10 +3,16 @@
 ![vue 2.5](https://img.shields.io/badge/vue-2.5-green.svg)
 ![element-ui 2.0](https://img.shields.io/badge/element-2.0-blue.svg)
 
-ncform theme - element-ui
+ncform theme widgets -> element-ui
 
-# how to dev
+# How to dev
 
+Step 1: prepare the dependency nc libraries
+```sh
+cd ../../ && npm run build
+```
+
+Step 2: start development
 ```sh
 npm run dev
 ```

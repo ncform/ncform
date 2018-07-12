@@ -10,6 +10,7 @@
     "lint-test": "eslint packages/*/test --fix",
     "lint-script": "eslint scripts/* --fix",
     "doc": "node scripts/gen-doc.js",
+    "build": "lerna run build",
     "commit": "git-cz",
     "release:log": "conventional-changelog -p angular -i CHANGELOG_TEMP.md -s -r 0",
     "release": "npm run lint && lerna run release && lerna publish",
