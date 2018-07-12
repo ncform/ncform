@@ -227,3 +227,8 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 - [json-editor](https://github.com/jdorn/json-editor)
 - [react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form)
 - [angular-schema-form](https://github.com/json-schema-form/angular-schema-form)
+
+## 作者
+
+- 肖玮（Daniel.Xiao），ncform的设计者和主要实现者
+- 罗振考（Kyle.lo），ncform表单校验部分的实现者和标准组件的主力开发者
