@@ -10,7 +10,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 在 [Playground](https://vipshop.github.io/ncform/ncform-show/playground/index.html) 体验一下ncform的魅力，可加深你对ncform的了解
 
-> [Playground](http://192.168.145.229:3000/examples/components/playground/index.html) 展示了ncform大部分的使用场景例子（I believe the example is the best document），建议先仔细浏览下，例子中的配置实际开发中一般都可以直接使用滴
+> [Playground](https://vipshop.github.io/ncform/ncform-show/playground/index.html) 展示了ncform大部分的使用场景例子（I believe the example is the best document），建议先仔细浏览下，例子中的配置实际开发中一般都可以直接使用滴
 
 ## Quick Start
 
