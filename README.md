@@ -221,7 +221,7 @@ ncform = ncform容器 + ncform主题标准组件
 一个系统项目，一般都会使用一种UI库（如vue）及其之上的UI实现方案（如elementui）
 为了与之和平共处，ncform的标准组件可采用与之一致的UI实现方案
 
-ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](http://192.168.145.229:3002/)
+ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](https://vipshop.github.io/ncform/ncform-theme-elementui/index.html)
 
 如果你是iview的粉丝，通过遵循ncform标准组件的规范开发iview主题的标准组件即可
 
