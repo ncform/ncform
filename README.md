@@ -14,7 +14,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 ## Quick Start
 
-### ES6
+### In node.js
 
 1.install
 ```
@@ -67,7 +67,7 @@ Vue.use(vueNcform, { extComponents: ncformStdComps });
 </script>
 ```
 
-### Script Files
+### In a browser
 
 ```
 <html>
@@ -186,6 +186,8 @@ SO，为了提高表单开发效率，减少失误，提高表单规范和健壮
 json-schema对于验证规则，声明在各个地方，不好管理。而ncform都集中在rules。这种设计也便于后面开发表单制作IDE
 
 ## dx表达式：
+
+通过`dx`表达式，你可以通过`{{$root.xxx}}`取得指定字段的值，然后用原生的JS书写你的任意逻辑表达式
 
 - 指定对象中的属性值，例子：
 ```
