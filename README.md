@@ -82,13 +82,13 @@ Vue.use(vueNcform, { extComponents: ncformStdComps });
     <el-button @click="submit()">Submit</button>
   </div>
 
-  <script type="text/javascript" src="path/to/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
 
-  <script type="text/javascript" src="path/to/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="path/to/@ncform/ncform/dist/vueNcform.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform/dist/vueNcform.min.js"></script>
 
   <script type="text/javascript" src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="path/to/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
 
   <script type="text/javascript">
     Vue.use(vueNcform, { extComponents: ncformStdComps });
@@ -247,3 +247,9 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 - 肖玮（Daniel.xiao），ncform的设计者和主要实现者
 - 罗振考（Kyle.lo），ncform表单校验部分的实现者和标准组件的主力开发者
+
+## 开发交流
+
+![](http://daniel-test.image.alimmdn.com/ncform/wx-qrcode.jpeg)
+
+ncform官方微信讨论群，请扫码或搜索微信号viptech128(唯技术)，备注ncform，添加好友后加入。
