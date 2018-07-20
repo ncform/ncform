@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ncform Playground</title>
-    <link rel="stylesheet" href="../../../node_modules/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <style>
   * {margin: 0; padding: 0;}
@@ -24,7 +24,7 @@
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.min.js"></script>
   <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.js"></script>
   <script type="text/javascript" src="../../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
-  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-theme-elementui/dist/ncformStdComps.js"></script>
+  <script type="text/javascript" src="../../../node_modules/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script src="https://unpkg.com/mockjs"></script>
   <script src="https://unpkg.com/js-url"></script>
@@ -44,7 +44,7 @@
       return res.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
     })
 
-    Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+    Vue.use(vueNcform, { extComponents: ncformStdComps });
     // Bootstrap the app
     new Vue({
       el: '#demo',
