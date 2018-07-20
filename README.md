@@ -250,6 +250,6 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 ## 开发交流
 
-![](http://daniel-test.image.alimmdn.com/ncform/wx-qrcode.jpeg)
+![qrcode](http://daniel-test.image.alimmdn.com/ncform/wx-qrcode.jpeg)
 
 ncform官方微信讨论群，请扫码或搜索微信号viptech128(唯技术)，备注ncform，添加好友后加入。
