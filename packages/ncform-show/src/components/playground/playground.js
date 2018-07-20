@@ -875,7 +875,8 @@ export default {
     createForm() {
       const value = this.$options.editor.getValue();
       try {
-        this.$data.ncformSchema = JSON.parse(value);
+        eval('this.$data.ncformSchema = '+value);
+        this.$data.ncformValue = {};
       } catch (err) {
         alert("不是有效的JSON数据.");
         throw new Error(`createForm Error:${err}`);
