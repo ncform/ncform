@@ -72,6 +72,7 @@ export default {
 }
 </script>
 ```
+可参考[ncform-demo](https://github.com/daniel-dx/ncform-demo)项目
 
 ### In a browser
 
