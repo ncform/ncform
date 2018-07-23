@@ -45,11 +45,13 @@ Vue.use(vueNcform, { extComponents: ncformStdComps });
 <script>
   export default {
     data() {
-      formSchema: {
-        type: 'object',
-        properties: {
-          name: {
-            type: 'string'
+      return {
+        formSchema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string'
+            }
           }
         }
       }
