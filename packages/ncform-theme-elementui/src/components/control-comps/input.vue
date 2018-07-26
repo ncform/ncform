@@ -463,7 +463,12 @@ export default {
           ] = this.$data.appendSelectVal;
         }
         return obj;
-      } else {
+      } else if(typeof this.value === "string"){
+        val = val.trim();
+        this.$data.inputVal = val;
+        return val;
+      }
+      else{
         this.$data.inputVal = val;
         return val;
       }
