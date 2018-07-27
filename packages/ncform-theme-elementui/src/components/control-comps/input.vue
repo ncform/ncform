@@ -463,7 +463,7 @@ export default {
           ] = this.$data.appendSelectVal;
         }
         return obj;
-      } else if(typeof this.value === "string"){
+      } else if(this.mergeConfig.trim && typeof this.value === "string"){
         val = val.trim();
         this.$data.inputVal = val;
         return val;
