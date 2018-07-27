@@ -447,6 +447,11 @@ export default {
           val = parseInt(val);
           val = isNaN(val) ? "" : val;
           break;
+        case "string":
+          if(this.mergeConfig.trim){
+            val = val.toString().trim();
+          }
+          break;
       }
 
       if (typeof this.value === "object") {
@@ -463,7 +468,8 @@ export default {
           ] = this.$data.appendSelectVal;
         }
         return obj;
-      } else {
+      }
+      else{
         this.$data.inputVal = val;
         return val;
       }

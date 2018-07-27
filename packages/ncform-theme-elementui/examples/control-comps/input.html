@@ -64,17 +64,17 @@
     Vue.use(vueNcform, { extComponents: { object, input } });
 
     let formSchemas = [
-      {
-        title: '默认状态',
-        schema: {
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string',
+        {
+          title: '默认状态',
+          schema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              }
             }
           }
-        }
-      },
+        },
       {
         title: '提供值',
         schema: {
@@ -88,6 +88,22 @@
           ui: {
             widgetConfig: {
               layout: 'h'
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] trim: 前后去空格',
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  trim: true
+                }
+              }
             }
           }
         }
