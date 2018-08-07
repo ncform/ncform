@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform-common",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "ncform common",
   "main": "dist/ncformCommon.min.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "build": "gulp build",
     "coverage": "gulp coverage",
     "watch-build": "gulp watch-build",
-    "release": "NODE_ENV=production gulp build"
+    "release": "cross-env NODE_ENV=production gulp build"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "babel-preset-power-assert": "^1.0.0",
     "babel-register": "6.14.0",
     "chai": "3.5.0",
+    "cross-env": "^5.2.0",
     "del": "2.2.2",
     "glob": "7.0.6",
     "gulp": "3.9.1",
