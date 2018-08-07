@@ -6,7 +6,7 @@
   ></el-color-picker>
 </template>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 </style>
 
 <script>

@@ -13,7 +13,7 @@
   </el-tooltip>
 </template>
 
-<style lang="sass">
+<style lang="scss">
   .ncform-label {
     font-size: 14px;
 

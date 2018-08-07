@@ -1,9 +1,15 @@
 const path = require("path");
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const config = require("./config");
 
 // webpack.config.js
-module.exports = {
+const webpackConfig = {
+
+  mode: 'development',
+
+  devtool: 'cheap-module-eval-source-map',
+
   entry: {
     input: path.join(config.src, "components", "control-comps", "input.vue"),
     radio: path.join(config.src, "components", "control-comps", "radio.vue"),
@@ -92,25 +98,30 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
-        loader: "vue",
+        loader: "vue-loader",
         include: [config.src]
       },
       {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.js$/,
-        loader: "babel",
+        loader: 'babel-loader',
         include: [config.src].concat(config.babelModules)
       },
       {
-        // edit this for additional asset file types
         test: /\.(png|jpg|gif)$/,
-        loader: "url",
+        loader: "url-loader",
         query: {
-          // inline files smaller then 10kb as base64 dataURL
           limit: 10000,
-          // fallback to file-loader with this naming scheme
           name: "img/[name].[ext]"
         },
         include: [config.src]
@@ -118,13 +129,17 @@ module.exports = {
     ]
   },
 
-  vue: {
-    loaders: {
-      js: "babel"
-    }
-  },
-  babel: {
-    presets: ["es2015"],
-    plugins: ["transform-runtime"]
-  }
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 };
+
+
+module.exports = [
+  webpackConfig,
+  Object.assign({}, webpackConfig, {
+    entry: {
+      ncformStdComps: path.join(config.src, 'components', 'index.js'),
+    }
+  })
+]

@@ -1,7 +1,11 @@
 const path = require("path");
 const config = require("./config");
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
+
+  mode: 'development',
+
   entry: {
     vueNcform: path.join(config.src, "components", "vue-ncform", "index.js")
   },
@@ -31,20 +35,28 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
-        loader: "vue",
+        loader: "vue-loader",
         include: [config.src]
       },
       {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
         test: /\.js$/,
-        loader: "babel",
+        loader: 'babel-loader',
         include: [config.src].concat(config.babelModules)
       },
       {
         test: /\.(png|jpg|gif)$/,
-        loader: "url",
+        loader: "url-loader",
         query: {
           limit: 10000,
           name: "img/[name].[ext]"
@@ -54,13 +66,7 @@ module.exports = {
     ]
   },
 
-  vue: {
-    loaders: {
-      js: "babel"
-    }
-  },
-  babel: {
-    presets: ["es2015"],
-    plugins: ["transform-runtime"]
-  }
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 };

@@ -15,13 +15,13 @@
     "axios": "^0.17.1",
     "babel-core": "^6.2.21",
     "babel-eslint": "^6.0.4",
-    "babel-loader": "^6.2.1",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-power-assert": "^1.0.0",
     "babel-runtime": "^6.3.19",
     "browser-sync": "^2.9.1",
     "concat": "^1.0.0",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.23.1",
     "csswring": "^4.0.0",
     "eslint": "~2.2.0",
@@ -47,15 +47,13 @@
     "url-loader": "^0.5.7",
     "vue-hot-reload-api": "^2.0.6",
     "vue-html-loader": "^1.1.0",
-    "vue-loader": "^8.7.1",
-    "vue-style-loader": "^1.0.0",
-    "webpack": "^1.12.1"
+    "vue-style-loader": "^1.0.0"
   },
   "scripts": {
     "dev": "gulp dev",
     "build": "gulp build",
     "watch-build": "gulp watch-build",
-    "release": "NODE_ENV=production gulp build"
+    "release": "cross-env NODE_ENV=production gulp build"
   },
   "files": [
     "dist",

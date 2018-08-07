@@ -54,7 +54,7 @@
   </div>
 </template>
 
-<style lang="sass">
+<style lang="scss">
   .ncform-input {
     .el-select .el-input {
       width: 130px;
@@ -193,6 +193,7 @@ export default {
 
       defaultConfig: {
         type: "text",
+        trim: true,
         prefixIcon: "",
         suffixIcon: "",
         modelField: "",
@@ -438,6 +439,10 @@ export default {
         val = this.$data.inputVal;
       }
 
+      if(this.$data.mergeConfig.trim){
+        val = val ? val.toString().trim() : val;
+      }
+
       switch (this.$data.mergeConfig.type) {
         case "number":
           val = parseFloat(val);
@@ -447,10 +452,7 @@ export default {
           val = parseInt(val);
           val = isNaN(val) ? "" : val;
           break;
-        case "string":
-          if(this.mergeConfig.trim){
-            val = val.toString().trim();
-          }
+        default:
           break;
       }
 

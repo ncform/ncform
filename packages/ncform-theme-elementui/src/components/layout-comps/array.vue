@@ -48,7 +48,7 @@
 
 </template>
 
-<style lang="sass">
+<style lang="scss">
   .__array-form-item {
 
     // margin-top: 8px;

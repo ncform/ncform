@@ -49,7 +49,7 @@
       return { result: [{ id: 1, label: 'iphone' }, { id: 2, label: 'xiaomi' }, { id: 3, label: 'oppo' }] };
     })
 
-    Vue.use(vueNcform, { extComponents: { object, radio } });
+    Vue.use(vueNcform, { extComponents: { object: object.default, radio: radio.default } });
 
     let formSchemas = [
       {

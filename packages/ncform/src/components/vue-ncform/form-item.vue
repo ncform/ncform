@@ -49,7 +49,7 @@
 
 </template>
 
-<style lang="sass">
+<style lang="scss">
   .__ncform-control {
     width: 100%;
     display: inline-block;

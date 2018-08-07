@@ -11,7 +11,7 @@
     </div>
 </template>
 
-<style lang="sass">
+<style lang="scss">
   .h-layout {
     .ncform-input-number {
       &.__ncform-control {

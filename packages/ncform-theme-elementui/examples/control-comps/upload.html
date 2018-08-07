@@ -50,7 +50,7 @@
       return { data: { name: 'shoe.jpg', url: '//a.vpimg2.com/upload/upimg2/ued/cxy/xinke/02-sport.jpg' } };
     })
 
-    Vue.use(vueNcform, { extComponents: { object, upload } });
+    Vue.use(vueNcform, { extComponents: { object: object.default, upload: upload.default } });
 
     let formSchemas = [
       {

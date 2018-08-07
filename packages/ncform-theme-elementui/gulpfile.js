@@ -15,14 +15,17 @@ const { reload } = browserSync;
 
 /* ====================== functions ====================== */
 
-function handleErrors(err) {
-  notify
-    .onError({
-      title: "compile error",
-      message: "<%= error.message %>"
-    })
-    .apply(this, err);
-  this.emit("end");
+function handleErrors(err, stats) {
+  if (err) {
+    console.error(err.details);
+  }
+
+  if (stats) {
+    console.log(stats.toString({
+      chunks: false,  // Makes the build much quieter
+      colors: true    // Shows colors in the console
+    }));
+  }
 }
 
 function watchBuild() {
@@ -32,11 +35,16 @@ function watchBuild() {
 /* ====================== gulp tasks ====================== */
 
 gulp.task("webpack", done => {
-  webpack(webpackConfig, err => {
-    if (err) {
-      handleErrors(err);
+  webpack(webpackConfig, (err, stats) => {
+    if (err || stats.hasErrors()) {
+      handleErrors(err, stats);
+    } else {
+      console.log(stats.toString({
+        chunks: false,  // Makes the build much quieter
+        colors: true    // Shows colors in the console
+      }));
+      done();
     }
-    done();
   });
 });
 

@@ -62,7 +62,7 @@
 
 </template>
 
-<style lang="sass">
+<style lang="scss">
 
 .__array-table-form-item {
 

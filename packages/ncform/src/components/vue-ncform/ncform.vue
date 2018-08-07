@@ -7,7 +7,7 @@
 </div>
 </template>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 .ncform {
 }
 </style>

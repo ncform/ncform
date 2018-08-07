@@ -64,7 +64,7 @@
   </div>
 </template>
 
-<style lang="sass">
+<style lang="scss">
   .__object-form-item {
 
     & > legend {

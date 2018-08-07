@@ -51,7 +51,7 @@
       return result.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
     })
 
-    Vue.use(vueNcform, { extComponents: { object, select } });
+    Vue.use(vueNcform, { extComponents: { object: object.default, select: select.default } });
 
     let formSchemas = [
       {
