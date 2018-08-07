@@ -74,6 +74,7 @@ typings/
 
 # IDE
 .DS_Store
+.vscode
 
 # build
 dist
