@@ -4,25 +4,14 @@ const webpack = require("webpack");
 const config = require("./config");
 
 module.exports = {
-  entry: {
-    vueNcform: path.join(config.src, "components", "vue-ncform", "index.js")
-  },
+
+  mode: 'production',
 
   output: {
-    path: config.dist,
     filename: "[name].min.js",
-    sourceMapFilename: "[file].map",
-    library: "[name]",
-    libraryTarget: "umd",
-    umdNamedDefine: true
   },
 
-  plugins: [
-    // compress js
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]
+  optimization: {
+    minimize: true
+  }
 };

@@ -44,7 +44,7 @@ function build() {
         // would externalize the `jquery` module.
         externals: {},
         module: {
-          loaders: [
+          rules: [
             // {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}
             { test: /\.js$/, loader: "babel-loader" }
           ]
@@ -136,7 +136,7 @@ function testBrowser() {
           },
           // Externals isn't necessary here since these are for tests.
           module: {
-            loaders: [
+            rules: [
               // This is what allows us to author in future JavaScript
               // {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
               { test: /\.js$/, loader: "babel-loader" },

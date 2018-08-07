@@ -1,9 +1,12 @@
 const path = require("path");
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const config = require("./config");
 
 // webpack.config.js
 module.exports = {
+
+  mode: 'development',
+
   entry: {
     playground: path.join(config.src, "components", "playground", "index.vue"),
     schemaGen: path.join(config.src, "components", "schema-gen", "index.vue")
@@ -31,39 +34,45 @@ module.exports = {
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.vue$/,
-        loader: "vue",
-        include: [config.src].concat(config.vueModules)
+        loader: "vue-loader",
+        include: [config.src]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+        ]
       },
       {
         test: /\.js$/,
-        loader: "babel",
+        loader: 'babel-loader',
         include: [config.src].concat(config.babelModules)
       },
       {
-        // edit this for additional asset file types
         test: /\.(png|jpg|gif)$/,
-        loader: "url",
+        loader: "url-loader",
         query: {
-          // inline files smaller then 10kb as base64 dataURL
           limit: 10000,
-          // fallback to file-loader with this naming scheme
           name: "img/[name].[ext]"
         },
-        include: [config.src].concat(config.vueModules)
+        include: [config.src]
       }
     ]
   },
 
-  vue: {
-    loaders: {
-      js: "babel"
-    }
-  },
-  babel: {
-    presets: ["stage-3", "es2015"],
-    plugins: ["transform-runtime"]
-  }
+  plugins: [
+    new VueLoaderPlugin()
+  ]
 };

@@ -47,7 +47,7 @@
       return { result: [{ id: 1, label: 'iphone' }, { id: 2, label: 'xiaomi' }, { id: 3, label: 'oppo' }] };
     })
 
-    Vue.use(vueNcform, { extComponents: { object, checkbox } });
+    Vue.use(vueNcform, { extComponents: { object: object.default, checkbox: checkbox.default } });
 
     let formSchemas = [
       {

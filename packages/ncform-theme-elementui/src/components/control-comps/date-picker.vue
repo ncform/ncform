@@ -12,7 +12,7 @@
   </el-date-picker>
 </template>
 
-<style lang="sass">
+<style lang="scss">
   .h-layout {
     .ncform-date-picker {
       &.__ncform-control {

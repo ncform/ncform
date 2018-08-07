@@ -33,12 +33,12 @@
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script type="text/javascript" src="../../../dist/schemaGen.js"></script>
   <script type="text/javascript">
-    Vue.use(vueNcform, { extComponents: ncformStdComps.default });
+    Vue.use(vueNcform, { extComponents: ncformStdComps });
     // Bootstrap the app
     new Vue({
       el: '#demo',
       components: {
-        schemaGen: schemaGen
+        schemaGen: schemaGen.default
       }
     });
   </script>

@@ -61,7 +61,7 @@
       return { data: result.filter(item => item.value.indexOf(params.keyword) >= 0) };
     })
 
-    Vue.use(vueNcform, { extComponents: { object, input } });
+    Vue.use(vueNcform, { extComponents: { object: object.default, input: input.default } });
 
     let formSchemas = [
         {
@@ -93,7 +93,7 @@
         }
       },
       {
-        title: '[属性] trim: 前后去空格',
+        title: '[属性] trim: 前后去空格。默认值是true',
         schema: {
           type: 'object',
           properties: {
@@ -101,7 +101,7 @@
               type: 'string',
               ui: {
                 widgetConfig: {
-                  trim: true
+                  trim: false
                 }
               }
             }
@@ -151,7 +151,7 @@
         }
       },
       {
-        title: '[属性] type: 显示类型. 可选值：[text | number | password]',
+        title: '[属性] type: 显示类型. 可选值：[text | number | password]',
         schema: {
           type: 'object',
           properties: {

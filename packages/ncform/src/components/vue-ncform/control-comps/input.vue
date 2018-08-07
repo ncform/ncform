@@ -6,7 +6,7 @@
          :type="mergeConfig.type" class="form-control" v-model="modelVal">
 </template>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 </style>
 
 <script>

@@ -29,11 +29,12 @@
   "devDependencies": {
     "babel-core": "6.14.0",
     "babel-eslint": "^8.2.5",
-    "babel-loader": "6.2.5",
+    "babel-loader": "^7.1.5",
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-polyfill": "6.13.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-power-assert": "^1.0.0",
+    "babel-preset-stage-3": "^6.24.1",
     "babel-register": "6.14.0",
     "babel-runtime": "^6.3.19",
     "commitizen": "^2.10.1",
@@ -48,6 +49,11 @@
     "lerna": "^2.11.0",
     "lint-staged": "^7.2.0",
     "prettier": "^1.13.7",
+    "vue-loader": "^15.2.6",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.16.4",
+    "webpack-cli": "^3.1.0",
+    "webpack-merge": "^4.1.4",
     "yorkie": "^1.0.3"
   },
   "dependencies": {

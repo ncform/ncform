@@ -44,7 +44,7 @@
 
 </template>
 
-<style lang="sass">
+<style lang="scss">
   .__array-form-item {
 
     & > legend {

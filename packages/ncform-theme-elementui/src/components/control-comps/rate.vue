@@ -21,7 +21,7 @@
   ></el-rate>
 </template>
 
-<style lang="sass">
+<style lang="scss">
     .h-layout {
     .ncform-rate {
       &.__ncform-control {
