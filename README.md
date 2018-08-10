@@ -86,7 +86,7 @@ export default {
 <body>
   <div id="demo">
     <ncform :form-schema="formSchema" form-name="your-form-name" v-model="formSchema.value" @submit="submit()"></ncform>
-    <el-button @click="submit()">Submit</button>
+    <el-button @click="submit()">Submit</el-button>
   </div>
 
   <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
