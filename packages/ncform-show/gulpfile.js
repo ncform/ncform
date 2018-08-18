@@ -22,10 +22,12 @@ function handleErrors(err, stats) {
   }
 
   if (stats) {
-    console.log(stats.toString({
-      chunks: false,  // Makes the build much quieter
-      colors: true    // Shows colors in the console
-    }));
+    console.log(
+      stats.toString({
+        chunks: false, // Makes the build much quieter
+        colors: true // Shows colors in the console
+      })
+    );
   }
 }
 
@@ -36,10 +38,12 @@ gulp.task("webpack", done => {
     if (err || stats.hasErrors()) {
       handleErrors(err, stats);
     } else {
-      console.log(stats.toString({
-        chunks: false,  // Makes the build much quieter
-        colors: true    // Shows colors in the console
-      }));
+      console.log(
+        stats.toString({
+          chunks: false, // Makes the build much quieter
+          colors: true // Shows colors in the console
+        })
+      );
       done();
     }
   });
