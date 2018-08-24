@@ -33,6 +33,7 @@
   </div>
 
   <script type="text/javascript" src="../assets/lodash.min.js"></script>
+  <script type="text/javascript" src="../assets/axios.min.js"></script>
   <script type="text/javascript" src="../assets/vue.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
   <script src="https://unpkg.com/mockjs"></script>
@@ -47,7 +48,7 @@
       return { result: [{ id: 1, label: 'iphone' }, { id: 2, label: 'xiaomi' }, { id: 3, label: 'oppo' }] };
     })
 
-    Vue.use(vueNcform, { extComponents: { object, checkbox } });
+    Vue.use(vueNcform, { extComponents: { object: object.default, checkbox: checkbox.default } });
 
     let formSchemas = [
       {

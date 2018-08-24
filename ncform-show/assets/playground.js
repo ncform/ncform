@@ -7,1305 +7,222 @@
 		exports["playground"] = factory();
 	else
 		root["playground"] = factory();
-})(this, function() {
+})(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-
+/******/ 		module.l = true;
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-
+/******/
+/******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/components/playground/index.vue");
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ "../../node_modules/babel-loader/lib/index.js!./src/components/playground/playground.js?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************!*\
+  !*** D:/daniel/projects/owner/ncform/node_modules/babel-loader/lib!./src/components/playground/playground.js?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var __vue_script__, __vue_template__
-	var __vue_styles__ = {}
-	__webpack_require__(1)
-	__vue_script__ = __webpack_require__(5)
-	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
-	  console.warn("[vue-loader] src/components/playground/index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(9)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
-	if (__vue_template__) {
-	__vue_options__.template = __vue_template__
-	}
-	if (!__vue_options__.computed) __vue_options__.computed = {}
-	Object.keys(__vue_styles__).forEach(function (key) {
-	var module = __vue_styles__[key]
-	__vue_options__.computed[key] = function () { return module }
-	})
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-fec2bcfe/index.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n/**\r\n * <playground></playground>\r\n */\nexports.default = {\n  /* ====================== 生命周期 ====================== */\n\n  created: function created() {\n    // 在这里做一些跟DOM无关的初始化, 比如获取初始化数据\n  },\n  mounted: function mounted() {\n    var _this = this;\n\n    // 在这里做一些跟DOM有关的初始化\n    setTimeout(function () {\n      _this.createEditor();\n      _this.templateChange(\"0\");\n    }, 0);\n  },\n  destroyed: function destroyed() {\n    // 在这里销毁无用的资源，比如setTimeout返回的值\n  },\n\n\n  /* ====================== 引用组件 ====================== */\n\n  components: {},\n\n  /* ====================== 数据绑定 ====================== */\n\n  props: {},\n\n  data: function data() {\n    return {\n      jsonValue: \"\",\n      ncformSchema: {\n        type: \"object\",\n        properties: {\n          username: {\n            type: \"string\",\n            ui: {\n              columns: 6,\n              label: \"username\"\n            }\n          }\n        }\n      },\n      ncformValue: {},\n\n      selectVal: \"0\",\n      options: [{\n        value: \"0\",\n        label: \"基础使用\"\n      }, {\n        value: \"1\",\n        label: \"基础使用-丰富显示\"\n      }, {\n        value: \"2\",\n        label: \"基础使用-多列布局\"\n      }, {\n        value: \"22\",\n        label: \"基础使用-媒体预览\"\n      }, {\n        value: \"3\",\n        label: \"基础使用-标签居左\"\n      }, {\n        value: \"4\",\n        label: \"基础使用-校验规则\"\n      }, {\n        value: \"5\",\n        label: \"基础使用-数组类型\"\n      }, {\n        value: \"6\",\n        label: \"基础使用-表格数组\"\n      }, {\n        value: \"7\",\n        label: \"基础使用-标签数组\"\n      }, {\n        value: \"8\",\n        label: \"高级玩法-控件交互 dx表达式\"\n      }, {\n        value: \"9\",\n        label: \"高级玩法-数组项交互 dx表达式\"\n      }, {\n        value: \"10\",\n        label: \"高级玩法-下拉框值交互 dx表达式\"\n      }, {\n        value: \"101\",\n        label: \"高级玩法-校验关联 dx表达式\"\n      }, {\n        value: \"11\",\n        label: \"高级玩法-自定义校验规则 dx表达式\"\n      }, {\n        value: \"12\",\n        label: \"高级玩法-全局常量 dx表达式\"\n      }],\n      templates: {\n        \"0\": {\n          type: \"object\",\n          properties: {\n            name: {\n              type: \"string\"\n            },\n            email: {\n              type: \"string\"\n            },\n            age: {\n              type: \"integer\"\n            },\n            adult: {\n              type: \"boolean\"\n            }\n          }\n        },\n        \"1\": {\n          type: \"object\",\n          properties: {\n            name: {\n              type: \"string\",\n              ui: {\n                label: \"姓名\",\n                description: \"请填写你的姓名\",\n                placeholder: \"姓名\"\n              }\n            },\n            email: {\n              type: \"string\",\n              ui: {\n                label: \"邮件\"\n              }\n            },\n            age: {\n              type: \"integer\",\n              default: 18,\n              ui: {\n                label: \"年龄\"\n              }\n            },\n            adult: {\n              type: \"boolean\",\n              ui: {\n                label: \"是否成年\",\n                help: {\n                  show: true,\n                  text: \"?\",\n                  content: \"成年才可以玩农药啊\"\n                }\n              }\n            }\n          }\n        },\n        \"2\": {\n          type: \"object\",\n          properties: {\n            firstname: {\n              type: \"string\",\n              ui: {\n                columns: 3,\n                label: \"姓名\",\n                placeholder: \"姓\"\n              }\n            },\n            lastname: {\n              type: \"string\",\n              ui: {\n                columns: 3,\n                showLabel: false,\n                placeholder: \"名\"\n              }\n            },\n            email: {\n              type: \"string\",\n              ui: {\n                columns: 6,\n                label: \"邮件\"\n              }\n            },\n            age: {\n              type: \"integer\",\n              ui: {\n                columns: 6,\n                label: \"年龄\"\n              }\n            },\n            adult: {\n              type: \"boolean\",\n              ui: {\n                columns: 6,\n                label: \"是否成年\",\n                help: {\n                  show: true,\n                  text: \"?\",\n                  content: \"成年才可以玩农药啊\"\n                }\n              }\n            }\n          }\n        },\n\n        \"22\": {\n          type: \"object\",\n          properties: {\n            image: {\n              type: \"string\",\n              default: \"https://upload-images.jianshu.io/upload_images/2195795-e3c500e4b7d17b2c.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240\",\n              ui: {\n                label: \"图片\",\n                columns: 6,\n                preview: {\n                  type: \"image\",\n                  value: \"dx: {{$self}}\",\n                  clearable: true,\n                  outward: {\n                    width: 150,\n                    height: 150,\n                    shape: \"circle\"\n                  }\n                }\n              }\n            },\n            video: {\n              type: \"string\",\n              default: \"https://www.w3schools.com/html/mov_bbb.mp4\",\n              ui: {\n                label: \"视频\",\n                columns: 6,\n                preview: {\n                  type: \"video\"\n                }\n              }\n            },\n            audio: {\n              type: \"string\",\n              default: \"https://www.w3schools.com/html/mov_bbb.mp4\",\n              ui: {\n                label: \"音频\",\n                columns: 6,\n                preview: {\n                  type: \"audio\"\n                }\n              }\n            },\n            link: {\n              type: \"string\",\n              default: \"https://www.baidu.com\",\n              ui: {\n                label: \"链接\",\n                columns: 6,\n                preview: {\n                  type: \"link\"\n                }\n              }\n            }\n          }\n        },\n\n        \"3\": {\n          type: \"object\",\n          properties: {\n            firstname: {\n              type: \"string\",\n              ui: {\n                label: \"姓名\",\n                placeholder: \"姓\"\n              }\n            },\n            lastname: {\n              type: \"string\",\n              ui: {\n                showLabel: false,\n                placeholder: \"名\"\n              }\n            },\n            email: {\n              type: \"string\",\n              ui: {\n                label: \"邮件\"\n              }\n            },\n            age: {\n              type: \"integer\",\n              ui: {\n                label: \"年龄\"\n              }\n            },\n            adult: {\n              type: \"boolean\",\n              ui: {\n                label: \"是否成年\",\n                help: {\n                  show: true,\n                  text: \"?\",\n                  content: \"成年才可以玩农药啊\"\n                }\n              }\n            }\n          },\n          ui: {\n            widgetConfig: {\n              layout: \"h\"\n            }\n          }\n        },\n        \"4\": {\n          type: \"object\",\n          properties: {\n            name: {\n              type: \"string\",\n              ui: {\n                label: \"姓名\",\n                description: \"请填写你的姓名\",\n                placeholder: \"姓名\"\n              },\n              rules: {\n                required: true,\n                minLength: 10\n              }\n            },\n            email: {\n              type: \"string\",\n              ui: {\n                label: \"邮件\"\n              },\n              rules: {\n                required: true,\n                email: {\n                  value: true,\n                  errMsg: \"请填写有效的邮件地址\"\n                }\n              }\n            },\n            age: {\n              type: \"integer\",\n              ui: {\n                label: \"年龄\"\n              }\n            },\n            adult: {\n              type: \"boolean\",\n              ui: {\n                label: \"是否成年\",\n                help: {\n                  show: true,\n                  text: \"?\",\n                  content: \"成年才可以玩农药啊\"\n                }\n              }\n            }\n          }\n        },\n        \"5\": {\n          type: \"object\",\n          properties: {\n            user: {\n              type: \"array\",\n              items: {\n                type: \"object\",\n                properties: {\n                  name: {\n                    type: \"string\",\n                    ui: {\n                      label: \"姓名\",\n                      description: \"请填写你的姓名\",\n                      placeholder: \"姓名\"\n                    },\n                    rules: {\n                      required: true\n                    }\n                  },\n                  email: {\n                    type: \"string\",\n                    ui: {\n                      label: \"邮件\"\n                    },\n                    rules: {\n                      required: true,\n                      email: true\n                    }\n                  },\n                  age: {\n                    type: \"integer\",\n                    ui: {\n                      label: \"年龄\"\n                    }\n                  },\n                  adult: {\n                    type: \"boolean\",\n                    ui: {\n                      label: \"是否成年\",\n                      help: {\n                        show: true,\n                        text: \"?\",\n                        content: \"成年才可以玩农药啊\"\n                      }\n                    }\n                  }\n                },\n                ui: {\n                  label: \"用户\"\n                }\n              },\n              ui: {\n                showLegend: false,\n                noLabelSpace: true\n              }\n            }\n          }\n        },\n        \"6\": {\n          type: \"object\",\n          properties: {\n            user: {\n              type: \"array\",\n              items: {\n                type: \"object\",\n                properties: {\n                  name: {\n                    type: \"string\",\n                    ui: {\n                      label: \"姓名\",\n                      description: \"请填写你的姓名\",\n                      placeholder: \"姓名\"\n                    },\n                    rules: {\n                      required: true\n                    }\n                  },\n                  email: {\n                    type: \"string\",\n                    ui: {\n                      label: \"邮件\"\n                    },\n                    rules: {\n                      required: true,\n                      email: true\n                    }\n                  },\n                  age: {\n                    type: \"integer\",\n                    ui: {\n                      label: \"年龄\"\n                    }\n                  },\n                  adult: {\n                    type: \"boolean\",\n                    ui: {\n                      label: \"是否成年\",\n                      help: {\n                        show: true,\n                        text: \"?\",\n                        content: \"成年才可以玩农药啊\"\n                      }\n                    }\n                  }\n                }\n              },\n              ui: {\n                showLegend: false,\n                noLabelSpace: true,\n                widget: \"array-table\",\n                widgetConfig: {\n                  disableCollapse: true\n                }\n              }\n            }\n          }\n        },\n        \"7\": {\n          type: \"object\",\n          properties: {\n            user: {\n              type: \"array\",\n              items: {\n                type: \"object\",\n                properties: {\n                  name: {\n                    type: \"string\",\n                    ui: {\n                      label: \"姓名\",\n                      description: \"请填写你的姓名\",\n                      placeholder: \"姓名\"\n                    },\n                    rules: {\n                      required: true\n                    }\n                  },\n                  email: {\n                    type: \"string\",\n                    ui: {\n                      label: \"邮件\"\n                    },\n                    rules: {\n                      required: true,\n                      email: true\n                    }\n                  },\n                  age: {\n                    type: \"integer\",\n                    ui: {\n                      label: \"年龄\"\n                    }\n                  },\n                  adult: {\n                    type: \"boolean\",\n                    ui: {\n                      label: \"是否成年\",\n                      help: {\n                        show: true,\n                        text: \"?\",\n                        content: \"成年才可以玩农药啊\"\n                      }\n                    }\n                  }\n                },\n                ui: {\n                  label: \"用户\"\n                }\n              },\n              ui: {\n                showLegend: false,\n                noLabelSpace: true,\n                widget: \"array-tabs\"\n              }\n            }\n          }\n        },\n        \"8\": {\n          type: \"object\",\n          properties: {\n            age: {\n              type: \"integer\",\n              ui: {\n                label: \"年龄\",\n                description: \"大于18岁才能继续填写\"\n              }\n            },\n            gameInfo: {\n              type: \"object\",\n              properties: {\n                game: {\n                  type: \"string\",\n                  ui: {\n                    label: \"喜欢游戏\",\n                    description: \"填写解锁\"\n                  }\n                },\n                gameAge: {\n                  type: \"integer\",\n                  ui: {\n                    label: \"游戏年龄\",\n                    disabled: \"dx: !{{$root.gameInfo.game}}\"\n                  }\n                }\n              },\n              ui: {\n                legend: \"游戏信息\",\n                hidden: \"dx: !{{$root.age}} || {{$root.age}} < 18\"\n              }\n            }\n          }\n        },\n        \"9\": {\n          type: \"object\",\n          properties: {\n            user: {\n              type: \"array\",\n              items: {\n                type: \"object\",\n                properties: {\n                  adult: {\n                    type: \"boolean\",\n                    ui: {\n                      label: \"是否成年\",\n                      help: {\n                        show: true,\n                        text: \"?\"\n                      }\n                    }\n                  },\n                  gameName: {\n                    type: \"string\",\n                    ui: {\n                      label: \"喜欢游戏\",\n                      disabled: \"dx: !{{$root.user[i].adult}}\"\n                    }\n                  },\n                  gameAge: {\n                    type: \"integer\",\n                    ui: {\n                      label: \"游戏年龄\",\n                      disabled: \"dx: !{{$root.user[i].adult}}\"\n                    }\n                  }\n                }\n              },\n              ui: {\n                showLegend: false,\n                noLabelSpace: true,\n                widget: \"array-table\"\n              }\n            }\n          }\n        },\n        \"10\": {\n          type: \"object\",\n          properties: {\n            province: {\n              type: \"string\",\n              ui: {\n                label: \"省份\",\n                widget: \"select\",\n                widgetConfig: {\n                  itemLabelField: \"name\", // 项数据表示label的字段\n                  itemValueField: \"id\", // 项数据表示value的字段\n                  enumSourceRemote: {\n                    // 远程数据源\n                    remoteUrl: \"/api/test/getProvinces\", // 如果是远程访问，则填写该url\n                    paramName: \"keyword\" // 请求参数名，默认是keyword\n                  }\n                }\n              }\n            },\n            city: {\n              type: \"string\",\n              ui: {\n                label: \"城市\",\n                widget: \"select\",\n                widgetConfig: {\n                  itemLabelField: \"name\", // 项数据表示label的字段\n                  itemValueField: \"id\", // 项数据表示value的字段\n                  enumSourceRemote: {\n                    // 远程数据源\n                    remoteUrl: \"/api/test/getCities\", // 如果是远程访问，则填写该url\n                    paramName: \"keyword\", // 请求参数名，默认是keyword\n                    otherParams: {\n                      provinceId: \"dx: {{$root.province}}\"\n                    }\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"101\": {\n          type: \"object\",\n          properties: {\n            isRequired: {\n              type: \"boolean\",\n              ui: {\n                label: \"是否必填\",\n                linkFields: [{\n                  fieldPath: \"num_1\",\n                  rules: [\"required\"]\n                }, {\n                  fieldPath: \"num_2\",\n                  rules: [\"required\"]\n                }]\n              }\n            },\n            num_1: {\n              type: \"number\",\n              ui: {\n                description: \"num_1 >= num_2\",\n                columns: 6,\n                linkFields: [{\n                  fieldPath: \"num_2\",\n                  rules: [\"maximum\"]\n                }]\n              },\n              rules: {\n                required: {\n                  value: \"dx: {{$root.isRequired}}\"\n                },\n                minimum: {\n                  value: \"dx: {{$root.num_2}} || 0\",\n                  errMsg: \"num_1 >= num_2\"\n                }\n              }\n            },\n            num_2: {\n              type: \"number\",\n              ui: {\n                columns: 6,\n                linkFields: [{\n                  fieldPath: \"num_1\",\n                  rules: [\"minimum\"]\n                }]\n              },\n              rules: {\n                required: {\n                  value: \"dx: {{$root.isRequired}}\"\n                },\n                maximum: {\n                  value: \"dx: {{$root.num_1}} || 0\",\n                  errMsg: \"num_2 <= num_1\"\n                }\n              }\n            }\n          }\n        },\n        \"11\": {\n          type: \"object\",\n          properties: {\n            startTime: {\n              type: \"string\",\n              ui: {\n                widget: \"date-picker\"\n              },\n              rules: {\n                customRule: [{\n                  script: \"dx: !{{$root.endTime}} || {{$root.endTime}} >= {{$root.startTime}}\", // 支持dx表达式\n                  errMsg: \"开始日期必须小于等于结束日期\", // 验证错误信息\n                  linkItems: [\n                  // 当触发校验时，同时触发这些关联的项进行校验\n                  {\n                    fieldPath: \"endTime\", // 关联项\n                    customRuleIdx: 0 // 触发该项的自定义验证规则的索引\n                  }]\n                }]\n              }\n            },\n            endTime: {\n              type: \"string\",\n              ui: {\n                widget: \"date-picker\"\n              },\n              rules: {\n                customRule: [{\n                  script: \"dx: !{{$root.startTime}} || {{$root.endTime}} >= {{$root.startTime}}\", // 支持dx表达式\n                  errMsg: \"结束日期必须大于等于开始日期\", // 验证错误信息\n                  linkItems: [\n                  // 当触发校验时，同时触发这些关联的项进行校验\n                  {\n                    fieldPath: \"startTime\", // 关联项\n                    customRuleIdx: 0 // 触发该项的自定义验证规则的索引\n                  }]\n                }]\n              }\n            },\n            arrayItems: {\n              type: \"array\",\n              items: {\n                type: \"object\",\n                properties: {\n                  startTime: {\n                    type: \"string\",\n                    ui: {\n                      widget: \"date-picker\"\n                    },\n                    rules: {\n                      customRule: [{\n                        script: \"dx: !{{$root.arrayItems[i].endTime}} || {{$root.arrayItems[i].endTime}} >= {{$root.arrayItems[i].startTime}}\", // 支持dx表达式\n                        errMsg: \"开始日期必须小于等于结束日期\", // 验证错误信息\n                        linkItems: [\n                        // 当触发校验时，同时触发这些关联的项进行校验\n                        {\n                          fieldPath: \"arrayItems[i].endTime\", // 关联项\n                          customRuleIdx: 0 // 触发该项的自定义验证规则的索引\n                        }]\n                      }]\n                    }\n                  },\n                  endTime: {\n                    type: \"string\",\n                    ui: {\n                      widget: \"date-picker\"\n                    },\n                    rules: {\n                      customRule: [{\n                        script: \"dx: !{{$root.arrayItems[i].startTime}} || {{$root.arrayItems[i].endTime}} >= {{$root.arrayItems[i].startTime}}\", // 支持dx表达式\n                        errMsg: \"结束日期必须大于等于开始日期\", // 验证错误信息\n                        linkItems: [\n                        // 当触发校验时，同时触发这些关联的项进行校验\n                        {\n                          fieldPath: \"arrayItems[i].startTime\", // 关联项\n                          customRuleIdx: 0 // 触发该项的自定义验证规则的索引\n                        }]\n                      }]\n                    }\n                  }\n                }\n              },\n              ui: {\n                showLabel: false,\n                legend: \"数组项\",\n                widget: \"array-table\",\n                widgetConfig: {\n                  collapsed: true\n                }\n              }\n            }\n          }\n        },\n        \"12\": {\n          type: \"object\",\n          properties: {\n            age: {\n              type: \"string\",\n              ui: {\n                placeholder: 'dx: \"年龄必须大于\" + {{$const.ageLimit}}'\n              },\n              rules: {\n                customRule: [{\n                  script: \"dx: {{$root.age}} > {{$const.ageLimit}}\", // 支持dx表达式\n                  errMsg: \"请填写正确的年龄\" // 验证错误信息\n                }]\n              }\n            }\n          },\n          globalConfig: {\n            constants: {\n              ageLimit: 18\n            }\n          }\n        }\n      }\n    };\n  },\n\n\n  /* ====================== 事件处理 ====================== */\n\n  methods: {\n    createEditor: function createEditor() {\n      this.$options.editor = window.ace.edit(this.$refs.editor);\n      this.$options.editor.$blockScrolling = Infinity;\n    },\n    templateChange: function templateChange(v) {\n      this.$options.editor.setValue(JSON.stringify(this.$data.templates[v], null, 2), 1);\n      this.$data.ncformSchema = JSON.parse(this.$options.editor.getValue());\n      this.$data.ncformValue = {};\n    },\n    createForm: function createForm() {\n      var value = this.$options.editor.getValue();\n      try {\n        eval('this.$data.ncformSchema = ' + value);\n        this.$data.ncformValue = {};\n      } catch (err) {\n        alert(\"不是有效的JSON数据.\");\n        throw new Error(\"createForm Error:\" + err);\n      }\n    },\n    getFormData: function getFormData() {\n      var _this2 = this;\n\n      this.$ncformValidate(\"preview-form\").then(function (res) {\n        if (res.result) {\n          var data = JSON.stringify(_this2.$data.ncformValue, null, 2);\n          alert(data);\n        }\n      });\n    }\n  },\n\n  watch: {}\n};\n\n//# sourceURL=webpack://%5Bname%5D/./src/components/playground/playground.js?D:/daniel/projects/owner/ncform/node_modules/babel-loader/lib");
 
 /***/ }),
-/* 1 */
+
+/***/ "../../node_modules/vue-loader/lib/loaders/templateLoader.js?!./src/components/playground/playground.html?vue&type=template&id=64a6888e&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** D:/daniel/projects/owner/ncform/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./src/components/playground/playground.html?vue&type=template&id=64a6888e&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    { staticClass: \"playground\" },\n    [\n      _c(\n        \"el-row\",\n        [\n          _c(\n            \"el-col\",\n            { attrs: { span: 12 } },\n            [\n              _vm._v(\"\\r\\n        模板：\\r\\n      \"),\n              _c(\n                \"el-select\",\n                {\n                  attrs: { placeholder: \"请选择\" },\n                  on: { change: _vm.templateChange },\n                  model: {\n                    value: _vm.selectVal,\n                    callback: function($$v) {\n                      _vm.selectVal = $$v\n                    },\n                    expression: \"selectVal\"\n                  }\n                },\n                _vm._l(_vm.options, function(item) {\n                  return _c(\"el-option\", {\n                    key: item.value,\n                    attrs: { label: item.label, value: item.value }\n                  })\n                })\n              ),\n              _vm._v(\" \"),\n              _c(\n                \"el-button\",\n                { attrs: { type: \"primary\" }, on: { click: _vm.createForm } },\n                [_vm._v(\"生成表单\")]\n              )\n            ],\n            1\n          ),\n          _vm._v(\" \"),\n          _c(\n            \"el-col\",\n            { attrs: { span: 12 } },\n            [\n              _c(\n                \"el-button\",\n                { attrs: { type: \"success\" }, on: { click: _vm.getFormData } },\n                [_vm._v(\"获取表单数据\")]\n              )\n            ],\n            1\n          )\n        ],\n        1\n      ),\n      _vm._v(\" \"),\n      _c(\n        \"el-row\",\n        [\n          _c(\"el-col\", { attrs: { span: 12 } }, [\n            _c(\"div\", { staticClass: \"editorArea\" }, [\n              _c(\"div\", { ref: \"editor\", staticClass: \"editor\" }, [\n                _vm._v(_vm._s(_vm.jsonValue))\n              ])\n            ])\n          ]),\n          _vm._v(\" \"),\n          _c(\"el-col\", { attrs: { span: 12 } }, [\n            _c(\n              \"div\",\n              { staticClass: \"previewArea\" },\n              [\n                _c(\"ncform\", {\n                  attrs: {\n                    \"form-schema\": _vm.ncformSchema,\n                    \"form-name\": \"preview-form\"\n                  },\n                  model: {\n                    value: _vm.ncformValue,\n                    callback: function($$v) {\n                      _vm.ncformValue = $$v\n                    },\n                    expression: \"ncformValue\"\n                  }\n                })\n              ],\n              1\n            )\n          ])\n        ],\n        1\n      )\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack://%5Bname%5D/./src/components/playground/playground.html?D:/daniel/projects/owner/ncform/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options");
+
+/***/ }),
+
+/***/ "../../node_modules/vue-loader/lib/runtime/componentNormalizer.js":
+/*!**************************************************************************************************!*\
+  !*** D:/daniel/projects/owner/ncform/node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return normalizeComponent; });\n/* globals __VUE_SSR_CONTEXT__ */\n\n// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).\n// This module is a runtime utility for cleaner component module output and will\n// be included in the final webpack user bundle.\n\nfunction normalizeComponent (\n  scriptExports,\n  render,\n  staticRenderFns,\n  functionalTemplate,\n  injectStyles,\n  scopeId,\n  moduleIdentifier, /* server only */\n  shadowMode /* vue-cli only */\n) {\n  // Vue.extend constructor export interop\n  var options = typeof scriptExports === 'function'\n    ? scriptExports.options\n    : scriptExports\n\n  // render functions\n  if (render) {\n    options.render = render\n    options.staticRenderFns = staticRenderFns\n    options._compiled = true\n  }\n\n  // functional template\n  if (functionalTemplate) {\n    options.functional = true\n  }\n\n  // scopedId\n  if (scopeId) {\n    options._scopeId = 'data-v-' + scopeId\n  }\n\n  var hook\n  if (moduleIdentifier) { // server build\n    hook = function (context) {\n      // 2.3 injection\n      context =\n        context || // cached call\n        (this.$vnode && this.$vnode.ssrContext) || // stateful\n        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional\n      // 2.2 with runInNewContext: true\n      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {\n        context = __VUE_SSR_CONTEXT__\n      }\n      // inject component styles\n      if (injectStyles) {\n        injectStyles.call(this, context)\n      }\n      // register component module identifier for async chunk inferrence\n      if (context && context._registeredComponents) {\n        context._registeredComponents.add(moduleIdentifier)\n      }\n    }\n    // used by ssr in case component is cached and beforeCreate\n    // never gets called\n    options._ssrRegister = hook\n  } else if (injectStyles) {\n    hook = shadowMode\n      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }\n      : injectStyles\n  }\n\n  if (hook) {\n    if (options.functional) {\n      // for template-only hot-reload because in that case the render fn doesn't\n      // go through the normalizer\n      options._injectStyles = hook\n      // register for functioal component in vue file\n      var originalRender = options.render\n      options.render = function renderWithStyleInjection (h, context) {\n        hook.call(context)\n        return originalRender(h, context)\n      }\n    } else {\n      // inject component registration as beforeCreate hook\n      var existing = options.beforeCreate\n      options.beforeCreate = existing\n        ? [].concat(existing, hook)\n        : [hook]\n    }\n  }\n\n  return {\n    exports: scriptExports,\n    options: options\n  }\n}\n\n\n//# sourceURL=webpack://%5Bname%5D/D:/daniel/projects/owner/ncform/node_modules/vue-loader/lib/runtime/componentNormalizer.js?");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!D:/daniel/projects/owner/ncform/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(2);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-fec2bcfe&scoped=true!./playground.css", function() {
-				var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-fec2bcfe&scoped=true!./playground.css");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
+eval("exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")();\n// imports\n\n\n// module\nexports.push([module.i, \"\\n.playground[data-v-64a6888e] {\\r\\n    padding: 8px;\\n}\\n.editorArea[data-v-64a6888e]{\\r\\n    margin: 8px 0 0;\\r\\n    border: 1px solid #d8dce5;\\r\\n    border-left: none;\\n}\\n.previewArea[data-v-64a6888e]{\\r\\n    margin: 8px 0 0;\\r\\n    /* min-height: 650px; */\\n}\\n.editor[data-v-64a6888e]{\\r\\n    position: relative;\\r\\n    width: 100%;\\r\\n    min-height: 600px;\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack://%5Bname%5D/./src/components/playground/playground.css?./node_modules/css-loader!D:/daniel/projects/owner/ncform/node_modules/vue-loader/lib/loaders/stylePostLoader.js");
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".playground[_v-fec2bcfe] {\n    padding: 8px;\n}\n.editorArea[_v-fec2bcfe]{\n    margin: 8px 0 0;\n    border: 1px solid #d8dce5;\n    border-left: none;\n}\n.previewArea[_v-fec2bcfe]{\n    margin: 8px 0 0;\n    /* min-height: 650px; */\n}\n\n.editor[_v-fec2bcfe]{\n    position: relative;\n    width: 100%;\n    min-height: 600px;\n}", ""]);
-
-	// exports
-
-
-/***/ }),
-/* 3 */
+/***/ "./node_modules/css-loader/lib/css-base.js":
+/*!*************************************************!*\
+  !*** ./node_modules/css-loader/lib/css-base.js ***!
+  \*************************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
+eval("/*\r\n\tMIT License http://www.opensource.org/licenses/mit-license.php\r\n\tAuthor Tobias Koppers @sokra\r\n*/\r\n// css base code, injected by the css-loader\r\nmodule.exports = function() {\r\n\tvar list = [];\r\n\r\n\t// return the list of modules as css string\r\n\tlist.toString = function toString() {\r\n\t\tvar result = [];\r\n\t\tfor(var i = 0; i < this.length; i++) {\r\n\t\t\tvar item = this[i];\r\n\t\t\tif(item[2]) {\r\n\t\t\t\tresult.push(\"@media \" + item[2] + \"{\" + item[1] + \"}\");\r\n\t\t\t} else {\r\n\t\t\t\tresult.push(item[1]);\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn result.join(\"\");\r\n\t};\r\n\r\n\t// import a list of modules into the list\r\n\tlist.i = function(modules, mediaQuery) {\r\n\t\tif(typeof modules === \"string\")\r\n\t\t\tmodules = [[null, modules, \"\"]];\r\n\t\tvar alreadyImportedModules = {};\r\n\t\tfor(var i = 0; i < this.length; i++) {\r\n\t\t\tvar id = this[i][0];\r\n\t\t\tif(typeof id === \"number\")\r\n\t\t\t\talreadyImportedModules[id] = true;\r\n\t\t}\r\n\t\tfor(i = 0; i < modules.length; i++) {\r\n\t\t\tvar item = modules[i];\r\n\t\t\t// skip already imported module\r\n\t\t\t// this implementation is not 100% perfect for weird media query combinations\r\n\t\t\t//  when a module is imported multiple times with different media queries.\r\n\t\t\t//  I hope this will never occur (Hey this way we have smaller bundles)\r\n\t\t\tif(typeof item[0] !== \"number\" || !alreadyImportedModules[item[0]]) {\r\n\t\t\t\tif(mediaQuery && !item[2]) {\r\n\t\t\t\t\titem[2] = mediaQuery;\r\n\t\t\t\t} else if(mediaQuery) {\r\n\t\t\t\t\titem[2] = \"(\" + item[2] + \") and (\" + mediaQuery + \")\";\r\n\t\t\t\t}\r\n\t\t\t\tlist.push(item);\r\n\t\t\t}\r\n\t\t}\r\n\t};\r\n\treturn list;\r\n};\r\n\n\n//# sourceURL=webpack://%5Bname%5D/./node_modules/css-loader/lib/css-base.js?");
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
 
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-
-		update(obj);
-
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-
-	var replaceText = (function () {
-		var textStore = [];
-
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-
-		if (media) {
-			styleElement.setAttribute("media", media);
-		}
-
-		if (sourceMap) {
-			// https://developer.chrome.com/devtools/docs/javascript-debugging
-			// this makes source maps inside style tags work properly in Chrome
-			css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */';
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _stringify = __webpack_require__(6);
-
-	var _stringify2 = _interopRequireDefault(_stringify);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * <playground></playground>
-	 */
-	exports.default = {
-	  /* ====================== 生命周期 ====================== */
-
-	  created: function created() {
-	    // 在这里做一些跟DOM无关的初始化, 比如获取初始化数据
-	  },
-	  mounted: function mounted() {
-	    var _this = this;
-
-	    // 在这里做一些跟DOM有关的初始化
-	    setTimeout(function () {
-	      _this.createEditor();
-	      _this.templateChange("0");
-	    }, 0);
-	  },
-	  destroyed: function destroyed() {
-	    // 在这里销毁无用的资源，比如setTimeout返回的值
-	  },
-
-
-	  /* ====================== 引用组件 ====================== */
-
-	  components: {},
-
-	  /* ====================== 数据绑定 ====================== */
-
-	  props: {},
-
-	  data: function data() {
-	    return {
-	      jsonValue: "",
-	      ncformSchema: {
-	        type: "object",
-	        properties: {
-	          username: {
-	            type: "string",
-	            ui: {
-	              columns: 6,
-	              label: "username"
-	            }
-	          }
-	        }
-	      },
-	      ncformValue: {},
-
-	      selectVal: "0",
-	      options: [{
-	        value: "0",
-	        label: "基础使用"
-	      }, {
-	        value: "1",
-	        label: "基础使用-丰富显示"
-	      }, {
-	        value: "2",
-	        label: "基础使用-多列布局"
-	      }, {
-	        value: "22",
-	        label: "基础使用-媒体预览"
-	      }, {
-	        value: "3",
-	        label: "基础使用-标签居左"
-	      }, {
-	        value: "4",
-	        label: "基础使用-校验规则"
-	      }, {
-	        value: "5",
-	        label: "基础使用-数组类型"
-	      }, {
-	        value: "6",
-	        label: "基础使用-表格数组"
-	      }, {
-	        value: "7",
-	        label: "基础使用-标签数组"
-	      }, {
-	        value: "8",
-	        label: "高级玩法-控件交互 dx表达式"
-	      }, {
-	        value: "9",
-	        label: "高级玩法-数组项交互 dx表达式"
-	      }, {
-	        value: "10",
-	        label: "高级玩法-下拉框值交互 dx表达式"
-	      }, {
-	        value: "101",
-	        label: "高级玩法-校验关联 dx表达式"
-	      }, {
-	        value: "11",
-	        label: "高级玩法-自定义校验规则 dx表达式"
-	      }, {
-	        value: "12",
-	        label: "高级玩法-全局常量 dx表达式"
-	      }],
-	      templates: {
-	        "0": {
-	          type: "object",
-	          properties: {
-	            name: {
-	              type: "string"
-	            },
-	            email: {
-	              type: "string"
-	            },
-	            age: {
-	              type: "integer"
-	            },
-	            adult: {
-	              type: "boolean"
-	            }
-	          }
-	        },
-	        "1": {
-	          type: "object",
-	          properties: {
-	            name: {
-	              type: "string",
-	              ui: {
-	                label: "姓名",
-	                description: "请填写你的姓名",
-	                placeholder: "姓名"
-	              }
-	            },
-	            email: {
-	              type: "string",
-	              ui: {
-	                label: "邮件"
-	              }
-	            },
-	            age: {
-	              type: "integer",
-	              default: 18,
-	              ui: {
-	                label: "年龄"
-	              }
-	            },
-	            adult: {
-	              type: "boolean",
-	              ui: {
-	                label: "是否成年",
-	                help: {
-	                  show: true,
-	                  text: "?",
-	                  content: "成年才可以玩农药啊"
-	                }
-	              }
-	            }
-	          }
-	        },
-	        "2": {
-	          type: "object",
-	          properties: {
-	            firstname: {
-	              type: "string",
-	              ui: {
-	                columns: 3,
-	                label: "姓名",
-	                placeholder: "姓"
-	              }
-	            },
-	            lastname: {
-	              type: "string",
-	              ui: {
-	                columns: 3,
-	                showLabel: false,
-	                placeholder: "名"
-	              }
-	            },
-	            email: {
-	              type: "string",
-	              ui: {
-	                columns: 6,
-	                label: "邮件"
-	              }
-	            },
-	            age: {
-	              type: "integer",
-	              ui: {
-	                columns: 6,
-	                label: "年龄"
-	              }
-	            },
-	            adult: {
-	              type: "boolean",
-	              ui: {
-	                columns: 6,
-	                label: "是否成年",
-	                help: {
-	                  show: true,
-	                  text: "?",
-	                  content: "成年才可以玩农药啊"
-	                }
-	              }
-	            }
-	          }
-	        },
-
-	        "22": {
-	          type: "object",
-	          properties: {
-	            image: {
-	              type: "string",
-	              default: "https://upload-images.jianshu.io/upload_images/2195795-e3c500e4b7d17b2c.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240",
-	              ui: {
-	                label: "图片",
-	                columns: 6,
-	                preview: {
-	                  type: "image",
-	                  value: "dx: {{$self}}",
-	                  clearable: true,
-	                  outward: {
-	                    width: 150,
-	                    height: 150,
-	                    shape: "circle"
-	                  }
-	                }
-	              }
-	            },
-	            video: {
-	              type: "string",
-	              default: "https://www.w3schools.com/html/mov_bbb.mp4",
-	              ui: {
-	                label: "视频",
-	                columns: 6,
-	                preview: {
-	                  type: "video"
-	                }
-	              }
-	            },
-	            audio: {
-	              type: "string",
-	              default: "https://www.w3schools.com/html/mov_bbb.mp4",
-	              ui: {
-	                label: "音频",
-	                columns: 6,
-	                preview: {
-	                  type: "audio"
-	                }
-	              }
-	            },
-	            link: {
-	              type: "string",
-	              default: "https://www.baidu.com",
-	              ui: {
-	                label: "链接",
-	                columns: 6,
-	                preview: {
-	                  type: "link"
-	                }
-	              }
-	            }
-	          }
-	        },
-
-	        "3": {
-	          type: "object",
-	          properties: {
-	            firstname: {
-	              type: "string",
-	              ui: {
-	                label: "姓名",
-	                placeholder: "姓"
-	              }
-	            },
-	            lastname: {
-	              type: "string",
-	              ui: {
-	                showLabel: false,
-	                placeholder: "名"
-	              }
-	            },
-	            email: {
-	              type: "string",
-	              ui: {
-	                label: "邮件"
-	              }
-	            },
-	            age: {
-	              type: "integer",
-	              ui: {
-	                label: "年龄"
-	              }
-	            },
-	            adult: {
-	              type: "boolean",
-	              ui: {
-	                label: "是否成年",
-	                help: {
-	                  show: true,
-	                  text: "?",
-	                  content: "成年才可以玩农药啊"
-	                }
-	              }
-	            }
-	          },
-	          ui: {
-	            widgetConfig: {
-	              layout: "h"
-	            }
-	          }
-	        },
-	        "4": {
-	          type: "object",
-	          properties: {
-	            name: {
-	              type: "string",
-	              ui: {
-	                label: "姓名",
-	                description: "请填写你的姓名",
-	                placeholder: "姓名"
-	              },
-	              rules: {
-	                required: true,
-	                minLength: 10
-	              }
-	            },
-	            email: {
-	              type: "string",
-	              ui: {
-	                label: "邮件"
-	              },
-	              rules: {
-	                required: true,
-	                email: {
-	                  value: true,
-	                  errMsg: "请填写有效的邮件地址"
-	                }
-	              }
-	            },
-	            age: {
-	              type: "integer",
-	              ui: {
-	                label: "年龄"
-	              }
-	            },
-	            adult: {
-	              type: "boolean",
-	              ui: {
-	                label: "是否成年",
-	                help: {
-	                  show: true,
-	                  text: "?",
-	                  content: "成年才可以玩农药啊"
-	                }
-	              }
-	            }
-	          }
-	        },
-	        "5": {
-	          type: "object",
-	          properties: {
-	            user: {
-	              type: "array",
-	              items: {
-	                type: "object",
-	                properties: {
-	                  name: {
-	                    type: "string",
-	                    ui: {
-	                      label: "姓名",
-	                      description: "请填写你的姓名",
-	                      placeholder: "姓名"
-	                    },
-	                    rules: {
-	                      required: true
-	                    }
-	                  },
-	                  email: {
-	                    type: "string",
-	                    ui: {
-	                      label: "邮件"
-	                    },
-	                    rules: {
-	                      required: true,
-	                      email: true
-	                    }
-	                  },
-	                  age: {
-	                    type: "integer",
-	                    ui: {
-	                      label: "年龄"
-	                    }
-	                  },
-	                  adult: {
-	                    type: "boolean",
-	                    ui: {
-	                      label: "是否成年",
-	                      help: {
-	                        show: true,
-	                        text: "?",
-	                        content: "成年才可以玩农药啊"
-	                      }
-	                    }
-	                  }
-	                },
-	                ui: {
-	                  label: "用户"
-	                }
-	              },
-	              ui: {
-	                showLegend: false,
-	                noLabelSpace: true
-	              }
-	            }
-	          }
-	        },
-	        "6": {
-	          type: "object",
-	          properties: {
-	            user: {
-	              type: "array",
-	              items: {
-	                type: "object",
-	                properties: {
-	                  name: {
-	                    type: "string",
-	                    ui: {
-	                      label: "姓名",
-	                      description: "请填写你的姓名",
-	                      placeholder: "姓名"
-	                    },
-	                    rules: {
-	                      required: true
-	                    }
-	                  },
-	                  email: {
-	                    type: "string",
-	                    ui: {
-	                      label: "邮件"
-	                    },
-	                    rules: {
-	                      required: true,
-	                      email: true
-	                    }
-	                  },
-	                  age: {
-	                    type: "integer",
-	                    ui: {
-	                      label: "年龄"
-	                    }
-	                  },
-	                  adult: {
-	                    type: "boolean",
-	                    ui: {
-	                      label: "是否成年",
-	                      help: {
-	                        show: true,
-	                        text: "?",
-	                        content: "成年才可以玩农药啊"
-	                      }
-	                    }
-	                  }
-	                }
-	              },
-	              ui: {
-	                showLegend: false,
-	                noLabelSpace: true,
-	                widget: "array-table",
-	                widgetConfig: {
-	                  disableCollapse: true
-	                }
-	              }
-	            }
-	          }
-	        },
-	        "7": {
-	          type: "object",
-	          properties: {
-	            user: {
-	              type: "array",
-	              items: {
-	                type: "object",
-	                properties: {
-	                  name: {
-	                    type: "string",
-	                    ui: {
-	                      label: "姓名",
-	                      description: "请填写你的姓名",
-	                      placeholder: "姓名"
-	                    },
-	                    rules: {
-	                      required: true
-	                    }
-	                  },
-	                  email: {
-	                    type: "string",
-	                    ui: {
-	                      label: "邮件"
-	                    },
-	                    rules: {
-	                      required: true,
-	                      email: true
-	                    }
-	                  },
-	                  age: {
-	                    type: "integer",
-	                    ui: {
-	                      label: "年龄"
-	                    }
-	                  },
-	                  adult: {
-	                    type: "boolean",
-	                    ui: {
-	                      label: "是否成年",
-	                      help: {
-	                        show: true,
-	                        text: "?",
-	                        content: "成年才可以玩农药啊"
-	                      }
-	                    }
-	                  }
-	                },
-	                ui: {
-	                  label: "用户"
-	                }
-	              },
-	              ui: {
-	                showLegend: false,
-	                noLabelSpace: true,
-	                widget: "array-tabs"
-	              }
-	            }
-	          }
-	        },
-	        "8": {
-	          type: "object",
-	          properties: {
-	            age: {
-	              type: "integer",
-	              ui: {
-	                label: "年龄",
-	                description: "大于18岁才能继续填写"
-	              }
-	            },
-	            gameInfo: {
-	              type: "object",
-	              properties: {
-	                game: {
-	                  type: "string",
-	                  ui: {
-	                    label: "喜欢游戏",
-	                    description: "填写解锁"
-	                  }
-	                },
-	                gameAge: {
-	                  type: "integer",
-	                  ui: {
-	                    label: "游戏年龄",
-	                    disabled: "dx: !{{$root.gameInfo.game}}"
-	                  }
-	                }
-	              },
-	              ui: {
-	                legend: "游戏信息",
-	                hidden: "dx: !{{$root.age}} || {{$root.age}} < 18"
-	              }
-	            }
-	          }
-	        },
-	        "9": {
-	          type: "object",
-	          properties: {
-	            user: {
-	              type: "array",
-	              items: {
-	                type: "object",
-	                properties: {
-	                  adult: {
-	                    type: "boolean",
-	                    ui: {
-	                      label: "是否成年",
-	                      help: {
-	                        show: true,
-	                        text: "?"
-	                      }
-	                    }
-	                  },
-	                  gameName: {
-	                    type: "string",
-	                    ui: {
-	                      label: "喜欢游戏",
-	                      disabled: "dx: !{{$root.user[i].adult}}"
-	                    }
-	                  },
-	                  gameAge: {
-	                    type: "integer",
-	                    ui: {
-	                      label: "游戏年龄",
-	                      disabled: "dx: !{{$root.user[i].adult}}"
-	                    }
-	                  }
-	                }
-	              },
-	              ui: {
-	                showLegend: false,
-	                noLabelSpace: true,
-	                widget: "array-table"
-	              }
-	            }
-	          }
-	        },
-	        "10": {
-	          type: "object",
-	          properties: {
-	            province: {
-	              type: "string",
-	              ui: {
-	                label: "省份",
-	                widget: "select",
-	                widgetConfig: {
-	                  itemLabelField: "name", // 项数据表示label的字段
-	                  itemValueField: "id", // 项数据表示value的字段
-	                  enumSourceRemote: {
-	                    // 远程数据源
-	                    remoteUrl: "/api/test/getProvinces", // 如果是远程访问，则填写该url
-	                    paramName: "keyword" // 请求参数名，默认是keyword
-	                  }
-	                }
-	              }
-	            },
-	            city: {
-	              type: "string",
-	              ui: {
-	                label: "城市",
-	                widget: "select",
-	                widgetConfig: {
-	                  itemLabelField: "name", // 项数据表示label的字段
-	                  itemValueField: "id", // 项数据表示value的字段
-	                  enumSourceRemote: {
-	                    // 远程数据源
-	                    remoteUrl: "/api/test/getCities", // 如果是远程访问，则填写该url
-	                    paramName: "keyword", // 请求参数名，默认是keyword
-	                    otherParams: {
-	                      provinceId: "dx: {{$root.province}}"
-	                    }
-	                  }
-	                }
-	              }
-	            }
-	          }
-	        },
-	        "101": {
-	          type: "object",
-	          properties: {
-	            isRequired: {
-	              type: "boolean",
-	              ui: {
-	                label: "是否必填",
-	                linkFields: [{
-	                  fieldPath: "num_1",
-	                  rules: ["required"]
-	                }, {
-	                  fieldPath: "num_2",
-	                  rules: ["required"]
-	                }]
-	              }
-	            },
-	            num_1: {
-	              type: "number",
-	              ui: {
-	                description: "num_1 >= num_2",
-	                columns: 6,
-	                linkFields: [{
-	                  fieldPath: "num_2",
-	                  rules: ["maximum"]
-	                }]
-	              },
-	              rules: {
-	                required: {
-	                  value: "dx: {{$root.isRequired}}"
-	                },
-	                minimum: {
-	                  value: "dx: {{$root.num_2}} || 0",
-	                  errMsg: "num_1 >= num_2"
-	                }
-	              }
-	            },
-	            num_2: {
-	              type: "number",
-	              ui: {
-	                columns: 6,
-	                linkFields: [{
-	                  fieldPath: "num_1",
-	                  rules: ["minimum"]
-	                }]
-	              },
-	              rules: {
-	                required: {
-	                  value: "dx: {{$root.isRequired}}"
-	                },
-	                maximum: {
-	                  value: "dx: {{$root.num_1}} || 0",
-	                  errMsg: "num_2 <= num_1"
-	                }
-	              }
-	            }
-	          }
-	        },
-	        "11": {
-	          type: "object",
-	          properties: {
-	            startTime: {
-	              type: "string",
-	              ui: {
-	                widget: "date-picker"
-	              },
-	              rules: {
-	                customRule: [{
-	                  script: "dx: !{{$root.endTime}} || {{$root.endTime}} >= {{$root.startTime}}", // 支持dx表达式
-	                  errMsg: "开始日期必须小于等于结束日期", // 验证错误信息
-	                  linkItems: [
-	                  // 当触发校验时，同时触发这些关联的项进行校验
-	                  {
-	                    fieldPath: "endTime", // 关联项
-	                    customRuleIdx: 0 // 触发该项的自定义验证规则的索引
-	                  }]
-	                }]
-	              }
-	            },
-	            endTime: {
-	              type: "string",
-	              ui: {
-	                widget: "date-picker"
-	              },
-	              rules: {
-	                customRule: [{
-	                  script: "dx: !{{$root.startTime}} || {{$root.endTime}} >= {{$root.startTime}}", // 支持dx表达式
-	                  errMsg: "结束日期必须大于等于开始日期", // 验证错误信息
-	                  linkItems: [
-	                  // 当触发校验时，同时触发这些关联的项进行校验
-	                  {
-	                    fieldPath: "startTime", // 关联项
-	                    customRuleIdx: 0 // 触发该项的自定义验证规则的索引
-	                  }]
-	                }]
-	              }
-	            },
-	            arrayItems: {
-	              type: "array",
-	              items: {
-	                type: "object",
-	                properties: {
-	                  startTime: {
-	                    type: "string",
-	                    ui: {
-	                      widget: "date-picker"
-	                    },
-	                    rules: {
-	                      customRule: [{
-	                        script: "dx: !{{$root.arrayItems[i].endTime}} || {{$root.arrayItems[i].endTime}} >= {{$root.arrayItems[i].startTime}}", // 支持dx表达式
-	                        errMsg: "开始日期必须小于等于结束日期", // 验证错误信息
-	                        linkItems: [
-	                        // 当触发校验时，同时触发这些关联的项进行校验
-	                        {
-	                          fieldPath: "arrayItems[i].endTime", // 关联项
-	                          customRuleIdx: 0 // 触发该项的自定义验证规则的索引
-	                        }]
-	                      }]
-	                    }
-	                  },
-	                  endTime: {
-	                    type: "string",
-	                    ui: {
-	                      widget: "date-picker"
-	                    },
-	                    rules: {
-	                      customRule: [{
-	                        script: "dx: !{{$root.arrayItems[i].startTime}} || {{$root.arrayItems[i].endTime}} >= {{$root.arrayItems[i].startTime}}", // 支持dx表达式
-	                        errMsg: "结束日期必须大于等于开始日期", // 验证错误信息
-	                        linkItems: [
-	                        // 当触发校验时，同时触发这些关联的项进行校验
-	                        {
-	                          fieldPath: "arrayItems[i].startTime", // 关联项
-	                          customRuleIdx: 0 // 触发该项的自定义验证规则的索引
-	                        }]
-	                      }]
-	                    }
-	                  }
-	                }
-	              },
-	              ui: {
-	                showLabel: false,
-	                legend: "数组项",
-	                widget: "array-table",
-	                widgetConfig: {
-	                  collapsed: true
-	                }
-	              }
-	            }
-	          }
-	        },
-	        "12": {
-	          type: "object",
-	          properties: {
-	            age: {
-	              type: "string",
-	              ui: {
-	                placeholder: 'dx: "年龄必须大于" + {{$const.ageLimit}}'
-	              },
-	              rules: {
-	                customRule: [{
-	                  script: "dx: {{$root.age}} > {{$const.ageLimit}}", // 支持dx表达式
-	                  errMsg: "请填写正确的年龄" // 验证错误信息
-	                }]
-	              }
-	            }
-	          },
-	          globalConfig: {
-	            constants: {
-	              ageLimit: 18
-	            }
-	          }
-	        }
-	      }
-	    };
-	  },
-
-
-	  /* ====================== 事件处理 ====================== */
-
-	  methods: {
-	    createEditor: function createEditor() {
-	      this.$options.editor = window.ace.edit(this.$refs.editor);
-	      this.$options.editor.$blockScrolling = Infinity;
-	    },
-	    templateChange: function templateChange(v) {
-	      this.$options.editor.setValue((0, _stringify2.default)(this.$data.templates[v], null, 2), 1);
-	      this.$data.ncformSchema = JSON.parse(this.$options.editor.getValue());
-	      this.$data.ncformValue = {};
-	    },
-	    createForm: function createForm() {
-	      var value = this.$options.editor.getValue();
-	      try {
-	        eval('this.$data.ncformSchema = ' + value);
-	        this.$data.ncformValue = {};
-	      } catch (err) {
-	        alert("不是有效的JSON数据.");
-	        throw new Error("createForm Error:" + err);
-	      }
-	    },
-	    getFormData: function getFormData() {
-	      var _this2 = this;
-
-	      this.$ncformValidate("preview-form").then(function (res) {
-	        if (res.result) {
-	          var data = (0, _stringify2.default)(_this2.$data.ncformValue, null, 2);
-	          alert(data);
-	        }
-	      });
-	    }
-	  },
-
-	  watch: {}
-	};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(7), __esModule: true };
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var core = __webpack_require__(8);
-	var $JSON = core.JSON || (core.JSON = { stringify: JSON.stringify });
-	module.exports = function stringify(it) { // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-
-/***/ }),
-/* 8 */
+/***/ "./node_modules/vue-style-loader/addStyles.js":
+/*!****************************************************!*\
+  !*** ./node_modules/vue-style-loader/addStyles.js ***!
+  \****************************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-	var core = module.exports = { version: '2.5.1' };
-	if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
-
+eval("/*\n\tMIT License http://www.opensource.org/licenses/mit-license.php\n\tAuthor Tobias Koppers @sokra\n*/\nvar stylesInDom = {},\n\tmemoize = function(fn) {\n\t\tvar memo;\n\t\treturn function () {\n\t\t\tif (typeof memo === \"undefined\") memo = fn.apply(this, arguments);\n\t\t\treturn memo;\n\t\t};\n\t},\n\tisOldIE = memoize(function() {\n\t\treturn /msie [6-9]\\b/.test(window.navigator.userAgent.toLowerCase());\n\t}),\n\tgetHeadElement = memoize(function () {\n\t\treturn document.head || document.getElementsByTagName(\"head\")[0];\n\t}),\n\tsingletonElement = null,\n\tsingletonCounter = 0,\n\tstyleElementsInsertedAtTop = [];\n\nmodule.exports = function(list, options) {\n\tif(typeof DEBUG !== \"undefined\" && DEBUG) {\n\t\tif(typeof document !== \"object\") throw new Error(\"The style-loader cannot be used in a non-browser environment\");\n\t}\n\n\toptions = options || {};\n\t// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>\n\t// tags it will allow on a page\n\tif (typeof options.singleton === \"undefined\") options.singleton = isOldIE();\n\n\t// By default, add <style> tags to the bottom of <head>.\n\tif (typeof options.insertAt === \"undefined\") options.insertAt = \"bottom\";\n\n\tvar styles = listToStyles(list);\n\taddStylesToDom(styles, options);\n\n\treturn function update(newList) {\n\t\tvar mayRemove = [];\n\t\tfor(var i = 0; i < styles.length; i++) {\n\t\t\tvar item = styles[i];\n\t\t\tvar domStyle = stylesInDom[item.id];\n\t\t\tdomStyle.refs--;\n\t\t\tmayRemove.push(domStyle);\n\t\t}\n\t\tif(newList) {\n\t\t\tvar newStyles = listToStyles(newList);\n\t\t\taddStylesToDom(newStyles, options);\n\t\t}\n\t\tfor(var i = 0; i < mayRemove.length; i++) {\n\t\t\tvar domStyle = mayRemove[i];\n\t\t\tif(domStyle.refs === 0) {\n\t\t\t\tfor(var j = 0; j < domStyle.parts.length; j++)\n\t\t\t\t\tdomStyle.parts[j]();\n\t\t\t\tdelete stylesInDom[domStyle.id];\n\t\t\t}\n\t\t}\n\t};\n}\n\nfunction addStylesToDom(styles, options) {\n\tfor(var i = 0; i < styles.length; i++) {\n\t\tvar item = styles[i];\n\t\tvar domStyle = stylesInDom[item.id];\n\t\tif(domStyle) {\n\t\t\tdomStyle.refs++;\n\t\t\tfor(var j = 0; j < domStyle.parts.length; j++) {\n\t\t\t\tdomStyle.parts[j](item.parts[j]);\n\t\t\t}\n\t\t\tfor(; j < item.parts.length; j++) {\n\t\t\t\tdomStyle.parts.push(addStyle(item.parts[j], options));\n\t\t\t}\n\t\t} else {\n\t\t\tvar parts = [];\n\t\t\tfor(var j = 0; j < item.parts.length; j++) {\n\t\t\t\tparts.push(addStyle(item.parts[j], options));\n\t\t\t}\n\t\t\tstylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};\n\t\t}\n\t}\n}\n\nfunction listToStyles(list) {\n\tvar styles = [];\n\tvar newStyles = {};\n\tfor(var i = 0; i < list.length; i++) {\n\t\tvar item = list[i];\n\t\tvar id = item[0];\n\t\tvar css = item[1];\n\t\tvar media = item[2];\n\t\tvar sourceMap = item[3];\n\t\tvar part = {css: css, media: media, sourceMap: sourceMap};\n\t\tif(!newStyles[id])\n\t\t\tstyles.push(newStyles[id] = {id: id, parts: [part]});\n\t\telse\n\t\t\tnewStyles[id].parts.push(part);\n\t}\n\treturn styles;\n}\n\nfunction insertStyleElement(options, styleElement) {\n\tvar head = getHeadElement();\n\tvar lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];\n\tif (options.insertAt === \"top\") {\n\t\tif(!lastStyleElementInsertedAtTop) {\n\t\t\thead.insertBefore(styleElement, head.firstChild);\n\t\t} else if(lastStyleElementInsertedAtTop.nextSibling) {\n\t\t\thead.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);\n\t\t} else {\n\t\t\thead.appendChild(styleElement);\n\t\t}\n\t\tstyleElementsInsertedAtTop.push(styleElement);\n\t} else if (options.insertAt === \"bottom\") {\n\t\thead.appendChild(styleElement);\n\t} else {\n\t\tthrow new Error(\"Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.\");\n\t}\n}\n\nfunction removeStyleElement(styleElement) {\n\tstyleElement.parentNode.removeChild(styleElement);\n\tvar idx = styleElementsInsertedAtTop.indexOf(styleElement);\n\tif(idx >= 0) {\n\t\tstyleElementsInsertedAtTop.splice(idx, 1);\n\t}\n}\n\nfunction createStyleElement(options) {\n\tvar styleElement = document.createElement(\"style\");\n\tstyleElement.type = \"text/css\";\n\tinsertStyleElement(options, styleElement);\n\treturn styleElement;\n}\n\nfunction addStyle(obj, options) {\n\tvar styleElement, update, remove;\n\n\tif (options.singleton) {\n\t\tvar styleIndex = singletonCounter++;\n\t\tstyleElement = singletonElement || (singletonElement = createStyleElement(options));\n\t\tupdate = applyToSingletonTag.bind(null, styleElement, styleIndex, false);\n\t\tremove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);\n\t} else {\n\t\tstyleElement = createStyleElement(options);\n\t\tupdate = applyToTag.bind(null, styleElement);\n\t\tremove = function() {\n\t\t\tremoveStyleElement(styleElement);\n\t\t};\n\t}\n\n\tupdate(obj);\n\n\treturn function updateStyle(newObj) {\n\t\tif(newObj) {\n\t\t\tif(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)\n\t\t\t\treturn;\n\t\t\tupdate(obj = newObj);\n\t\t} else {\n\t\t\tremove();\n\t\t}\n\t};\n}\n\nvar replaceText = (function () {\n\tvar textStore = [];\n\n\treturn function (index, replacement) {\n\t\ttextStore[index] = replacement;\n\t\treturn textStore.filter(Boolean).join('\\n');\n\t};\n})();\n\nfunction applyToSingletonTag(styleElement, index, remove, obj) {\n\tvar css = remove ? \"\" : obj.css;\n\n\tif (styleElement.styleSheet) {\n\t\tstyleElement.styleSheet.cssText = replaceText(index, css);\n\t} else {\n\t\tvar cssNode = document.createTextNode(css);\n\t\tvar childNodes = styleElement.childNodes;\n\t\tif (childNodes[index]) styleElement.removeChild(childNodes[index]);\n\t\tif (childNodes.length) {\n\t\t\tstyleElement.insertBefore(cssNode, childNodes[index]);\n\t\t} else {\n\t\t\tstyleElement.appendChild(cssNode);\n\t\t}\n\t}\n}\n\nfunction applyToTag(styleElement, obj) {\n\tvar css = obj.css;\n\tvar media = obj.media;\n\tvar sourceMap = obj.sourceMap;\n\n\tif (media) {\n\t\tstyleElement.setAttribute(\"media\", media);\n\t}\n\n\tif (sourceMap) {\n\t\t// https://developer.chrome.com/devtools/docs/javascript-debugging\n\t\t// this makes source maps inside style tags work properly in Chrome\n\t\tcss += '\\n/*# sourceURL=' + sourceMap.sources[0] + ' */';\n\t\t// http://stackoverflow.com/a/26603875\n\t\tcss += \"\\n/*# sourceMappingURL=data:application/json;base64,\" + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + \" */\";\n\t}\n\n\tif (styleElement.styleSheet) {\n\t\tstyleElement.styleSheet.cssText = css;\n\t} else {\n\t\twhile(styleElement.firstChild) {\n\t\t\tstyleElement.removeChild(styleElement.firstChild);\n\t\t}\n\t\tstyleElement.appendChild(document.createTextNode(css));\n\t}\n}\n\n\n//# sourceURL=webpack://%5Bname%5D/./node_modules/vue-style-loader/addStyles.js?");
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
 
-	module.exports = "<div class=\"playground\" _v-fec2bcfe=\"\">\n  <el-row _v-fec2bcfe=\"\">\n    <el-col :span=\"12\" _v-fec2bcfe=\"\">\n        模板：\n      <el-select v-model=\"selectVal\" placeholder=\"请选择\" @change=\"templateChange\" _v-fec2bcfe=\"\">\n        <el-option v-for=\"item in options\" :key=\"item.value\" :label=\"item.label\" :value=\"item.value\" _v-fec2bcfe=\"\">\n        </el-option>\n      </el-select>\n      <el-button type=\"primary\" @click=\"createForm\" _v-fec2bcfe=\"\">生成表单</el-button>\n    </el-col>\n    <el-col :span=\"12\" _v-fec2bcfe=\"\">\n      <el-button type=\"success\" @click=\"getFormData\" _v-fec2bcfe=\"\">获取表单数据</el-button>\n    </el-col>\n  </el-row>\n  <el-row _v-fec2bcfe=\"\">\n    <el-col :span=\"12\" _v-fec2bcfe=\"\">\n      <div class=\"editorArea\" _v-fec2bcfe=\"\">\n        <div ref=\"editor\" class=\"editor\" _v-fec2bcfe=\"\">{{jsonValue}}</div>\n      </div>\n    </el-col>\n    <el-col :span=\"12\" _v-fec2bcfe=\"\">\n      <div class=\"previewArea\" _v-fec2bcfe=\"\">\n        <ncform :form-schema=\"ncformSchema\" v-model=\"ncformValue\" form-name=\"preview-form\" _v-fec2bcfe=\"\"></ncform>\n      </div>\n    </el-col>\n  </el-row>\n</div>";
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/css-loader!D:/daniel/projects/owner/ncform/node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css& */ \"./node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\n// add the styles to the DOM\nvar update = __webpack_require__(/*! ../../../node_modules/vue-style-loader/addStyles.js */ \"./node_modules/vue-style-loader/addStyles.js\")(content, {});\nif(content.locals) module.exports = content.locals;\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack://%5Bname%5D/./src/components/playground/playground.css?./node_modules/vue-style-loader!./node_modules/css-loader!D:/daniel/projects/owner/ncform/node_modules/vue-loader/lib/loaders/stylePostLoader.js");
+
+/***/ }),
+
+/***/ "./src/components/playground/index.vue":
+/*!*********************************************!*\
+  !*** ./src/components/playground/index.vue ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _playground_html_vue_type_template_id_64a6888e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./playground.html?vue&type=template&id=64a6888e&scoped=true& */ \"./src/components/playground/playground.html?vue&type=template&id=64a6888e&scoped=true&\");\n/* harmony import */ var _playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./playground.js?vue&type=script&lang=js& */ \"./src/components/playground/playground.js?vue&type=script&lang=js&\");\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n/* harmony import */ var _playground_css_vue_type_style_index_0_id_64a6888e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css& */ \"./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"../../node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _playground_html_vue_type_template_id_64a6888e_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _playground_html_vue_type_template_id_64a6888e_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  \"64a6888e\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src\\\\components\\\\playground\\\\index.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack://%5Bname%5D/./src/components/playground/index.vue?");
+
+/***/ }),
+
+/***/ "./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css&":
+/*!***********************************************************************************************************!*\
+  !*** ./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css& ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_playground_css_vue_type_style_index_0_id_64a6888e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-style-loader!../../../node_modules/css-loader!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!./src/components/playground/playground.css?vue&type=style&index=0&id=64a6888e&scoped=true&lang=css&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_playground_css_vue_type_style_index_0_id_64a6888e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_playground_css_vue_type_style_index_0_id_64a6888e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_playground_css_vue_type_style_index_0_id_64a6888e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_playground_css_vue_type_style_index_0_id_64a6888e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_playground_css_vue_type_style_index_0_id_64a6888e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack://%5Bname%5D/./src/components/playground/playground.css?");
+
+/***/ }),
+
+/***/ "./src/components/playground/playground.html?vue&type=template&id=64a6888e&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./src/components/playground/playground.html?vue&type=template&id=64a6888e&scoped=true& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_playground_html_vue_type_template_id_64a6888e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./playground.html?vue&type=template&id=64a6888e&scoped=true& */ \"../../node_modules/vue-loader/lib/loaders/templateLoader.js?!./src/components/playground/playground.html?vue&type=template&id=64a6888e&scoped=true&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_playground_html_vue_type_template_id_64a6888e_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_playground_html_vue_type_template_id_64a6888e_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack://%5Bname%5D/./src/components/playground/playground.html?");
+
+/***/ }),
+
+/***/ "./src/components/playground/playground.js?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./src/components/playground/playground.js?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib!./playground.js?vue&type=script&lang=js& */ \"../../node_modules/babel-loader/lib/index.js!./src/components/playground/playground.js?vue&type=script&lang=js&\");\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_babel_loader_lib_index_js_playground_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack://%5Bname%5D/./src/components/playground/playground.js?");
 
 /***/ })
-/******/ ])
+
+/******/ });
 });
-;

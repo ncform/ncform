@@ -35,6 +35,7 @@
   </div>
 
   <script type="text/javascript" src="../assets/lodash.min.js"></script>
+  <script type="text/javascript" src="../assets/axios.min.js"></script>
   <script type="text/javascript" src="../assets/vue.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
   <script src="https://unpkg.com/mockjs"></script>
@@ -61,20 +62,20 @@
       return { data: result.filter(item => item.value.indexOf(params.keyword) >= 0) };
     })
 
-    Vue.use(vueNcform, { extComponents: { object, input } });
+    Vue.use(vueNcform, { extComponents: { object: object.default, input: input.default } });
 
     let formSchemas = [
-      {
-        title: '默认状态',
-        schema: {
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string',
+        {
+          title: '默认状态',
+          schema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+              }
             }
           }
-        }
-      },
+        },
       {
         title: '提供值',
         schema: {
@@ -88,6 +89,22 @@
           ui: {
             widgetConfig: {
               layout: 'h'
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] trim: 前后去空格。默认值是true',
+        schema: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string',
+              ui: {
+                widgetConfig: {
+                  trim: false
+                }
+              }
             }
           }
         }
@@ -135,7 +152,7 @@
         }
       },
       {
-        title: '[属性] type: 显示类型. 可选值：[text | number | password]',
+        title: '[属性] type: 显示类型. 可选值：[text | number | password]',
         schema: {
           type: 'object',
           properties: {

@@ -35,6 +35,7 @@
   </div>
 
   <script type="text/javascript" src="../assets/lodash.min.js"></script>
+  <script type="text/javascript" src="../assets/axios.min.js"></script>
   <script type="text/javascript" src="../assets/vue.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
   <script type="text/javascript" src="../assets/ncformCommon.min.js"></script>
@@ -43,7 +44,7 @@
   <script type="text/javascript" src="../assets/dist/object.js"></script>
 
   <script type="text/javascript">
-    Vue.use(vueNcform, { extComponents: { object, colorPicker } });
+    Vue.use(vueNcform, { extComponents: { object: object.default, colorPicker: colorPicker.default } });
 
     let formSchemas = [
       {
