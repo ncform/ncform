@@ -130,6 +130,7 @@ function genNcformThemeElementuiDoc() {
   // 复制静态资源
   [
     "lodash/lodash.min.js",
+    "axios/dist/axios.min.js",
     "vue/dist/vue.min.js",
     "@ncform/ncform-common/dist/ncformCommon.min.js",
     "@ncform/ncform/dist/vueNcform.min.js",
