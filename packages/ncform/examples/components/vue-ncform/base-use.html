@@ -45,6 +45,7 @@
                 },
                 lastName: {
                   type: 'string',
+                  default: 'dx: "daniel"',
                   ui: {
                     showLabel: false,
                     columns: 6,
@@ -140,7 +141,7 @@
           console.log(JSON.stringify(this.$data.formSchema.value, null, 2));
         },
         changeModel() {
-          this.formSchema.value = { "username": "sarah", "age": 19 }
+          this.formSchema.value = { peason1: { "firstName": "sarah" } }
         }
       }
     });
