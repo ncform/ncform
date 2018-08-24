@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "nice form",
   "author": "daniel.xiao",
   "main": "dist/vueNcform.min.js",
@@ -61,7 +61,7 @@
     "src"
   ],
   "dependencies": {
-    "@ncform/ncform-common": "^0.1.11",
+    "@ncform/ncform-common": "^0.1.12",
     "extend": "^3.0.1",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8"
