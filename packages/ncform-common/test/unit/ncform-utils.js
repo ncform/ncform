@@ -88,6 +88,29 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(result.username === 'daniel' && result.age === 5);
   });
+  it("getModelFromSchema - object类型 只有default值 default值是dx表达式", () => {
+    const formSchema = {
+      type: 'object',
+      properties: {
+        username: {
+          type: 'string',
+          default: 'dx: "hello " + "daniel"',
+          ui: {
+            label: 'Username'
+          }
+        },
+        age: {
+          type: 'integer',
+          default: 'dx: 5 + 1',
+          ui: {
+            label: 'Age'
+          }
+        }
+      }
+    };
+    const result = ncformUtils.getModelFromSchema(formSchema);
+    assert(result.username === 'hello daniel' && result.age === 6);
+  });
   it("getModelFromSchema - object类型 底下value高于上级", () => {
     const formSchema = {
       type: 'object',
@@ -158,20 +181,26 @@ describe('/src/ncform-utils.js', () => {
             type: 'string',
             default: 'hi'
           },
-          value: [
-            {
-              __dataSchema: {
-                type: 'string',
-                default: 'hi'
-              }
-            },
-            {
-              __dataSchema: {
-                type: 'string',
-                default: 'hi'
-              }
-            }
+          default: [
+            'hi', 'daniel'
           ]
+        }
+      }
+    };
+    const result = ncformUtils.getModelFromSchema(formSchema);
+    assert(JSON.stringify(result.user) === JSON.stringify(['hi', 'daniel']));
+  });
+  it("getModelFromSchema - array类型 只有default值 dx表达式", () => {
+    const formSchema = {
+      type: 'object',
+      properties: {
+        user: {
+          type: 'array',
+          items: {
+            type: 'string',
+            default: 'hi'
+          },
+          default: 'dx: ["hi", "hi"]'
         }
       }
     };

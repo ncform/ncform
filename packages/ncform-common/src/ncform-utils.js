@@ -178,7 +178,7 @@ const ncformUtils = {
             model[key] = ncformUtils.priorityGetValue(
               "basic",
               formSchema.properties[key].value,
-              formSchema.properties[key].default,
+              ncformUtils.smartAnalyze(formSchema.properties[key].default),
               ncformUtils.getDefVal(formSchema.properties[key].type)
             );
           }
@@ -188,7 +188,7 @@ const ncformUtils = {
         "object",
         model,
         formSchema.value,
-        formSchema.default
+        ncformUtils.smartAnalyze(formSchema.default)
       );
     } else if (formSchema.type === "array") {
       model = [];
@@ -203,7 +203,7 @@ const ncformUtils = {
           ncformUtils.priorityGetValue(
             "basic",
             formSchema.items.value,
-            formSchema.items.default,
+            ncformUtils.smartAnalyze(formSchema.items.default),
             ncformUtils.getDefVal(formSchema.items.type)
           )
         );
@@ -213,7 +213,7 @@ const ncformUtils = {
       model = ncformUtils.priorityGetValue(
         "array",
         formSchema.value,
-        formSchema.default,
+        ncformUtils.smartAnalyze(formSchema.default),
         []
       ); // 不让model来覆盖是为了空值的时候给出的值是正确的空数组
 
@@ -228,7 +228,7 @@ const ncformUtils = {
       model = ncformUtils.priorityGetValue(
         "basic",
         formSchema.value,
-        formSchema.default,
+        ncformUtils.smartAnalyze(formSchema.default),
         ncformUtils.getDefVal(formSchema.type)
       );
     }
@@ -263,7 +263,7 @@ const ncformUtils = {
               "basic",
               _get(value, parentPath),
               schema.value,
-              schema.default,
+              ncformUtils.smartAnalyze(schema.default),
               ncformUtils.getDefVal(schema.type)
             );
       }
