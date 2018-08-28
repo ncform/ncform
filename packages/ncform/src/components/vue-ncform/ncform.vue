@@ -73,7 +73,7 @@ export default {
     // 在这里做一些跟DOM有关的初始化
     let vm = this;
     if(window.__$ncform.__ncFormsGlobalList[this.$data.name]){
-      console.error(`表单命名重复`);
+      console.warn(`表单命名重复`);
       const newName = `${this.$data.name}_${Math.random().toString(36).substring(2)})`;
       window.__$ncform.__ncFormsGlobalList[newName] = vm;
       this.$data.name = newName;
