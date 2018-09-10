@@ -13,9 +13,9 @@
 </style>
 
 <script>
-import _get from "lodash-es/get";
+import _get from 'lodash-es/get';
 import ncformCommon from '@ncform/ncform-common';
-import formItem from "./form-item.vue";
+import formItem from './form-item.vue';
 
 const ncformUtils = ncformCommon.ncformUtils;
 
@@ -34,53 +34,60 @@ export default {
       vm.$data.dataFormSchema = dataFormSchema;
 
       // 初始赋值
-      ncformUtils.setValueToSchema(vm.value || dataFormSchema.value, dataFormSchema, true);
+      ncformUtils.setValueToSchema(
+        vm.value || dataFormSchema.value,
+        dataFormSchema,
+        true
+      );
       dataFormSchema.value = {}; // 清空最顶层的value，以防止更新的值被其覆盖
 
       // 在这里强行把最外层的对象布局（根布局永远都是对象）的边框置空（对象的布局样式必须是v-layout和h-layout）
       vm.$nextTick(() => {
         let rootBorderElement = vm.$el.querySelector('[class$=-layout]');
         if (rootBorderElement) rootBorderElement.style.border = 'none';
-      })
-    };
+      });
+    }
 
-    this.$watch('formSchema',  (newVal, oldVal) => {
+    this.$watch('formSchema', (newVal, oldVal) => {
       if (newVal !== oldVal) {
         this.$data.isSchemaChanging = true;
         this.$nextTick(() => {
           this.$data.isSchemaChanging = false;
           handleSchema();
-        })
+        });
       }
-    })
+    });
 
-    this.$watch('value',  (newVal, oldVal) => {
-      if (JSON.stringify(newVal) !== JSON.stringify(oldVal) && !this.$options.isValueUpdateFromInner) {
+    this.$watch('value', (newVal, oldVal) => {
+      if (
+        JSON.stringify(newVal) !== JSON.stringify(oldVal) &&
+        !this.$options.isValueUpdateFromInner
+      ) {
         this.$data.isSchemaChanging = true;
         this.$nextTick(() => {
           this.$data.isSchemaChanging = false;
           handleSchema();
-        })
+        });
       }
       this.$options.isValueUpdateFromInner = false; // reset
-    })
+    });
 
     handleSchema();
-
   },
 
   mounted() {
     // 在这里做一些跟DOM有关的初始化
     let vm = this;
-    if(window.__$ncform.__ncFormsGlobalList[this.$data.name]){
+    if (window.__$ncform.__ncFormsGlobalList[this.$data.name]) {
       console.warn(`表单命名重复`);
-      const newName = `${this.$data.name}_${Math.random().toString(36).substring(2)})`;
+      const newName = `${this.$data.name}_${Math.random()
+        .toString(36)
+        .substring(2)})`;
       window.__$ncform.__ncFormsGlobalList[newName] = vm;
       this.$data.name = newName;
-    }else{
+    } else {
       window.__$ncform.__ncFormsGlobalList[this.$data.name] = vm;
     }
-
   },
 
   destroyed() {
@@ -103,7 +110,7 @@ export default {
 
     formName: {
       type: String,
-      default: "_ncformDefaultName"
+      default: '_ncformDefaultName'
     },
 
     value: {
@@ -126,20 +133,23 @@ export default {
     ncformValidate() {
       // 清空验证数组，数组内为promise对象。
       this.$data.validateArray = [];
-      this.checkValidation(this.$data.dataFormSchema, "dataFormSchema", "data");
+      this.checkValidation(this.$data.dataFormSchema, 'dataFormSchema', 'data');
 
       return new Promise((resolve, reject) => {
         Promise.all(this.$data.validateArray).then(data => {
           data.forEach(item => {
             this.$set(
               _get(this.$data, item.__path),
-              "__validationResult",
+              '__validationResult',
               JSON.parse(JSON.stringify(item.result))
             );
           });
           resolve({
             result: !data.some(item => item.result.result === false),
-            detail: data.map(item => {delete item.__path; return item;})
+            detail: data.map(item => {
+              delete item.__path;
+              return item;
+            })
           });
         });
       });
@@ -148,42 +158,61 @@ export default {
     // 根据schema，递归检索出所有的验证规则，并push进验证数组validateArray。
     // __path参数：控件在schema中的路径。 验证结束后，将验证结果放到对应的控件中展示时需要使用。
     // __dataPath: 数据在value中的路径。 最终返回给用户。
-    checkValidation(schema, __path, __dataPath, __idxChain='') {
+    checkValidation(schema, __path, __dataPath, __idxChain) {
+
+      __idxChain = __idxChain === undefined ? '' : __idxChain; // 不在参数命名的时候给默认值是因为会传了undifine进来导致错误
+
+      if (_get(this.dataFormSchema, 'globalConfig.ignoreRulesWhenHidden', true)) { // 如果开启了忽略隐藏字段规则
+        const isHidden = ncformUtils.smartAnalyzeVal(schema.ui.hidden, {
+          idxChain: __idxChain,
+          data: {
+            rootData: this.$data.formData,
+            constData: this.dataFormSchema.globalConfig.constants
+          }
+        });
+        // 如果是隐藏，则忽略校验规则
+        if (isHidden) return Promise.resolve({ result: true, __path, __dataPath });
+      }
+
       if (schema.__validationResult) {
         // 存在验证结果，直接取验证结果。
         this.$data.validateArray.push(
-          Promise.resolve({ result: schema.__validationResult, __path, __dataPath })
+          Promise.resolve({
+            result: schema.__validationResult,
+            __path,
+            __dataPath
+          })
         );
-      } else if (
-        schema.rules &&
-        Object.keys(schema.rules) !== 0
-      ) {
+      } else if (schema.rules && Object.keys(schema.rules) !== 0) {
         // 不存在验证结果，则进行验证
         this.$data.validateArray.push(
           window.__$ncform.__ncformRegularValidation
-            .validate(schema.value, schema.rules, {formData:this.$data.formData, idxChain: __idxChain, globalConfig: this.dataFormSchema.globalConfig})
+            .validate(schema.value, schema.rules, {
+              formData: this.$data.formData,
+              idxChain: __idxChain,
+              globalConfig: this.dataFormSchema.globalConfig
+            })
             .then(result => {
               return Promise.resolve({ result, __path, __dataPath });
             })
         );
-      } else {
-        //
       }
 
       // 递归
       switch (schema.type) {
-        case "object":
+        case 'object':
           for (let key in schema.properties) {
-            if(schema.properties[key]){
+            if (schema.properties[key]) {
               this.checkValidation(
                 schema.properties[key],
                 `${__path}.properties.${key}`,
-                `${__dataPath}.${key}`
+                `${__dataPath}.${key}`,
+                __idxChain
               );
             }
           }
           break;
-        case "array":
+        case 'array':
           if (schema.items) {
             schema.value.forEach((item, index) => {
               if (item.__dataSchema) {
@@ -191,7 +220,7 @@ export default {
                   item.__dataSchema,
                   `${__path}.value[${index}].__dataSchema`,
                   `${__dataPath}[${index}]`,
-                  index
+                  !__idxChain && __idxChain !== 0 ? [index].join(',') : [__idxChain, index].join(',')
                 );
               }
             });
@@ -205,7 +234,6 @@ export default {
     submit() {
       this.$emit('submit');
     }
-
   },
 
   watch: {
@@ -213,7 +241,7 @@ export default {
       handler(newVal) {
         this.$data.formData = ncformUtils.getModelFromSchema(newVal);
         this.$options.isValueUpdateFromInner = true;
-        this.$emit("input", this.$data.formData);
+        this.$emit('input', this.$data.formData);
       },
       deep: true
     }

@@ -113,6 +113,7 @@
     }
   },
   globalConfig: { // 根节点：全局配置
+    ignoreRulesWhenHidden: true, // 当控件隐藏时自动忽略掉其验证规则，即隐藏的控件验证规则不生效。默认为true
     style: { // 全局样式配置
       formCls: '', // form class
       invalidFeedbackCls: '', // invalid feedback class 
