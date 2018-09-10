@@ -13,6 +13,8 @@ class PatternRule extends ValidationRule {
   validateLogic(val, ruleVal) {
     if (!notEmptyVal(ruleVal) && getValType(ruleVal) !== "regexp") return true;
 
+    if (getValType(ruleVal) === "string") ruleVal = new RegExp(ruleVal);
+
     return ruleVal.test(val);
   }
 }
