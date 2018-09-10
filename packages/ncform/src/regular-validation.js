@@ -150,11 +150,11 @@ class RegularValidation {
             data: { rootData: formData, constData: globalConfig.constants }
           }) === false ||
           ncformUtils.smartAnalyzeVal(
-            _get(rules, "required.value", {
+            _get(rules, "required.value"), {
               idxChain,
               data: { rootData: formData, constData: globalConfig.constants }
             }) === false
-          )) &&
+        ) &&
         !ncformUtils.notEmptyVal(value)
       ) {
         // 如果不存在required验证条件，且value为空时，直接验证通过
