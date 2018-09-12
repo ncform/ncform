@@ -88,7 +88,8 @@ export default {
   },
 
   created() {
-    this.$watch("inputVal", () => {
+    this.$watch("inputVal", (newVal, oldVal) => {
+      if (!newVal && !oldVal) return;
       let val = this._processModelVal();
       this.$emit("input", val);
     });
