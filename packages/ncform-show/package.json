@@ -1,7 +1,7 @@
 {
   "name": "ncform-show",
   "private": true,
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "ncform show",
   "author": "daniel.xiao",
   "keywords": [
@@ -57,7 +57,7 @@
   "dependencies": {
     "@ncform/ncform": "^0.1.13",
     "@ncform/ncform-common": "^0.1.12",
-    "@ncform/ncform-theme-elementui": "^0.1.13",
+    "@ncform/ncform-theme-elementui": "^0.1.14",
     "ace-builds": "^1.2.9",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8"
