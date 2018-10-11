@@ -11,7 +11,7 @@
       /* 数据 */
       type: 'string', // 数据类型 string / number / integer / boolean / object / array 
       value: '', // 数据的值
-      default: '', // 数据的默认值，value为空的时候取该值
+      default: '', // 数据的默认值，value为空的时候取该值 
 
       /* UI */
       ui: {
