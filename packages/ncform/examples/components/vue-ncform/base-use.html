@@ -65,6 +65,13 @@
                     noLabelSpace: true,
                     placeholder: 'Last Name'
                   }
+                },
+                fullname1: {
+                  type: 'string',
+                  valueTemplate: 'dx: {{$root.peason1.firstName1}} + " " + {{$root.peason1.lastName1}}',
+                  ui: {
+                    description: '使用valueTemplate自动赋值'
+                  }
                 }
               }
             },

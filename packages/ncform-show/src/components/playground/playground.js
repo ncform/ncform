@@ -106,6 +106,10 @@ export default {
         {
           value: "12",
           label: "高级玩法-全局常量 dx表达式"
+        },
+        {
+          value: "13",
+          label: "高级玩法-跟随 dx表达式"
         }
       ],
       templates: {
@@ -850,6 +854,30 @@ export default {
           globalConfig: {
             constants: {
               ageLimit: 18
+            }
+          }
+        },
+        "13": {
+          type: "object",
+          properties: {
+            firstname: {
+              type: 'string',
+              ui: {
+                columns: 6
+              }
+            },
+            lastname: {
+              type: 'string',
+              ui: {
+                columns: 6
+              }
+            },
+            fullname: {
+              type: 'string',
+              valueTemplate: 'dx: {{$root.firstname}} + " " +　{{$root.lastname}}',
+              ui: {
+                columns: 12
+              }
             }
           }
         }

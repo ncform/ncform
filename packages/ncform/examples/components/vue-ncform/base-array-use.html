@@ -41,7 +41,7 @@
                   type: 'object',
                   properties: {
                     firstname: { type: 'string', ui: { columns: 6 }, rules: {required: true} },
-                    lastname: { type: 'string', ui: { columns: 6 } }
+                    lastname: { type: 'string', valueTemplate: 'dx: {{$root.person[i].firstname}}', ui: { columns: 6 } }
                   },
                   ui: {
                     label: 'people',

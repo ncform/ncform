@@ -133,6 +133,18 @@ export default {
     };
   },
 
+  computed: {
+    valueTemplate() {
+      return ncformUtils.smartAnalyzeVal(this.schema.valueTemplate, {
+        idxChain: this.idxChain,
+        data: {
+          rootData: this.formData,
+          constData: this.globalConfig.constants
+        }
+      });
+    }
+  },
+
   methods: {
     isNormalObjSchema: ncformUtils.isNormalObjSchema,
 
@@ -188,6 +200,9 @@ export default {
   },
 
   watch: {
+    valueTemplate(newVal) {
+      this.schema.value = newVal;
+    },
     schema: {
       handler: function(newVal) {
         let changed = false;
