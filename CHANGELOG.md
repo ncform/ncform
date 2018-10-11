@@ -1,3 +1,14 @@
+<a name="0.1.15"></a>
+## [0.1.15](https://github.com/vipshop/ncform/compare/v0.1.14...v) (2018-10-11)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed input control $emit input event when init with compound.prependSelect config ([941a88f](https://github.com/vipshop/ncform/commit/941a88f)), closes [#19](https://github.com/vipshop/ncform/issues/19)
+
+### Features
+
+* **ncform:** add valueTemplate config, now you can easily control one field's value depend on another ([8ac95eb](https://github.com/vipshop/ncform/commit/8ac95eb))
+
 <a name="0.1.13"></a>
 ## [0.1.13](https://github.com/vipshop/ncform/compare/v0.1.12...v0.1.13) (2018-09-10)
 
