@@ -90,6 +90,7 @@ export default {
   </div>
 
   <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
   <script type="text/javascript" src="https://unpkg.com/@ncform/ncform/dist/vueNcform.min.js"></script>
