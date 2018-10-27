@@ -26,6 +26,12 @@ module.exports = {
       commonjs: "vue",
       amd: "vue"
     },
+    axios: {
+      root: "axios",
+      commonjs2: "axios",
+      commonjs: "axios",
+      amd: "axios"
+    },
     "@ncform/ncform-common": {
       root: "ncformCommon",
       commonjs2: "@ncform/ncform-common",
