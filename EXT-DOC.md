@@ -24,7 +24,7 @@ class MyCustomRule extends ncformCommon.ValidationRule {
   validateLogic(val, ruleVal) {
     // val: the input value for validating
     // ruleVal: rule's value. example: {maxLength: {value: 1}}, the ruleVal's value here is 1  
-    // You can dynamically change the error message by setting this.errMsg. (e.g. this.errMsg = 'There are some errors')
+    // You can change the error message programmatically by setting this.errMsg. (e.g. this.errMsg = 'There are some errors')
     return true;
     // or return new Promise(resolve => resolve(true))
   }
