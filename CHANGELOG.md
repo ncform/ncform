@@ -1,3 +1,19 @@
+<a name="0.1.16"></a>
+## [0.1.16](https://github.com/vipshop/ncform/compare/v0.1.15...v0.1.16) (2018-10-27)
+
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed upload control fields assignment error ([23a4acf](https://github.com/vipshop/ncform/commit/23a4acf)), closes [#23](https://github.com/vipshop/ncform/issues/23)
+* **ncform-theme-elementui:** fixed select control when multiple is set to true, then the otherParams changed cause error ([1485660](https://github.com/vipshop/ncform/commit/1485660)), closes [#24](https://github.com/vipshop/ncform/issues/24)
+
+
+### Features
+
+* **ncform:** add new rule - ajax ([961f1eb](https://github.com/vipshop/ncform/commit/961f1eb)), closes [#29](https://github.com/vipshop/ncform/issues/29)
+* **ncform:** add reset method - $ncformReset(formName) ([a192afc](https://github.com/vipshop/ncform/commit/a192afc)), closes [#25](https://github.com/vipshop/ncform/issues/25)
+* **ncform:** description support dx expression && html content ([7fc4532](https://github.com/vipshop/ncform/commit/7fc4532)), closes [#27](https://github.com/vipshop/ncform/issues/27)
+
 <a name="0.1.15"></a>
 ## [0.1.15](https://github.com/vipshop/ncform/compare/v0.1.14...v) (2018-10-11)
 
