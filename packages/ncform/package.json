@@ -41,6 +41,7 @@
     "html-loader": "^0.5.1",
     "map-stream": "0.0.6",
     "mocha": "^4.0.1",
+    "nock": "^10.0.1",
     "node-libs-browser": "^1.0.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^0.8.0",
@@ -62,6 +63,7 @@
   ],
   "dependencies": {
     "@ncform/ncform-common": "^0.1.12",
+    "axios": "^0.18.0",
     "extend": "^3.0.1",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8"

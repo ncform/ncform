@@ -67,6 +67,7 @@
           }
         },
         number,
+        ajax, // value值：{ remoteUrl: '远程接口Url', method: 'get or post', paramName: '请求参数名，值为控件的值', otherParams: {} }
 
         // for Numeric Instances 
         minimum,
