@@ -14,6 +14,7 @@
 
 <script>
 import _get from 'lodash-es/get';
+import _cloneDeep from 'lodash-es/cloneDeep';
 import ncformCommon from '@ncform/ncform-common';
 import formItem from './form-item.vue';
 
@@ -25,6 +26,9 @@ export default {
     // 在这里做一些跟DOM无关的初始化, 比如获取初始化数据
 
     let vm = this;
+
+    // 在进行Form操作前的原始值，用于reset操作
+    vm.$options.originFormVal = _cloneDeep(vm.value || {});
 
     // 用于识别value的变化是内部触发还是外部主动更改
     vm.$options.isValueUpdateFromInner = false;
@@ -63,6 +67,7 @@ export default {
         JSON.stringify(newVal) !== JSON.stringify(oldVal) &&
         !this.$options.isValueUpdateFromInner
       ) {
+        vm.$options.originFormVal = _cloneDeep(newVal || {}); // 每次外部赋值都要更新原始值，作为reset有依据
         this.$data.isSchemaChanging = true;
         this.$nextTick(() => {
           this.$data.isSchemaChanging = false;
@@ -159,10 +164,12 @@ export default {
     // __path参数：控件在schema中的路径。 验证结束后，将验证结果放到对应的控件中展示时需要使用。
     // __dataPath: 数据在value中的路径。 最终返回给用户。
     checkValidation(schema, __path, __dataPath, __idxChain) {
-
       __idxChain = __idxChain === undefined ? '' : __idxChain; // 不在参数命名的时候给默认值是因为会传了undifine进来导致错误
 
-      if (_get(this.dataFormSchema, 'globalConfig.ignoreRulesWhenHidden', true)) { // 如果开启了忽略隐藏字段规则
+      if (
+        _get(this.dataFormSchema, 'globalConfig.ignoreRulesWhenHidden', true)
+      ) {
+        // 如果开启了忽略隐藏字段规则
         const isHidden = ncformUtils.smartAnalyzeVal(schema.ui.hidden, {
           idxChain: __idxChain,
           data: {
@@ -171,7 +178,8 @@ export default {
           }
         });
         // 如果是隐藏，则忽略校验规则
-        if (isHidden) return Promise.resolve({ result: true, __path, __dataPath });
+        if (isHidden)
+          return Promise.resolve({ result: true, __path, __dataPath });
       }
 
       if (schema.__validationResult) {
@@ -220,7 +228,9 @@ export default {
                   item.__dataSchema,
                   `${__path}.value[${index}].__dataSchema`,
                   `${__dataPath}[${index}]`,
-                  !__idxChain && __idxChain !== 0 ? [index].join(',') : [__idxChain, index].join(',')
+                  !__idxChain && __idxChain !== 0
+                    ? [index].join(',')
+                    : [__idxChain, index].join(',')
                 );
               }
             });
@@ -233,6 +243,11 @@ export default {
 
     submit() {
       this.$emit('submit');
+    },
+
+    reset() {
+      this.$options.isValueUpdateFromInner = false; // 通过模拟外部赋值来达到重置的目的
+      this.$emit('input', this.$options.originFormVal);
     }
   },
 

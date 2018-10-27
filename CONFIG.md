@@ -1,9 +1,7 @@
-## ncform配置详解
+## ncform config
 
 ```js
 {
-  title: '表单名称', // 根节点：表单名称
-  description: '表单描述', // 根节点：表单描述
   type: 'object', // 根节点：只能是object
   properties: { // 根节点：表单字段
     firstName: {
@@ -125,4 +123,45 @@
   }
 }
 
+```
+
+## ncform API
+
+ncform API 都是Vue实例级别的方法。
+
+- $ncformReset(formName)
+
+重置表单。重置的值为最后一次外部更新 `ncform v-model` 的值
+
+外部更新是指你直接用新value更新ncform的v-model值，而非操作表单控件发生的v-model的值的更新
+
+注意：当你保存完表单，想以最后一次保存的值为reset的值，需要外部更新下ncform的v-model值
+
+```
+// Demo code:
+this.$ncformReset('demoForm');
+```
+
+- $ncformValidate(formName)
+
+校验表单的所有字段的规则。
+
+```
+// Demo code:
+this.$ncformValidate('demoForm').then(data => {
+  if (data.result) { // 校验通过
+    // do whatever you like to do. e.g. save form
+  }
+})
+```
+
+## ncform event
+
+- submit
+
+提交表单事件。
+
+```
+// Demo code:
+<ncform @submit="submit()"></ncform>
 ```

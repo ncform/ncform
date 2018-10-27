@@ -13,9 +13,10 @@
 
   <!--演示区域-->
   <div id="demo" style="padding: 8px">
-    <ncform :form-schema="formSchema" v-model="formSchema.value" @submit="submit()"></ncform>
+    <ncform :form-schema="formSchema" form-name="demoForm" v-model="formSchema.value" @submit="submit()"></ncform>
 
     <button class="btn btn-primary" @click="submit()">提交</button>
+    <button class="btn btn-primary" @click="reset()">重置</button>
     <button class="btn btn-primary" @click="changeModel()">外部更新model值</button>
   </div>
 
@@ -132,8 +133,9 @@
             }
           },
           value: {
-            "username": "daniel",
-            "age": 18
+            peason1: {
+              firstName: 'daniel'
+            }
           },
           globalConfig: {
             style: {
@@ -146,6 +148,9 @@
       methods: {
         submit() {
           console.log(JSON.stringify(this.$data.formSchema.value, null, 2));
+        },
+        reset() {
+          this.$ncformReset('demoForm');
         },
         changeModel() {
           this.formSchema.value = { peason1: { "firstName": "sarah" } }
