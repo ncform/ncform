@@ -40,8 +40,8 @@
                 items: {
                   type: 'object',
                   properties: {
-                    firstname: { type: 'string' },
-                    lastname: { type: 'string' }
+                    firstname: { type: 'string', ui: { description: '使用html内容的描述：<a target="_blank" href="https://www.baidu.com">点击</a>' } },
+                    lastname: { type: 'string', ui: { description: 'dx: "使用dx表达式的描述：" + ({{$root.person}} || []).length'  }}
                   },
                   ui: {
                     label: 'people'

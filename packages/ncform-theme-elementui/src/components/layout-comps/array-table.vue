@@ -22,8 +22,7 @@
             </el-tooltip>
 
             <!-- 说明信息 -->
-            <small v-if="renderSchema.ui.description" class="form-text text-muted">
-                {{renderSchema.ui.description}}
+            <small v-if="renderSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(renderSchema.ui.description)">
             </small>
           </th>
 

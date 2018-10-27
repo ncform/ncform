@@ -16,8 +16,7 @@
             <a v-if="renderSchema.ui.help.show === true" href="#"><span :class="renderSchema.ui.help.icon">{{renderSchema.ui.help.text}}</span></a>
 
             <!-- 说明信息 -->
-            <small v-if="renderSchema.ui.description" class="form-text text-muted">
-                {{renderSchema.ui.description}}
+            <small v-if="renderSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(renderSchema.ui.description)">
             </small>
           </th>
 
