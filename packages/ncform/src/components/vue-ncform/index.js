@@ -48,6 +48,17 @@ module.exports = {
       return vm.ncformValidate();
     };
 
+    Vue.prototype.$ncformReset = function(formName) {
+      formName = formName || "_ncformDefaultName";
+      const vm = window.__$ncform.__ncFormsGlobalList[formName];
+
+      if (!vm) {
+        return Promise.resolve(false);
+      }
+
+      return vm.reset();
+    };
+
     Vue.component("ncform", ncform);
   }
 };
