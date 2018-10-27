@@ -222,8 +222,8 @@
           if (fileList[i].uid === file.uid) {
             const { resField, fileUrlField, fileNameField } = vm.mergeConfig;
             const resObj = _get(res, resField || '', {});
-            fileList[i].name = resObj && resObj[fileUrlField] || fileList[i].name;
-            fileList[i].url = resObj && resObj[fileNameField] || fileList[i].url;
+            fileList[i].name = resObj && resObj[fileNameField] || fileList[i].name;
+            fileList[i].url = resObj && resObj[fileUrlField] || fileList[i].url;
             break;
           }
         }
