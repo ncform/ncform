@@ -25,6 +25,7 @@ class MyCustomRule extends ncformCommon.ValidationRule {
     // val: the input value for validating
     // ruleVal: rule's value. example: {maxLength: {value: 1}}, the ruleVal's value here is 1  
     return true;
+    // or return new Promise(resolve => resolve(true))
   }
 
 }

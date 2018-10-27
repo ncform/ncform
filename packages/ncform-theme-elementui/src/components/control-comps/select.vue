@@ -154,7 +154,13 @@ export default {
     //【使config支持字符串表达式】(2) watch在computed声明的属性，当发生变化时，执行相关的动作
     otherParams(newVal, oldVal) {
       if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-        if (oldVal !== undefined) this.modelVal = null; // 非第一次
+        if (oldVal !== undefined) { // 非第一次
+          if (Array.isArray(this.modelVal)) {
+            this.modelVal = [];
+          } else {
+            this.modelVal = null;
+          }
+        }
         this.remoteMethod();
       }
     }
