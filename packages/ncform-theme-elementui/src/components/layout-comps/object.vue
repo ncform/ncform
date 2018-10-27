@@ -31,8 +31,7 @@
             <slot :name="field"></slot>
 
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-desc">
-                {{fieldSchema.ui.description}}
+            <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">
             </small>
 
         </template>
@@ -62,8 +61,7 @@
           <div class="el-form-item__content" :style="{'margin-left': isNormalObjSchema(fieldSchema) || fieldSchema.ui.noLabelSpace ? '0px' : mergeConfig.labelWidth}">
             <slot :name="field"></slot>
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-desc">
-                {{fieldSchema.ui.description}}
+            <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">
             </small>
           </div>
         </template>

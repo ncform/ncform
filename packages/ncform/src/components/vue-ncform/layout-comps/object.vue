@@ -24,8 +24,7 @@
             <slot :name="field"></slot>
 
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-text text-muted">
-                {{fieldSchema.ui.description}}
+            <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description)">
             </small>
 
         </template>
@@ -53,8 +52,7 @@
             <slot :name="field"></slot>
 
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-text text-muted">
-                {{fieldSchema.ui.description}}
+            <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description)">
             </small>
           </div>
         </template>

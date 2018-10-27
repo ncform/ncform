@@ -21,7 +21,7 @@
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
         legend: '', // 标题内容，当对象，数组布局数据类型时有效
         showLegend: false, // 是否显示标题
-        description: 'Fill in the first name', // 字段描述信息
+        description: 'Fill in the first name', // 字段描述信息【支持dx表达式】
         placeholder: 'first name', // 占位内容【支持dx表达式】
         disabled: false, // 是否禁用【支持dx表达式】
         readonly: false, // 是否只读【支持dx表达式】
