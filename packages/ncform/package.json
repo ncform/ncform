@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform",
-  "version": "0.1.18-0",
+  "version": "0.1.18",
   "description": "nice form",
   "author": "daniel.xiao",
   "main": "dist/vueNcform.min.js",
