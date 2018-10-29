@@ -68,6 +68,7 @@ export default {
     this.$watch('value', (newVal, oldVal) => {
       if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
         if (!this.$options.isValueUpdateFromInner) {
+          // 外部更新值
           this.$data.isSchemaChanging = true;
           this.$nextTick(() => {
             this.$data.isSchemaChanging = false;
@@ -84,6 +85,7 @@ export default {
           );
         }
       }
+
       this.$options.isValueUpdateFromInner = false; // reset
     });
 
@@ -262,6 +264,7 @@ export default {
 
     reset() {
       this.$options.isValueUpdateFromInner = false; // 通过模拟外部赋值来达到重置的目的
+      this.$emit('update:isDirty', false); // 表单回到not dirty状态
       this.$emit('input', this.$options.originFormVal);
     }
   },
