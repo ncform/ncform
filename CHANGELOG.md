@@ -1,3 +1,11 @@
+<a name="0.1.17"></a>
+## [0.1.17](https://github.com/vipshop/ncform/compare/v0.1.16...v0.1.17) (2018-10-29)
+
+
+### Features
+
+* **ncform:** add isDirty prop ([82a468b](https://github.com/vipshop/ncform/commit/82a468b)), closes [#32](https://github.com/vipshop/ncform/issues/32)
+
 <a name="0.1.16"></a>
 ## [0.1.16](https://github.com/vipshop/ncform/compare/v0.1.15...v0.1.16) (2018-10-27)
 
