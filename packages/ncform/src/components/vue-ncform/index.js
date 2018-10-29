@@ -53,7 +53,7 @@ module.exports = {
       const vm = window.__$ncform.__ncFormsGlobalList[formName];
 
       if (!vm) {
-        return Promise.resolve(false);
+        return;
       }
 
       return vm.reset();

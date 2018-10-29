@@ -126,6 +126,47 @@
 
 ```
 
+## ncform props
+
+- form-schema
+
+用于描述表单的schema配置数据，具体数据结构请参考[ncform config](#ncform-config)
+
+```
+// Demo code
+<ncform :form-schema="formSchema"></ncform>
+```
+
+- form-name
+
+表单名称，当使用[ncform API](#ncform-api)时需要提供该值
+
+```
+// Demo code
+<ncform form-name="your-form-name"></ncform>
+```
+
+- v-model
+
+表单的值
+
+```
+// Demo code
+<ncform :form-schema="formSchema" v-model="formSchema.value" ></ncform>
+```
+
+- is-dirty.sync
+
+用于标识表单的值是否dirty（即修改）
+
+通常的使用场景是通过该值，来判断提交按钮是否可用
+
+```
+// Demo code
+<ncform :form-schema="formSchema" v-model="formSchema.value" :is-dirty.sync="isFormDirty"></ncform>
+<button :disabled="!isFormDirty">提交</button>
+```
+
 ## ncform API
 
 ncform API 都是Vue实例级别的方法。
