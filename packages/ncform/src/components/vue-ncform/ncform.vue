@@ -66,20 +66,23 @@ export default {
     });
 
     this.$watch('value', (newVal, oldVal) => {
-      if (
-        JSON.stringify(newVal) !== JSON.stringify(oldVal) &&
-        !this.$options.isValueUpdateFromInner
-      ) {
-        this.$data.isSchemaChanging = true;
-        this.$nextTick(() => {
-          this.$data.isSchemaChanging = false;
-          handleSchema();
-          this.$options.originFormVal =
-            ncformUtils.getModelFromSchema(this.$data.dataFormSchema) || {}; // 每次外部赋值都要更新原始值，作为reset有依据
-        });
-      } else {
-        // 通知表单值dirty，配合 is-dirty.sync
-        this.$emit('update:isDirty', JSON.stringify(this.$options.originFormVal) !== JSON.stringify(this.$data.formData))
+      if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+        if (!this.$options.isValueUpdateFromInner) {
+          this.$data.isSchemaChanging = true;
+          this.$nextTick(() => {
+            this.$data.isSchemaChanging = false;
+            handleSchema();
+            this.$options.originFormVal =
+              ncformUtils.getModelFromSchema(this.$data.dataFormSchema) || {}; // 每次外部赋值都要更新原始值，作为reset有依据
+          });
+        } else {
+          // 通知表单值dirty，配合 is-dirty.sync
+          this.$emit(
+            'update:isDirty',
+            JSON.stringify(this.$options.originFormVal) !==
+              JSON.stringify(this.$data.formData)
+          );
+        }
       }
       this.$options.isValueUpdateFromInner = false; // reset
     });
