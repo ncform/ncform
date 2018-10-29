@@ -13,9 +13,9 @@
 
   <!--演示区域-->
   <div id="demo" style="padding: 8px">
-    <ncform :form-schema="formSchema" form-name="demoForm" v-model="formSchema.value" @submit="submit()"></ncform>
+    <ncform :is-dirty.sync="isFormDirty" :form-schema="formSchema" form-name="demoForm" v-model="formSchema.value" @submit="submit()"></ncform>
 
-    <button class="btn btn-primary" @click="submit()">提交</button>
+    <button :disabled="!isFormDirty" class="btn btn-primary" @click="submit()">提交</button>
     <button class="btn btn-primary" @click="reset()">重置</button>
     <button class="btn btn-primary" @click="changeModel()">外部更新model值</button>
   </div>
@@ -71,7 +71,7 @@
                 },
                 fullname1: {
                   type: 'string',
-                  valueTemplate: 'dx: {{$root.peason1.firstName1}} + " " + {{$root.peason1.lastName1}}',
+                  valueTemplate: 'dx: {{$root.peason1.firstName1}} ? {{$root.peason1.firstName1}} + " " + {{$root.peason1.lastName1}} : ""',
                   ui: {
                     description: '使用valueTemplate自动赋值'
                   }
@@ -146,6 +146,7 @@
             }
           }
         },
+        isFormDirty: false,
       },
       methods: {
         submit() {

@@ -28,7 +28,10 @@ export default {
     let vm = this;
 
     // 在进行Form操作前的原始值，用于reset操作
-    vm.$options.originFormVal = _cloneDeep(vm.value || {});
+    vm.$nextTick(() => {
+      vm.$options.originFormVal =
+        ncformUtils.getModelFromSchema(vm.$data.dataFormSchema) || {};
+    });
 
     // 用于识别value的变化是内部触发还是外部主动更改
     vm.$options.isValueUpdateFromInner = false;
@@ -67,12 +70,16 @@ export default {
         JSON.stringify(newVal) !== JSON.stringify(oldVal) &&
         !this.$options.isValueUpdateFromInner
       ) {
-        vm.$options.originFormVal = _cloneDeep(newVal || {}); // 每次外部赋值都要更新原始值，作为reset有依据
         this.$data.isSchemaChanging = true;
         this.$nextTick(() => {
           this.$data.isSchemaChanging = false;
           handleSchema();
+          this.$options.originFormVal =
+            ncformUtils.getModelFromSchema(this.$data.dataFormSchema) || {}; // 每次外部赋值都要更新原始值，作为reset有依据
         });
+      } else {
+        // 通知表单值dirty，配合 is-dirty.sync
+        this.$emit('update:isDirty', JSON.stringify(this.$options.originFormVal) !== JSON.stringify(this.$data.formData))
       }
       this.$options.isValueUpdateFromInner = false; // reset
     });
@@ -120,6 +127,11 @@ export default {
 
     value: {
       type: Object
+    },
+
+    isDirty: {
+      type: Boolean,
+      default: false
     }
   },
 

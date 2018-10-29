@@ -144,7 +144,7 @@ export default {
 
 ## 文档
 
-- [ncform config](./CONFIG.md)
+- [ncform config/props/api/event](./CONFIG.md)
 
 - [Standard Components](./STD-COMP.md)
 
