@@ -75,14 +75,17 @@ export default {
             handleSchema();
             this.$options.originFormVal =
               ncformUtils.getModelFromSchema(this.$data.dataFormSchema) || {}; // 每次外部赋值都要更新原始值，作为reset有依据
+            this.$emit('update:isDirty', false);
           });
         } else {
-          // 通知表单值dirty，配合 is-dirty.sync
-          this.$emit(
-            'update:isDirty',
-            JSON.stringify(this.$options.originFormVal) !==
-              JSON.stringify(this.$data.formData)
-          );
+          if (this.$options.originFormVal) {
+            // 通知表单值dirty，配合 is-dirty.sync
+            this.$emit(
+              'update:isDirty',
+              JSON.stringify(this.$options.originFormVal) !==
+                JSON.stringify(this.$data.formData)
+            );
+          }
         }
       }
 
@@ -264,7 +267,6 @@ export default {
 
     reset() {
       this.$options.isValueUpdateFromInner = false; // 通过模拟外部赋值来达到重置的目的
-      this.$emit('update:isDirty', false); // 表单回到not dirty状态
       this.$emit('input', this.$options.originFormVal);
     }
   },
