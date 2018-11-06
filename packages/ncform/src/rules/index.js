@@ -21,6 +21,7 @@ import maxProperties from "./maxProperties";
 import minProperties from "./minProperties";
 import pattern from "./pattern";
 import url from "./url";
+import ajax from "./ajax";
 
 export default {
   contains,
@@ -45,5 +46,6 @@ export default {
   maxProperties,
   minProperties,
   pattern,
-  url
+  url,
+  ajax,
 };

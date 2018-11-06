@@ -52,6 +52,7 @@
     })
     Mock.mock(/getKeywords/, function (options) {
       let params = url('?', options.url) || {};
+      console.log('getKeywords:', params)
       let result = [
         { value: 'oppo' },
         { value: 'xiaomi' },
@@ -211,7 +212,8 @@
                   autocomplete: {
                     itemValueField: 'keyword', // 项数据表示value的字段
                     itemTemplate: '<span>-> {{item.keyword}}</span>',
-                    enumSource: [{ keyword: 'iphone1' }, { keyword: 'iphone x' }, { keyword: 'oppo' }]
+                    enumSource: [{ keyword: 'iphone1' }, { keyword: 'iphone x' }, { keyword: 'oppo' }],
+                    immediateShow: true
                   }
                 }
               }
@@ -222,6 +224,8 @@
 itemTemplate: 显示数据项的模板，如"<span>-> {{item.keyword}}</span>"
 
 itemValueField: 数据源的每一项显示的标签的字段，默认值是value. 例子中就是keyword
+
+immediateShow: 是否立即显示，如果为false则当输入关键字才显示。默认为false
         `
       },
       {
@@ -239,6 +243,7 @@ itemValueField: 数据源的每一项显示的标签的字段，默认值是valu
                     enumSourceRemote: {
                       remoteUrl: '/api/input/getKeywords', // 如果是远程访问，则填写该url
                       paramName: 'keyword', // 请求参数名，默认是keyword
+                      otherParams: { date: 'dx: +new Date()' }, // 其它请求参数，值支持 dx表达式
                       resField: 'data', // 响应结果的字段
                     }
                   }
@@ -251,6 +256,8 @@ itemValueField: 数据源的每一项显示的标签的字段，默认值是valu
 remoteUrl: 远程接口url
 
 paramName: 请求参数名，默认是keyword
+
+otherParams: 其它请求参数，值支持 dx表达式
 
 resField: 数据源读取返回数据的哪个字段，如例子返回{data: [{ value: 'iphone', label: 'iphone' }, ...]}，则填写data
         `
