@@ -36,10 +36,12 @@
   autocomplete: { // 自动补全 
     itemValueField: 'value', // 项数据表示value的字段
     itemTemplate: '<span>{{item.value}}</span>', // 显示项的模板
+    immediateShow: false, // 是否立即显示，如果为false则当输入关键字才显示
     enumSource: [{value: [String | Number | Boolean], label: ''}], // 当提示数据是本地而非远程时提供
     enumSourceRemote: {
       remoteUrl: '', // 如果是远程访问，则填写该url
       paramName: 'keyword', // 请求参数名，默认是keyword
+      otherParams: {}, // 其它请求参数，值支持 dx表达式
       resField: '', // 响应结果的字段
     }
   },

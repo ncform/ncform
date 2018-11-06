@@ -28,7 +28,7 @@
     </el-input>
 
     <!-- 自动补全 -->
-    <el-autocomplete v-else :disabled="disabled" :readonly="readonly" :placeholder="placeholder" v-show="!hidden" :type="mergeConfig.type" :prefix-icon="mergeConfig.prefixIcon" :suffix-icon="mergeConfig.suffixIcon" :fetchSuggestions="querySearch" :trigger-on-focus="false" :value-key="mergeConfig.autocomplete.itemValueField || 'value'" v-model="inputVal">
+    <el-autocomplete v-else :disabled="disabled" :readonly="readonly" :placeholder="placeholder" v-show="!hidden" :type="mergeConfig.type" :prefix-icon="mergeConfig.prefixIcon" :suffix-icon="mergeConfig.suffixIcon" :fetch-suggestions="querySearch" :trigger-on-focus="!!mergeConfig.autocomplete.immediateShow" :value-key="mergeConfig.autocomplete.itemValueField || 'value'" v-model="inputVal">
 
       <template slot-scope="props" v-if="mergeConfig.autocomplete && mergeConfig.autocomplete.itemTemplate">
         <component :is="itemTemplate" :item="props.item">
@@ -74,6 +74,7 @@
 <script>
 import ncformCommon from '@ncform/ncform-common';
 import _get from "lodash-es/get";
+import _cloneDeep from 'lodash-es/cloneDeep';
 import axios from "axios";
 
 const controlMixin = ncformCommon.mixins.vue.controlMixin;
@@ -174,6 +175,7 @@ export default {
         this.$emit("input", val);
       });
     }
+
   },
 
   data() {
@@ -203,10 +205,12 @@ export default {
         //   itemLabelField: 'label', // 项数据表示label的字段
         //   itemValueField: 'value', // 项数据表示value的字段
         //   itemTemplate: '<li value="{{value}}">{{label}}</li>', // 显示项的模板
+        //   immediateShow: false, // 是否立即显示，如果为false则当输入关键字才显示
         //   enumSource: [{value: [String | Number | Boolean], label: ''}], // 当提示数据是本地而非远程时提供
         //   enumSourceRemote: {
         //     remoteUrl: '', // 如果是远程访问，则填写该url
         //     paramName: 'keyword', // 请求参数名，默认是keyword
+        //     otherParams: {}, // 其它请求参数，值支持 dx表达式
         //     resField: '', // 响应结果的字段
         //   }
         // },
@@ -259,6 +263,16 @@ export default {
     };
   },
 
+  computed: {
+    autocompleteOtherParams() {
+      let otherParams = _cloneDeep(_get(this.mergeConfig, 'autocomplete.enumSourceRemote.otherParams'), {});
+      for (let key in otherParams) {
+        otherParams[key] = this._analyzeVal(otherParams[key]);
+      }
+      return otherParams;
+    }
+  },
+
   methods: {
     querySearch(queryString, cb) {
       const autoCpl = this.$data.mergeConfig.autocomplete;
@@ -279,7 +293,7 @@ export default {
       // 下面是远程数据源的处理
       const options = {
         url: autoCpl.enumSourceRemote.remoteUrl,
-        params: {}
+        params: JSON.parse(JSON.stringify(this.autocompleteOtherParams))
       };
       options.params[autoCpl.enumSourceRemote.paramName] = queryString;
 
