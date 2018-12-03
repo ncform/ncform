@@ -67,6 +67,9 @@
         display: none;
       }
     }
+    .el-autocomplete {
+      width: 100%;
+    }
   }
 
 </style>
