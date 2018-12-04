@@ -1,7 +1,7 @@
 <template>
 
       <el-select v-model="modelVal" :placeholder="placeholder || '请选择'" v-show="!hidden" :disabled="disabled || readonly"
-      :clearable="!isLocalSource || mergeConfig.clearable"
+      :clearable="mergeConfig.clearable"
       :multiple="mergeConfig.multiple"
       :filterable="mergeConfig.filterable"
       :remote="!isLocalSource && !mergeConfig.filterLocal"
