@@ -5,6 +5,7 @@ import Ajax from '../../src/rules/ajax';
 describe('/src/rules/ajax.js', () => {
   beforeEach(() => {
     nock('http://mock')
+      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
       .get(new RegExp('/check/true'))
       .reply(200, function(uri) {
         console.log(uri);
@@ -12,6 +13,7 @@ describe('/src/rules/ajax.js', () => {
       });
 
     nock('http://mock')
+      .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
       .get(new RegExp('/check/object'))
       .reply(200, function(uri) {
         console.log(uri);

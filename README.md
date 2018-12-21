@@ -19,7 +19,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 1.install
 ```
 npm i @ncform/ncform @ncform/ncform-common --save
-npm i @ncform/ncform-theme-elementui element-ui --save 
+npm i @ncform/ncform-theme-elementui element-ui axios --save 
 ```
 
 2.import
@@ -30,9 +30,11 @@ import vueNcform from '@ncform/ncform';
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import ncformStdComps from '@ncform/ncform-theme-elementui';
+import axios from 'axios';
 
 Vue.use(Element);
 Vue.use(vueNcform, { extComponents: ncformStdComps });
+window.$http = Vue.prototype.$http = axios;
 ```
 
 3.usage

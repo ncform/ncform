@@ -1,3 +1,5 @@
+import axios from "axios";
+
 class ValidationRule {
   constructor() {
     this.name = "";
@@ -53,6 +55,10 @@ class ValidationRule {
 
   validateLogic(val, ruleVal, options) {
     return false;
+  }
+
+  get $http() {
+    return window.$http || window.$axios || window.axios || axios;
   }
 }
 

@@ -134,6 +134,14 @@ function testBrowser() {
           output: {
             filename: "__spec-build.js"
           },
+          externals: {
+            axios: {
+              root: "axios",
+              commonjs2: "axios",
+              commonjs: "axios",
+              amd: "axios"
+            }
+          },
           // Externals isn't necessary here since these are for tests.
           module: {
             rules: [

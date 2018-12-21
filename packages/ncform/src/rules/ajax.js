@@ -1,5 +1,4 @@
 import { ValidationRule } from "@ncform/ncform-common";
-import axios from 'axios';
 import _merge from 'lodash-es/merge';
 import _get from 'lodash-es/get';
 
@@ -25,7 +24,7 @@ class AjaxRule extends ValidationRule {
     options.params[options.paramName] = val;
     Object.assign(options.params, options.otherParams);
 
-    return axios({
+    return this.$http({
       url: options.remoteUrl,
       method: options.method,
       data: options.method === 'post' ? options.params : {},

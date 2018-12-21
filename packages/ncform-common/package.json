@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "assert": "^1.4.1",
+    "axios": "^0.18.0",
     "extend": "^3.0.1",
     "lodash-es": "^4.17.4",
     "power-assert": "^1.4.4"

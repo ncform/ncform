@@ -25,7 +25,6 @@
 </style>
 
 <script>
-import axios from "axios";
 import _get from "lodash-es/get";
 import _cloneDeep from 'lodash-es/cloneDeep';
 import ncformCommon from '@ncform/ncform-common';
@@ -134,7 +133,7 @@ export default {
       options.params[
         this.$data.mergeConfig.enumSourceRemote.paramName
       ] = query;
-      axios(options).then(res => {
+      this.$http(options).then(res => {
         this.$data.options = this.$data.mergeConfig.enumSourceRemote.resField ? _get(res.data, this.$data.mergeConfig.enumSourceRemote.resField) : res.data;
         if (this.mergeConfig.enumSourceRemote.selectFirstItem && this.$data.options.length > 0) {
           this.$data.modelVal = this.$data.modelVal || this.$data.options[0][this.$data.mergeConfig.itemValueField];

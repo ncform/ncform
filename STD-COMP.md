@@ -32,6 +32,7 @@
   suffixIcon: '', // 后图标样式名
   modelField: '', // 当值为对象时使用（即使用compound.prependSelect或compound.appendSelect）
   trim: true, // 是否自动将前后空格trim掉，默认为true 
+  clearable: false, // 是否可清空，默认为false
 
   autocomplete: { // 自动补全 
     itemValueField: 'value', // 项数据表示value的字段

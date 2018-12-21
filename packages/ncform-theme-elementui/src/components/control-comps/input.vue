@@ -1,7 +1,7 @@
 <template>
   <div class="ncform-input">
     <!-- 没有自动补全 -->
-    <el-input v-if="!mergeConfig.autocomplete" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" v-show="!hidden" :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type" :prefix-icon="mergeConfig.prefixIcon" :suffix-icon="mergeConfig.suffixIcon" v-model="inputVal">
+    <el-input v-if="!mergeConfig.autocomplete" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" v-show="!hidden" :clearable="mergeConfig.clearable" :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type" :prefix-icon="mergeConfig.prefixIcon" :suffix-icon="mergeConfig.suffixIcon" v-model="inputVal">
 
       <template v-if="mergeConfig.type !== 'file' && mergeConfig.compound">
         <template slot="prepend" v-if="mergeConfig.compound.prependLabel">{{mergeConfig.compound.prependLabel}}</template>
@@ -28,7 +28,7 @@
     </el-input>
 
     <!-- 自动补全 -->
-    <el-autocomplete v-else :disabled="disabled" :readonly="readonly" :placeholder="placeholder" v-show="!hidden" :type="mergeConfig.type" :prefix-icon="mergeConfig.prefixIcon" :suffix-icon="mergeConfig.suffixIcon" :fetch-suggestions="querySearch" :trigger-on-focus="!!mergeConfig.autocomplete.immediateShow" :value-key="mergeConfig.autocomplete.itemValueField || 'value'" v-model="inputVal">
+    <el-autocomplete v-else :disabled="disabled" :readonly="readonly" :placeholder="placeholder" v-show="!hidden" :clearable="mergeConfig.clearable" :type="mergeConfig.type" :prefix-icon="mergeConfig.prefixIcon" :suffix-icon="mergeConfig.suffixIcon" :fetch-suggestions="querySearch" :trigger-on-focus="!!mergeConfig.autocomplete.immediateShow" :value-key="mergeConfig.autocomplete.itemValueField || 'value'" v-model="inputVal">
 
       <template slot-scope="props" v-if="mergeConfig.autocomplete && mergeConfig.autocomplete.itemTemplate">
         <component :is="itemTemplate" :item="props.item">
@@ -78,7 +78,6 @@
 import ncformCommon from '@ncform/ncform-common';
 import _get from "lodash-es/get";
 import _cloneDeep from 'lodash-es/cloneDeep';
-import axios from "axios";
 
 const controlMixin = ncformCommon.mixins.vue.controlMixin;
 
@@ -119,7 +118,7 @@ export default {
           "compound.prependSelect.enumSource"
         );
       } else {
-        axios({
+        this.$http({
           url: _get(
             this.$data.mergeConfig,
             "compound.prependSelect.enumSourceRemote.remoteUrl"
@@ -152,7 +151,7 @@ export default {
           "compound.appendSelect.enumSource"
         );
       } else {
-        axios({
+        this.$http({
           url: _get(
             this.$data.mergeConfig,
             "compound.appendSelect.enumSourceRemote.remoteUrl"
@@ -200,6 +199,7 @@ export default {
       defaultConfig: {
         type: "text",
         trim: true,
+        clearable: false,
         prefixIcon: "",
         suffixIcon: "",
         modelField: "",
@@ -296,11 +296,13 @@ export default {
       // 下面是远程数据源的处理
       const options = {
         url: autoCpl.enumSourceRemote.remoteUrl,
-        params: JSON.parse(JSON.stringify(this.autocompleteOtherParams))
+        params: this.autocompleteOtherParams
+          ? JSON.parse(JSON.stringify(this.autocompleteOtherParams))
+          : {}
       };
       options.params[autoCpl.enumSourceRemote.paramName] = queryString;
 
-      axios(options).then(res => {
+      this.$http(options).then(res => {
         cb(
           autoCpl.enumSourceRemote.resField
             ? _get(res.data, autoCpl.enumSourceRemote.resField)
@@ -414,7 +416,7 @@ export default {
           fd.append(key, value);
         }
         this.$data.isUploading = true;
-        axios({
+        this.$http({
           method: "POST",
           url: uploadUrl,
           data: fd
@@ -423,7 +425,7 @@ export default {
             this.$data.inputVal = _get(res, resField || "");
             this.$data.isUploading = false;
           })
-          .catch(err => {
+          .catch(() => {
             vm.$message.error(`上传失败，请稍后再试！`);
             this.$data.isUploading = false;
           });

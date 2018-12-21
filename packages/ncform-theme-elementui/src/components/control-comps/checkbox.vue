@@ -90,7 +90,6 @@
 <script>
 
   import ncformCommon from '@ncform/ncform-common';
-  import axios from 'axios';
   import _get from 'lodash-es/get';
 
   const controlMixin = ncformCommon.mixins.vue.controlMixin;
@@ -179,7 +178,7 @@
           const vm = this;
           const enumSourceRemote = vm.mergeConfig.enumSourceRemote;
 
-          axios({
+          this.$http({
             method: 'GET',
             url: enumSourceRemote.remoteUrl,
             data: {},
