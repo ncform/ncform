@@ -29,7 +29,7 @@
         help: { // 帮助信息
           show: true, // 是否显示，默认不显示
           content: '', // 帮助信息
-          icon: '', // 帮助图标
+          iconCls: '', // 帮助图标样式名
           text: '' // 帮助文字
         },
         itemClass: '', // 给表单项添加的样式名

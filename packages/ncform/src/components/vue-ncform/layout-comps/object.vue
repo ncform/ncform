@@ -18,7 +18,7 @@
 
               <!-- TODO daniel: 提示信息组件未加 -->
               <!--  提示信息 -->
-              <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.icon">{{fieldSchema.ui.help.text}}</span></a>
+              <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
             </label>
 
             <slot :name="field"></slot>
@@ -45,7 +45,7 @@
             {{fieldSchema.ui.label}}
             <!-- TODO daniel: 提示信息组件未加 -->
             <!--  提示信息 -->
-            <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.icon">{{fieldSchema.ui.help.text}}</span></a>
+            <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
             :
           </label>
           <div :style="{'margin-left': !isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}" :class="{'col-md-9': !isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace)}">
