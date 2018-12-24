@@ -5,7 +5,9 @@ import ncformUtils from "../../ncform-utils";
 export default {
   created() {
 
-    this.$http = this.$http || this.$axios || this.axios || axios;
+    if (!this.$http) {
+      this.$http = this.$axios || this.axios || axios;
+    }
 
     this.$data.mergeConfig = extend(
       true,
