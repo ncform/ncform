@@ -20,6 +20,16 @@
 
     </component>
 
+    <!-- 特殊类型 HTML -->
+    <template v-else-if="schema.type === 'HTML'">
+      <div v-html="htmlTypeVal"></div>
+    </template>
+
+    <!-- 特殊类型 COMP -->
+    <template v-else-if="schema.type === 'COMP'">
+      <div :is="schema.value"></div>
+    </template>
+
     <!-- string / number / integer / boolean 类型 -->
     <template v-else>
       <component :is="'ncform-' + schema.ui.widget" :config="schema.ui.widgetConfig" v-model="schema.value" :form-data="formData" :global-const="globalConfig.constants" :idx-chain="idxChain" class="__ncform-control">
@@ -136,6 +146,15 @@ export default {
   computed: {
     valueTemplate() {
       return ncformUtils.smartAnalyzeVal(this.schema.valueTemplate, {
+        idxChain: this.idxChain,
+        data: {
+          rootData: this.formData,
+          constData: this.globalConfig.constants
+        }
+      });
+    },
+    htmlTypeVal() {
+      return ncformUtils.smartAnalyzeVal(this.schema.value, {
         idxChain: this.idxChain,
         data: {
           rootData: this.formData,

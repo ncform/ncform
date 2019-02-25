@@ -70,7 +70,7 @@ const ncformUtils = {
 
     function addDefField(fieldName, fieldSchema) {
       const fullFields = {
-        /* 数据本身 */
+        /* 数据本身 */
         type: fieldSchema.type || "string",
         value: null, // 这里给了null，否则如果是对象这种，默认值就不会被覆盖了
         // value: ncformUtils.getDefVal(fieldSchema.type),
@@ -80,6 +80,7 @@ const ncformUtils = {
           /* 通用的表单项字段 */
           label: fieldName === "$root" ? "" : fieldName,
           legend: fieldName === "$root" ? "" : fieldName,
+          noLabelSpace: fieldSchema.type.toUpperCase() === fieldSchema.type ? true : false, // 大写的类型为特殊的只读类型，所以不需要显示label
           showLabel: true,
           showLegend: true,
           description: "",
@@ -132,7 +133,7 @@ const ncformUtils = {
       if (fieldName === "$root") {
         // 根节点
         const defaultGlobalConfig = {
-          // 全局配置
+          // 全局配置
           style: {
             formCls: "", // form class
             invalidFeedbackCls: "" // invalid feedback class
@@ -175,12 +176,14 @@ const ncformUtils = {
               key
             );
           } else {
-            model[key] = ncformUtils.priorityGetValue(
-              "basic",
-              formSchema.properties[key].value,
-              ncformUtils.smartAnalyze(formSchema.properties[key].default),
-              ncformUtils.getDefVal(formSchema.properties[key].type)
-            );
+            if (formSchema.properties[key].type.toUpperCase() !== formSchema.properties[key].type) { // 大写的类型忽略掉
+              model[key] = ncformUtils.priorityGetValue(
+                "basic",
+                formSchema.properties[key].value,
+                ncformUtils.smartAnalyze(formSchema.properties[key].default),
+                ncformUtils.getDefVal(formSchema.properties[key].type)
+              );
+            }
           }
         });
       }

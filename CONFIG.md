@@ -7,7 +7,7 @@
     firstName: {
       
       /* 数据 */
-      type: 'string', // 数据类型 string / number / integer / boolean / object / array 
+      type: 'string', // 数据类型 string / number / integer / boolean / object / array / HTML / COMP (注意：大写的为特殊只读类型，该数据会自动过滤掉。HTML: value值为一段HTML【支持dx表达式】; COMP: value值为component name)
       value: '', // 数据的值
       default: '', // 数据的默认值，value为空的时候取该值 
       valueTemplate: '', // 值模板，当里面有dx表达式时，表达式值发生改变，会优化取该值作为value（即会覆盖用户所填的值）

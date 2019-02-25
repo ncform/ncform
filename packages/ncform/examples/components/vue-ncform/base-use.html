@@ -26,6 +26,10 @@
   <script type="text/javascript">
     Vue.use(vueNcform)
 
+    Vue.component('SepLine', {
+      template: '<div> >> ========这是一条华丽丽的COMP分割线======== << </div>'
+    })
+
     // Bootstrap the app
     new Vue({
       el: '#demo',
@@ -77,6 +81,14 @@
                   }
                 }
               }
+            },
+            _sepLine1: {
+              type: 'HTML',
+              value: 'dx: {{$root.peason1.firstName}} + " >> ========这是一条华丽丽的HTML分割线======== << " + {{$root.peason1.firstName}}',
+            },
+            _sepLine2: {
+              type: 'COMP',
+              value: 'SepLine'
             },
             peason2: {
               type: 'object',
