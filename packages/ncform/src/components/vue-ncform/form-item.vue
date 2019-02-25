@@ -27,7 +27,7 @@
 
     <!-- 特殊类型 COMP -->
     <template v-else-if="schema.type === 'COMP'">
-      <div :is="schema.value"></div>
+      <component :is="schema.ui.widget" :config="schema.ui.widgetConfig" :form-data="formData" :global-const="globalConfig.constants" :idx-chain="idxChain"></component>
     </template>
 
     <!-- string / number / integer / boolean 类型 -->

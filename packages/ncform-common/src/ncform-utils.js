@@ -69,9 +69,10 @@ const ncformUtils = {
     }
 
     function addDefField(fieldName, fieldSchema) {
+      let type = fieldSchema.type || "string";
       const fullFields = {
         /* 数据本身 */
-        type: fieldSchema.type || "string",
+        type: type,
         value: null, // 这里给了null，否则如果是对象这种，默认值就不会被覆盖了
         // value: ncformUtils.getDefVal(fieldSchema.type),
 
@@ -80,7 +81,7 @@ const ncformUtils = {
           /* 通用的表单项字段 */
           label: fieldName === "$root" ? "" : fieldName,
           legend: fieldName === "$root" ? "" : fieldName,
-          noLabelSpace: fieldSchema.type.toUpperCase() === fieldSchema.type ? true : false, // 大写的类型为特殊的只读类型，所以不需要显示label
+          noLabelSpace: type.toUpperCase() === type ? true : false, // 大写的类型为特殊的只读类型，所以不需要显示label
           showLabel: true,
           showLegend: true,
           description: "",
@@ -95,7 +96,7 @@ const ncformUtils = {
 
           /* 渲染组件字段 */
           widget:
-            fieldSchema.widget || getDefWidget(fieldSchema.type || "string"),
+            fieldSchema.widget || getDefWidget(type),
           widgetConfig: {
             placeholder: _get(fieldSchema, "ui.placeholder", ""),
             disabled: _get(fieldSchema, "ui.disabled", false),
