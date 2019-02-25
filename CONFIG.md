@@ -24,7 +24,7 @@
         showLabel: true, // 是否显示标签（当为false不显示时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
         legend: '', // 标题内容，当对象，数组布局数据类型时有效
-        showLegend: false, // 是否显示标题
+        showLegend: true, // 是否显示标题。当为object类型时，showLegend优先于showLabel，所以需要设置showLegend为false时label才生效
         description: 'Fill in the first name', // 字段描述信息【支持dx表达式】
         placeholder: 'first name', // 占位内容【支持dx表达式】
         disabled: false, // 是否禁用【支持dx表达式】

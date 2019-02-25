@@ -81,9 +81,9 @@ const ncformUtils = {
           /* 通用的表单项字段 */
           label: fieldName === "$root" ? "" : fieldName,
           legend: fieldName === "$root" ? "" : fieldName,
-          noLabelSpace: type.toUpperCase() === type ? true : false, // 大写的类型为特殊的只读类型，所以不需要显示label
           showLabel: true,
-          showLegend: true,
+          showLegend: (ncformUtils.isNormalObjSchema(fieldSchema) || ncformUtils.isNormalArrSchema(fieldSchema)) ? true : false,
+          noLabelSpace: type.toUpperCase() === type ? true : false, // 大写的类型为特殊的只读类型，所以不需要显示label
           description: "",
           placeholder: "",
           disabled: false,

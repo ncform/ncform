@@ -1,6 +1,6 @@
 <template>
   <div class="__object-form-item">
-    <legend v-if="schema.ui.legend && showLegend && schema.ui.showLegend" @click="collapse()">{{schema.ui.legend}}</legend>
+    <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">{{schema.ui.legend}}</legend>
 
     <!-- 垂直布局，即label上，control下 -->
     <div v-if="mergeConfig.layout === 'v'" v-show="!mergeConfig.collapsed" class="form-row v-layout" style="width: 100%">
@@ -39,7 +39,7 @@
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="form-group row">
         <template>
-          <label v-if="!isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}" class="col-form-label">
+          <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}" class="col-form-label">
             <!-- 必填标识 -->
             <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
             {{fieldSchema.ui.label}}
@@ -48,7 +48,7 @@
             <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
             :
           </label>
-          <div :style="{'margin-left': !isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}" :class="{'col-md-9': !isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace)}">
+          <div :style="{'margin-left': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}" :class="{'col-md-9': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace)}">
             <slot :name="field"></slot>
 
             <!-- 说明信息 -->
@@ -107,6 +107,11 @@
         type: Boolean,
         default: true
       },
+    },
+    methods: {
+      legendEnable(fieldSchema) {
+        return fieldSchema.ui.showLegend && fieldSchema.ui.legend;
+      }
     },
     mixins: [layoutObjectMixin]
   }
