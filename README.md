@@ -8,9 +8,9 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 ## Playground
 
-在 [Playground](https://vipshop.github.io/ncform/ncform-show/playground/index.html) 体验一下ncform的魅力，可加深你对ncform的了解
+在 [Playground](https://ncform.github.io/ncform/ncform-show/playground/index.html) 体验一下ncform的魅力，可加深你对ncform的了解
 
-> [Playground](https://vipshop.github.io/ncform/ncform-show/playground/index.html) 展示了ncform大部分的使用场景例子（I believe the example is the best document），建议先仔细浏览下，例子中的配置实际开发中一般都可以直接使用滴
+> [Playground](https://ncform.github.io/ncform/ncform-show/playground/index.html) 展示了ncform大部分的使用场景例子（I believe the example is the best document），建议先仔细浏览下，例子中的配置实际开发中一般都可以直接使用滴
 
 ## Quick Start
 
@@ -235,7 +235,7 @@ ncform = ncform容器 + ncform主题标准组件
 一个系统项目，一般都会使用一种UI库（如vue）及其之上的UI实现方案（如elementui）
 为了与之和平共处，ncform的标准组件可采用与之一致的UI实现方案
 
-ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](https://vipshop.github.io/ncform/ncform-theme-elementui/index.html)
+ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](https://ncform.github.io/ncform/ncform-theme-elementui/index.html)
 
 如果你是iview的粉丝，通过遵循ncform标准组件的规范开发iview主题的标准组件即可
 
@@ -243,7 +243,7 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 ## Schema Generator
 
-通过 [Schema Generator](https://vipshop.github.io/ncform/ncform-show/schema-gen/index.html)，可以加速你写form schema的速度
+通过 [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)，可以加速你写form schema的速度
 
 ## 参考项目
 

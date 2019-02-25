@@ -42,7 +42,7 @@
       <tfoot v-if="!mergeConfig.disableDel || !mergeConfig.disableAdd">
         <tr>
           <td :colspan="renderSchemas.length + 1">
-            <!-- 列表控制按钮 -->
+            <!-- 列表控制按钮 -->
             <div class="btn-group btn-group-sm" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
               <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="btn btn-secondary">Add</button>
               <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">Del All</button>

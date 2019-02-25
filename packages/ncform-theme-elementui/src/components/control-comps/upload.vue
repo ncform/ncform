@@ -210,7 +210,7 @@
           && !vm.mergeConfig.showFileList
           && fileList.length) {
             vm.$message({
-              message: `成功选中文件！目前选中文件共 ${fileList.length} 个`,
+              message: `成功选中文件！目前选中文件共 ${fileList.length} 个`,
               type: 'success'
             });
         }
@@ -266,7 +266,7 @@
       handleUploadExceed(files, fileList) {
         const vm = this;
         vm.$message({
-          message: `此次选择导致一次上传的文件个数超过限制数目${vm.mergeConfig.limit}个，请重新选择！`,
+          message: `此次选择导致一次上传的文件个数超过限制数目${vm.mergeConfig.limit}个，请重新选择！`,
           type: 'warning'
         });
       },

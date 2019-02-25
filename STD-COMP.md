@@ -1,6 +1,6 @@
 # Standard Components
 
-如果你不太喜欢冷冰冰的文字描述，可点击 [互动版本](https://vipshop.github.io/ncform/ncform-theme-elementui/index.html)
+如果你不太喜欢冷冰冰的文字描述，可点击 [互动版本](https://ncform.github.io/ncform/ncform-theme-elementui/index.html)
 
 ## control components
 
