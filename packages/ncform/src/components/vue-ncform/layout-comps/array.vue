@@ -69,16 +69,31 @@
     mixins: [layoutArrayMixin],
 
     created() {
-      if (!this.$data.mergeConfig.disableItemCollapse) {
-        this.schema.value.forEach(dataItem => {
-          this.$set(dataItem.__dataSchema, '_expand', !this.$data.mergeConfig.itemCollapse);
-        })
-      }
+      this._supportItemsCollapse();
     },
 
     methods: {
       collapseItem(dataSchema) {
         dataSchema._expand = !dataSchema._expand;
+      },
+
+      _supportItemsCollapse() {
+        if (!this.$data.mergeConfig.disableItemCollapse) {
+          this.schema.value.forEach(dataItem => {
+            if (dataItem.__dataSchema._expand === undefined)
+              this.$set(dataItem.__dataSchema, '_expand', !this.$data.mergeConfig.itemCollapse);
+          })
+        }
+      }
+    },
+
+    watch: {
+      'schema.value.length': {
+        handler(newVal, oldVal) {
+          if (newVal > oldVal) { // add item
+            this._supportItemsCollapse();
+          }
+        }
       }
     }
 
