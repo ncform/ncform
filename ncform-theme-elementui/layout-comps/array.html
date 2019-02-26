@@ -60,7 +60,7 @@
         }
       },
       {
-        title: '[属性] disableAdd: 是否禁止添加项',
+        title: '[属性] disableAdd: 是否禁止添加项',
         schema: {
           type: 'object',
           properties: {
@@ -98,7 +98,7 @@
         }
       },
       {
-        title: '[属性] disableReorder: 是否禁止排序',
+        title: '[属性] disableReorder: 是否禁止排序',
         schema: {
           type: 'object',
           properties: {
@@ -117,7 +117,26 @@
         }
       },
       {
-        title: '[属性] collapsed: 是否默认折叠',
+        title: '[属性] disableCollapse: 是否禁止折叠',
+        schema: {
+          type: 'object',
+          properties: {
+            user: {
+              type: 'array',
+              items: {
+                type: 'string'
+              },
+              ui: {
+                widgetConfig: {
+                  disableCollapse: true
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] collapsed: 是否默认折叠',
         schema: {
           type: 'object',
           properties: {
@@ -136,7 +155,7 @@
         }
       },
       {
-        title: '[属性] disableCollapse: 是否禁止折叠',
+        title: '[属性] disableItemCollapse: 是否禁止项折叠',
         schema: {
           type: 'object',
           properties: {
@@ -147,7 +166,26 @@
               },
               ui: {
                 widgetConfig: {
-                  disableCollapse: true
+                  disableItemCollapse: true
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        title: '[属性] itemCollapse: 项是否默认折叠',
+        schema: {
+          type: 'object',
+          properties: {
+            user: {
+              type: 'array',
+              items: {
+                type: 'string'
+              },
+              ui: {
+                widgetConfig: {
+                  itemCollapse: true
                 }
               }
             }
