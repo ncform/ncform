@@ -266,8 +266,10 @@
   disableAdd: true, // 是否禁止添加项
   disableDel: true, // 是否禁止删除项
   disableReorder: true, // 是否禁止排序
-  collapsed: false, // 是否默认折叠
   disableCollapse: false, // 是否允许折叠
+  collapsed: false, // 是否默认折叠
+  disableItemCollapse: false, // 是否允许项折叠
+  itemCollapse: false, // 项是否默认折叠
   addTxt: 'Add', // 新建文字
   delAllTxt: 'Del All' // 删除全部文字
 }
