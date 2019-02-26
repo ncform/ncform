@@ -1,3 +1,18 @@
+<a name="0.1.25"></a>
+## [0.1.25](https://github.com/ncform/ncform/compare/v0.1.24...v0.1.25) (2019-02-26)
+
+
+### Bug Fixes
+
+* Fixed the display bug of the object type control in the h layout ([88aa77b](https://github.com/ncform/ncform/commit/88aa77b))
+* Remove garbled chars ([db4e9ca](https://github.com/ncform/ncform/commit/db4e9ca))
+
+
+### Features
+
+* Add HTML && COMP types to support static content show. ([e4a9bc7](https://github.com/ncform/ncform/commit/e4a9bc7))
+* Add array item collapse feature ([7ac74ad](https://github.com/ncform/ncform/commit/7ac74ad))
+
 <a name="0.1.17"></a>
 ## [0.1.17](https://github.com/ncform/ncform/compare/v0.1.16...v0.1.17) (2018-10-29)
 
