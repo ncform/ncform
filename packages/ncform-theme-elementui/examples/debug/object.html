@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>object widget</title>
+
+    <link rel="stylesheet" href="../demo.css" />
+
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css" />
+  </head>
+
+  <body>
+    <!--演示区域-->
+    <div id="demo" v-cloak>
+      <div v-for="(item, idx) in formSchemas">
+        <h4 class="demo_title">{{ item.title }}</h4>
+        <div class="demo_item-wrapper">
+          <div>
+            <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+            <small>value: {{ item.schema.value }}</small>
+          </div>
+          <div>
+            <pre>{{ JSON.stringify(originFormSchemas[idx].schema.properties, null, 2) }}</pre>
+          </div>
+          <div>
+            <pre>{{ item.detail }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+    <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+    <script type="text/javascript" src="../../dist/input.js"></script>
+    <script type="text/javascript" src="../../dist/object.js"></script>
+
+    <script type="text/javascript">
+      Vue.use(vueNcform, { extComponents: { input: input.default, object: object.default } });
+
+      let formSchemas = [
+        {
+          title: '默认状态',
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'object',
+                properties: {
+                  info: {
+                    type: 'object',
+                    properties: {
+                      firstname: {
+                        type: 'string'
+                      },
+                      lastname: {
+                        type: 'string'
+                      }
+                    },
+                    ui: {
+                      showLegend:false,
+                      label: 'haha',
+                    }
+                  }
+                },
+                ui: {
+                  widgetConfig: {
+                    layout: 'h'
+                  }
+                }
+              }
+            }
+          }
+        }
+      ];
+
+      // Bootstrap the app
+      new Vue({
+        el: '#demo',
+        data: {
+          formSchemas: _.cloneDeep(formSchemas),
+          originFormSchemas: formSchemas
+        }
+      });
+    </script>
+  </body>
+</html>

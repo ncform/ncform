@@ -14,6 +14,8 @@
 
         <!-- 项控制按钮 -->
         <div class="el-button-group">
+          <button @click="collapseItem(dataItem.__dataSchema)" v-show="dataItem.__dataSchema._expand" v-if="!mergeConfig.disableItemCollapse" type="button" class="el-button el-button--mini"><i class="el-icon-arrow-down"></i></button>
+          <button @click="collapseItem(dataItem.__dataSchema)" v-show="!dataItem.__dataSchema._expand" v-if="!mergeConfig.disableItemCollapse" type="button" class="el-button el-button--mini"><i class="el-icon-arrow-up"></i></button>
           <button @click="delItem(idx)" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
           <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" type="button" class="el-button el-button--mini"><i class="el-icon-sort-up"></i></button>
           <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" type="button" class="el-button el-button--mini"><i class="el-icon-sort-down"></i></button>
@@ -22,7 +24,7 @@
 
       <!-- array item 是 正常的 object 类型 -->
       <template v-if="isNormalObjSchema(dataItem.__dataSchema)">
-        <ncform-object :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :config="dataItem.__dataSchema.ui.widgetConfig" :show-legend="false">
+        <ncform-object v-show="mergeConfig.disableItemCollapse || dataItem.__dataSchema._expand" :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :config="dataItem.__dataSchema.ui.widgetConfig" :show-legend="false">
 
           <template v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})" :slot="fieldName"><!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
             <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
@@ -33,12 +35,14 @@
 
       <!-- array item 是 非正常的 object 类型 以及 其它类型 -->
       <div v-else class="normal-item">
-        <slot name="__notObjItem" :schema="dataItem.__dataSchema" :idx="idx"></slot> <!-- 注意：__notObjItem 和 __dataSchema 都是约定好的值，其它名字不生效 -->
+        <div v-show="mergeConfig.disableItemCollapse || dataItem.__dataSchema._expand">
+          <slot name="__notObjItem" :schema="dataItem.__dataSchema" :idx="idx"></slot> <!-- 注意：__notObjItem 和 __dataSchema 都是约定好的值，其它名字不生效 -->
+        </div>
       </div>
 
     </div>
 
-    <!-- 列表控制按钮 -->
+    <!-- 列表控制按钮 -->
     <div v-show="!mergeConfig.collapsed" class="el-button-group" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
       <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt}}</button>
       <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt}}</button>
@@ -93,6 +97,35 @@
   export default {
 
     mixins: [layoutArrayMixin],
+
+    created() {
+      this._supportItemsCollapse();
+    },
+
+    methods: {
+      collapseItem(dataSchema) {
+        dataSchema._expand = !dataSchema._expand;
+      },
+
+      _supportItemsCollapse() {
+        if (!this.$data.mergeConfig.disableItemCollapse) {
+          this.schema.value.forEach(dataItem => {
+            if (dataItem.__dataSchema._expand === undefined)
+              this.$set(dataItem.__dataSchema, '_expand', !this.$data.mergeConfig.itemCollapse);
+          })
+        }
+      }
+    },
+
+    watch: {
+      'schema.value.length': {
+        handler(newVal, oldVal) {
+          if (newVal > oldVal) { // add item
+            this._supportItemsCollapse();
+          }
+        }
+      }
+    }
 
   }
 </script>

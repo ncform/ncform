@@ -69,9 +69,10 @@ const ncformUtils = {
     }
 
     function addDefField(fieldName, fieldSchema) {
+      let type = fieldSchema.type || "string";
       const fullFields = {
-        /* 数据本身 */
-        type: fieldSchema.type || "string",
+        /* 数据本身 */
+        type: type,
         value: null, // 这里给了null，否则如果是对象这种，默认值就不会被覆盖了
         // value: ncformUtils.getDefVal(fieldSchema.type),
 
@@ -81,7 +82,8 @@ const ncformUtils = {
           label: fieldName === "$root" ? "" : fieldName,
           legend: fieldName === "$root" ? "" : fieldName,
           showLabel: true,
-          showLegend: true,
+          showLegend: (ncformUtils.isNormalObjSchema(fieldSchema) || ncformUtils.isNormalArrSchema(fieldSchema)) ? true : false,
+          noLabelSpace: type.toUpperCase() === type ? true : false, // 大写的类型为特殊的只读类型，所以不需要显示label
           description: "",
           placeholder: "",
           disabled: false,
@@ -94,7 +96,7 @@ const ncformUtils = {
 
           /* 渲染组件字段 */
           widget:
-            fieldSchema.widget || getDefWidget(fieldSchema.type || "string"),
+            fieldSchema.widget || getDefWidget(type),
           widgetConfig: {
             placeholder: _get(fieldSchema, "ui.placeholder", ""),
             disabled: _get(fieldSchema, "ui.disabled", false),
@@ -132,7 +134,7 @@ const ncformUtils = {
       if (fieldName === "$root") {
         // 根节点
         const defaultGlobalConfig = {
-          // 全局配置
+          // 全局配置
           style: {
             formCls: "", // form class
             invalidFeedbackCls: "" // invalid feedback class
@@ -175,12 +177,14 @@ const ncformUtils = {
               key
             );
           } else {
-            model[key] = ncformUtils.priorityGetValue(
-              "basic",
-              formSchema.properties[key].value,
-              ncformUtils.smartAnalyze(formSchema.properties[key].default),
-              ncformUtils.getDefVal(formSchema.properties[key].type)
-            );
+            if (formSchema.properties[key].type.toUpperCase() !== formSchema.properties[key].type) { // 大写的类型忽略掉
+              model[key] = ncformUtils.priorityGetValue(
+                "basic",
+                formSchema.properties[key].value,
+                ncformUtils.smartAnalyze(formSchema.properties[key].default),
+                ncformUtils.getDefVal(formSchema.properties[key].type)
+              );
+            }
           }
         });
       }

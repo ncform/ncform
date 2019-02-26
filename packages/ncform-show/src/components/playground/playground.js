@@ -84,6 +84,10 @@ export default {
           label: "基础使用-标签数组"
         },
         {
+          value: "77",
+          label: "基础使用-分隔栏"
+        },
+        {
           value: "8",
           label: "高级玩法-控件交互 dx表达式"
         },
@@ -539,6 +543,51 @@ export default {
                 showLegend: false,
                 noLabelSpace: true,
                 widget: "array-tabs"
+              }
+            }
+          }
+        },
+        "77": {
+          type: "object",
+          properties: {
+            _line1: {
+              type: 'HTML',
+              value: '<div style="border-left: 4px solid orange; padding-left: 6px; color: orange">  基本信息</div>'
+            },
+            name: {
+              type: "string",
+              ui: {
+                label: "姓名",
+                description: "请填写你的姓名",
+                placeholder: "姓名"
+              }
+            },
+            email: {
+              type: "string",
+              ui: {
+                label: "邮件"
+              }
+            },
+            _line2: {
+              type: 'HTML',
+              value: '<div style="border-left: 4px solid orange; margin-top:10px; padding-left: 6px; color: orange">  其它信息</div>'
+            },
+            age: {
+              type: "integer",
+              default: 18,
+              ui: {
+                label: "年龄"
+              }
+            },
+            adult: {
+              type: "boolean",
+              ui: {
+                label: "是否成年",
+                help: {
+                  show: true,
+                  text: "?",
+                  content: "成年才可以玩农药啊"
+                }
               }
             }
           }

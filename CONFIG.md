@@ -7,7 +7,11 @@
     firstName: {
       
       /* 数据 */
-      type: 'string', // 数据类型 string / number / integer / boolean / object / array 
+      type: 'string', // 数据类型 string / number / integer / boolean / object / array / HTML / COMP 
+      // 注意：大写的类型为特殊只读类型，一般应用场景为显示一个分隔栏。该数据会自动过滤掉
+      // HTML: 配置value，值为一段HTML【支持dx表达式】; 
+      // COMP: 配置ui.widget和ui.widgetConfig
+      
       value: '', // 数据的值
       default: '', // 数据的默认值，value为空的时候取该值 
       valueTemplate: '', // 值模板，当里面有dx表达式时，表达式值发生改变，会优化取该值作为value（即会覆盖用户所填的值）
@@ -20,7 +24,7 @@
         showLabel: true, // 是否显示标签（当为false不显示时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
         legend: '', // 标题内容，当对象，数组布局数据类型时有效
-        showLegend: false, // 是否显示标题
+        showLegend: true, // 是否显示标题。当为object类型时，showLegend优先于showLabel，所以需要设置showLegend为false时label才生效
         description: 'Fill in the first name', // 字段描述信息【支持dx表达式】
         placeholder: 'first name', // 占位内容【支持dx表达式】
         disabled: false, // 是否禁用【支持dx表达式】

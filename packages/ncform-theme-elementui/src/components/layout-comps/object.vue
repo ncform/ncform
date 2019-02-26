@@ -1,6 +1,6 @@
 <template>
   <div class="__object-form-item">
-    <legend v-if="schema.ui.legend && showLegend && schema.ui.showLegend" @click="collapse()">
+    <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">
       {{schema.ui.legend}}
       <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !mergeConfig.collapsed, 'el-icon-arrow-down': mergeConfig.collapsed}"></i>
     </legend>
@@ -47,7 +47,7 @@
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>
-          <label v-if="!isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
+          <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
             <!-- 必填标识 -->
             <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
             {{fieldSchema.ui.label}}
@@ -58,7 +58,7 @@
             </el-tooltip>
             :
           </label>
-          <div class="el-form-item__content" :style="{'margin-left': isNormalObjSchema(fieldSchema) || fieldSchema.ui.noLabelSpace ? '0px' : mergeConfig.labelWidth}">
+          <div class="el-form-item__content" :style="{'margin-left': (legendEnable(fieldSchema) || fieldSchema.ui.noLabelSpace) ? '0px' : mergeConfig.labelWidth}">
             <slot :name="field"></slot>
             <!-- 说明信息 -->
             <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">
@@ -155,6 +155,11 @@ export default {
     showLegend: {
       type: Boolean,
       default: true
+    }
+  },
+  methods: {
+    legendEnable(fieldSchema) {
+      return fieldSchema.ui.showLegend && fieldSchema.ui.legend;
     }
   },
   mixins: [layoutObjectMixin]

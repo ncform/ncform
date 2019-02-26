@@ -223,6 +223,27 @@ describe('/src/ncform-utils.js', () => {
     const result = ncformUtils.getModelFromSchema(formSchema);
     assert(JSON.stringify(result.user) === JSON.stringify([]));
   });
+  it("getModelFromSchema - 大写的类型，如HTML，COMP类型值 自动过滤掉", () => {
+    const formSchema = {
+      type: 'object',
+      properties: {
+        user: {
+          type: 'string',
+          value: 'daniel'
+        },
+        _line1: {
+          type: 'HTML',
+          value: '------'
+        },
+        _line2: {
+          type: 'COMP',
+          value: 'SomeLineComp'
+        }
+      }
+    };
+    const result = ncformUtils.getModelFromSchema(formSchema);
+    assert(JSON.stringify(result) === JSON.stringify({user: 'daniel'}));
+  });
 
   // --- setValueToSchema
 
