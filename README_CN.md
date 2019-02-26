@@ -150,7 +150,7 @@ export default {
 
 - [ncform config/props/api/event](./CONFIG.md)
 
-- [Standard Components](./STD-COMP.md)
+- [Standard Components](./STD-COMP_CN.md)
 
 - [How to extend](./EXT-DOC.md)
 
