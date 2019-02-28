@@ -1,5 +1,7 @@
 ## ncform config
 
+[English Version](CONFIG.md)
+
 ```js
 {
   type: 'object', // 根节点：只能是object
