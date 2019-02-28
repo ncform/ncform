@@ -1,117 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <title>label widget</title>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-	<title>label widget</title>
+    <link rel="stylesheet" href="../demo.css" />
 
-	<link rel="stylesheet" href="../demo.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../assets/index.css" />
+  </head>
 
-	<!-- 引入样式 -->
-	<link rel="stylesheet" href="../assets/index.css">
+  <body>
+    <!--演示区域-->
+    <div id="demo" v-cloak>
+      <div v-for="(item, idx) in formSchemas">
+        <h4 class="demo_title">{{ item.title }}</h4>
+        <div class="demo_item-wrapper">
+          <div>
+            <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+            <small>value: {{ item.schema.value }}</small>
+          </div>
+          <div>
+            <pre>{{ JSON.stringify(originFormSchemas[idx].schema.properties, null, 2) }}</pre>
+          </div>
+          <div>
+            <pre>{{ item.detail }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
 
-</head>
+    <script type="text/javascript" src="../assets/lodash.min.js"></script>
+    <script type="text/javascript" src="../assets/axios.min.js"></script>
+    <script type="text/javascript" src="../assets/vue.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+    <script type="text/javascript" src="../assets/ncformCommon.min.js"></script>
+    <script type="text/javascript" src="../assets/vueNcform.min.js"></script>
+    <script type="text/javascript" src="../assets/dist/label.js"></script>
+    <script type="text/javascript" src="../assets/dist/object.js"></script>
 
-<body>
+    <script type="text/javascript">
+      let lang = 'en';
 
-	<!--演示区域-->
-	<div id="demo" v-cloak>
-		<div v-for="(item, idx) in formSchemas">
-			<h4 class="demo_title">{{item.title}}</h4>
-			<div class="demo_item-wrapper">
-				<div>
-					<ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
-					<small>value: {{item.schema.value}}</small>
-				</div>
-				<div>
-					<pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
-				</div>
-				<div>
-					<pre>{{item.detail}}</pre>
-				</div>
-			</div>
-		</div>
-	</div>
+      if (location.search.indexOf('lang=cn') >= 0) {
+        lang = 'cn';
+      }
 
-  <script type="text/javascript" src="../assets/lodash.min.js"></script>
-  <script type="text/javascript" src="../assets/axios.min.js"></script>
-	<script type="text/javascript" src="../assets/vue.min.js"></script>
-	<script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
-  <script type="text/javascript" src="../assets/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="../assets/vueNcform.min.js"></script>
-	<script type="text/javascript" src="../assets/dist/label.js"></script>
-	<script type="text/javascript" src="../assets/dist/object.js"></script>
+      Vue.use(vueNcform, { extComponents: { object: object.default, label: label.default } });
 
-	<script type="text/javascript">
-		Vue.use(vueNcform, { extComponents: { object: object.default, label: label.default } });
+      let formSchemas = [
+        {
+          title: {
+            cn: '默认状态',
+            en: 'Default'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              label: {
+                type: 'string',
+                default: 'some text',
+                ui: {
+                  widget: 'label'
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '提供值',
+            en: 'Provide value'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              label: {
+                type: 'string',
+                value: 'some text',
+                ui: {
+                  widget: 'label'
+                }
+              }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] multiLine: 超过一行时是否多行显示，默认为false',
+            en: '[ATTR] multiLine: whether multiple lines are displayed when more than one line, default is false'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              label: {
+                type: 'string',
+                value:
+                  'React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.',
+                ui: {
+                  widget: 'label',
+                  widgetConfig: {
+                    multiLine: true
+                  }
+                }
+              }
+            }
+          }
+        }
+      ];
 
-		let formSchemas = [
-			{
-				title: '默认状态',
-				schema: {
-					type: 'object',
-					properties: {
-						label: {
-							type: 'string',
-							default: 'some text',
-							ui: {
-								widget: 'label'
-							}
-						}
-					}
-				}
-			},
-			{
-				title: '提供值',
-				schema: {
-					type: 'object',
-					properties: {
-						label: {
-							type: 'string',
-							value: 'some text',
-							ui: {
-								widget: 'label',
-							}
-						}
-					},
-					ui: {
-						widgetConfig: {
-							layout: 'h'
-						}
-					}
-				}
-			},
-			{
-				title: '[属性] multiLine: 超过一行时是否多行显示，默认为false',
-				schema: {
-					type: 'object',
-					properties: {
-						label: {
-							type: 'string',
-							value: 'React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.',
-							ui: {
-								widget: 'label',
-								widgetConfig: {
-									multiLine: true
-								}
-							}
-						}
-					}
-				}
-			}
-		]
+      // Bootstrap the app
+      new Vue({
+        el: '#demo',
+        data: {
+          formSchemas: getFormSchemas(),
+          originFormSchemas: getFormSchemas()
+        }
+      });
 
-		// Bootstrap the app
-		new Vue({
-			el: '#demo',
-			data: {
-				formSchemas: _.cloneDeep(formSchemas),
-				originFormSchemas: formSchemas
-			}
-		});
-	</script>
-
-</body>
-
+      function getFormSchemas() {
+        return formSchemas.map(item => ({
+          title: item.title[lang],
+          schema: item.schema,
+          detail: item.detail ? item.detail[lang] : ''
+        }));
+      }
+    </script>
+  </body>
 </html>

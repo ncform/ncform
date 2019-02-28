@@ -1,339 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <title>rate widget</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-  <title>rate widget</title>
+    <link rel="stylesheet" href="../demo.css" />
 
-  <link rel="stylesheet" href="../demo.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../assets/index.css" />
+  </head>
 
-  <!-- 引入样式 -->
-  <link rel="stylesheet" href="../assets/index.css">
-
-</head>
-
-<body>
-
-  <!--演示区域-->
-  <div id="demo" v-cloak>
-    <div v-for="(item, idx) in formSchemas">
-      <h4 class="demo_title">{{item.title}}</h4>
-      <div class="demo_item-wrapper">
-        <div>
-          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
-          <small>value: {{item.schema.value}}</small>
-        </div>
-        <div>
-          <pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
-        </div>
-        <div>
-          <pre>{{item.detail}}</pre>
+  <body>
+    <!--演示区域-->
+    <div id="demo" v-cloak>
+      <div v-for="(item, idx) in formSchemas">
+        <h4 class="demo_title">{{ item.title }}</h4>
+        <div class="demo_item-wrapper">
+          <div>
+            <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+            <small>value: {{ item.schema.value }}</small>
+          </div>
+          <div>
+            <pre>{{ JSON.stringify(originFormSchemas[idx].schema.properties, null, 2) }}</pre>
+          </div>
+          <div>
+            <pre>{{ item.detail }}</pre>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script type="text/javascript" src="../assets/lodash.min.js"></script>
-  <script type="text/javascript" src="../assets/axios.min.js"></script>
-  <script type="text/javascript" src="../assets/vue.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
-  <script type="text/javascript" src="../assets/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="../assets/vueNcform.min.js"></script>
-  <script type="text/javascript" src="../assets/dist/rate.js"></script>
-  <script type="text/javascript" src="../assets/dist/object.js"></script>
+    <script type="text/javascript" src="../assets/lodash.min.js"></script>
+    <script type="text/javascript" src="../assets/axios.min.js"></script>
+    <script type="text/javascript" src="../assets/vue.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+    <script type="text/javascript" src="../assets/ncformCommon.min.js"></script>
+    <script type="text/javascript" src="../assets/vueNcform.min.js"></script>
+    <script type="text/javascript" src="../assets/dist/rate.js"></script>
+    <script type="text/javascript" src="../assets/dist/object.js"></script>
 
-  <script type="text/javascript">
-    Vue.use(vueNcform, { extComponents: { object: object.default, rate: rate.default } });
+    <script type="text/javascript">
+      let lang = 'en';
 
-    let formSchemas = [
-      {
-        title: '默认状态',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              ui: {
-                widget: 'rate'
+      if (location.search.indexOf('lang=cn') >= 0) {
+        lang = 'cn';
+      }
+
+      Vue.use(vueNcform, { extComponents: { object: object.default, rate: rate.default } });
+
+      let formSchemas = [
+        {
+          title: {
+            cn: '默认状态',
+            en: 'Default'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                ui: {
+                  widget: 'rate'
+                }
               }
             }
           }
-        }
-      },
-      {
-        title: '提供值',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 3,
-              ui: {
-                widget: 'rate'
+        },
+        {
+          title: {
+            cn: '提供值',
+            en: 'Provide value'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 3,
+                ui: {
+                  widget: 'rate'
+                }
+              }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] readonly: 只读状态',
+            en: '[ATTR] readonly: read-only state'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 3,
+                ui: {
+                  widget: 'rate',
+                  readonly: true
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] disabled: 禁用状态',
+            en: '[ATTR] disabled: disable state'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 3,
+                ui: {
+                  widget: 'rate',
+                  disabled: true
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] max: 最大值. 默认值: 5',
+            en: '[ATTR] max: maximum. Default is 5'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 3,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    max: 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] allowHalf: 允许半选. 默认值: false',
+            en: '[ATTR] allowHalf: Allow semi-selection. Default is false'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 3.5,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    allowHalf: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] lowThreshold:低分和中等分数的界限 highThreshold:高分和中等分数的界限 . 默认值: lowThreshold：2，highThreshold：4',
+            en:
+              '[ATTR] lowThreshold: the bound between the low and medium scores; highThreshold: the bounds between the high and medium scores. Default: lowThreshold: 2, highThreshold: 4'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 3.5,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    lowThreshold: 2,
+                    highThreshold: 4,
+                    colors: ['red', 'green', 'blue']
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] colors: 颜色数组，共有 3 个元素，为 3 个分段所对应的颜色',
+            en: '[ATTR] colors: an array of colors with 3 elements, the color corresponding to 3 segments'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 4,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    lowThreshold: 2,
+                    highThreshold: 4,
+                    colors: ['red', 'green', 'blue']
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] voidColor: 未选中 icon 的颜色',
+            en: "[ATTR] voidColor: unchecked icon's color"
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 1,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    voidColor: 'black'
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] disabledVoidColor: 未选中且不可选的 icon 的颜色',
+            en: "[ATTR] disabledVoidColor: unchecked and disabled icon's color"
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 1,
+                ui: {
+                  widget: 'rate',
+                  disabled: true,
+                  widgetConfig: {
+                    disabledVoidColor: '#09c'
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] iconClasses: icon 的类名数组，共有 3 个元素，为 3 个分段所对应的类名',
+            en: '[ATTR] iconClasses: an array of class names for icon, with 3 elements, the class name corresponding to 3 segments'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 2,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    iconClasses: ['el-icon-d-arrow-right', 'el-icon-d-arrow-right', 'el-icon-d-arrow-left']
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] voidIconClass: 未选中 icon 的类名',
+            en: '[ATTR] voidIconClass: unchecked class name of icon'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 2,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    voidIconClass: 'el-icon-info'
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] disabledVoidIconClass: 只读时 未选中 icon 的类名',
+            en: '[ATTR] disabledVoidIconClass: unchecked and disabled class name of icon'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 2,
+                ui: {
+                  widget: 'rate',
+                  disabled: true,
+                  widgetConfig: {
+                    disabledVoidIconClass: 'el-icon-info'
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] showText: 是否显示辅助文字，若为真，则会从 texts 数组中选取当前分数对应的文字内容',
+            en:
+              '[ATTR] showText: whether to display auxiliary text, if true, the text content corresponding to the current score will be selected from the texts array'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 2,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    showText: true,
+                    texts: ['very poor', 'disappointment', 'general', 'satisfaction', 'surprise'], // 辅助文字数组
+                    textColor: 'red'
+                  }
+                }
               }
             }
           },
-          ui: {
-            widgetConfig: {
-              layout: 'h'
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] readonly: 只读状态',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 3,
-              ui: {
-                widget: 'rate',
-                readonly: true
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] disabled: 只读状态',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 3,
-              ui: {
-                widget: 'rate',
-                disabled: true
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] max: 最大值. 默认值: 5',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 3,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  max: 10
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] allowHalf: 允许半选. 默认值: false',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 3.5,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  allowHalf: true
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] lowThreshold:低分和中等分数的界限 highThreshold:高分和中等分数的界限 . 默认值: lowThreshold：2，highThreshold：4',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 3.5,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  lowThreshold: 2,
-                  highThreshold: 4,
-                  colors: ['red', 'green', 'blue'],
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] colors: 颜色数组，共有 3 个元素，为 3 个分段所对应的颜色',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 4,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  lowThreshold: 2,
-                  highThreshold: 4,
-                  colors: ['red', 'green', 'blue'],
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] voidColor: 未选中 icon 的颜色',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 1,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  voidColor: 'black'
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] disabledVoidColor: 未选中 icon 的颜色',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 1,
-              ui: {
-                widget: 'rate',
-                disabled: true,
-                widgetConfig: {
-                  disabledVoidColor: '#09c'
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] iconClasses: icon 的类名数组，共有 3 个元素，为 3 个分段所对应的类名',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 2,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  iconClasses: ['el-icon-d-arrow-right', 'el-icon-d-arrow-right', 'el-icon-d-arrow-left']
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] voidIconClass: 未选中 icon 的类名',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 2,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  voidIconClass: 'el-icon-info'
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] disabledVoidIconClass: 只读时 未选中 icon 的类名',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 2,
-              ui: {
-                widget: 'rate',
-                disabled: true,
-                widgetConfig: {
-                  disabledVoidIconClass: 'el-icon-info'
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] showText: 是否显示辅助文字，若为真，则会从 texts 数组中选取当前分数对应的文字内容',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 2,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  showText: true,
-                  texts: ['极差', '失望', '一般', '满意', '惊喜'], // 辅助文字数组
-                  textColor: 'red'
-                }
-              }
-            }
+          detail: {
+            cn: 'showText和showScore 只能其中一个为true\ntextColor为辅助颜色的颜色\ntexts：辅助文字数组',
+            en: 'showText and showScore can only have one of true\ntextColor as the color of the auxiliary color\ntexts: auxiliary text array'
           }
         },
-        detail: 'showText和showScore 只能其中一个为true\ntextColor为辅助颜色的颜色\ntexts：辅助文字数组'
-      },
-      {
-        title: '[属性] showScore: 是否显示分数',
-        schema: {
-          type: 'object',
-          properties: {
-            evaluation: {
-              type: 'number',
-              value: 2,
-              ui: {
-                widget: 'rate',
-                widgetConfig: {
-                  showScore: true,
-                  textColor: 'red'
+        {
+          title: {
+            cn: '[属性] showScore: 是否显示分数',
+            en: '[ATTR] showScore: whether to display the score'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              evaluation: {
+                type: 'number',
+                value: 2,
+                ui: {
+                  widget: 'rate',
+                  widgetConfig: {
+                    showScore: true,
+                    textColor: 'red'
+                  }
                 }
               }
             }
+          },
+          detail: {
+            cn: 'showText和showScore 只能其中一个为true,\ntextColor为辅助颜色的颜色',
+            en: 'showText and showScore can only be one of true, \ntextColor is the color of the auxiliary color'
           }
-        },
-        detail: 'showText和showScore 只能其中一个为true,\ntextColor为辅助颜色的颜色'
-      },
-    ]
+        }
+      ];
 
-    // Bootstrap the app
-    new Vue({
-      el: '#demo',
-      data: {
-        formSchemas: _.cloneDeep(formSchemas),
-        originFormSchemas: formSchemas
+      // Bootstrap the app
+      new Vue({
+        el: '#demo',
+        data: {
+          formSchemas: getFormSchemas(),
+          originFormSchemas: getFormSchemas()
+        }
+      });
+
+      function getFormSchemas() {
+        return formSchemas.map(item => ({
+          title: item.title[lang],
+          schema: item.schema,
+          detail: item.detail ? item.detail[lang] : ''
+        }));
       }
-    });
-  </script>
-
-</body>
-
+    </script>
+  </body>
 </html>
