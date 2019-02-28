@@ -1,186 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>array-tabs widget</title>
 
-<head>
-  <meta charset="UTF-8">
-  <title>array-tabs widget</title>
+    <link rel="stylesheet" href="../demo.css" />
 
-  <link rel="stylesheet" href="../demo.css">
+    <!-- 引入样式 -->
+    <link
+      rel="stylesheet"
+      href="../../node_modules/element-ui/lib/theme-chalk/index.css"
+    />
+  </head>
 
-  <!-- 引入样式 -->
-  <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
-</head>
-
-<body>
-
-  <!--演示区域-->
-  <div id="demo" v-cloak>
-    <div v-for="(item, idx) in formSchemas">
-      <h4 class="demo_title">{{item.title}}</h4>
-      <div class="demo_item-wrapper">
-        <div>
-          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
-          <small>value: {{item.schema.value}}</small>
-        </div>
-        <div>
-          <pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
-        </div>
-        <div>
-          <pre>{{item.detail}}</pre>
+  <body>
+    <!--演示区域-->
+    <div id="demo" v-cloak>
+      <div v-for="(item, idx) in formSchemas">
+        <h4 class="demo_title">{{ item.title }}</h4>
+        <div class="demo_item-wrapper">
+          <div>
+            <ncform
+              :form-schema="item.schema"
+              v-model="item.schema.value"
+            ></ncform>
+            <small>value: {{ item.schema.value }}</small>
+          </div>
+          <div>
+            <pre>{{
+              JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)
+            }}</pre>
+          </div>
+          <div>
+            <pre>{{ item.detail }}</pre>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
-  <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
-  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
-  <script type="text/javascript" src="../../dist/input.js"></script>
-  <script type="text/javascript" src="../../dist/object.js"></script>
-  <script type="text/javascript" src="../../dist/arrayTabs.js"></script>
+    <script
+      type="text/javascript"
+      src="../../node_modules/lodash/lodash.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../node_modules/vue/dist/vue.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/element-ui@2.0.7/lib/index.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../node_modules/@ncform/ncform/dist/vueNcform.js"
+    ></script>
+    <script type="text/javascript" src="../../dist/input.js"></script>
+    <script type="text/javascript" src="../../dist/object.js"></script>
+    <script type="text/javascript" src="../../dist/arrayTabs.js"></script>
 
-  <script type="text/javascript">
-    Vue.use(vueNcform, { extComponents: { input: input.default, object: object.default, arrayTabs: arrayTabs.default } });
+    <script type="text/javascript">
+      let lang = 'en';
 
-    let formSchemas = [
-      {
-        title: '默认状态',
-        schema: {
-          type: 'object',
-          properties: {
-            user: {
-              type: 'array',
-              items: {
-                type: 'string'
-              },
-              ui: {
-                widget: 'array-tabs'
-              }
-            }
-          }
+      if (location.search.indexOf('lang=cn') >= 0) {
+        lang = 'cn';
+      }
+
+      Vue.use(vueNcform, {
+        extComponents: {
+          input: input.default,
+          object: object.default,
+          arrayTabs: arrayTabs.default
         }
-      },
-      {
-        title: '[属性] disableAdd: 是否禁止添加项',
-        schema: {
-          type: 'object',
-          properties: {
-            user: {
-              type: 'array',
-              items: {
-                type: 'string'
-              },
-              ui: {
-                widget: 'array-tabs',
-                widgetConfig: {
-                  disableAdd: true
+      });
+
+      let formSchemas = [
+        {
+          title: {
+            cn: '默认状态',
+            en: 'Default'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs'
                 }
               }
             }
           }
-        }
-      },
-      {
-        title: '[属性] disableDel: 是否禁止删除项',
-        schema: {
-          type: 'object',
-          properties: {
-            user: {
-              type: 'array',
-              items: {
-                type: 'string'
-              },
-              ui: {
-                widget: 'array-tabs',
-                widgetConfig: {
-                  disableDel: true
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] collapsed: 是否默认折叠',
-        schema: {
-          type: 'object',
-          properties: {
-            user: {
-              type: 'array',
-              items: {
-                type: 'string'
-              },
-              ui: {
-                widget: 'array-tabs',
-                widgetConfig: {
-                  collapsed: true
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] disableCollapse: 是否禁止折叠',
-        schema: {
-          type: 'object',
-          properties: {
-            user: {
-              type: 'array',
-              items: {
-                type: 'string'
-              },
-              ui: {
-                widget: 'array-tabs',
-                widgetConfig: {
-                  disableCollapse: true
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] tabPosition: tab的显示位置，可选值 [left | top]',
-        schema: {
-          type: 'object',
-          properties: {
-            user: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  firstname: {
-                    type: 'string'
-                  },
-                  lastname: {
-                    type: 'string'
+        },
+        {
+          title: {
+            cn: '[属性] disableAdd: 是否禁止添加项',
+            en: '[ATTR] disableAdd: Whether to disable the addition of items'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    disableAdd: true
                   }
                 }
-              },
-              ui: {
-                widget: 'array-tabs',
-                widgetConfig: {
-                  tabPosition: 'left'
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] disableDel: 是否禁止删除项',
+            en: '[ATTR] disableDel: whether to disable item deletion'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    disableDel: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] disableCollapse: 是否禁止折叠',
+            en: '[ATTR] disableCollapse: whether to disable collapse'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    disableCollapse: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] collapsed: 是否默认折叠，默认是false',
+            en:
+              '[ATTR] collapsed: whether to collapse by default. default is false'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    collapsed: true
+                  }
+                }
+              }
+            }
+          }
+        },
+
+        {
+          title: {
+            cn: '[属性] tabPosition: tab的显示位置，可选值 [left | top]',
+            en:
+              '[ATTR] tabPosition: whether to disable the display position of the tabs, optional valueitem deletion [left | top]'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'object',
+                  properties: {
+                    firstname: {
+                      type: 'string'
+                    },
+                    lastname: {
+                      type: 'string'
+                    }
+                  }
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    tabPosition: 'left'
+                  }
                 }
               }
             }
           }
         }
-      },
-    ]
+      ];
 
-    // Bootstrap the app
-    new Vue({
-      el: '#demo',
-      data: {
-        formSchemas: _.cloneDeep(formSchemas),
-        originFormSchemas: formSchemas
+      // Bootstrap the app
+      new Vue({
+        el: '#demo',
+        data: {
+          formSchemas: getFormSchemas(),
+          originFormSchemas: getFormSchemas()
+        }
+      });
+
+      function getFormSchemas() {
+        return formSchemas.map(item => ({
+          title: item.title[lang],
+          schema: item.schema,
+          detail: item.detail ? item.detail[lang] : ''
+        }));
       }
-    });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>

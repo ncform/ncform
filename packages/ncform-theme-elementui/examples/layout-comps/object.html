@@ -135,6 +135,28 @@
         },
         {
           title: {
+            cn: '隐藏标题栏',
+            en: 'Hide legend'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'object',
+                properties: {
+                  firstname: {
+                    type: 'string'
+                  }
+                },
+                ui: {
+                  showLegend: false
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
             cn: '[属性] layout: 布局类型，垂直即为label上control下，水平即为label左control右，可选值 [v | h]',
             en:
               '[ATTR] layout: layout type, vertical is the control under label, horizontal is label on the left side of the control, optional value [v | h]'

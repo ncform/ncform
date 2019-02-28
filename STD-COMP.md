@@ -266,7 +266,7 @@ If you don't like the cold text description, click on the [interactive version](
 ```js
 {
   disableAdd: true, // Whether to prohibit the addition of items
-  disableDel: true, // Whether to prohibit item deletion
+  disableDel: true, // whether to disable item deletion
   disableReorder: true, // Whether to prohibit sorting
   disableCollapse: false, // Whether to allow folding
   collapsed: false, // Whether to fold by default
@@ -282,7 +282,7 @@ If you don't like the cold text description, click on the [interactive version](
 ```js
 {
   disableAdd: true, // Whether to prohibit the addition of items
-  disableDel: true, // Whether to prohibit item deletion
+  disableDel: true, // whether to disable item deletion
   disableReorder: true, // Whether to prohibit sorting
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
@@ -296,7 +296,7 @@ If you don't like the cold text description, click on the [interactive version](
 ```js
 {
   disableAdd: true, // Whether to prohibit the addition of items
-  disableDel: true, // Whether to prohibit item deletion
+  disableDel: true, // whether to disable item deletion
   tabPosition: 'top', // Optional value：[left | top]
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
