@@ -3,7 +3,7 @@
 ```js
 {
   type: 'object', // Root node: can only be object
-  properties: { // 根节点：表单字段
+  properties: { // Root node: form fields
     firstName: {
       
       /* 数据 */
