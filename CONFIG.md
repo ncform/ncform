@@ -1,77 +1,79 @@
 ## ncform config
 
+[中文版](CONFIG_CN.md)
+
 ```js
 {
   type: 'object', // Root node: can only be object
   properties: { // Root node: form fields
     firstName: {
       
-      /* 数据 */
-      type: 'string', // 数据类型 string / number / integer / boolean / object / array / HTML / COMP 
-      // 注意：大写的类型为特殊只读类型，一般应用场景为显示一个分隔栏。该数据会自动过滤掉
-      // HTML: 配置value，值为一段HTML【支持dx表达式】; 
-      // COMP: 配置ui.widget和ui.widgetConfig
+      /* Data */
+      type: 'string', // Data type: string / number / integer / boolean / object / array / HTML / COMP 
+      // Note: The type of uppercase is a special read-only type, and the general scenario is to display a separator bar. This data will be automatically filtered out
+      // HTML: configure "value" field, the value is a piece of HTML [support dx expression];
+      // COMP: configure ui.widget and ui.widgetConfig
       
-      value: '', // 数据的值
-      default: '', // 数据的默认值，value为空的时候取该值 
-      valueTemplate: '', // 值模板，当里面有dx表达式时，表达式值发生改变，会优化取该值作为value（即会覆盖用户所填的值）
+      value: '', // Value of the data
+      default: '', // The default value of the data. When the "value" is empty, take this one. 
+      valueTemplate: '', // Value template. note: when there is a "dx expression" inside, the expression value changes, it will overwrite the value filled by the user
 
       /* UI */
       ui: {
 
-        columns: 6, // 占用列数，一共12列。6代表占一半
-        label: 'First Name', // 标签内容
-        showLabel: true, // 是否显示标签（当为false不显示时，依然占着空间）
-        noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
-        legend: '', // 标题内容，当对象，数组布局数据类型时有效
-        showLegend: true, // 是否显示标题。当为object类型时，showLegend优先于showLabel，所以需要设置showLegend为false时label才生效
-        description: 'Fill in the first name', // 字段描述信息【支持dx表达式】
-        placeholder: 'first name', // 占位内容【支持dx表达式】
-        disabled: false, // 是否禁用【支持dx表达式】
-        readonly: false, // 是否只读【支持dx表达式】
-        hidden: false, // 是否隐藏【支持dx表达式】
-        help: { // 帮助信息
-          show: true, // 是否显示，默认不显示
-          content: '', // 帮助信息
-          iconCls: '', // 帮助图标样式名
-          text: '' // 帮助文字
+        columns: 6, // The number of columns, total is 12. 6 represents half
+        label: 'First Name', // Label display content
+        showLabel: true, // Whether to show the label (when it is false, it still takes up space)
+        noLabelSpace: false, // Whether the label does not occupy space, the priority is higher than showLabel
+        legend: '', // Legend content, valid when the type is object or array
+        showLegend: true, // Whether to display the legend. When the type is object or array, showLegend takes precedence over showLabel, so the label takes effect when showLegend is set to false.
+        description: 'Fill in the first name', // Field description information [support dx expression]
+        placeholder: 'first name', // Placeholder content [support dx expression]
+        disabled: false, // Whether to disable [support dx expression]
+        readonly: false, // Whether read-only [support dx expression]
+        hidden: false, // Whether to hide [support dx expression]
+        help: { // Help information
+          show: true, // Whether to display, default is false
+          content: '', // Help detail information
+          iconCls: '', // Help icon class name
+          text: '' // Help text
         },
-        itemClass: '', // 给表单项添加的样式名
-        preview: { // 预览
-          type: '', // 预览类型，可选值：video / audio / image / link
-          value: '', // 默认值: 'dx: {{$self}}'【支持dx表达式】
-          clearable: false, // 是否可删除
-          outward: { // 外观
-            width: 0, // 宽度，0代表无限制
-            height: 0, // 高度，0代表无限制
-            shape: '', // 外观形状，可选值：空值 / rounded / circle / ，默认值为空
+        itemClass: '', // The class name added to the form item
+        preview: { // Preview
+          type: '', // Preview type, optional values: video / audio / image / link
+          value: '', // Default: 'dx: {{$self}}' [supports dx expressions]
+          clearable: false, // Whether it can be cleared
+          outward: { // outward appearance
+            width: 0, // Width, 0 means unlimited
+            height: 0, // Height, 0 means unlimited
+            shape: '', // Appearance shape, optional values: '' / rounded / circle. default is ''
           }
         },
-        linkFields: [ // 关联字段，当值发生变化时，会触发关联字段的一些动作，比如校验
+        linkFields: [ // Associated fields, when the value changes, it will trigger some actions of the associated field, such as rules check
           {
-            fieldPath: '', // 关联项字段路径。当为数组项时，则用[i]，如a.b[i].c
-            rules: [], // 校验规则名，如required, number
+            fieldPath: '', // The associated item field path. When it is an array item, use [i], such as a.b[i].c
+            rules: [], // the rules, such as required, number
           }
         ],
 
-        /* 渲染组件 */
-        widget: 'textarea', // 渲染的组件名
-        widgetConfig: {}, // 组件配置
+        /* Rendering Widget */
+        widget: 'textarea', // Widget component name
+        widgetConfig: {}, // widget component config
       },
 
-      /* 验证规则 */
+      /* Verification rules */
       rules: {
         // for Any Instance Type
         required: {
-          value: true, // 传给验证规则的配置值
-          errMsg: 'it is required!', // 错误信息
-          options: { // 验证规则选项
-            delay: 300, // 延迟验证的时间（毫秒）
-            delayMsg: '异步验证中..' // 延迟验证时的提示
+          value: true, // The value passed to the validation rule
+          errMsg: 'it is required!', // Error message
+          options: { // Validation rule options
+            delay: 300, // Delayed verification time (ms)
+            delayMsg: 'Checking...' // Prompt for delayed verification
           }
         },
         number,
-        ajax, // value值：{ remoteUrl: '远程接口Url', method: 'get or post', paramName: '请求参数名，值为控件的值', otherParams: {} }
+        ajax, // Value: { remoteUrl: 'remote api url', method: 'get or post', paramName: 'request parameter name, the value is the control\'s value', otherParams: {} }
 
         // for Numeric Instances 
         minimum,
@@ -102,27 +104,27 @@
         maxProperties,
         minProperties,
 
-        /* 自定义的验证规则 */
+        /* Custom Validation Rules */
         customRule: [{
-          script: '', // 【支持dx表达式】
-          errMsg: '', // 验证错误信息
-          linkItems: [ // 当触发校验时，同时触发这些关联的项进行校验（ 建议使用ui.linkFields来替代这里的功能 ）
+          script: '', // [Support dx expression]
+          errMsg: '', // Error message
+          linkItems: [ // When the check is triggered, these associated items are also triggered for verification (recommended to use ui.linkFields instead of this feature)
             {
-              fieldPath: '', // 关联项字段路径。当为数组项时，则用[i]，如a.b[i].c
-              customRuleIdx: 0 // 触发该项的自定义验证规则的索引
+              fieldPath: '', // The associated item field path. When it is an array item, use [i], such as a.b[i].c
+              customRuleIdx: 0 // The index of the triggered item's custom validation rules
             }
           ]
         }]
       },
     }
   },
-  globalConfig: { // 根节点：全局配置
-    ignoreRulesWhenHidden: true, // 当控件隐藏时自动忽略掉其验证规则，即隐藏的控件验证规则不生效。默认为true
-    style: { // 全局样式配置
+  globalConfig: { // Root node: global configuration
+    ignoreRulesWhenHidden: true, // When the control is hidden, its validation rules are automatically ignored, Default is true
+    style: { // Global style configuration
       formCls: '', // form class
       invalidFeedbackCls: '', // invalid feedback class 
     },
-    constants: { // 全局常量配置，可在dx表达中通过{{$const.}}来访问，如{{$const.userName}}
+    constants: { // Global constant configuration, accessible via {{$const.}} in dx expressions, such as {{$const.userName}}
       userName: 'daniel'
     }
   }
@@ -134,7 +136,7 @@
 
 - form-schema
 
-用于描述表单的schema配置数据，具体数据结构请参考[ncform config](#ncform-config)
+Used to describe the schema configuration data of the form. For the specific data structure, please refer to[ncform config](#ncform-config)
 
 ```
 // Demo code
@@ -143,7 +145,7 @@
 
 - form-name
 
-表单名称，当使用[ncform API](#ncform-api)时需要提供该值
+The name of the form, which is required when using [ncform API](#ncform-api)
 
 ```
 // Demo code
@@ -152,7 +154,7 @@
 
 - v-model
 
-表单的值
+Form value
 
 ```
 // Demo code
@@ -161,27 +163,27 @@
 
 - is-dirty.sync
 
-用于标识表单的值是否dirty（即修改）
+Is used to identify whether the value of the form is dirty (ie modified)
 
-通常的使用场景是通过该值，来判断提交按钮是否可用
+The usual usage scenario is to use this value to determine if the submit button is available.
 
 ```
 // Demo code
 <ncform :form-schema="formSchema" v-model="formSchema.value" :is-dirty.sync="isFormDirty"></ncform>
-<button :disabled="!isFormDirty">提交</button>
+<button :disabled="!isFormDirty">Submit</button>
 ```
 
 ## ncform API
 
-ncform API 都是Vue实例级别的方法。
+The ncform API is a Vue instance level method.
 
 - $ncformReset(formName)
 
-重置表单。重置的值为最后一次外部更新 `ncform v-model` 的值
+Reset the form. The value after resetting is the value of the last external update `ncform v-model`
 
-外部更新是指你直接用新value更新ncform的v-model值，而非操作表单控件发生的v-model的值的更新
+External update means that you update the v-model value of the ncform directly with the new value, instead of updating the value of the v-model that occurs when the user fill in the form controls.
 
-注意：当你保存完表单，想以最后一次保存的值为reset的值，需要外部更新下ncform的v-model值
+Note: When you save the form and want to save the value of the last saved value, you need to externally update the v-model value of ncform.
 
 ```
 // Demo code:
@@ -190,12 +192,12 @@ this.$ncformReset('demoForm');
 
 - $ncformValidate(formName)
 
-校验表单的所有字段的规则。
+Verify all fields of the form.
 
 ```
 // Demo code:
 this.$ncformValidate('demoForm').then(data => {
-  if (data.result) { // 校验通过
+  if (data.result) { // Verification pass
     // do whatever you like to do. e.g. save form
   }
 })
@@ -205,7 +207,7 @@ this.$ncformValidate('demoForm').then(data => {
 
 - submit
 
-提交表单事件。
+Submit a form.
 
 ```
 // Demo code:
