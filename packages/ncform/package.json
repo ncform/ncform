@@ -9,7 +9,8 @@
     "form",
     "automatic",
     "json-schema",
-    "ncform"
+    "ncform",
+    "generation"
   ],
   "scripts": {
     "dev": "gulp dev",

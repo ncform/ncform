@@ -2,6 +2,14 @@
   "name": "ncform",
   "private": true,
   "license": "MIT",
+  "keywords": [
+    "json",
+    "form",
+    "automatic",
+    "json-schema",
+    "ncform",
+    "generation"
+  ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "link": "lerna link",
