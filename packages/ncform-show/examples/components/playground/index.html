@@ -33,13 +33,13 @@
   <script type="text/javascript">
 
     Mock.mock(/getProvinces/, function (options) {
-      return [{ "id": 1, "name": "广东" }, { "id": 2, "name": "北京" }]
+      return [{ "id": 1, "name": "Guangdong" }, { "id": 2, "name": "Beijing" }]
     })
     Mock.mock(/getCities/, function (options) {
       let params = url('?', options.url) || {};
       let result = {
-        1: [{ id: 10, name: '广州' }, { id: 20, name: '汕头' }],
-        2: [{ id: 30, name: '北京' }]
+        1: [{ id: 10, name: 'Guangzhou' }, { id: 20, name: 'Shantou' }],
+        2: [{ id: 30, name: 'Beijing' }]
       }
       let res = result[params.provinceId] || [];
       return res.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);

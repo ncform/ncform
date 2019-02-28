@@ -1,130 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+    <title>color-picker widget</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
-  <title>color-picker widget</title>
+    <link rel="stylesheet" href="../demo.css" />
 
-  <link rel="stylesheet" href="../demo.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css" />
+  </head>
 
-  <!-- 引入样式 -->
-  <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css">
-
-</head>
-
-<body>
-
-  <!--演示区域-->
-  <div id="demo" v-cloak>
-    <div v-for="(item, idx) in formSchemas">
-      <h4 class="demo_title">{{item.title}}</h4>
-      <div class="demo_item-wrapper">
-        <div>
-          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
-          <small>value: {{item.schema.value}}</small>
-        </div>
-        <div>
-          <pre>{{JSON.stringify(originFormSchemas[idx].schema.properties, null, 2)}}</pre>
-        </div>
-        <div>
-          <pre>{{item.detail}}</pre>
+  <body>
+    <!--演示区域-->
+    <div id="demo" v-cloak>
+      <div v-for="(item, idx) in formSchemas">
+        <h4 class="demo_title">{{ item.title }}</h4>
+        <div class="demo_item-wrapper">
+          <div>
+            <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+            <small>value: {{ item.schema.value }}</small>
+          </div>
+          <div>
+            <pre>{{ JSON.stringify(originFormSchemas[idx].schema.properties, null, 2) }}</pre>
+          </div>
+          <div>
+            <pre>{{ item.detail }}</pre>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
-  <script type="text/javascript" src="../../node_modules/axios/dist/axios.min.js"></script>
-  <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
-  <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
-  <script type="text/javascript" src="../../dist/colorPicker.js"></script>
-  <script type="text/javascript" src="../../dist/object.js"></script>
+    <script type="text/javascript" src="../../node_modules/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/element-ui@2.0.7/lib/index.js"></script>
+    <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+    <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
+    <script type="text/javascript" src="../../dist/colorPicker.js"></script>
+    <script type="text/javascript" src="../../dist/object.js"></script>
 
-  <script type="text/javascript">
-    Vue.use(vueNcform, { extComponents: { object: object.default, colorPicker: colorPicker.default } });
+    <script type="text/javascript">
+      let lang = 'en';
 
-    let formSchemas = [
-      {
-        title: '默认状态',
-        schema: {
-          type: 'object',
-          properties: {
-            color: {
-              type: 'string',
-              ui: {
-                widget: 'color-picker'
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '提供值',
-        schema: {
-          type: 'object',
-          properties: {
-            color: {
-              type: 'string',
-              value: '#ccffff',
-              ui: {
-                widget: 'color-picker'
-              }
-            }
-          },
-          ui: {
-            widgetConfig: {
-              layout: 'h'
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] readonly: 只读状态',
-        schema: {
-          type: 'object',
-          properties: {
-            color: {
-              type: 'string',
-              value: '#ccffff',
-              ui: {
-                widget: 'color-picker',
-                readonly: true
-              }
-            }
-          }
-        }
-      },
-      {
-        title: '[属性] disabled: 禁用状态',
-        schema: {
-          type: 'object',
-          properties: {
-            color: {
-              type: 'string',
-              value: '#ccffff',
-              ui: {
-                widget: 'color-picker',
-                disabled: true
-              }
-            }
-          }
-        }
-      },
-    ]
-
-    // Bootstrap the app
-    new Vue({
-      el: '#demo',
-      data: {
-        formSchemas: _.cloneDeep(formSchemas),
-        originFormSchemas: formSchemas
+      if (location.search.indexOf('lang=cn') >= 0) {
+        lang = 'cn';
       }
-    });
-  </script>
 
-</body>
+      Vue.use(vueNcform, { extComponents: { object: object.default, colorPicker: colorPicker.default } });
 
+      let formSchemas = [
+        {
+          title: {
+            cn: '默认状态',
+            en: 'Default'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              color: {
+                type: 'string',
+                ui: {
+                  widget: 'color-picker'
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '提供值',
+            en: 'Provide value'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              color: {
+                type: 'string',
+                value: '#ccffff',
+                ui: {
+                  widget: 'color-picker'
+                }
+              }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] readonly: 只读状态',
+            en: '[ATTR] readonly: read-only state'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              color: {
+                type: 'string',
+                value: '#ccffff',
+                ui: {
+                  widget: 'color-picker',
+                  readonly: true
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] disabled: 禁用状态',
+            en: '[ATTR] disabled: disable state'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              color: {
+                type: 'string',
+                value: '#ccffff',
+                ui: {
+                  widget: 'color-picker',
+                  disabled: true
+                }
+              }
+            }
+          }
+        }
+      ];
+
+      // Bootstrap the app
+      new Vue({
+        el: '#demo',
+        data: {
+          formSchemas: getFormSchemas(),
+          originFormSchemas: getFormSchemas()
+        }
+      });
+
+      function getFormSchemas() {
+        return formSchemas.map(item => ({
+          title: item.title[lang],
+          schema: item.schema,
+          detail: item.detail ? item.detail[lang] : ''
+        }));
+      }
+    </script>
+  </body>
 </html>

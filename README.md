@@ -1,16 +1,18 @@
-# ncform
+# ncform 
 
 ![vue 2.5](https://img.shields.io/badge/vue-2.5-green.svg)
 
-ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表单UI及其交互行为。
+[中文版](README_CN.md)
+
+ncform, a pleasing form development method that generates form UIs and their interactions with just configuration.
 
 ![preview](http://daniel-test.image.alimmdn.com/ncform/ncform-preview?spm=a312x.7755591.0.0.502b4e08Lxgnuv)
 
 ## Playground
 
-在 [Playground](https://ncform.github.io/ncform/ncform-show/playground/index.html) 体验一下ncform的魅力，可加深你对ncform的了解
+Experience the charm of ncform on the [Playground](https://ncform.github.io/ncform/ncform-show/playground/index.html) to deepen your understanding of ncform
 
-> [Playground](https://ncform.github.io/ncform/ncform-show/playground/index.html) 展示了ncform大部分的使用场景例子（I believe the example is the best document），建议先仔细浏览下，例子中的配置实际开发中一般都可以直接使用滴
+> [Playground](https://ncform.github.io/ncform/ncform-show/playground/index.html) shows the examples of ncform most of the use of the scene ( I believe the examples are the best document ), it is recommended to carefully browse the examples, the configuration of the examples can be used directly in the actual development
 
 ## Quick Start
 
@@ -74,7 +76,7 @@ export default {
 }
 </script>
 ```
-可参考[ncform-demo](https://github.com/daniel-dx/ncform-demo)项目
+You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) project
 
 ### In a browser
 
@@ -132,19 +134,19 @@ export default {
 </html>
 ```
 
-## 特性
+## Features
 
-- 配置生成：一个JSON数据结构完整描述一个表单的UI及其交互行为，表单的开发工作就完成了
+- Configuration generation: A JSON data structure completely describes the UI of a form and its interaction behavior, and the development of the form is completed.
 
-- 灵活互动：通过强大的`dx表达式`，表单控件可灵活与其它表单控件进行互动
+- Flexible interaction: Form controls flexibly interact with each other with powerful `dx expressions`
 
-- 标准组件：ncform定义了一套标准的表单组件配置规范，未经扩展即可满足你90%以上的表单开发需求
+- Standard components: ncform defines a standard set of form component configuration specifications that can meet more than 90% of your form development needs without extensions.
 
-- 校验丰富：自带常用的十几种验证规则，满足你90%以上的表单验证需求
+- Rich verification: ncform comes with more than ten commonly used verification rules to meet more than 90% of your form validation requirements
 
-- 扩展友好：表单的组件和校验规则都可灵活扩展，并且提供了工具简化扩展工作
+- Extended friendliness: Form components and validation rules can be flexible extended and provide tools to simplify extension work
 
-## 文档
+## Documents
 
 - [ncform config/props/api/event](./CONFIG.md)
 
@@ -152,100 +154,100 @@ export default {
 
 - [How to extend](./EXT-DOC.md)
 
-## 解决痛点
+## Solve Pain Points
 
-后台管理系统中绝大部分的功能不是查询列表，就是录入表单。  
-表单的开发是一种无趣的，无营养的，高消耗的重复体力活，费时费力。  
-表单控件间的交互功能，表单项的校验规则，都极容易产生“八哥”。  
-SO，为了提高表单开发效率，减少失误，提高表单规范和健壮性，最重要，提高开发人员的开发幸福感，项目因此而生
+Most of the features in the management system are not the query list, that is, the form.  
+The development of the form is a boring, nutrient-free, high-consumption repetitive physical activity that takes time and effort.  
+The interaction between the form controls and the validation rules of the form items are very easy to produce bugs.  
+So, in order to improve the efficiency of form development, reduce bugs, improve form development specifications and robustness, and most importantly, improve the development happiness of developers, the project is born
 
-## 重复造轮子？
+## Repeat the wheel?
 
-圈子里比较有名的类似方案（参考项目列举的几个），存在以下一个或多个的问题：
+A similarly well-known scheme in the community  ( listed in the reference projects ) has one or more of the following problems:
 
-1. 基本完全按照json-schema来设计，而仅用json-schmea来描述一个表单并不合适
+1. Basically designed in accordance with json-schema, but it is not appropriate to use json-schmea to describe a form.
 
-2. 对于表单项之间的关联交互，复杂的验证逻辑，没有很好的解决方案
+2. For the interaction between form items, complex verification logic, there is no good solution
 
-3. 无法仅提供一份配置就完成所有表单的UI及交互行为（意义在于配置可储存）
+3. Can't complete all the UI and interaction behavior of the form with just one configuration ( meaning the configuration can be stored )
 
-4. 默认提供的基础组件不够丰富，难以覆盖实际开发中常用的表单组件
+4. The underlying components provided by default are not rich enough to cover the form components commonly used in actual development.
 
-5. 很久没维护，代码编写风格过于久远，难于扩展
+5. Long time no maintenance, code writing style is too old and is difficult to expand
 
-6. 组件扩展问题：当前主流的组件实现方案是Vue和React，没有友好的方案，需要使用者自行扩展支持
+6. Component extension problem: There is no friendly extension solution for the current hot component implementations like Vue and React. 
 
-为了解决以上问题，走上了造轮子之路。。。
+In order to solve the above problems, embarked on the road of making wheels. . .
 
-## 为什么不用标准的json-schema？
+## Why not use the standard json-schema?
 
-因为json-schema是面向数据(data)而非表单(ui)，对于声明一个表单不太友好。  
+Because json-schema is data-oriented rather than form (ui), it is not very friendly for declaring a form.
 
-对于一个表单，关心的是有哪些表单项，表单项长啥样，校验规则怎样，这些都跟字段相关，在一处管理最直观
+For a form, care about what the form items are, what the form items look like, what are the validation rules, all these are related to the fields. The most intuitive management is in one place
 
-来个简单的对比：
+Come to a simple comparison:
 
-- json-schema例子：
+- json-schema example：
 
 ![json-schema sample](http://daniel-test.image.alimmdn.com/ncform/jsonschema-sample@400w?spm=a312x.7755591.0.0.502b4e08LPhKHt)
 
-- ncform例子：
+- ncform example：
 
 ![ncform sample](http://daniel-test.image.alimmdn.com/ncform/ncform-sample@400w?spm=a312x.7755591.0.0.502b4e08LPhKHt)
 
-json-schema对于验证规则，声明在各个地方，不好管理。而ncform都集中在rules。这种设计也便于后面开发表单制作IDE
+Json-schema for validation rules, declared in various places, not well managed. And ncform is concentrated in rules field. This design is also convenient for later development of form development IDE
 
-## dx表达式：
+## dx expression：
 
-通过`dx`表达式，你可以通过`{{$root.xxx}}`取得指定字段的值，然后用原生的JS书写你的任意逻辑表达式
+With `dx` expressions, you can get the value of the specified field with `{{$root.xxx}}` and then write your arbitrary logical expression with the native JS.
 
-- 指定对象中的属性值，例子：
+- Specify the attribute value in the object, for example：
 ```
 disabled: 'dx: {{$root.person.age}} < 18'
 ```
 
-- 指定数组中的某一项的值，例子：
+- Specify the value of an item in the array, for example:
 ```
 disabled: 'dx: {{$root.persons[0].age}} < 18'
 ```
 
-- 指定数组中同一项的属性，例子：
+- Specify the properties of the same item in the array, for example:
 ```
 disabled: 'dx: {{$root.persons[i].age}} < 18'
 disabled: 'dx: {{$root.persons[i + 1].age}} < 18'
 ```
 
-- 访问全局配置中的常量数据，例子:
+- Access constant data in the global configuration, for example:
 
 ```
 disabled: 'dx: {{$root.person.age}} === {{$const.max}}'
 
-// 全局配置如下：
+// The global configuration is as follows
 globalConfig: {
   constants: { max: 18 }
 }
 ```
 
-## 设计思想
+## Design Thinking
 
-ncform = ncform容器 + ncform主题标准组件
+ncform = ncform container + ncform theme standard component
 
 ![design](http://daniel-test.image.alimmdn.com/ncform/design.png)
 
-一个系统项目，一般都会使用一种UI库（如vue）及其之上的UI实现方案（如elementui）
-为了与之和平共处，ncform的标准组件可采用与之一致的UI实现方案
+A system project generally uses a UI library (such as vue) and a UI implementation (such as elementui)
+In order to live in peace with it, ncform's standard components can use the same UI implementation
 
-ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](https://ncform.github.io/ncform/ncform-theme-elementui/index.html)
+The ncform Vue version provides the standard components of the elementui theme by default [[Click to view]](https://ncform.github.io/ncform/ncform-theme-elementui/index.html)
 
-如果你是iview的粉丝，通过遵循ncform标准组件的规范开发iview主题的标准组件即可
+If you are a fan of iview, you can develop standard components of the iview theme by following the specifications of the ncform standard components.
 
-思想：把各种主题的标准组件“丢进”ncform容器，就是一个可配的表单开发利器
+Thought: "Throw in" the standard components of various themes into the ncform container, which is a nice tool for developing forms.
 
 ## Schema Generator
 
-通过 [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)，可以加速你写form schema的速度
+You can accelerate the speed of writing form schemas with [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)
 
-## 参考项目
+## References
 
 - [json-schema](http://json-schema.org/)
 - [jsonform](https://github.com/joshfire/jsonform)
@@ -253,13 +255,7 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 - [react-jsonschema-form](https://github.com/mozilla-services/react-jsonschema-form)
 - [angular-schema-form](https://github.com/json-schema-form/angular-schema-form)
 
-## 作者
+## Authors
 
-- 肖玮（Daniel.xiao），ncform的设计者和主要实现者
-- 罗振考（Kyle.lo），ncform表单校验部分的实现者和标准组件的主力开发者
-
-## 开发交流
-
-![qrcode](http://daniel-test.image.alimmdn.com/ncform/wx-qrcode.jpeg)
-
-ncform官方微信讨论群，请扫码或搜索微信号viptech128(唯技术)，备注ncform，添加好友后加入。
+- [Daniel.xiao](https://github.com/daniel-dx) : ncform designer and main implementer
+- Kyle.lo : The implementer of the ncform form validation part and the main developer of the standard component

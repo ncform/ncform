@@ -12,46 +12,74 @@
   <style>
     .doc {
       height: 100%;
-      min-height: 600px;
+      min-height: 300px;
     }
   </style>
 </head>
 
 <body>
 
-  <h2 style="margin-left: 25px; color: #5A5E66">ncform standard components</h2>
+  <div class="doc">
+    <h2 style="margin-left: 25px; color: #5A5E66">
+      ncform standard components
 
-  <div style="display: flex" class="doc" v-cloak>
-    <div style="flex:1">
-      <ul class="el-menu el-menu-vertical-demo">
-        <li class="el-submenu is-opened">
-          <div class="el-submenu__title" style="padding-left: 20px;"><i class="el-icon-star-on"></i><span>Controls</span></div>
-          <ul class="el-menu">
-            <li v-for="item in controls" class="el-menu-item" :class="{'is-active': currentUrl === item.url}" @click="goto(item.url)">
-              {{item.name}}
-            </li>
-            <!-- Don't touch me - controls -->
-          </ul>
-        </li>
-        <li class="el-submenu is-opened">
-          <div class="el-submenu__title" style="padding-left: 20px;"><i class="el-icon-star-on"></i><span>Layouts</span></div>
-          <ul class="el-menu">
-            <li v-for="item in layouts" class="el-menu-item" :class="{'is-active': currentUrl === item.url}" @click="goto(item.url)">
-              {{item.name}}
-            </li>
-            <!-- Don't touch me - layouts -->
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div style="flex:5">
-      <iframe :src="currentUrl" style="width: 100%; border: none; height: 100%"></iframe>
+      <div class="el-radio-group" style="float: right;">
+        <label class="el-radio-button">
+          <input type="radio" class="el-radio-button__orig-radio" value="en" v-model="lang">
+          <span class="el-radio-button__inner">English</span>
+        </label>
+        <label class="el-radio-button" value="cn">
+          <input type="radio" class="el-radio-button__orig-radio" value="cn" v-model="lang">
+          <span class="el-radio-button__inner">中文</span>
+        </label>
+      </div>
+
+    </h2>
+
+    <div style="display: flex; height: calc(100vh - 80px); overflow: hidden;" v-cloak>
+      <div style="flex:1; overflow: auto">
+        <ul class="el-menu el-menu-vertical-demo">
+          <li class="el-submenu is-opened">
+            <div class="el-submenu__title" style="padding-left: 20px;"><i
+                class="el-icon-star-on"></i><span>Controls</span></div>
+            <ul class="el-menu">
+              <li v-for="item in displayControls" class="el-menu-item" :class="{'is-active': currentUrl === item.url}"
+                @click="goto(item.url)">
+                {{item.name}}
+              </li>
+              <!-- Don't touch me - controls -->
+            </ul>
+          </li>
+          <li class="el-submenu is-opened">
+            <div class="el-submenu__title" style="padding-left: 20px;"><i
+                class="el-icon-star-on"></i><span>Layouts</span>
+            </div>
+            <ul class="el-menu">
+              <li v-for="item in displayLayouts" class="el-menu-item" :class="{'is-active': currentUrl === item.url}"
+                @click="goto(item.url)">
+                {{item.name}}
+              </li>
+              <!-- Don't touch me - layouts -->
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div style="flex:5">
+        <iframe :src="currentUrl" style="width: 100%; border: none; height: 100%"></iframe>
+      </div>
     </div>
   </div>
+
+
 
   <script type="text/javascript">
     new Vue({
       el: '.doc',
+      created() {
+        if (location.search.indexOf('lang=cn') >= 0) {
+          this.$data.lang = 'cn';
+        }
+      },
       data: {
         controls: [
           { "url": "/examples/control-comps/input.html", "name": "input" },
@@ -72,11 +100,33 @@
           { "url": "/examples/layout-comps/array-table.html", "name": "array-table" },
           { "url": "/examples/layout-comps/array-tabs.html", "name": "array-tabs" }
         ],
-        currentUrl: ''
+        currentUrl: '',
+        lang: 'en'
+      },
+      computed: {
+        displayControls() {
+          return this.$data.controls.map(item => ({
+            url: item.url + '?lang=' + this.$data.lang,
+            name: item.name
+          }))
+        },
+        displayLayouts() {
+          return this.$data.layouts.map(item => ({
+            url: item.url + '?lang=' + this.$data.lang,
+            name: item.name
+          }))
+        }
       },
       methods: {
         goto(url) {
           this.$data.currentUrl = url;
+        }
+      },
+      watch: {
+        'lang': function (newVal) {
+          let url = location.pathname + '?lang=' + this.$data.lang;
+          window.history.replaceState("", document.title, url);
+          this.$data.currentUrl = this.$data.currentUrl.replace(/lang=.*/, 'lang=' + this.$data.lang);
         }
       }
     });
