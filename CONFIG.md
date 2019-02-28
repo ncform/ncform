@@ -2,7 +2,7 @@
 
 ```js
 {
-  type: 'object', // 根节点：只能是object
+  type: 'object', // Root node: can only be object
   properties: { // 根节点：表单字段
     firstName: {
       
