@@ -6,6 +6,9 @@ export default {
 
   created() {
     // 在这里做一些跟DOM无关的初始化, 比如获取初始化数据
+    if (location.search.indexOf('lang=cn') >= 0) {
+      this.$data.lang = 'cn';
+    }
   },
 
   mounted() {
@@ -16,21 +19,28 @@ export default {
     }, 0);
   },
 
-  destroyed() {
-    // 在这里销毁无用的资源，比如setTimeout返回的值
-  },
-
-  /* ====================== 引用组件 ====================== */
-
-  components: {},
-
   /* ====================== 数据绑定 ====================== */
 
   props: {},
 
   data() {
     return {
+      lang: 'en',
       jsonValue: "",
+      i18nData: {
+        en: {
+          template: 'Template',
+          genForm: 'Run',
+          getData: 'Get Data',
+          notValidJSON: 'Not valid JSON data'
+        },
+        cn: {
+          template: '模板',
+          genForm: '生成表单',
+          getData: '获取表单数据',
+          notValidJSON: '不是有效的JSON数据'
+        }
+      },
       ncformSchema: {
         type: "object",
         properties: {
@@ -49,71 +59,122 @@ export default {
       options: [
         {
           value: "0",
-          label: "基础使用"
+          label: {
+            cn: "基础使用",
+            en: "Basic"
+          },
         },
         {
           value: "1",
-          label: "基础使用-丰富显示"
+          label: {
+            cn: "基础使用-丰富显示",
+            en: "Basic-Rich Display"
+          },
         },
         {
           value: "2",
-          label: "基础使用-多列布局"
+          label: {
+            cn: "基础使用-多列布局",
+            en: "Basic-Multi Columns"
+          },
         },
         {
           value: "22",
-          label: "基础使用-媒体预览"
+          label: {
+            cn: "基础使用-媒体预览",
+            en: "Basic-Media Preview"
+          },
         },
         {
           value: "3",
-          label: "基础使用-标签居左"
+          label: {
+            cn: "基础使用-标签居左",
+            en: "Basic-Label Left"
+          },
         },
         {
           value: "4",
-          label: "基础使用-校验规则"
+          label: {
+            cn: "基础使用-校验规则",
+            en: "Basic-Verification Rule"
+          },
         },
         {
           value: "5",
-          label: "基础使用-数组类型"
+          label: {
+            cn: "基础使用-数组类型",
+            en: "Basic-Array Type"
+          },
         },
         {
           value: "6",
-          label: "基础使用-表格数组"
+          label: {
+            cn: "基础使用-表格数组",
+            en: "Basic-Table Array"
+          },
         },
         {
           value: "7",
-          label: "基础使用-标签数组"
+          label: {
+            cn: "基础使用-标签数组",
+            en: "Basic-Tabs Array"
+          },
         },
         {
           value: "77",
-          label: "基础使用-分隔栏"
+          label: {
+            cn: "基础使用-分隔栏",
+            en: "Basic-Separator"
+          },
         },
         {
           value: "8",
-          label: "高级玩法-控件交互 dx表达式"
+          label: {
+            cn: "高级玩法-控件交互 dx表达式",
+            en: "Adv-Control Interaction [dx expression]"
+          },
         },
         {
           value: "9",
-          label: "高级玩法-数组项交互 dx表达式"
+          label: {
+            cn: "高级玩法-数组项交互 dx表达式",
+            en: "Adv-Array Item Interaction [dx expression]"
+          },
         },
         {
           value: "10",
-          label: "高级玩法-下拉框值交互 dx表达式"
+          label: {
+            cn: "高级玩法-下拉框值交互 dx表达式",
+            en: "Adv-Selector Interaction [dx expression]"
+          },
         },
         {
           value: "101",
-          label: "高级玩法-校验关联 dx表达式"
+          label: {
+            cn: "高级玩法-校验关联 dx表达式",
+            en: "Adv-Check Association [dx expression]"
+          },
         },
         {
           value: "11",
-          label: "高级玩法-自定义校验规则 dx表达式"
+          label: {
+            cn: "高级玩法-自定义校验规则 dx表达式",
+            en: "Adv-Custom Rule [dx expression]"
+          },
         },
         {
           value: "12",
-          label: "高级玩法-全局常量 dx表达式"
+          label: {
+            cn: "高级玩法-全局常量 dx表达式",
+            en: "Adv-Global Constant [dx expression]"
+          },
         },
         {
           value: "13",
-          label: "高级玩法-跟随 dx表达式"
+          label: {
+            cn: "高级玩法-跟随 dx表达式",
+            en: "Adv-Follow [dx expression]"
+          },
         }
       ],
       templates: {
@@ -140,32 +201,32 @@ export default {
             name: {
               type: "string",
               ui: {
-                label: "姓名",
-                description: "请填写你的姓名",
-                placeholder: "姓名"
+                label: "Name",
+                description: "Please fill in your name.",
+                placeholder: "Name"
               }
             },
             email: {
               type: "string",
               ui: {
-                label: "邮件"
+                label: "Email"
               }
             },
             age: {
               type: "integer",
               default: 18,
               ui: {
-                label: "年龄"
+                label: "Age"
               }
             },
             adult: {
               type: "boolean",
               ui: {
-                label: "是否成年",
+                label: "Adult",
                 help: {
                   show: true,
                   text: "?",
-                  content: "成年才可以玩农药啊"
+                  content: "Adults can play games."
                 }
               }
             }
@@ -178,8 +239,8 @@ export default {
               type: "string",
               ui: {
                 columns: 3,
-                label: "姓名",
-                placeholder: "姓"
+                label: "Name",
+                placeholder: "First name"
               }
             },
             lastname: {
@@ -187,32 +248,32 @@ export default {
               ui: {
                 columns: 3,
                 showLabel: false,
-                placeholder: "名"
+                placeholder: "Last name"
               }
             },
             email: {
               type: "string",
               ui: {
                 columns: 6,
-                label: "邮件"
+                label: "Email"
               }
             },
             age: {
               type: "integer",
               ui: {
                 columns: 6,
-                label: "年龄"
+                label: "Age"
               }
             },
             adult: {
               type: "boolean",
               ui: {
                 columns: 6,
-                label: "是否成年",
+                label: "adult",
                 help: {
                   show: true,
                   text: "?",
-                  content: "成年才可以玩农药啊"
+                  content: "Adults can play games"
                 }
               }
             }
@@ -227,7 +288,7 @@ export default {
               default:
                 "https://upload-images.jianshu.io/upload_images/2195795-e3c500e4b7d17b2c.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240",
               ui: {
-                label: "图片",
+                label: "Image",
                 columns: 6,
                 preview: {
                   type: "image",
@@ -245,7 +306,7 @@ export default {
               type: "string",
               default: "https://www.w3schools.com/html/mov_bbb.mp4",
               ui: {
-                label: "视频",
+                label: "Video",
                 columns: 6,
                 preview: {
                   type: "video"
@@ -256,7 +317,7 @@ export default {
               type: "string",
               default: "https://www.w3schools.com/html/mov_bbb.mp4",
               ui: {
-                label: "音频",
+                label: "Audio",
                 columns: 6,
                 preview: {
                   type: "audio"
@@ -267,7 +328,7 @@ export default {
               type: "string",
               default: "https://www.baidu.com",
               ui: {
-                label: "链接",
+                label: "Link",
                 columns: 6,
                 preview: {
                   type: "link"
@@ -283,37 +344,37 @@ export default {
             firstname: {
               type: "string",
               ui: {
-                label: "姓名",
-                placeholder: "姓"
+                label: "Name",
+                placeholder: "First name"
               }
             },
             lastname: {
               type: "string",
               ui: {
                 showLabel: false,
-                placeholder: "名"
+                placeholder: "Last name"
               }
             },
             email: {
               type: "string",
               ui: {
-                label: "邮件"
+                label: "Email"
               }
             },
             age: {
               type: "integer",
               ui: {
-                label: "年龄"
+                label: "Age"
               }
             },
             adult: {
               type: "boolean",
               ui: {
-                label: "是否成年",
+                label: "Adult",
                 help: {
                   show: true,
                   text: "?",
-                  content: "成年才可以玩农药啊"
+                  content: "Adults can play games"
                 }
               }
             }
@@ -330,9 +391,9 @@ export default {
             name: {
               type: "string",
               ui: {
-                label: "姓名",
-                description: "请填写你的姓名",
-                placeholder: "姓名"
+                label: "Name",
+                description: "Please fill in your name",
+                placeholder: "Name"
               },
               rules: {
                 required: true,
@@ -342,30 +403,30 @@ export default {
             email: {
               type: "string",
               ui: {
-                label: "邮件"
+                label: "Email"
               },
               rules: {
                 required: true,
                 email: {
                   value: true,
-                  errMsg: "请填写有效的邮件地址"
+                  errMsg: "Please fill in a valid email address"
                 }
               }
             },
             age: {
               type: "integer",
               ui: {
-                label: "年龄"
+                label: "Age"
               }
             },
             adult: {
               type: "boolean",
               ui: {
-                label: "是否成年",
+                label: "Adult",
                 help: {
                   show: true,
                   text: "?",
-                  content: "成年才可以玩农药啊"
+                  content: "Adults can play games"
                 }
               }
             }
@@ -382,9 +443,9 @@ export default {
                   name: {
                     type: "string",
                     ui: {
-                      label: "姓名",
-                      description: "请填写你的姓名",
-                      placeholder: "姓名"
+                      label: "Name",
+                      description: "Please fill in your name",
+                      placeholder: "Name"
                     },
                     rules: {
                       required: true
@@ -393,7 +454,7 @@ export default {
                   email: {
                     type: "string",
                     ui: {
-                      label: "邮件"
+                      label: "Email"
                     },
                     rules: {
                       required: true,
@@ -403,23 +464,23 @@ export default {
                   age: {
                     type: "integer",
                     ui: {
-                      label: "年龄"
+                      label: "Age"
                     }
                   },
                   adult: {
                     type: "boolean",
                     ui: {
-                      label: "是否成年",
+                      label: "Adult",
                       help: {
                         show: true,
                         text: "?",
-                        content: "成年才可以玩农药啊"
+                        content: "Adults can play games"
                       }
                     }
                   }
                 },
                 ui: {
-                  label: "用户"
+                  label: "User"
                 }
               },
               ui: {
@@ -440,9 +501,9 @@ export default {
                   name: {
                     type: "string",
                     ui: {
-                      label: "姓名",
-                      description: "请填写你的姓名",
-                      placeholder: "姓名"
+                      label: "Name",
+                      description: "Please fill in your name",
+                      placeholder: "Name"
                     },
                     rules: {
                       required: true
@@ -451,7 +512,7 @@ export default {
                   email: {
                     type: "string",
                     ui: {
-                      label: "邮件"
+                      label: "Email"
                     },
                     rules: {
                       required: true,
@@ -461,17 +522,17 @@ export default {
                   age: {
                     type: "integer",
                     ui: {
-                      label: "年龄"
+                      label: "Age"
                     }
                   },
                   adult: {
                     type: "boolean",
                     ui: {
-                      label: "是否成年",
+                      label: "Adult",
                       help: {
                         show: true,
                         text: "?",
-                        content: "成年才可以玩农药啊"
+                        content: "Adults can play games"
                       }
                     }
                   }
@@ -499,9 +560,9 @@ export default {
                   name: {
                     type: "string",
                     ui: {
-                      label: "姓名",
-                      description: "请填写你的姓名",
-                      placeholder: "姓名"
+                      label: "Name",
+                      description: "Please fill in your name",
+                      placeholder: "Name"
                     },
                     rules: {
                       required: true
@@ -510,7 +571,7 @@ export default {
                   email: {
                     type: "string",
                     ui: {
-                      label: "邮件"
+                      label: "Email"
                     },
                     rules: {
                       required: true,
@@ -520,23 +581,23 @@ export default {
                   age: {
                     type: "integer",
                     ui: {
-                      label: "年龄"
+                      label: "Age"
                     }
                   },
                   adult: {
                     type: "boolean",
                     ui: {
-                      label: "是否成年",
+                      label: "Adult",
                       help: {
                         show: true,
                         text: "?",
-                        content: "成年才可以玩农药啊"
+                        content: "Adults can play games"
                       }
                     }
                   }
                 },
                 ui: {
-                  label: "用户"
+                  label: "User"
                 }
               },
               ui: {
@@ -552,41 +613,41 @@ export default {
           properties: {
             _line1: {
               type: 'HTML',
-              value: '<div style="border-left: 4px solid orange; padding-left: 6px; color: orange">  基本信息</div>'
+              value: '<div style="border-left: 4px solid orange; padding-left: 6px; color: orange">  Basic Information</div>'
             },
             name: {
               type: "string",
               ui: {
-                label: "姓名",
-                description: "请填写你的姓名",
-                placeholder: "姓名"
+                label: "Name",
+                description: "Please fill in your name",
+                placeholder: "Name"
               }
             },
             email: {
               type: "string",
               ui: {
-                label: "邮件"
+                label: "Email"
               }
             },
             _line2: {
               type: 'HTML',
-              value: '<div style="border-left: 4px solid orange; margin-top:10px; padding-left: 6px; color: orange">  其它信息</div>'
+              value: '<div style="border-left: 4px solid orange; margin-top:10px; padding-left: 6px; color: orange">  Other Information</div>'
             },
             age: {
               type: "integer",
               default: 18,
               ui: {
-                label: "年龄"
+                label: "Age"
               }
             },
             adult: {
               type: "boolean",
               ui: {
-                label: "是否成年",
+                label: "Adult",
                 help: {
                   show: true,
                   text: "?",
-                  content: "成年才可以玩农药啊"
+                  content: "Adults can play games"
                 }
               }
             }
@@ -598,8 +659,8 @@ export default {
             age: {
               type: "integer",
               ui: {
-                label: "年龄",
-                description: "大于18岁才能继续填写"
+                label: "Age",
+                description: "More than 18 years old to continue filling"
               }
             },
             gameInfo: {
@@ -608,20 +669,20 @@ export default {
                 game: {
                   type: "string",
                   ui: {
-                    label: "喜欢游戏",
-                    description: "填写解锁"
+                    label: "Like games",
+                    description: "Fill in and unlock"
                   }
                 },
                 gameAge: {
                   type: "integer",
                   ui: {
-                    label: "游戏年龄",
+                    label: "Game age",
                     disabled: "dx: !{{$root.gameInfo.game}}"
                   }
                 }
               },
               ui: {
-                legend: "游戏信息",
+                legend: "Game info",
                 hidden: "dx: !{{$root.age}} || {{$root.age}} < 18"
               }
             }
@@ -638,7 +699,7 @@ export default {
                   adult: {
                     type: "boolean",
                     ui: {
-                      label: "是否成年",
+                      label: "Adult",
                       help: {
                         show: true,
                         text: "?"
@@ -648,14 +709,14 @@ export default {
                   gameName: {
                     type: "string",
                     ui: {
-                      label: "喜欢游戏",
+                      label: "Like games",
                       disabled: "dx: !{{$root.user[i].adult}}"
                     }
                   },
                   gameAge: {
                     type: "integer",
                     ui: {
-                      label: "游戏年龄",
+                      label: "Game age",
                       disabled: "dx: !{{$root.user[i].adult}}"
                     }
                   }
@@ -675,7 +736,7 @@ export default {
             province: {
               type: "string",
               ui: {
-                label: "省份",
+                label: "Province",
                 widget: "select",
                 widgetConfig: {
                   itemLabelField: "name", // 项数据表示label的字段
@@ -691,7 +752,7 @@ export default {
             city: {
               type: "string",
               ui: {
-                label: "城市",
+                label: "City",
                 widget: "select",
                 widgetConfig: {
                   itemLabelField: "name", // 项数据表示label的字段
@@ -715,7 +776,7 @@ export default {
             isRequired: {
               type: "boolean",
               ui: {
-                label: "是否必填",
+                label: "Required",
                 linkFields: [
                   {
                     fieldPath: "num_1",
@@ -786,7 +847,7 @@ export default {
                   {
                     script:
                       "dx: !{{$root.endTime}} || {{$root.endTime}} >= {{$root.startTime}}", // 支持dx表达式
-                    errMsg: "开始日期必须小于等于结束日期", // 验证错误信息
+                    errMsg: "Start date must be less than or equal to the end date", // 验证错误信息
                     linkItems: [
                       // 当触发校验时，同时触发这些关联的项进行校验
                       {
@@ -808,7 +869,7 @@ export default {
                   {
                     script:
                       "dx: !{{$root.startTime}} || {{$root.endTime}} >= {{$root.startTime}}", // 支持dx表达式
-                    errMsg: "结束日期必须大于等于开始日期", // 验证错误信息
+                    errMsg: "End date must be greater than or equal to the start date", // 验证错误信息
                     linkItems: [
                       // 当触发校验时，同时触发这些关联的项进行校验
                       {
@@ -835,7 +896,7 @@ export default {
                         {
                           script:
                             "dx: !{{$root.arrayItems[i].endTime}} || {{$root.arrayItems[i].endTime}} >= {{$root.arrayItems[i].startTime}}", // 支持dx表达式
-                          errMsg: "开始日期必须小于等于结束日期", // 验证错误信息
+                          errMsg: "Start date must be less than or equal to the end date", // 验证错误信息
                           linkItems: [
                             // 当触发校验时，同时触发这些关联的项进行校验
                             {
@@ -857,7 +918,7 @@ export default {
                         {
                           script:
                             "dx: !{{$root.arrayItems[i].startTime}} || {{$root.arrayItems[i].endTime}} >= {{$root.arrayItems[i].startTime}}", // 支持dx表达式
-                          errMsg: "结束日期必须大于等于开始日期", // 验证错误信息
+                          errMsg: "End date must be greater than or equal to the start date", // 验证错误信息
                           linkItems: [
                             // 当触发校验时，同时触发这些关联的项进行校验
                             {
@@ -873,7 +934,7 @@ export default {
               },
               ui: {
                 showLabel: false,
-                legend: "数组项",
+                legend: "Array item",
                 widget: "array-table",
                 widgetConfig: {
                   collapsed: true
@@ -888,13 +949,13 @@ export default {
             age: {
               type: "string",
               ui: {
-                placeholder: 'dx: "年龄必须大于" + {{$const.ageLimit}}'
+                placeholder: 'dx: "Age must be greater than " + {{$const.ageLimit}}'
               },
               rules: {
                 customRule: [
                   {
                     script: "dx: {{$root.age}} > {{$const.ageLimit}}", // 支持dx表达式
-                    errMsg: "请填写正确的年龄" // 验证错误信息
+                    errMsg: "Please fill in the correct age" // 验证错误信息
                   }
                 ]
               }
@@ -934,6 +995,18 @@ export default {
     };
   },
 
+  computed: {
+    listOptions() {
+      return this.$data.options.map(item => ({
+        value: item.value,
+        label: item.label[this.$data.lang]
+      }))
+    },
+    i18n() {
+      return this.$data.i18nData[this.$data.lang];
+    }
+  },
+
   /* ====================== 事件处理 ====================== */
 
   methods: {
@@ -955,7 +1028,7 @@ export default {
         eval('this.$data.ncformSchema = '+value);
         this.$data.ncformValue = {};
       } catch (err) {
-        alert("不是有效的JSON数据.");
+        alert(this.i18n.notValidJSON);
         throw new Error(`createForm Error:${err}`);
       }
     },
@@ -966,8 +1039,10 @@ export default {
           alert(data);
         }
       });
+    },
+    langChange() {
+      let url = location.pathname + '?lang=' + this.$data.lang;
+      window.history.replaceState("", document.title, url);
     }
-  },
-
-  watch: {}
+  }
 };

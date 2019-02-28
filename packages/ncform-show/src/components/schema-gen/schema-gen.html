@@ -1,26 +1,26 @@
 <div class="schema-gen">
   <div class="header">
-    <h3>ncform schema 生成器</h3>
-    <el-button type="primary" size="medium" @click="jsonChange">点击生成</el-button>
+    <h3>ncform schema generator</h3>
+    <el-button type="primary" size="medium" @click="jsonChange">Click to generate</el-button>
   </div>
 
   <el-alert v-if="inputErr.isShow" :title="inputErr.msg" :type="inputErr.type" :closable="false" show-icon></el-alert>
 
   <el-row :gutter="20" :class="[inputErr.isShow ? 'alert': '', 'main']">
     <el-col :span="8">
-      <h4>输入：</h4>
+      <h4>Input:</h4>
 
       <div ref="editor" class="area"></div>
     </el-col>
 
     <el-col :span="8">
-      <h4>结果：</h4>
+      <h4>Result:</h4>
 
       <div ref="output" class="area"></div>
     </el-col>
 
     <el-col :span="8">
-      <h4>预览：</h4>
+      <h4>Preview:</h4>
 
       <ncform class="area" v-if="showNcform" :form-schema="ncformSchema" v-model="ncformValue" form-name="preview-form"></ncform>
     </el-col>

@@ -110,7 +110,7 @@ export default {
 
           case 1:
             vm.setAlertMsg(
-              "输入的对象'object'中必须有键值对才能预览ncform表单。",
+              "Must provide at least one key-value pair",
               true,
               "warning"
             );
@@ -118,7 +118,7 @@ export default {
 
           case 0:
             vm.setAlertMsg(
-              `输入的对象type必须是'object'才能预览ncform表单。当前类型是 ${
+              `The input must be object type. Current type is ${
                 resultJSON.type
               }。`,
               true,
@@ -131,7 +131,8 @@ export default {
         }
       } catch (error) {
         console.error(error);
-        vm.setAlertMsg("不是有效的JSON数据.", true);
+        vm.setAlertMsg("Not valid JSON data.", true);
+
       }
 
       vm.$options.output.setValue(resultJSONStr);
