@@ -4,9 +4,29 @@
 
 [中文版](README_CN.md)
 
-ncform, a pleasing form development method that generates form UIs and their interactions with just configuration.
-
 ![preview](docs/images/preview.png)
+
+ncform, a nice form development way that generates form UIs and their interactions with just configuration.
+
+Comes with **standard components** and **validation rules**, out of the box.
+
+Have powerful **control interaction** and **extension capabilities**, do what you want.
+
+---
+
+- Table Of Contents
+  - [Playground](#Playground)
+  - [Quick Start](#Quick-Start)
+    - [In node.js](#In-node.js)
+    - [In browser](#In-browser)
+  - [Features](#Features)
+  - [Documents](#Documents)
+  - [Solve Pain Points](#Solve-Pain-Points)
+  - [Repeat the wheel?](#Repeat-the-wheel?)
+  - [Why not use the standard json-schema?](#Why-not-use-the-standard-json-schema?)
+  - [dx expression](#dx-expression)
+  - [Design Thinking](#Design-Thinking)
+  - [Schema Generator](#Schema-Generator)
 
 ## Playground
 
@@ -78,7 +98,7 @@ export default {
 ```
 You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) project
 
-### In a browser
+### In browser
 
 ```
 <html>
@@ -148,11 +168,11 @@ You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) pro
 
 ## Documents
 
-- [ncform config/props/api/event](./CONFIG.md)
+- [ncform config / props / api / event](./CONFIG.md)
 
-- [Standard Components](./STD-COMP.md)
+- Standard Components [Preview Version](https://ncform.github.io/ncform/ncform-theme-elementui/index.html) | [Text Version](./STD-COMP.md)
 
-- [How to extend](./EXT-DOC.md)
+- [Custom Form Controls And Validation Rules](./EXT-DOC.md)
 
 ## Solve Pain Points
 
