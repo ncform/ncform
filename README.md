@@ -6,7 +6,7 @@
 
 ncform, a pleasing form development method that generates form UIs and their interactions with just configuration.
 
-![preview](http://daniel-test.image.alimmdn.com/ncform/ncform-preview?spm=a312x.7755591.0.0.502b4e08Lxgnuv)
+![preview](docs/images/preview.png)
 
 ## Playground
 
