@@ -6,7 +6,7 @@
 
 ncform, a pleasing form development method that generates form UIs and their interactions with just configuration.
 
-![preview](http://daniel-test.image.alimmdn.com/ncform/ncform-preview?spm=a312x.7755591.0.0.502b4e08Lxgnuv)
+![preview](docs/images/preview.png)
 
 ## Playground
 
@@ -189,11 +189,11 @@ Come to a simple comparison:
 
 - json-schema example：
 
-![json-schema sample](http://daniel-test.image.alimmdn.com/ncform/jsonschema-sample@400w?spm=a312x.7755591.0.0.502b4e08LPhKHt)
+![json-schema sample](docs/images/json-schema-sample.jpg)
 
 - ncform example：
 
-![ncform sample](http://daniel-test.image.alimmdn.com/ncform/ncform-sample@400w?spm=a312x.7755591.0.0.502b4e08LPhKHt)
+![ncform schema sample](docs/images/ncform-schema-sample.jpg)
 
 Json-schema for validation rules, declared in various places, not well managed. And ncform is concentrated in rules field. This design is also convenient for later development of form development IDE
 
@@ -232,7 +232,7 @@ globalConfig: {
 
 ncform = ncform container + ncform theme standard component
 
-![design](http://daniel-test.image.alimmdn.com/ncform/design.png)
+![design](docs/images/design.png)
 
 A system project generally uses a UI library (such as vue) and a UI implementation (such as elementui)
 In order to live in peace with it, ncform's standard components can use the same UI implementation
