@@ -1,6 +1,6 @@
 # ncform 
 
-![vue 2.5](https://img.shields.io/badge/vue-2.5-green.svg)
+![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
 
 [中文版](README_CN.md)
 

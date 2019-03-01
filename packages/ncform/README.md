@@ -1,8 +1,14 @@
 # ncform
 
-ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表单UI及其交互行为。
+![ncform](https://github.com/ncform/ncform/raw/master/docs/images/preview.png)
 
-更详细信息请访问官网：[https://github.com/ncform/ncform](https://github.com/ncform/ncform)
+ncform, a nice form development way that generates form UIs and their interactions with just configuration.
+
+Comes with standard components and validation rules, out of the box.
+
+Have powerful control interaction and extension capabilities, do what you want.
+
+For more details, please visit the official website: [https://github.com/ncform/ncform](https://github.com/ncform/ncform)
 
 # How to dev
 
@@ -16,7 +22,7 @@ Step 2: start development
 npm run dev
 ```
 
-[可选]配合以下可使用依赖的`ncform-common`的最新代码
+[Optional] Use the following command to watch and depend on the latest code for `ncform-common`
 ```
 cd ../ncform-common
 npm run watch-build

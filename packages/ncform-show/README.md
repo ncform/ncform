@@ -1,6 +1,6 @@
 ## ncform show
 
-ncform秀的舞台，当前主要提供了Playground和Schema Generator
+The stage of the ncform show, currently provides Playground and Schema Generator
 
 # How to dev
 

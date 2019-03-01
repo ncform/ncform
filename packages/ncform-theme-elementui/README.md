@@ -1,7 +1,7 @@
 # ncform theme element-ui
 
-![vue 2.5](https://img.shields.io/badge/vue-2.5-green.svg)
-![element-ui 2.0](https://img.shields.io/badge/element-2.0-blue.svg)
+![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
+![element-ui 2.x](https://img.shields.io/badge/element-2.x-blue.svg)
 
 ncform theme widgets -> element-ui
 
@@ -17,13 +17,13 @@ Step 2: start development
 npm run dev
 ```
 
-[可选]配合以下可使用依赖的`ncform-common`的最新代码
+[Optional] Use the following command to watch and depend on the latest code for `ncform-common`
 ```
 cd ../ncform-common
 npm run watch-build
 ```
 
-[可选]配合以下可使用依赖的`ncform`的最新代码
+[Optional] Use the following command to watch and depend on the latest code for `ncform`
 ```
 cd ../ncform
 npm run watch-build

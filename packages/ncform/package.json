@@ -5,12 +5,14 @@
   "author": "daniel.xiao",
   "main": "dist/vueNcform.min.js",
   "keywords": [
+    "vue",
     "json",
     "form",
     "automatic",
     "json-schema",
     "ncform",
-    "generation"
+    "generator",
+    "configuration"
   ],
   "scripts": {
     "dev": "gulp dev",
