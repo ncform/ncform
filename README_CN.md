@@ -6,7 +6,7 @@
 
 ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表单UI及其交互行为。
 
-![preview](http://daniel-test.image.alimmdn.com/ncform/ncform-preview?spm=a312x.7755591.0.0.502b4e08Lxgnuv)
+![preview](docs/images/preview.png)
 
 ## Playground
 
@@ -189,11 +189,11 @@ SO，为了提高表单开发效率，减少失误，提高表单规范和健壮
 
 - json-schema例子：
 
-![json-schema sample](http://daniel-test.image.alimmdn.com/ncform/jsonschema-sample@400w?spm=a312x.7755591.0.0.502b4e08LPhKHt)
+![json-schema sample](docs/images/json-schema-sample.jpg)
 
 - ncform例子：
 
-![ncform sample](http://daniel-test.image.alimmdn.com/ncform/ncform-sample@400w?spm=a312x.7755591.0.0.502b4e08LPhKHt)
+![ncform schema sample](docs/images/ncform-schema-sample.jpg)
 
 json-schema对于验证规则，声明在各个地方，不好管理。而ncform都集中在rules。这种设计也便于后面开发表单制作IDE
 
@@ -232,7 +232,7 @@ globalConfig: {
 
 ncform = ncform容器 + ncform主题标准组件
 
-![design](http://daniel-test.image.alimmdn.com/ncform/design.png)
+![design](docs/images/design.png)
 
 一个系统项目，一般都会使用一种UI库（如vue）及其之上的UI实现方案（如elementui）
 为了与之和平共处，ncform的标准组件可采用与之一致的UI实现方案
@@ -259,9 +259,3 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 - 肖玮（Daniel.xiao），ncform的设计者和主要实现者
 - 罗振考（Kyle.lo），ncform表单校验部分的实现者和标准组件的主力开发者
-
-## 开发交流
-
-![qrcode](http://daniel-test.image.alimmdn.com/ncform/wx-qrcode.jpeg)
-
-ncform官方微信讨论群，请扫码或搜索微信号viptech128(唯技术)，备注ncform，添加好友后加入。
