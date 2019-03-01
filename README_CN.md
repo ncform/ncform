@@ -17,7 +17,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 - 目录
   - [Playground](#Playground)
   - [Quick Start](#Quick-Start)
-    - [In node.js](#In-node)
+    - [In node.js](#In-nodejs)
     - [In browser](#In-browser)
   - [特性](#特性)
   - [文档](#文档)

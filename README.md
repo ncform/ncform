@@ -17,7 +17,7 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
 - Table Of Contents
   - [Playground](#Playground)
   - [Quick Start](#Quick-Start)
-    - [In node.js](#In-node)
+    - [In node.js](#In-nodejs)
     - [In browser](#In-browser)
   - [Features](#Features)
   - [Documents](#Documents)
