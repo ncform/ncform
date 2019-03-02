@@ -3,12 +3,14 @@
   "private": true,
   "license": "MIT",
   "keywords": [
+    "vue",
     "json",
     "form",
     "automatic",
     "json-schema",
     "ncform",
-    "generation"
+    "generator",
+    "configuration"
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",

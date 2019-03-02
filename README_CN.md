@@ -1,12 +1,32 @@
 # ncform
 
-![vue 2.5](https://img.shields.io/badge/vue-2.5-green.svg)
+![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
 
 [English Version](README.md)
 
+![preview](docs/images/preview.png)
+
 ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表单UI及其交互行为。
 
-![preview](docs/images/preview.png)
+自带丰富的 **标准组件** 和 **校验规则**，开箱即用。
+
+具备强大的 **控件交互** 和 **扩展能力**，做你所想。
+
+---
+
+- 目录
+  - [Playground](#Playground)
+  - [Quick Start](#Quick-Start)
+    - [In node.js](#In-nodejs)
+    - [In browser](#In-browser)
+  - [特性](#特性)
+  - [文档](#文档)
+  - [解决痛点](#解决痛点)
+  - [重复造轮子？](#重复造轮子)
+  - [为什么不用标准的json-schema？](#为什么不用标准的json-schema)
+  - [dx表达式](#dx表达式)
+  - [设计思想](#设计思想)
+  - [Schema Generator](#Schema-Generator)
 
 ## Playground
 
@@ -78,7 +98,7 @@ export default {
 ```
 可参考[ncform-demo](https://github.com/daniel-dx/ncform-demo)项目
 
-### In a browser
+### In browser
 
 ```
 <html>
@@ -148,11 +168,11 @@ export default {
 
 ## 文档
 
-- [ncform config/props/api/event](./CONFIG.md)
+- [ncform config / props / api / event](./CONFIG.md)
 
-- [Standard Components](./STD-COMP_CN.md)
+- [标准组件预览版本](https://ncform.github.io/ncform/ncform-theme-elementui/index.html) / [标准组件文字版](./STD-COMP_CN.md)
 
-- [How to extend](./EXT-DOC.md)
+- [如何扩展 表单控件 / 校验规则](./EXT-DOC.md)
 
 ## 解决痛点
 

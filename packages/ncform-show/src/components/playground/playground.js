@@ -32,13 +32,15 @@ export default {
           template: 'Template',
           genForm: 'Run',
           getData: 'Get Data',
-          notValidJSON: 'Not valid JSON data'
+          notValidJSON: 'Not valid JSON data',
+          moreComp: 'See more widgets'
         },
         cn: {
           template: '模板',
           genForm: '生成表单',
           getData: '获取表单数据',
-          notValidJSON: '不是有效的JSON数据'
+          notValidJSON: '不是有效的JSON数据',
+          moreComp: '看看更多的组件'
         }
       },
       ncformSchema: {
