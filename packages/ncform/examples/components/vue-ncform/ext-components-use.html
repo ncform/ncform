@@ -16,6 +16,7 @@
     <ncform :form-schema="formSchema" v-model="formSchema.value"></ncform>
 
     <button class="btn btn-primary" @click="submit()">提交</button>
+    <button class="btn btn-primary" @click="changeLang()">切换语言</button>
   </div>
 
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
@@ -27,7 +28,15 @@
     let extComponents = {
       'sayHi': {
         mixins: [ncformCommon.mixins.vue.controlMixin],
-        template: '<div>hi {{modelVal}}</div>',
+        template: '<div>{{$t("hi", {msg: modelVal})}} {{modelVal}}</div>',
+        i18nData: {
+          en: {
+            hi: 'Hi <%= msg %>'
+          },
+          zh_cn: {
+            hi: '你好 <%= msg %>'
+          }
+        },
         props: {
           value: {
             type: [String]
@@ -75,6 +84,9 @@
       methods: {
         submit() {
           console.log(JSON.stringify(this.$data.formSchema.value, null, 2));
+        },
+        changeLang() {
+          this.$ncformSetLang('en');
         }
       }
     });

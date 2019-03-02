@@ -69,6 +69,11 @@ module.exports = {
       window.__$ncform.__ncformRegularValidation.registerRule(ruleItem);
     }
 
+    window.__$ncform.eventHub = window.__$ncform.eventHub || new Vue();
+    Vue.prototype.$ncformSetLang = function(lang) {
+      window.__$ncform.eventHub.$emit('ncform set lang', lang);
+    }
+
     Vue.component("ncform", ncform);
   }
 };

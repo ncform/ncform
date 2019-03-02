@@ -44,8 +44,8 @@
 
     <!-- 列表控制按钮 -->
     <div v-show="!mergeConfig.collapsed" class="el-button-group" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
-      <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt}}</button>
-      <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt}}</button>
+      <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt || $t('add')}}</button>
+      <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt || $t('delAll')}}</button>
     </div>
 
   </div>
@@ -97,6 +97,17 @@
   export default {
 
     mixins: [layoutArrayMixin],
+
+    i18nData: {
+      en: {
+        add: 'Add',
+        delAll: 'Delete All'
+      },
+      zh_cn: {
+        add: '增加',
+        delAll: '删除全部'
+      }
+    },
 
     created() {
       this._supportItemsCollapse();

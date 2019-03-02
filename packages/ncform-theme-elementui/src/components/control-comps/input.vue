@@ -10,18 +10,18 @@
         <el-button slot="prepend" v-if="mergeConfig.compound.prependIcon" :icon="mergeConfig.compound.prependIcon"></el-button>
         <el-button slot="append" v-if="mergeConfig.compound.appendIcon" :icon="mergeConfig.compound.appendIcon"></el-button>
 
-        <el-select v-if="mergeConfig.compound.prependSelect" v-model="prependSelectVal" slot="prepend" placeholder="请选择">
+        <el-select v-if="mergeConfig.compound.prependSelect" v-model="prependSelectVal" slot="prepend" :placeholder="$t('selectPls')">
           <el-option v-for="item in prependSelectOptions" :label="item[mergeConfig.compound.prependSelect.itemLabelField]" :value="item[mergeConfig.compound.prependSelect.itemValueField]" :key="item[mergeConfig.compound.prependSelect.itemValueField]"></el-option>
         </el-select>
 
-        <el-select v-if="mergeConfig.compound.appendSelect" v-model="appendSelectVal" slot="append" placeholder="请选择">
+        <el-select v-if="mergeConfig.compound.appendSelect" v-model="appendSelectVal" slot="append" :placeholder="$t('selectPls')">
           <el-option v-for="item in appendSelectOptions" :label="item[mergeConfig.compound.appendSelect.itemLabelField]" :value="item[mergeConfig.compound.appendSelect.itemValueField]" :key="item[mergeConfig.compound.appendSelect.itemValueField]"></el-option>
         </el-select>
       </template>
 
       <!--上传类型-->
       <template v-else-if="mergeConfig.type === 'file' && mergeConfig.upload">
-        <el-button slot="append" v-if="mergeConfig.upload.uploadUrl" class="ncform-input-upload" @click="handleClickUpload">{{isUploading ? '上传中...' : mergeConfig.upload.uploadText}}
+        <el-button slot="append" v-if="mergeConfig.upload.uploadUrl" class="ncform-input-upload" @click="handleClickUpload">{{isUploading ? $t('uploading') : mergeConfig.upload.uploadText || $t('upload')}}
           <input type="file" ref="upload" :accept="mergeConfig.upload.accept || ''" @change="handleFileChange" />
         </el-button>
       </template>
@@ -42,11 +42,11 @@
         <el-button slot="prepend" v-if="mergeConfig.compound.prependIcon" :icon="mergeConfig.compound.prependIcon"></el-button>
         <el-button slot="append" v-if="mergeConfig.compound.appendIcon" :icon="mergeConfig.compound.appendIcon"></el-button>
 
-        <el-select v-if="mergeConfig.compound.prependSelect" v-model="prependSelectVal" slot="prepend" placeholder="请选择">
+        <el-select v-if="mergeConfig.compound.prependSelect" v-model="prependSelectVal" slot="prepend" :placeholder="$t('selectPls')">
           <el-option v-for="item in prependSelectOptions" :label="item[mergeConfig.compound.prependSelect.itemLabelField]" :value="item[mergeConfig.compound.prependSelect.itemValueField]" :key="item[mergeConfig.compound.prependSelect.itemValueField]"></el-option>
         </el-select>
 
-        <el-select v-if="mergeConfig.compound.appendSelect" v-model="appendSelectVal" slot="append" placeholder="请选择">
+        <el-select v-if="mergeConfig.compound.appendSelect" v-model="appendSelectVal" slot="append" :placeholder="$t('selectPls')">
           <el-option v-for="item in appendSelectOptions" :label="item[mergeConfig.compound.appendSelect.itemLabelField]" :value="item[mergeConfig.compound.appendSelect.itemValueField]" :key="item[mergeConfig.compound.appendSelectVal.itemValueField]"></el-option>
         </el-select>
       </template>
@@ -83,6 +83,19 @@ const controlMixin = ncformCommon.mixins.vue.controlMixin;
 
 export default {
   mixins: [controlMixin],
+
+  i18nData: {
+    en: {
+      selectPls: 'Select Please',
+      uploading: 'Uploading...',
+      upload: 'Upload'
+    },
+    zh_cn: {
+      selectPls: '请选择',
+      uploading: '上传中...',
+      upload: '点击上传'
+    }
+  },
 
   props: {
     value: {
@@ -260,7 +273,7 @@ export default {
             minSize: 0 // 最小图片大小，单位KB，0代表不限
           },
           resField: "", // 获取返回结果的字段,
-          uploadText: "点击上传" //  上传按钮的名称
+          uploadText: "" //  上传按钮的名称
         }
       }
     };

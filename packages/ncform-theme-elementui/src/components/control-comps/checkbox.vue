@@ -10,7 +10,7 @@
       :indeterminate="mergeConfig.isIndeterminate"
       v-model="mergeConfig.checkAll"
       @change="handleCheckAllChange"
-    >全选</el-checkbox>
+    >{{$t('all')}}</el-checkbox>
 
     <el-checkbox-group
       v-if="!readonly"
@@ -97,6 +97,17 @@
   export default {
 
     mixins: [controlMixin],
+
+    i18nData: {
+      en: {
+        yes: 'Yes',
+        all: 'All'
+      },
+      zh_cn: {
+        yes: '是',
+        all: '全选'
+      }
+    },
 
     props: {
       value: {
@@ -204,7 +215,7 @@
       if (enumSourceRemote && enumSourceRemote.remoteUrl) {
         vm.getRemoteSource();
       } else if (!vm.mergeConfig.enumSource.length) {
-        vm.mergeConfig.enumSource = [ {label: '是', value: true}];
+        vm.mergeConfig.enumSource = [ {label: this.$t('yes'), value: true}];
       }
     }
   }

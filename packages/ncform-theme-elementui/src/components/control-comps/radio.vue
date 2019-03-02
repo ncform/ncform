@@ -67,6 +67,17 @@
 
     mixins: [controlMixin],
 
+    i18nData: {
+      en: {
+        yes: 'Yes',
+        no: 'No'
+      },
+      zh_cn: {
+        yes: '是',
+        no: '否'
+      }
+    },
+
     props: {
       value: {
         type: [String, Number, Boolean]
@@ -157,7 +168,7 @@
       if (enumSourceRemote && enumSourceRemote.remoteUrl) {
         vm.getRemoteSource();
       } else if (!vm.mergeConfig.enumSource.length) {
-        vm.mergeConfig.enumSource = [ {value: true, label: '是'}, {value: false, label: '否'} ];
+        vm.mergeConfig.enumSource = [ {value: true, label: this.$t('yes')}, {value: false, label: this.$t('no')} ];
       }
     }
   }

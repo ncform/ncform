@@ -1,9 +1,19 @@
 import extend from "extend";
 import axios from "axios";
+import _template from "lodash-es/template";
 import ncformUtils from "../../ncform-utils";
 
 export default {
+
+  lang: (navigator.browserLanguage || navigator.language).replace(/-/, '_').toLowerCase(),
+  i18nData: {
+    en: {},
+    zh_cn: {}
+  },
+
   created() {
+
+    this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
 
     if (!this.$http) {
       this.$http = this.$axios || this.axios || axios;
@@ -24,6 +34,12 @@ export default {
         this.config
       );
     });
+
+    window.__$ncform.eventHub.$on('ncform set lang', this._changeLang)
+  },
+
+  beforeDestroy() {
+    window.__$ncform.eventHub.$off('ncform set lang', this._changeLang)
   },
 
   props: {
@@ -61,7 +77,8 @@ export default {
     return {
       mergeConfig: {},
       defaultConfig: {},
-      modelVal: this.value
+      modelVal: this.value,
+      i18n: {},
     };
   },
 
@@ -108,6 +125,15 @@ export default {
 
     _processModelVal(modelVal) {
       return modelVal;
+    },
+
+    _changeLang(lang) {
+      this.$options.lang = lang.replace(/-/, '_').toLowerCase();
+      this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
+    },
+
+    $t(key, data) {
+      return Object.prototype.toString.call(data) !== "[object Object]" ? this.$data.i18n[key] : _template(this.$data.i18n[key])(data);
     }
   }
 };

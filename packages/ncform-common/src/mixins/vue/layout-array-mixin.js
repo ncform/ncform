@@ -1,9 +1,22 @@
 import _cloneDeep from "lodash-es/cloneDeep";
+import _template from "lodash-es/template";
 import extend from "extend";
 import ncformUtils from "../../ncform-utils";
 
 export default {
+
+  lang: (navigator.browserLanguage || navigator.language).replace(/-/, '_').toLowerCase(),
+  i18nData: {
+    en: {
+    },
+    zh_cn: {
+    }
+  },
+
   created() {
+
+    this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
+
     this.schema.value =
       this.schema.value && this.schema.value.length > 0
         ? this.schema.value
@@ -26,6 +39,12 @@ export default {
         this.config
       );
     });
+
+    window.__$ncform.eventHub.$on('ncform set lang', this._changeLang)
+  },
+
+  beforeDestroy() {
+    window.__$ncform.eventHub.$off('ncform set lang', this._changeLang)
   },
 
   props: {
@@ -65,9 +84,10 @@ export default {
         disableReorder: false,
         disableAdd: false,
         disableDel: false,
-        addTxt: "Add",
-        delAllTxt: "Del All"
-      }
+        addTxt: "",
+        delAllTxt: "",
+      },
+      i18n: {},
     };
   },
 
@@ -137,6 +157,15 @@ export default {
     collapse() {
       if (!this.$data.mergeConfig.disableCollapse)
         this.$data.mergeConfig.collapsed = !this.$data.mergeConfig.collapsed;
+    },
+
+    _changeLang(lang) {
+      this.$options.lang = lang.replace(/-/, '_').toLowerCase();
+      this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
+    },
+
+    $t(key, data) {
+      return Object.prototype.toString.call(data) !== "[object Object]" ? this.$data.i18n[key] : _template(this.$data.i18n[key])(data);
     }
   }
 };
