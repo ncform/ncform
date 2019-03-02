@@ -36,11 +36,18 @@
       }
     }
 
-    Vue.use(vueNcform, { extComponents });
+    // You can add your custom widget while registering ncform
+    // Vue.use(vueNcform, { extComponents });
+
+    Vue.use(vueNcform);
 
     // Bootstrap the app
     new Vue({
       el: '#demo',
+      created() {
+        // You can add your custom widget after registering ncform as follow:
+        this.$ncformAddWidget({name: 'sayHi', widget: extComponents.sayHi});
+      },
       data: {
         formSchema: {
           type: 'object',

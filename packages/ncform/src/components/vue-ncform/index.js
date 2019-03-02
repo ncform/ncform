@@ -59,6 +59,16 @@ module.exports = {
       return vm.reset();
     };
 
+    Vue.prototype.$ncformAddWidget = function({name, widget}) {
+      Vue.component(`ncform-${_kebabCase(name)}`, widget)
+    }
+
+    Vue.prototype.$ncformAddRule = function({name, rule}) {
+      let ruleItem = {};
+      ruleItem[name] = rule;
+      window.__$ncform.__ncformRegularValidation.registerRule(ruleItem);
+    }
+
     Vue.component("ncform", ncform);
   }
 };

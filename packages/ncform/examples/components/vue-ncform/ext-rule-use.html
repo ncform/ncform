@@ -34,25 +34,34 @@
       }
 
       validateLogic(val, ruleVal) {
-        this.errMsg = "dynamic error"
-        return new Promise((rs, rj)=>{
-          const rd = parseInt(Math.random()*20+1)*100;
-          console.log('request', rd);
-          setTimeout(()=>{
-            rs(val === 'daniel');
-            console.log('==>',rd)
-          },rd);
-        });
-        // return val === 'daniel';
+        // this.errMsg = "dynamic error"
+        // return new Promise((rs, rj)=>{
+        //   const rd = parseInt(Math.random()*20+1)*100;
+        //   console.log('request', rd);
+        //   setTimeout(()=>{
+        //     rs(val === 'daniel');
+        //     console.log('==>',rd)
+        //   },rd);
+        // });
+
+        this.errMsg = "must fill in 'daniel'"
+        return val === 'daniel';
       }
 
     }
 
-    Vue.use(vueNcform, { extRules: [{myCustom: MyCustomRule}] });
+    // You can add your custom rule while registering ncform
+    // Vue.use(vueNcform, { extRules: [{myCustom: MyCustomRule}] });
+
+    Vue.use(vueNcform);
 
     // Bootstrap the app
     new Vue({
       el: '#demo',
+      created() {
+        // You can add your custom rule after registering ncform as follow:
+        this.$ncformAddRule({name: 'myCustom', rule: MyCustomRule});
+      },
       data: {
         formSchema: {
           type: 'object',
