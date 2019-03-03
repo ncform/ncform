@@ -101,10 +101,12 @@
     i18nData: {
       en: {
         yes: 'Yes',
+        no: 'No',
         all: 'All'
       },
       zh_cn: {
         yes: '是',
+        no: '否',
         all: '全选'
       }
     },
@@ -150,7 +152,7 @@
         const modelVal = vm.modelVal;
 
         if (typeof modelVal === 'boolean') {
-          res.push(modelVal ? '是' : '否');
+          res.push(modelVal ? this.$t('yes') : this.$t('no'));
         } else {
           for (let m in modelVal) {
             for (let i in enumSource) {

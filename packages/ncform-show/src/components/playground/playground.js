@@ -1045,6 +1045,7 @@ export default {
     langChange() {
       let url = location.pathname + '?lang=' + this.$data.lang;
       window.history.replaceState("", document.title, url);
+      window.location.reload();
     }
   }
 };

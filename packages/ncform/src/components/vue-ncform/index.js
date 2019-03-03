@@ -19,12 +19,14 @@ module.exports = {
    *   { 'rule name': rule class }
    * ]
    */
-  install: (Vue, options = { extComponents: {}, extRules: [] }) => {
+  install: (Vue, options = { extComponents: {}, extRules: [], lang }) => {
     window.__$ncform = {}; // 属于ncform的全局变量
 
     window.__$ncform.__ncFormsGlobalList = {};
 
     window.__$ncform.__ncformRegularValidation = new RegularValidation();
+
+    window.__$ncform.lang = (options.lang || window.__$ncform.lang || navigator.browserLanguage || navigator.language).replace(/-/, '_').toLowerCase();
 
     // 注册组件
     _map(
@@ -67,11 +69,6 @@ module.exports = {
       let ruleItem = {};
       ruleItem[name] = rule;
       window.__$ncform.__ncformRegularValidation.registerRule(ruleItem);
-    }
-
-    window.__$ncform.eventHub = window.__$ncform.eventHub || new Vue();
-    Vue.prototype.$ncformSetLang = function(lang) {
-      window.__$ncform.eventHub.$emit('ncform set lang', lang);
     }
 
     Vue.component("ncform", ncform);

@@ -1,6 +1,7 @@
 # ncform
 
 ![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
 [English Version](README.md)
 

@@ -45,7 +45,7 @@
         lang = 'cn';
       }
 
-      Vue.use(vueNcform, { extComponents: { input: input.default, object: object.default } });
+      Vue.use(vueNcform, { extComponents: { input: input.default, object: object.default }, lang: lang === 'cn' ? 'zh_cn' : 'en' });
 
       let formSchemas = [
         {

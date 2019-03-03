@@ -5,7 +5,6 @@ import ncformUtils from "../../ncform-utils";
 
 export default {
 
-  lang: (navigator.browserLanguage || navigator.language).replace(/-/, '_').toLowerCase(),
   i18nData: {
     en: {},
     zh_cn: {}
@@ -13,6 +12,7 @@ export default {
 
   created() {
 
+    this.$options.lang = window.__$ncform.lang;
     this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
 
     if (!this.$http) {
@@ -35,11 +35,6 @@ export default {
       );
     });
 
-    window.__$ncform.eventHub.$on('ncform set lang', this._changeLang)
-  },
-
-  beforeDestroy() {
-    window.__$ncform.eventHub.$off('ncform set lang', this._changeLang)
   },
 
   props: {
@@ -125,11 +120,6 @@ export default {
 
     _processModelVal(modelVal) {
       return modelVal;
-    },
-
-    _changeLang(lang) {
-      this.$options.lang = lang.replace(/-/, '_').toLowerCase();
-      this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
     },
 
     $t(key, data) {

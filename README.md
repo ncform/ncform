@@ -1,6 +1,7 @@
 # ncform 
 
 ![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
 [中文版](README_CN.md)
 
@@ -55,7 +56,7 @@ import ncformStdComps from '@ncform/ncform-theme-elementui';
 import axios from 'axios';
 
 Vue.use(Element);
-Vue.use(vueNcform, { extComponents: ncformStdComps });
+Vue.use(vueNcform, { extComponents: ncformStdComps, /*lang: 'zh-cn'*/ });
 window.$http = Vue.prototype.$http = axios;
 ```
 
@@ -123,7 +124,7 @@ You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) pro
   <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
 
   <script type="text/javascript">
-    Vue.use(vueNcform, { extComponents: ncformStdComps });
+    Vue.use(vueNcform, { extComponents: ncformStdComps, /*lang: 'zh-cn'*/ });
 
     // Bootstrap the app
     new Vue({

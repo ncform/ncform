@@ -243,15 +243,6 @@ class MyCustomRule extends ncformCommon.ValidationRule {
 this.$ncformAddRule({name: 'myCustom', rule: MyCustomRule});
 ```
 
-- $ncformSetLang(lang)
-
-Switch language
-
-```
-// Demo code:
-this.$ncformSetLang('en');
-```
-
 ## ncform event
 
 - submit

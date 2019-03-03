@@ -47,7 +47,7 @@
         lang = 'cn';
       }
 
-      Vue.use(vueNcform, { extComponents: { object: object.default, label: label.default } });
+      Vue.use(vueNcform, { extComponents: { object: object.default, label: label.default }, lang: lang === 'cn' ? 'zh_cn' : 'en' });
 
       let formSchemas = [
         {
@@ -102,7 +102,7 @@
               label: {
                 type: 'string',
                 value:
-                  'React makes it painless to create interactive UIs. Design simple views for each state in your application, and React will efficiently update and render just the right components when your data changes.',
+                  'ncform, a nice form development way that generates form UIs and their interactions with just configuration.',
                 ui: {
                   widget: 'label',
                   widgetConfig: {
