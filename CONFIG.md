@@ -203,6 +203,55 @@ this.$ncformValidate('demoForm').then(data => {
 })
 ```
 
+- $ncformAddWidget({name, widget})
+
+Add your custom form control
+
+```
+// Demo code:
+this.$ncformAddWidget({name: 'sayHi', widget: {
+  mixins: [ncformCommon.mixins.vue.controlMixin],
+  template: '<div>hi {{modelVal}}</div>',
+  props: {
+    value: {
+      type: [String]
+    },
+  },
+}});
+```
+
+- $ncformAddRule({name, rule})
+
+Add your custom validation rule
+
+```
+// Demo code:
+class MyCustomRule extends ncformCommon.ValidationRule {
+
+  constructor(props) {
+    super(props);
+    this.name = 'myCustom';
+    this.defaultErrMsg = 'yeah, show my custom rule message';
+  }
+
+  validateLogic(val, ruleVal) {
+    this.errMsg = "must fill in 'daniel'"
+    return val === 'daniel';
+  }
+}
+
+this.$ncformAddRule({name: 'myCustom', rule: MyCustomRule});
+```
+
+- $ncformSetLang(lang)
+
+Switch language
+
+```
+// Demo code:
+this.$ncformSetLang('en');
+```
+
 ## ncform event
 
 - submit

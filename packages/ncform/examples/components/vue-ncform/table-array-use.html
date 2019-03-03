@@ -18,6 +18,7 @@
       <ncform :form-schema="formSchema" v-model="formSchema.value"></ncform>
 
       <button class="btn btn-primary" @click="submit(formSchema.value)">提交</button>
+      <button class="btn btn-primary" @click="changeLang()">切换语言</button>
     </div>
   </div>
 
@@ -209,6 +210,9 @@
       methods: {
         submit(value) {
           console.log(JSON.stringify(value, null, 2));
+        },
+        changeLang() {
+          this.$ncformSetLang('en');
         }
       }
     });

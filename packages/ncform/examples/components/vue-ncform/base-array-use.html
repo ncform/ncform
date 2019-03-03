@@ -18,6 +18,7 @@
       <ncform :form-schema="formSchema" v-model="formSchema.value" :form-name="'formname_' + idx"></ncform>
 
       <button class="btn btn-primary" @click="submit(formSchema.value, 'formname_' + idx)">提交</button>
+      <button class="btn btn-primary" @click="changeLang()">切换语言</button>
     </div>
   </div>
 
@@ -58,8 +59,8 @@
                     // disableAdd: true,
                     // disableDel: true,
                     // disableReorder: true,
-                    addTxt: '增加',
-                    delAllTxt: '删除全部',
+                    addTxt: '加一个',
+                    delAllTxt: '删全部',
 
                     // disableItemCollapse: false,
                     // itemCollapse: true
@@ -216,6 +217,9 @@
               console.log(JSON.stringify(value, null, 2));
             }
           });
+        },
+        changeLang() {
+          this.$ncformSetLang('en');
         }
       }
     });

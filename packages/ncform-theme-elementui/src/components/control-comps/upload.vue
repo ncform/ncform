@@ -24,7 +24,7 @@
     <!-- 可拖拽 -->
     <template v-if="!readonly && mergeConfig.drag" slot="trigger">
       <i class="el-icon-upload"></i>
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+      <div class="el-upload__text" v-html="$t('uploadTips')"></div>
     </template>
     <div v-if="mergeConfig.drag && disabled" class="disabled-mask"></div>
 
@@ -35,7 +35,7 @@
       size="small"
       type="success"
       @click="submitUpload"
-    >上传到服务器</el-button>
+    >{{$t('uploadServer')}}</el-button>
 
     <!-- 不能可拖拽 是否自动上传 维度-->
     <el-button
@@ -43,7 +43,7 @@
       :disabled="disabled"
       size="small"
       type="primary"
-    >点击上传</el-button>
+    >{{$t('upload')}}</el-button>
 
     <template v-if="!readonly && !mergeConfig.drag && !mergeConfig.autoUpload">
       <el-button
@@ -51,14 +51,14 @@
         slot="trigger"
         size="small"
         type="primary"
-      >选取文件</el-button>
+      >{{$t('chFile')}}</el-button>
       <el-button
         :disabled="disabled"
         class="upload-btn"
         size="small"
         type="success"
         @click="submitUpload"
-      >上传到服务器</el-button>
+      >{{$t('uploadServer')}}</el-button>
     </template>
 
   </el-upload>
@@ -119,6 +119,31 @@
   export default {
 
     mixins: [controlMixin],
+
+    i18nData: {
+      en: {
+        uploadTips: 'Drag file here, or <em>click to upload</em>',
+        uploadServer: 'Upload to server',
+        upload: 'Upload',
+        chFile: 'Select file',
+        successChTips: '<%= fileCount %> files selected',
+        uploadSuccess: 'Uploaded successfully!',
+        uploadFail: 'Uploading files all failed!',
+        uploadSomeFail: 'Some files failed to upload!',
+        limitTips: 'No more than <%= limit %> files can be selected, please re-select'
+      },
+      zh_cn: {
+        uploadTips: '将文件拖到此处，或<em>点击上传</em>',
+        uploadServer: '上传到服务器',
+        upload: '点击上传',
+        chFile: '选取文件',
+        successChTips: '共选中文件 <%= fileCount %> 个',
+        uploadSuccess: '上传成功！',
+        uploadFail: '上传文件全部失败！',
+        uploadSomeFail: '部分文件上传失败！',
+        limitTips: '选中文件不能多于<%= limit %>个，请重新选择'
+      }
+    },
 
     props: {
       value: {
@@ -210,7 +235,7 @@
           && !vm.mergeConfig.showFileList
           && fileList.length) {
             vm.$message({
-              message: `成功选中文件！目前选中文件共 ${fileList.length} 个`,
+              message: this.$t('successChTips', {fileCount: fileList.length}),
               type: 'success'
             });
         }
@@ -247,12 +272,12 @@
           let content;
           if (total === vm.uploadInfo.num[state]) {
             vm.$message({
-              message: state === 'success' ? '上传成功！' : '上传文件全部失败！',
+              message: state === 'success' ? vm.$t('uploadSuccess') : vm.$t('uploadFail'),
               type: state
             });
           } else {
             vm.$message({
-              message: '部分文件上传失败！',
+              message: vm.$t('uploadSomeFail'),
               type: 'error'
             });
           }
@@ -266,7 +291,7 @@
       handleUploadExceed(files, fileList) {
         const vm = this;
         vm.$message({
-          message: `此次选择导致一次上传的文件个数超过限制数目${vm.mergeConfig.limit}个，请重新选择！`,
+          message: vm.$t('limitTips', {limit: vm.mergeConfig.limit}),
           type: 'warning'
         });
       },

@@ -1,6 +1,6 @@
 <template>
 
-      <el-select v-model="modelVal" :placeholder="placeholder || '请选择'" v-show="!hidden" :disabled="disabled || readonly"
+      <el-select v-model="modelVal" :placeholder="placeholder || $t('selectPls')" v-show="!hidden" :disabled="disabled || readonly"
       :clearable="mergeConfig.clearable"
       :multiple="mergeConfig.multiple"
       :filterable="mergeConfig.filterable"
@@ -34,6 +34,15 @@ const ncformUtils = ncformCommon.ncformUtils;
 
 export default {
   mixins: [controlMixin],
+
+  i18nData: {
+    en: {
+      selectPls: 'Select Please'
+    },
+    zh_cn: {
+      selectPls: '请选择'
+    }
+  },
 
   props: {
     value: {

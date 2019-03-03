@@ -282,6 +282,9 @@ resField: Which field of the response data as the data source, as the example re
       // Bootstrap the app
       new Vue({
         el: '#demo',
+        mounted() {
+          this.$ncformSetLang(lang === 'cn' ? 'zh_cn' : 'en');
+        },
         data: {
           formSchemas: getFormSchemas(),
           originFormSchemas: getFormSchemas()

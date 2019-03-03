@@ -1,13 +1,13 @@
 <template>
   <el-date-picker class="ncform-date-picker"
     v-if="mergeConfig.type && typeOptions[mergeConfig.type]"
-    :placeholder="placeholder || typeOptions[mergeConfig.type].placeholder"
+    :placeholder="placeholder || $t(typeOptions[mergeConfig.type].placeholder)"
     :disabled="disabled"
     :readonly="readonly"
     v-show="!hidden"
     v-model="modelVal"
     :type="mergeConfig.type"
-    :format="mergeConfig.format || typeOptions[mergeConfig.type].format"
+    :format="mergeConfig.format || $t(typeOptions[mergeConfig.type].format)"
     >
   </el-date-picker>
 </template>
@@ -44,6 +44,25 @@ const controlMixin = ncformCommon.mixins.vue.controlMixin;
 export default {
   mixins: [controlMixin],
 
+  i18nData: {
+    en: {
+      chYear: 'Choose Year',
+      chMonth: 'Choose Month',
+      chDate: 'Choose Date',
+      chWeek: 'Choose Week',
+      chTime: 'Choose Datetime',
+      weekFormat: 'Week WW of yyyy'
+    },
+    zh_cn: {
+      chYear: '选择年份',
+      chMonth: '选择月份',
+      chDate: '选择日期',
+      chWeek: '选择周',
+      chTime: '选择时间',
+      weekFormat: 'yyyy年 第WW周'
+    }
+  },
+
   props: {
     value: {
       type: String,
@@ -70,23 +89,23 @@ export default {
       typeOptions: {
         year: {
           format: '',
-          placeholder: '选择年',
+          placeholder: 'chYear',
         },
         month: {
           format: '',
-          placeholder: '选择月',
+          placeholder: 'chMonth',
         },
         date: {
           format: '',
-          placeholder: '选择日期',
+          placeholder: 'chDate',
         },
         week: {
-          format: 'yyyy年 第WW周',
-          placeholder: '选择周',
+          format: 'weekFormat',
+          placeholder: 'chWeek',
         },
         datetime:{
           format: '',
-          placeholder: '选择时间',
+          placeholder: 'chTime',
         }
       },
       // 组件特有的配置属性

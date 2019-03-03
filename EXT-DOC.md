@@ -38,6 +38,10 @@ export MyCustomRule;
 3.Register rule
 ```
 Vue.use(vueNcform, { extRules: [{myCustom: MyCustomRule}] });
+
+or 
+
+vm.$ncformAddRule({name: 'myCustom', rule: MyCustomRule});
 ```
 
 4.Use it
@@ -61,7 +65,8 @@ npm i @ncform/ncform-common --save
 
 <template>
   <div >
-    <label>{{mergeConfig.msg}}</label>
+    <!-- use $t to get i18n data -->
+    <label>{{$t('hi', {name: mergeConfig.name})}}</label>
 
     <!-- disabled / readonly / placeholder / hidden : use the computed version, not the config version. defined in controlMixin -->
     <!-- modelVal: for binding value. defined in controlMixin -->
@@ -83,10 +88,19 @@ import ncformCommon from '@ncform/ncform-common';
 export default {
   mixins: [ncformCommon.mixins.vue.controlMixin],
 
+  i18nData: { // i18n
+    en: {
+      hi: 'Hi <%= name %>'
+    },
+    zh_cn: {
+      hi: '你好 <%= name %>'
+    }
+  },
+
   data() {
     return {
       defaultConfig: { // your config's default value（Note: use mergeConfig when use config value）
-        msg: 'hello'
+        name: 'daniel'
       }
     }
   },
@@ -109,6 +123,10 @@ export default {
 
 ```
 Vue.use(vueNcform, { extComponents: {myCustomComp} });
+
+or
+
+vm.$ncformAddWidget({name: 'myCustomComp', widget: myCustomComp});
 ```
 
 4.Use it

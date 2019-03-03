@@ -40,8 +40,8 @@
 
     <!-- 列表控制按钮 -->
     <div v-show="!mergeConfig.collapsed" class="btn-group btn-group-sm" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
-      <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="btn btn-secondary">{{mergeConfig.addTxt}}</button>
-      <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">{{mergeConfig.delAllTxt}}</button>
+      <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="btn btn-secondary">{{mergeConfig.addTxt || $t('add')}}</button>
+      <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">{{mergeConfig.delAllTxt || $t('delAll')}}</button>
     </div>
 
   </div>
@@ -67,6 +67,17 @@
   export default {
 
     mixins: [layoutArrayMixin],
+
+    i18nData: {
+      en: {
+        add: 'Add',
+        delAll: 'Delete All'
+      },
+      zh_cn: {
+        add: '增加',
+        delAll: '删除全部'
+      }
+    },
 
     created() {
       this._supportItemsCollapse();
