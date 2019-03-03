@@ -45,7 +45,8 @@
       return res.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
     })
 
-    Vue.use(vueNcform, { extComponents: ncformStdComps });
+    let lang = location.search.indexOf('lang=cn') >= 0 ? 'zh-cn' : 'en';
+    Vue.use(vueNcform, { extComponents: ncformStdComps, lang });
     // Bootstrap the app
     new Vue({
       el: '#demo',

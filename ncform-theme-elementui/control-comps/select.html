@@ -55,7 +55,7 @@
         return result.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
       });
 
-      Vue.use(vueNcform, { extComponents: { object: object.default, select: select.default } });
+      Vue.use(vueNcform, { extComponents: { object: object.default, select: select.default }, lang: lang === 'cn' ? 'zh_cn' : 'en' });
 
       let formSchemas = [
         {
@@ -351,9 +351,6 @@
       // Bootstrap the app
       new Vue({
         el: '#demo',
-        mounted() {
-          this.$ncformSetLang(lang === 'cn' ? 'zh_cn' : 'en');
-        },
         data: {
           formSchemas: getFormSchemas(),
           originFormSchemas: getFormSchemas()

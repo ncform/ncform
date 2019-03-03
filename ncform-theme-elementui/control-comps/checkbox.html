@@ -52,7 +52,7 @@
         return { result: [{ id: 1, label: 'iphone' }, { id: 2, label: 'xiaomi' }, { id: 3, label: 'oppo' }] };
       });
 
-      Vue.use(vueNcform, { extComponents: { object: object.default, checkbox: checkbox.default } });
+      Vue.use(vueNcform, { extComponents: { object: object.default, checkbox: checkbox.default }, lang: lang === 'cn' ? 'zh_cn' : 'en' });
 
       let formSchemas = [
         {
@@ -282,9 +282,6 @@ resField: Which field of the response data as the data source, as the example re
       // Bootstrap the app
       new Vue({
         el: '#demo',
-        mounted() {
-          this.$ncformSetLang(lang === 'cn' ? 'zh_cn' : 'en');
-        },
         data: {
           formSchemas: getFormSchemas(),
           originFormSchemas: getFormSchemas()

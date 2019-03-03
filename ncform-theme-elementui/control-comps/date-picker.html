@@ -47,7 +47,7 @@
         lang = 'cn';
       }
 
-      Vue.use(vueNcform, { extComponents: { object: object.default, datePicker: datePicker.default } });
+      Vue.use(vueNcform, { extComponents: { object: object.default, datePicker: datePicker.default }, lang: lang === 'cn' ? 'zh_cn' : 'en' });
 
       let formSchemas = [
         {
@@ -200,9 +200,6 @@
       // Bootstrap the app
       new Vue({
         el: '#demo',
-        mounted() {
-          this.$ncformSetLang(lang === 'cn' ? 'zh_cn' : 'en');
-        },
         data: {
           formSchemas: getFormSchemas(),
           originFormSchemas: getFormSchemas()
