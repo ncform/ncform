@@ -37,7 +37,7 @@ class MyCustomRule extends ncformCommon.ValidationRule {
 
 }
 
-export MyCustomRule;
+export default MyCustomRule;
 ```
 
 3.Register rule
