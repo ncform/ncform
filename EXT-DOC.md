@@ -1,6 +1,11 @@
-# Extend
+# Custom
 
-## Extend validation rules
+- Table Of Contents
+  - [Custom Validation Rule](#Custom-validation-rule)
+  - [Custom Form Widget](#Custom-form-widget)
+  - [widgetConfig support `dx expression`](#Config-support-dx-expression)
+
+## Custom Validation Rule
 
 1.Install ncform-common
 ```
@@ -51,8 +56,7 @@ rules: {
 }
 ```
 
-
-## Extend form controls
+## Custom form widget
 
 1.Install ncform-common
 ```
@@ -140,7 +144,7 @@ ui: {
 }
 ```
 
-## Config support `dx expression`
+## widgetConfig support `dx expression`
 
 ```
 # myCustomComp.vue
