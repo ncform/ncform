@@ -572,6 +572,9 @@ The description of each field of upload is as follows:
       // Bootstrap the app
       new Vue({
         el: '#demo',
+        mounted() {
+          this.$ncformSetLang(lang === 'cn' ? 'zh_cn' : 'en');
+        },
         data: {
           formSchemas: getFormSchemas(),
           originFormSchemas: getFormSchemas()

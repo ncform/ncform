@@ -9,6 +9,7 @@
 }
 #demo .demo_item-wrapper > div:first-child {
   flex: 1;
+  width: 33%;
 }
 #demo .demo_item-wrapper > div:first-child small {
   margin-top: 8px; display: block;
