@@ -1,6 +1,12 @@
-## ncform config
-
 [English Version](CONFIG.md)
+
+- 目录
+  - [Schema](#ncform-schema)
+  - [Props](#ncform-props)
+  - [API](#ncform-API)
+  - [Event](#ncform-event)
+
+## ncform schema
 
 ```js
 {

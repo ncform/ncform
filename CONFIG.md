@@ -1,7 +1,12 @@
-## ncform config
-
 [中文版](CONFIG_CN.md)
 
+- Table Of Contents
+  - [Schema](#ncform-schema)
+  - [Props](#ncform-props)
+  - [API](#ncform-API)
+  - [Event](#ncform-event)
+
+## ncform schema
 ```js
 {
   type: 'object', // Root node: can only be object
