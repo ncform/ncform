@@ -142,7 +142,7 @@
 
 - form-schema
 
-用于描述表单的schema配置数据，具体数据结构请参考[ncform config](#ncform-config)
+用于描述表单的schema配置数据，具体数据结构请参考[ncform schema](#ncform-schema)
 
 ```
 // Demo code
@@ -151,7 +151,7 @@
 
 - form-name
 
-表单名称，当使用[ncform API](#ncform-api)时需要提供该值
+表单名称，当使用部分[ncform API](#ncform-api)时需要提供该值
 
 ```
 // Demo code
