@@ -52,7 +52,10 @@ vm.$ncformAddRule({name: 'myCustom', rule: MyCustomRule});
 4.Use it
 ```
 rules: {
-  myCustom: 1,
+  myCustom: {
+    value: '',
+    errMsg: ''
+  },
 }
 ```
 
