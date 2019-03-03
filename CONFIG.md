@@ -141,7 +141,7 @@
 
 - form-schema
 
-Used to describe the schema configuration data of the form. For the specific data structure, please refer to[ncform schema](#ncform-schema)
+Used to describe the schema configuration data of the form. For the specific data structure, please refer to [ncform schema](#ncform-schema)
 
 ```
 // Demo code
