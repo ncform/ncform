@@ -1,3 +1,12 @@
+<a name="0.1.26"></a>
+## [0.1.26](https://github.com/ncform/ncform/compare/v0.1.25...v0.1.26) (2019-03-03)
+
+### Features
+
+* Add `$ncformAddWidget` and `$ncformAddRule` apis ([3aba786](https://github.com/ncform/ncform/commit/3aba786))
+* Add `$ncformSetLang` api && all standard components support en && zh-cn ([3ba93ff](https://github.com/ncform/ncform/commit/3ba93ff))
+
+
 <a name="0.1.25"></a>
 ## [0.1.25](https://github.com/ncform/ncform/compare/v0.1.24...v0.1.25) (2019-02-26)
 
