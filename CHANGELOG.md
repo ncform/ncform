@@ -1,3 +1,10 @@
+<a name="0.1.27"></a>
+## [0.1.27](https://github.com/ncform/ncform/compare/v0.1.26...v0.1.27) (2019-03-03)
+
+### Bug Fixes
+
+* Add lang option when init ncform && remove `$ncformSetLang` api ([25d4684](https://github.com/ncform/ncform/commit/25d4684))
+
 <a name="0.1.26"></a>
 ## [0.1.26](https://github.com/ncform/ncform/compare/v0.1.25...v0.1.26) (2019-03-03)
 
