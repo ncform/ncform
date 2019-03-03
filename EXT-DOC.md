@@ -142,7 +142,7 @@ vm.$ncformAddWidget({name: 'myCustomComp', widget: myCustomComp});
 ui: {
   widget: 'my-custom-comp',
   widgetConfig: {
-    msg: 'hi'
+    name: 'your name'
   }
 }
 ```
