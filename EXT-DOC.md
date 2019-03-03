@@ -3,7 +3,7 @@
 - Table Of Contents
   - [Custom Validation Rule](#Custom-validation-rule)
   - [Custom Form Widget](#Custom-form-widget)
-  - [widgetConfig support `dx expression`](#Config-support-dx-expression)
+  - [widgetConfig support `dx expression`](#widgetConfig-support-dx-expression)
 
 ## Custom Validation Rule
 
