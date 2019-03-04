@@ -9,7 +9,7 @@
         <tr>
           <th v-for="(renderSchema, idx) in renderSchemas" :key="renderSchema.ui.label" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
 
-            <i v-if="renderSchema.rules && renderSchema.rules.required" class="text-danger">*</i>
+            <i v-if="showRequiredFlag(renderSchema.rules.required)" class="text-danger">*</i>
 
             {{renderSchema.ui.label}}<!--  标签信息 -->
 
@@ -115,6 +115,24 @@
       analyzeItemVal(val, idxChain) {
         return ncformUtils.smartAnalyzeVal(val, { idxChain: idxChain + '', data: { rootData: this.formData, constData: this.globalConst } });
       },
+
+      showRequiredFlag(requiredConfig) {
+        if (!requiredConfig) return false;
+
+        let requiredVal = requiredConfig;
+        if (requiredVal.value !== undefined) requiredVal = requiredConfig.value;
+
+        if (typeof requiredVal !== 'boolean') {
+          requiredVal = requiredVal.toString();
+          if (requiredVal.search(/^dx:.*\[i.*/) >= 0) { // Do not show when depending on the same line item
+            requiredVal = false;
+          } else {
+            requiredVal = this._analyzeVal(requiredVal);
+          }
+        }
+
+        return requiredVal;
+      }
     }
 
   }

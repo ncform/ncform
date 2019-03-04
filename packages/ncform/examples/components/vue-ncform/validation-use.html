@@ -463,7 +463,6 @@
           // TODO: 关联字段的ignoreRulesWhenHidden暂未实现
           {
             title: '数组中字段交互校验 - linkFields',
-            only: true,
             formName: 'form_' + Math.random(),
             formSchema: {
               type: 'object',
@@ -523,6 +522,56 @@
                   ui: {
                     showLabel: false,
                     noLabelSpace: true
+                  }
+                }
+              }
+            }
+          },
+          // TODO: 关联字段的ignoreRulesWhenHidden暂未实现
+          {
+            title: '表格中字段交互校验 - linkFields',
+            only: true,
+            formName: 'form_' + Math.random(),
+            formSchema: {
+              type: 'object',
+              properties: {
+                rows: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      required: {
+                        type: 'number',
+                        ui: {
+                          columns: 6,
+                          linkFields: [
+                            {
+                              fieldPath: 'rows[i].name',
+                              rules: ['required']
+                            }
+                          ]
+                        }
+                      },
+                      name: {
+                        type: 'string',
+                        rules: {
+                          // required: true,
+                          // required: {
+                          //   value: true
+                          // },
+
+                          // required: 'dx: {{$root.rows[i].required}} > 0',
+                          required: {
+                            value: 'dx: {{$root.rows[i].required}} > 0'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  ui: {
+                    showLabel: false,
+                    noLabelSpace: true,
+                    widget: 'array-table'
                   }
                 }
               }
