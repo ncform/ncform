@@ -1,6 +1,7 @@
 # ncform 
 
 ![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
+![license MIT](https://img.shields.io/npm/l/vue.svg)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
 [中文版](README_CN.md)
