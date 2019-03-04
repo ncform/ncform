@@ -13,6 +13,8 @@ Comes with **standard components** and **validation rules**, out of the box.
 
 Have powerful **control interaction** and **extension capabilities**, do what you want.
 
+> If you are hesitant, you can read this article: [How to choose](https://forum.vuejs.org/t/ncform-let-you-happily-develop-forms/57795)
+
 ---
 
 - Table Of Contents
