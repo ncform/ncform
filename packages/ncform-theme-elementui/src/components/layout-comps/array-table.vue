@@ -163,7 +163,7 @@
         if (!requiredConfig) return false;
 
         let requiredVal = requiredConfig;
-        if (requiredVal.value !== undefined) requiredVal = requiredConfig.value;
+        if (requiredVal.value !== undefined) requiredVal = requiredVal.value;
 
         if (typeof requiredVal !== 'boolean') {
           requiredVal = requiredVal.toString();

@@ -14,7 +14,7 @@ class ValidationRule {
       // 如果格式是： {value: '', errMsg: ''}
       this.errMsg = ruleVal.errMsg;
       ruleVal = ruleVal.value;
-      options = ruleVal.options || {};
+      if (ruleVal && ruleVal.options) options = ruleVal.options;
     }
 
     const result = this.validateLogic(val, ruleVal, options);
