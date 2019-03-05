@@ -2,6 +2,7 @@
 
 ![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
 ![license MIT](https://img.shields.io/npm/l/vue.svg)
+[![Gitter](https://img.shields.io/badge/GITTER-JOIN%20CHAT%20%E2%86%92-ff69b4.svg?style=flat-square)](https://gitter.im/ncform/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 
 [中文版](README_CN.md)
