@@ -75,18 +75,17 @@ jobs:
     working_directory: ~/project/ncform
     steps:
       - attach_workspace:
-        at: ~/project
+          at: ~/project
       - restore_cache:
-        keys:
-          - v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
-          - v1-deps-cypress
-      - run:
-        - cd packages/ncform-e2e && npm ci
+          keys:
+            - v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
+            - v1-deps-cypress
+      - run: cd packages/ncform-e2e && npm ci
       - save_cache:
-        key: v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
-        paths:
-          - ~/.cache
-          - ~/.npm
+          key: v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
+          paths:
+            - ~/.cache
+            - ~/.npm
       - run:
           command: npx http-server packages/ncform -p 3000
           background: true
