@@ -2,7 +2,97 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:8.15
+    working_directory: ~/project/ncform
     steps:
       - checkout
-      - run: echo "hello ncform"
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-{{ checksum "packages/ncform/package.json" }}
+            - v1-dependencies-ncform
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-common-{{ checksum "packages/ncform-common/package.json" }}
+            - v1-dependencies-ncform-common
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-show-{{ checksum "packages/ncform-show/package.json" }}
+            - v1-dependencies-ncform-show
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-theme-elementui-{{ checksum "packages/ncform-theme-elementui/package.json" }}
+            - v1-dependencies-ncform-theme-elementui
+      - run: npm run bootstrap
+      - save_cache:
+          paths:
+            - packages/ncform/node_modules
+          key: v1-dependencies-ncform-{{ checksum "packages/ncform/package.json" }}
+      - save_cache:
+          paths:
+            - packages/ncform-common/node_modules
+          key: v1-dependencies-ncform-common-{{ checksum "packages/ncform-common/package.json" }}
+      - save_cache:
+          paths:
+            - packages/ncform-show/node_modules
+          key: v1-dependencies-ncform-show-{{ checksum "packages/ncform-show/package.json" }}
+      - save_cache:
+          paths:
+            - packages/ncform-theme-elementui/node_modules
+          key: v1-dependencies-ncform-theme-elementui-{{ checksum "packages/ncform-theme-elementui/package.json" }}
+      - run: npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ncform
+  unittest:
+    docker:
+      - image: circleci/node:8.15
+    working_directory: ~/project/ncform
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: npm run test
+  run-ncform-dev-server:
+    docker:
+      - image: circleci/node:8.15
+    working_directory: ~/project/ncform
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: cd packages/ncform && npm run dev
+  e2etest:
+    docker:
+      - image: circleci/node:8.15
+    working_directory: ~/project/ncform
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: cd packages/ncform-e2e
+      - run: npm run test-ncform:cli
+
+workflows:
+  version: 2
+  unit-test:
+    jobs:
+      - build
+      - unittest:
+          requires:
+            - build
+  e2e-test:
+    jobs:
+      - build
+      - run-ncform-dev-server:
+          requires:
+            - build
+      - e2etest:
+          requires:
+            - run-ncform-dev-server
