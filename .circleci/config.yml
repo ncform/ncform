@@ -74,6 +74,8 @@ jobs:
       - image: cypress/base:8
     working_directory: ~/project/ncform
     steps:
+      - attach_workspace:
+        at: ~/project
       - restore_cache:
         keys:
           - v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
@@ -85,8 +87,6 @@ jobs:
         paths:
           - ~/.cache
           - ~/.npm
-      - attach_workspace:
-          at: ~/project
       - run:
           command: npx http-server packages/ncform -p 3000
           background: true
