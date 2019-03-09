@@ -31,6 +31,10 @@ jobs:
           keys:
             - v1-dependencies-ncform-theme-elementui-{{ checksum "packages/ncform-theme-elementui/package.json" }}
             - v1-dependencies-ncform-theme-elementui
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-e2e-{{ checksum "packages/ncform-e2e/package.json" }}
+            - v1-dependencies-ncform-e2e
       - run: npm run bootstrap
       - save_cache:
           paths:
@@ -48,6 +52,10 @@ jobs:
           paths:
             - packages/ncform-theme-elementui/node_modules
           key: v1-dependencies-ncform-theme-elementui-{{ checksum "packages/ncform-theme-elementui/package.json" }}
+      - save_cache:
+          paths:
+            - packages/ncform-e2e/node_modules
+          key: v1-dependencies-ncform-e2e-{{ checksum "packages/ncform-e2e/package.json" }}
       - run: npm run build
       - persist_to_workspace:
           root: ~/project
