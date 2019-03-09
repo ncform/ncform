@@ -71,7 +71,7 @@ jobs:
       - run: npm run test
   e2etest:
     docker:
-      - image: circleci/node:8.15
+      - image: cypress/base:8
     working_directory: ~/project/ncform
     steps:
       - attach_workspace:
