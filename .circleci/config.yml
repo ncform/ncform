@@ -76,13 +76,12 @@ jobs:
     steps:
       - restore_cache:
         keys:
-          - v1-deps-{ .Branch }-{ checksum "package.json" }
-          - v1-deps-{ .Branch }
-          - v1-deps
+          - v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
+          - v1-deps-cypress
       - run:
         - npm ci
       - save_cache:
-        key: v1-deps-{ .Branch }-{ checksum "package.json" }
+        key: v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
         paths:
           - ~/.cache
           - ~/.npm
