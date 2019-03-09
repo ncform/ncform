@@ -74,12 +74,12 @@ jobs:
 
 workflows:
   version: 2
-  unit-test:
-    jobs:
-      - build
-      - unittest:
-          requires:
-            - build
+  # unit-test:
+  #   jobs:
+  #     - build
+  #     - unittest:
+  #         requires:
+  #           - build
   e2e-test:
     jobs:
       - build
