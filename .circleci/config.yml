@@ -76,7 +76,15 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - run: nohub npx http-server packages/ncform -p 3000 &
+      - run:
+          command: npx http-server packages/ncform -p 3000
+          background: true
+      - run: ls
+      - run:
+          shell: /bin/sh
+          command: |
+            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://127.0.0.1:3000/examples/components/vue-ncform/_value-default.html
+            :
       - run: cd packages/ncform-e2e && npm run test-ncform:cli
 
 workflows:
