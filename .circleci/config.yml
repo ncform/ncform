@@ -61,14 +61,6 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run: npm run test
-  run-ncform-dev-server:
-    docker:
-      - image: circleci/node:8.15
-    working_directory: ~/project/ncform
-    steps:
-      - attach_workspace:
-          at: ~/project
-      - run: cd packages/ncform && npm run dev
   e2etest:
     docker:
       - image: circleci/node:8.15
@@ -76,8 +68,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - run: cd packages/ncform-e2e
-      - run: npm run test-ncform:cli
+      - run: npm install http-server -g
+      - run: cd $CIRCLE_WORKING_DIRECTORY/packages/ncform && nohub http-server -p 3000 &
+      - run: cd $CIRCLE_WORKING_DIRECTORY/packages/ncform-e2e && npm run test-ncform:cli
 
 workflows:
   version: 2
@@ -90,9 +83,6 @@ workflows:
   e2e-test:
     jobs:
       - build
-      - run-ncform-dev-server:
-          requires:
-            - build
       - e2etest:
           requires:
-            - run-ncform-dev-server
+            - build
