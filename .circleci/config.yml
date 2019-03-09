@@ -68,8 +68,8 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - run: nohub npx http-server $CIRCLE_WORKING_DIRECTORY/packages/ncform -p 3000 &
-      - run: cd $CIRCLE_WORKING_DIRECTORY/packages/ncform-e2e && npm run test-ncform:cli
+      - run: nohub npx http-server packages/ncform -p 3000 &
+      - run: cd packages/ncform-e2e && npm run test-ncform:cli
 
 workflows:
   version: 2
