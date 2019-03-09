@@ -12,7 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "cross-var": "^1.1.0",
-    "cypress": "^3.1.5"
+    "cypress": "^3.1.5",
+    "http-server": "^0.11.1"
   },
   "dependencies": {
     "blueimp-md5": "^2.10.0"
