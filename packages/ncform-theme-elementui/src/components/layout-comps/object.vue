@@ -18,9 +18,7 @@
             <label v-if="!isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}" class="el-form-item__label">
               <!-- 必填标识 -->
               <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-
-              {{fieldSchema.ui.label}}
-
+              {{_analyzeVal(fieldSchema.ui.label)}}
               <!-- 提示信息 -->
               <el-tooltip class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
                 <div slot="content" v-html="fieldSchema.ui.help.content"></div>
@@ -50,7 +48,7 @@
           <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
             <!-- 必填标识 -->
             <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-            {{fieldSchema.ui.label}}
+            {{_analyzeVal(fieldSchema.ui.label)}}
             <!-- 提示信息 -->
             <el-tooltip class="item" effect="dark" placement="right-start">
               <div slot="content" v-html="fieldSchema.ui.help.content"></div>

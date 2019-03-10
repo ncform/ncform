@@ -28,7 +28,7 @@
       ui: {
 
         columns: 6, // 占用列数，一共12列。6代表占一半
-        label: 'First Name', // 标签内容
+        label: 'First Name', // 标签内容【支持dx表达式】
         showLabel: true, // 是否显示标签（当为false不显示时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
         legend: '', // 标题内容，当对象，数组布局数据类型时有效

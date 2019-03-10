@@ -27,7 +27,7 @@
       ui: {
 
         columns: 6, // The number of columns, total is 12. 6 represents half
-        label: 'First Name', // Label display content
+        label: 'First Name', // Label display content [support dx expression]
         showLabel: true, // Whether to show the label (when it is false, it still takes up space)
         noLabelSpace: false, // Whether the label does not occupy space, the priority is higher than showLabel
         legend: '', // Legend content, valid when the type is object or array
