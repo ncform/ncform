@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-ncform Example</title>
+
+    <link
+      rel="stylesheet"
+      href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="demo" class="container">
+      <template v-for="item in formSchemas">
+        <div
+          :data-cy="item.id"
+          v-if="mode !== 'only' || item.only"
+          :key="item.formName"
+        >
+          <h4>[CASE] {{ item.title }}</h4>
+          <ncform
+            :form-schema="item.formSchema"
+            v-model="item.formSchema.value"
+            :form-name="item.formName"
+          ></ncform>
+          <hr />
+        </div>
+      </template>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="../../../node_modules/vue/dist/vue.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"
+    ></script>
+    <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+    <script type="text/javascript">
+      Vue.use(vueNcform);
+
+      new Vue({
+        el: '#demo',
+        data: {
+          mode: 'all', // all or only. if only mode, only objects with only:true in formSchemas are valid
+          formSchemas: [
+            {
+              id: md5('Object nested object'),
+              title: 'Object nested object',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'object',
+                        properties: {
+                          firstname: {
+                            type: 'string',
+                            ui: {
+                              columns: 6
+                            }
+                          },
+                          lastname: {
+                            type: 'string',
+                            ui: {
+                              columns: 6
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Object nested array and table'),
+              title: 'Object nested array and table',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  company: {
+                    type: 'object',
+                    properties: {
+                      users1: {
+                        type: 'array',
+                        items: {
+                          type: 'string'
+                        }
+                      },
+                      users2: {
+                        type: 'array',
+                        items: {
+                          type: 'string'
+                        },
+                        ui: {
+                          widget: 'array-table'
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Arrays and table items are objects'),
+              title: 'Arrays and table items are objects',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  companies1: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        name: {
+                          type: 'string'
+                        }
+                      }
+                    }
+                  },
+                  companies2: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        name: {
+                          type: 'string'
+                        }
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Arrays and table items are array and table'),
+              title: 'Arrays and table items are array and table',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  companies1: {
+                    type: 'array',
+                    items: {
+                      type: 'array',
+                      items: {
+                        type: 'string',
+                        ui: {
+                          label: 'User'
+                        }
+                      },
+                      ui: {
+                        legend: 'User'
+                      }
+                    }
+                  },
+                  companies2: {
+                    type: 'array',
+                    items: {
+                      type: 'array',
+                      items: {
+                        type: 'string',
+                        ui: {
+                          label: 'User'
+                        }
+                      },
+                      ui: {
+                        legend: 'User',
+                        widget: 'array-table'
+                      }
+                    }
+                  },
+                  companies3: {
+                    type: 'array',
+                    items: {
+                      type: 'array',
+                      items: {
+                        type: 'string',
+                        ui: {
+                          label: 'User'
+                        }
+                      },
+                      ui: {
+                        legend: 'User'
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  },
+                  companies4: {
+                    type: 'array',
+                    items: {
+                      type: 'array',
+                      items: {
+                        type: 'string',
+                        ui: {
+                          label: 'User'
+                        }
+                      },
+                      ui: {
+                        legend: 'User',
+                        widget: 'array-table'
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>
