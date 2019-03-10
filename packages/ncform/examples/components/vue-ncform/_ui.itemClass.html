@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-ncform Example</title>
+
+    <link
+      rel="stylesheet"
+      href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+
+    <style>
+
+      .obj-daniel {
+        border: 1px dashed #409EFF;
+        padding: 0 8px;
+        border-radius: 8px;
+      }
+      .obj-daniel .obj-item-daniel input {
+        border-color: #409EFF;
+      }
+
+      .array-daniel {
+        border: 1px dashed #F56C6C;
+        padding: 0 8px 8px 8px;
+        border-radius: 8px;
+      }
+      .array-daniel .array-item-daniel input {
+        border-color: #F56C6C;
+      }
+
+      .table-daniel {
+        border: 1px dashed #E6A23C;
+        padding: 0 8px 8px 8px;
+        border-radius: 8px;
+      }
+      .table-daniel .table-item-daniel input {
+        border-color: #E6A23C;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="demo" class="container">
+      <template v-for="item in formSchemas">
+        <div
+          :data-cy="item.id"
+          v-if="mode !== 'only' || item.only"
+          :key="item.formName"
+        >
+          <h4>[CASE] {{ item.title }}</h4>
+          <ncform
+            :form-schema="item.formSchema"
+            v-model="item.formSchema.value"
+            :form-name="item.formName"
+          ></ncform>
+          <hr />
+        </div>
+      </template>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="../../../node_modules/vue/dist/vue.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"
+    ></script>
+    <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+    <script type="text/javascript">
+      Vue.use(vueNcform);
+
+      new Vue({
+        el: '#demo',
+        data: {
+          mode: 'all', // all or only. if only mode, only objects with only:true in formSchemas are valid
+          formSchemas: [
+            {
+              id: md5('Add item class'),
+              title: 'Add item class',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string',
+                        ui: {
+                          itemClass: 'obj-item-daniel'
+                        }
+                      }
+                    },
+                    ui: {
+                      itemClass: 'obj-daniel'
+                    }
+                  },
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                        ui: {
+                          itemClass: 'array-item-daniel'
+                        }
+                    },
+                    ui: {
+                      itemClass: 'array-daniel'
+                    }
+                  },
+                  users1: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                        ui: {
+                          itemClass: 'table-item-daniel'
+                        }
+                    },
+                    ui: {
+                      itemClass: 'table-daniel',
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>
