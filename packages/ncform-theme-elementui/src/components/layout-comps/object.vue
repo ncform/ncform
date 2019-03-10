@@ -1,7 +1,7 @@
 <template>
   <div class="__object-form-item">
     <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">
-      {{schema.ui.legend}}
+      {{_analyzeVal(schema.ui.legend)}}
       <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !mergeConfig.collapsed, 'el-icon-arrow-down': mergeConfig.collapsed}"></i>
     </legend>
 

@@ -225,8 +225,8 @@
               }
             },
             {
-              id: md5('Object & array: only provide legend value'),
-              title: 'Object & array: only provide legend value',
+              id: md5('Object,array,array-table : only provide legend dx value'),
+              title: 'Object,array,array-table : only provide legend dx value',
               formName: 'form_' + Math.random(),
               formSchema: {
                 type: 'object',
@@ -239,7 +239,7 @@
                       }
                     },
                     ui: {
-                      legend: 'One User'
+                      legend: 'dx: {{$root.user.name}} + " info-object"'
                     }
                   },
                   users: {
@@ -248,7 +248,51 @@
                       type: 'string'
                     },
                     ui: {
-                      legend: 'Users'
+                      legend: 'dx: {{$root.users[0]}} + " info-array"'
+                    }
+                  },
+                  users1: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      legend: 'dx: {{$root.users1[0]}} + " info-table"',
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('array and table: dx value for item label'),
+              title: 'array and table: dx value for item label',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  company: {
+                    type: 'string'
+                  },
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                      ui: {
+                        label: 'dx: "dx from: " + {{$root.company}}'
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  },
+                  users1: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                      ui: {
+                        label: 'dx: "dx from: " + {{$root.company}}'
+                      }
                     }
                   }
                 }

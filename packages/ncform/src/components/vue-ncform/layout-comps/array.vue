@@ -2,11 +2,11 @@
 
   <div class="__array-form-item">
 
-    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">{{schema.ui.legend}}</legend>
+    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
 
     <div v-show="!mergeConfig.collapsed" v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id">
 
-      <label>{{dataItem.__dataSchema.ui.label}} {{idx + 1}}</label>
+      <label>{{_analyzeVal(dataItem.__dataSchema.ui.label)}} {{idx + 1}}</label>
 
       <!-- 项控制按钮 -->
       <div class="btn-group btn-group-sm">

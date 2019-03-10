@@ -1,6 +1,6 @@
 <template>
   <div class="__object-form-item">
-    <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">{{schema.ui.legend}}</legend>
+    <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
 
     <!-- 垂直布局，即label上，control下 -->
     <div v-if="mergeConfig.layout === 'v'" v-show="!mergeConfig.collapsed" class="form-row v-layout" style="width: 100%">

@@ -75,11 +75,35 @@ context('ui.label and ui.legend', () => {
     })
   })
 
-  it('Object & array: only provide legend value', () => {
-    let id = md5('Object & array: only provide legend value');
+  it('Object,array,array-table : only provide legend dx value', () => {
+    let id = md5('Object,array,array-table : only provide legend dx value');
     cy.get(`[data-cy=${id}]`).within(() => {
-      cy.get('legend').contains('One User').should('be.visible');
-      cy.get('legend').contains('Users').should('be.visible');
+      cy.get('legend').contains('info-object').should('be.visible');
+      cy.get('label').contains('name').next().find('input').type('daniel');
+      cy.get('legend').contains('daniel info-object').should('be.visible');
+
+      cy.get('legend').contains('info-array').should('be.visible');
+      cy.get('legend').contains('info-array').parent().find('input').type('sarah');
+      cy.get('legend').contains('sarah info-array').should('be.visible');
+
+      cy.get('legend').contains('info-table').should('be.visible');
+      cy.get('legend').contains('info-table').parent().find('input').type('dx');
+      cy.get('legend').contains('dx info-table').should('be.visible');
+    })
+  })
+
+  it('array and table: dx value for item label', () => {
+    let id = md5('array and table: dx value for item label');
+    cy.get(`[data-cy=${id}]`).within(() => {
+      cy.get('th').eq(0).as('header');
+      cy.get('legend').contains('users1').parent().as('array');
+
+      cy.get('@header').then($dom => expect($dom.text().trim()).to.be.equal('dx from:'));
+      cy.get('@array').find('label').then($dom => expect($dom.text().trim()).to.be.equal('dx from:  1'));
+
+      cy.get('label').contains('company').next().find('input').type('google');
+      cy.get('@header').then($dom => expect($dom.text().trim()).to.be.equal('dx from: google'));
+      cy.get('@array').find('label').then($dom => expect($dom.text().trim()).to.be.equal('dx from: google 1'));
     })
   })
 

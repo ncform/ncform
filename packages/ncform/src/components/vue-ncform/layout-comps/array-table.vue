@@ -2,7 +2,7 @@
 
   <div class="__array-table-form-item">
 
-    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">{{schema.ui.legend}}</legend>
+    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
 
     <table v-show="!mergeConfig.collapsed" class="table table-bordered">
       <thead>
@@ -11,7 +11,7 @@
 
             <i v-if="showRequiredFlag(renderSchema.rules.required)" class="text-danger">*</i>
 
-            {{renderSchema.ui.label}}<!--  标签信息 -->
+            {{_analyzeVal(renderSchema.ui.label)}}<!--  标签信息 -->
 
             <a v-if="renderSchema.ui.help.show === true" :title="renderSchema.ui.help.content" href="#"><span :class="renderSchema.ui.help.iconCls">{{renderSchema.ui.help.text}}</span></a>
 
