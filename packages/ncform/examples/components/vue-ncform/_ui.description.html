@@ -78,6 +78,31 @@
                   }
                 }
               }
+            },
+            {
+              id: md5('Array-table: Show description dx'),
+              title: 'Array-table: Show description dx',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  company: {
+                    type: 'string'
+                  },
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                      ui: {
+                        description: 'dx: "dx desc: " + {{$root.company}}'
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
             }
           ]
         }
