@@ -16,9 +16,8 @@
 
               {{_analyzeVal(fieldSchema.ui.label)}}
 
-              <!-- TODO daniel: 提示信息组件未加 -->
               <!--  提示信息 -->
-              <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+              <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
             </label>
 
             <slot :name="field"></slot>
@@ -43,9 +42,9 @@
             <!-- 必填标识 -->
             <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
             {{_analyzeVal(fieldSchema.ui.label)}}
-            <!-- TODO daniel: 提示信息组件未加 -->
+
             <!--  提示信息 -->
-            <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+            <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
             :
           </label>
           <div :style="{'margin-left': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}" :class="{'col-md-9': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace)}">

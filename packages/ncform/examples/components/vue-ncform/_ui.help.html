@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-ncform Example</title>
+
+    <link
+      rel="stylesheet"
+      href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div id="demo" class="container">
+      <template v-for="item in formSchemas">
+        <div
+          :data-cy="item.id"
+          v-if="mode !== 'only' || item.only"
+          :key="item.formName"
+        >
+          <h4>[CASE] {{ item.title }}</h4>
+          <ncform
+            :form-schema="item.formSchema"
+            v-model="item.formSchema.value"
+            :form-name="item.formName"
+          ></ncform>
+          <hr />
+        </div>
+      </template>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="../../../node_modules/vue/dist/vue.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"
+    ></script>
+    <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+    <script type="text/javascript">
+      Vue.use(vueNcform);
+
+      new Vue({
+        el: '#demo',
+        data: {
+          mode: 'all', // all or only. if only mode, only objects with only:true in formSchemas are valid
+          formSchemas: [
+            {
+              id: md5('Show help'),
+              title: 'Show help',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user1: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string',
+                        ui: {
+                          help: {
+                            show: true,
+                            iconCls: 'fas fa-question-circle',
+                            content: 'Some help tips'
+                          }
+                        }
+                      }
+                    }
+                  },
+                  user2: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string',
+                        ui: {
+                          help: {
+                            show: true,
+                            text: '?',
+                            content: 'Some help tips'
+                          }
+                        }
+                      }
+                    },
+                    ui: {
+                      widgetConfig: {
+                        layout: 'h'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Array-table: Show help'),
+              title: 'Array-table: Show help',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                      ui: {
+                        help: {
+                          show: true,
+                          iconCls: 'fas fa-question-circle',
+                          content: 'Some help tips'
+                        }
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>
