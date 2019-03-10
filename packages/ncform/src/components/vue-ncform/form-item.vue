@@ -39,7 +39,9 @@
         <span class="clear" v-if="schema.ui.preview.clearable" @click="clearComponentValue()">x</span>
         <div class="wrapper" :class="[schema.ui.preview.outward ? schema.ui.preview.outward.shape : '']">
           <!-- 图片 -->
-          <img v-if="schema.ui.preview.type === 'image'" :src="getPreviewVal(schema.ui.preview.value, schema.value)" alt="预览区域">
+          <img v-if="schema.ui.preview.type === 'image'"
+            :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ?  schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}"
+            :src="getPreviewVal(schema.ui.preview.value, schema.value)" alt="预览区域">
           <!-- 视频 -->
           <video v-if="schema.ui.preview.type === 'video'" :src="getPreviewVal(schema.ui.preview.value, schema.value)" controls="controls"></video>
           <!-- 音频 -->
