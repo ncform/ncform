@@ -46,7 +46,7 @@ context('Nesting', () => {
     })
   })
 
-  it.only('Arrays and table items are array and table', () => {
+  it('Arrays and table items are array and table', () => {
     let id = md5('Arrays and table items are array and table');
     cy.get(`[data-cy=${id}]`).within(() => {
       cy.get('legend').contains('companies1').as('companies1').should('exist');
