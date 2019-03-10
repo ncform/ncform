@@ -111,6 +111,8 @@ const ncformUtils = ncformCommon.ncformUtils;
 export default {
   name: "form-item", // 声明name可以嵌套自身
 
+  _init4valueTemplate: true,
+
   props: {
     schema: {
       type: Object,
@@ -145,13 +147,26 @@ export default {
 
   computed: {
     valueTemplate() {
-      return ncformUtils.smartAnalyzeVal(this.schema.valueTemplate, {
+
+      if (!this.schema.valueTemplate) return undefined;
+
+      // Put it here to let the dx expression in valueTemplate being watched
+      let result = ncformUtils.smartAnalyzeVal(this.schema.valueTemplate, {
         idxChain: this.idxChain,
         data: {
           rootData: this.formData,
           constData: this.globalConfig.constants
         }
       });
+
+      if (this.$options._init4valueTemplate) { // Prevent init value from being overwritten
+        if (this.schema.value) result = this.schema.value;
+        this.$nextTick(() => {
+          this.$options._init4valueTemplate = false;
+        })
+      }
+
+      return result;
     },
     htmlTypeVal() {
       return ncformUtils.smartAnalyzeVal(this.schema.value, {
@@ -220,7 +235,8 @@ export default {
 
   watch: {
     valueTemplate(newVal) {
-      this.schema.value = newVal;
+      if (newVal !== undefined)
+        this.schema.value = newVal;
     },
     schema: {
       handler: function(newVal) {
