@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-ncform Example</title>
+
+    <link
+      rel="stylesheet"
+      href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="demo" class="container">
+      <template v-for="item in formSchemas">
+        <div
+          :data-cy="item.id"
+          v-if="mode !== 'only' || item.only"
+          :key="item.formName"
+        >
+          <h4>[CASE] {{ item.title }}</h4>
+          <ncform
+            :form-schema="item.formSchema"
+            v-model="item.formSchema.value"
+            :form-name="item.formName"
+          ></ncform>
+          <hr />
+        </div>
+      </template>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="../../../node_modules/vue/dist/vue.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"
+    ></script>
+    <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+    <script type="text/javascript">
+      Vue.use(vueNcform, { lang: 'zh-cn' });
+
+      new Vue({
+        el: '#demo',
+        data: {
+          mode: 'all', // all or only. if only mode, only objects with only:true in formSchemas are valid
+          formSchemas: [
+            {
+              id: md5('Link object properties'),
+              title: 'Link object properties',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  maxNum: {
+                    type: 'number',
+                    rules: {
+                      exclusiveMinimum: 'dx: {{$root.minNum}} || 0'
+                    },
+                    ui: {
+                      columns: 6,
+                      linkFields: [
+                        {
+                          fieldPath: 'minNum',
+                          rules: ['exclusiveMaximum']
+                        }
+                      ]
+                    }
+                  },
+                  minNum: {
+                    type: 'number',
+                    rules: {
+                      exclusiveMaximum: 'dx: {{$root.maxNum}} || 0'
+                    },
+                    ui: {
+                      columns: 6,
+                      linkFields: [
+                        {
+                          fieldPath: 'maxNum',
+                          rules: ['exclusiveMinimum']
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Link Array item properties'),
+              title: 'Link Array item properties',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  nums: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        maxNum: {
+                          type: 'number',
+                          rules: {
+                            exclusiveMinimum: 'dx: {{$root.nums[i].minNum}} || 0'
+                          },
+                          ui: {
+                            columns: 6,
+                            linkFields: [
+                              {
+                                fieldPath: 'nums[i].minNum',
+                                rules: ['exclusiveMaximum']
+                              }
+                            ]
+                          }
+                        },
+                        minNum: {
+                          type: 'number',
+                          rules: {
+                            exclusiveMaximum: 'dx: {{$root.nums[i].maxNum}} || 0'
+                          },
+                          ui: {
+                            columns: 6,
+                            linkFields: [
+                              {
+                                fieldPath: 'nums[i].maxNum',
+                                rules: ['exclusiveMinimum']
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Link Table item properties'),
+              title: 'Link Table item properties',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  nums: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        maxNum: {
+                          type: 'number',
+                          rules: {
+                            exclusiveMinimum: 'dx: {{$root.nums[i].minNum}} || 0'
+                          },
+                          ui: {
+                            columns: 6,
+                            linkFields: [
+                              {
+                                fieldPath: 'nums[i].minNum',
+                                rules: ['exclusiveMaximum']
+                              }
+                            ]
+                          }
+                        },
+                        minNum: {
+                          type: 'number',
+                          rules: {
+                            exclusiveMaximum: 'dx: {{$root.nums[i].maxNum}} || 0'
+                          },
+                          ui: {
+                            columns: 6,
+                            linkFields: [
+                              {
+                                fieldPath: 'nums[i].maxNum',
+                                rules: ['exclusiveMinimum']
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>
