@@ -94,7 +94,6 @@ jobs:
           command: |
             wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://127.0.0.1:3000/examples/components/vue-ncform/_value-default.html
             :
-      - run: cd packages/ncform-e2e && npm run test
       - run: cd packages/ncform-e2e && npm run test-ncform:cli
 
 workflows:

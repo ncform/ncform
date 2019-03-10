@@ -1,3 +1,4 @@
 {
-  "projectId": "enxoqt"
+  "projectId": "enxoqt",
+  "ignoreTestFiles": "__template.spec.js"
 }
