@@ -59,7 +59,7 @@ context('required', () => {
       cy.get('legend').contains('users1').parent().as('users1');
 
       // users
-      cy.get('@users').find('button').contains('增加').click();
+      cy.get('@users').find('button').contains('Add').click();
       cy.get('@users').find('label:contains("name")').should('not.contain', '*');
 
       cy.get('@age').find('input').type(19);
@@ -69,7 +69,7 @@ context('required', () => {
       cy.get('@users').find('label:contains("name")').should('not.contain', '*');
 
       // users1
-      cy.get('@users1').find('button').contains('增加').click();
+      cy.get('@users1').find('button').contains('Add').click();
       cy.get('@users1').find('label:contains("users1")').each($item => {
         cy.wrap($item).parent().find('label').contains('age').next().find('input').as('ageInput');
         cy.wrap($item).parent().find('label').contains('name').as('nameLabel');
@@ -90,7 +90,7 @@ context('required', () => {
       cy.get('legend').contains('users1').parent().as('users1');
 
       // users
-      cy.get('@users').find('button').contains('增加').click();
+      cy.get('@users').find('button').contains('Add').click();
       cy.get('@users').find('th:contains("name")').should('not.contain', '*');
 
       cy.get('@age').find('input').type(19);
@@ -100,7 +100,7 @@ context('required', () => {
       cy.get('@users').find('th:contains("name")').should('not.contain', '*');
 
       // users1
-      cy.get('@users1').find('button').contains('增加').click();
+      cy.get('@users1').find('button').contains('Add').click();
       cy.get('@users1').find('tbody tr').each($item => {
         cy.wrap($item).find('input').eq(0).as('ageInput');
         cy.wrap($item).find('input').eq(1).as('nameInput');

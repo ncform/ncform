@@ -31,7 +31,7 @@ context('ui.linkFields', () => {
     let id = md5('Link Array item properties');
     cy.get(`[data-cy=${id}]`).within(() => {
 
-      cy.contains('增加').click();
+      cy.contains('Add').click();
       cy.get('label:contains("nums")').each(($item) => {
         cy.wrap($item).parent().find('label').contains('maxNum').next().find('input').as('maxNum');
         cy.wrap($item).parent().find('label').contains('minNum').next().find('input').as('minNum');
@@ -54,7 +54,7 @@ context('ui.linkFields', () => {
     let id = md5('Link Table item properties');
     cy.get(`[data-cy=${id}]`).within(() => {
 
-      cy.contains('增加').click();
+      cy.contains('Add').click();
       cy.get('tbody tr').each(($item) => {
         cy.wrap($item).find('input').eq(0).as('maxNum');
         cy.wrap($item).find('input').eq(1).as('minNum');
