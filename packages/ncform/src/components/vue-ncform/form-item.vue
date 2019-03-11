@@ -163,9 +163,11 @@ export default {
 
       if (this.$options._init4valueTemplate) { // Prevent init value from being overwritten
         if (this.schema.value) result = this.schema.value;
-        this.$nextTick(() => {
+        // User nextTick will cause the init value to be incorrect when field item in list
+        // so here use setTimeout instead
+        setTimeout(() => {
           this.$options._init4valueTemplate = false;
-        })
+        }, 100)
       }
 
       return result;
