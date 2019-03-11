@@ -1013,7 +1013,7 @@ export default {
 
   methods: {
     createEditor() {
-      this.$options.editor = window.ace.edit(this.$refs.editor);
+      window.editor = this.$options.editor = window.ace.edit(this.$refs.editor);
       this.$options.editor.$blockScrolling = Infinity;
     },
     templateChange(v) {
