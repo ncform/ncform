@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/ncform/ncform/tree/e2e.svg?style=svg)](https://circleci.com/gh/ncform/ncform/tree/e2e)
 ![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
 ![license MIT](https://img.shields.io/npm/l/vue.svg)
-[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://dashboard.cypress.io/#/projects/enxoqt/runs)
+[![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://dashboard.cypress.io/#/organizations/5a8f70ec-7f41-4e80-be29-7904254d59b4/projects)
 [![Gitter](https://img.shields.io/badge/GITTER-JOIN%20CHAT%20%E2%86%92-ff69b4.svg?style=flat-square)](https://gitter.im/ncform/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 

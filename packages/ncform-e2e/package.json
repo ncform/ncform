@@ -7,7 +7,9 @@
   "scripts": {
     "test": "cypress --version",
     "test-ncform:cli": "cross-var \"cypress run --project ./ncform --record --key $NCFORM_E2E_KEY\"",
-    "test-ncform:ui": "cd ncform && cypress open"
+    "test-ncform:ui": "cd ncform && cypress open",
+    "test-theme-elem:cli": "cross-var \"cypress run --project ./ncform-theme-elementui --record --key $NCFORM_THEME_ELEM_E2E_KEY\"",
+    "test-theme-elem:ui": "cd ncform-theme-elementui && cypress open"
   },
   "author": "daniel.xiao",
   "license": "MIT",
