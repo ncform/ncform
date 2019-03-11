@@ -82,7 +82,7 @@ context('required', () => {
     })
   })
 
-  it.only('Table: Specify dx value', () => {
+  it('Table: Specify dx value', () => {
     let id = md5('Table: Specify dx value');
     cy.get(`[data-cy=${id}]`).within(() => {
       cy.get('label').contains('age').parent().as('age');
