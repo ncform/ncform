@@ -4,43 +4,23 @@
     <meta charset="UTF-8" />
     <title>vue-ncform Example</title>
 
-    <link
-      rel="stylesheet"
-      href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
   </head>
 
   <body>
     <div id="demo" class="container">
       <template v-for="item in formSchemas">
-        <div
-          :data-cy="item.id"
-          v-if="mode !== 'only' || item.only"
-          :key="item.formName"
-        >
+        <div :data-cy="item.id" v-if="mode !== 'only' || item.only" :key="item.formName">
           <h4>[CASE] {{ item.title }}</h4>
-          <ncform
-            :form-schema="item.formSchema"
-            v-model="item.formSchema.value"
-            :form-name="item.formName"
-          ></ncform>
+          <ncform :form-schema="item.formSchema" v-model="item.formSchema.value" :form-name="item.formName"></ncform>
           <hr />
         </div>
       </template>
     </div>
 
-    <script
-      type="text/javascript"
-      src="../../../node_modules/vue/dist/vue.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"
-    ></script>
-    <script
-      type="text/javascript"
-      src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"
-    ></script>
+    <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"></script>
+    <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
     <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
     <script type="text/javascript">
       Vue.use(vueNcform);
@@ -79,6 +59,14 @@
                       }
                     }
                   }
+                },
+                value: {
+                  user: {
+                    name: {
+                      firstname: 'daniel',
+                      lastname: 'xiao'
+                    }
+                  }
                 }
               }
             },
@@ -108,6 +96,12 @@
                         }
                       }
                     }
+                  }
+                },
+                value: {
+                  company: {
+                    users1: ['daniel'],
+                    users2: ['sarah']
                   }
                 }
               }
@@ -144,6 +138,10 @@
                       widget: 'array-table'
                     }
                   }
+                },
+                value: {
+                  companies1: [{ name: 'daniel' }],
+                  companies2: [{ name: 'sarah' }]
                 }
               }
             },
@@ -222,6 +220,12 @@
                       widget: 'array-table'
                     }
                   }
+                },
+                value: {
+                  companies1: [['daniel']],
+                  companies2: [['sarah']],
+                  companies3: [['daniel']],
+                  companies4: [['sarah']]
                 }
               }
             }
