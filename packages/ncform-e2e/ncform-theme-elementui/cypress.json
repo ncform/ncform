@@ -1,3 +1,4 @@
 {
-  "projectId": "5y86ie"
+  "projectId": "5y86ie",
+  "ignoreTestFiles": ["__template.spec.js", "common.js"]
 }
