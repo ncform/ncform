@@ -1,53 +1,157 @@
 <template>
   <div class="ncform-input">
     <!-- 没有自动补全 -->
-    <el-input v-if="!mergeConfig.autocomplete" :disabled="disabled" :readonly="readonly" :placeholder="placeholder" v-show="!hidden" :clearable="mergeConfig.clearable" :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type" :prefix-icon="mergeConfig.prefixIcon" :suffix-icon="mergeConfig.suffixIcon" v-model="inputVal">
-
+    <el-input
+      v-if="!mergeConfig.autocomplete"
+      :disabled="disabled"
+      :readonly="readonly"
+      :placeholder="placeholder"
+      v-show="!hidden"
+      :clearable="mergeConfig.clearable"
+      :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type"
+      :prefix-icon="mergeConfig.prefixIcon"
+      :suffix-icon="mergeConfig.suffixIcon"
+      v-model="inputVal"
+    >
       <template v-if="mergeConfig.type !== 'file' && mergeConfig.compound">
-        <template slot="prepend" v-if="mergeConfig.compound.prependLabel">{{mergeConfig.compound.prependLabel}}</template>
-        <template slot="append" v-if="mergeConfig.compound.appendLabel">{{mergeConfig.compound.appendLabel}}</template>
+        <template
+          slot="prepend"
+          v-if="mergeConfig.compound.prependLabel"
+        >{{mergeConfig.compound.prependLabel}}</template>
+        <template
+          slot="append"
+          v-if="mergeConfig.compound.appendLabel"
+        >{{mergeConfig.compound.appendLabel}}</template>
 
-        <el-button slot="prepend" v-if="mergeConfig.compound.prependIcon" :icon="mergeConfig.compound.prependIcon"></el-button>
-        <el-button slot="append" v-if="mergeConfig.compound.appendIcon" :icon="mergeConfig.compound.appendIcon"></el-button>
+        <el-button
+          slot="prepend"
+          v-if="mergeConfig.compound.prependIcon"
+          :icon="mergeConfig.compound.prependIcon"
+        ></el-button>
+        <el-button
+          slot="append"
+          v-if="mergeConfig.compound.appendIcon"
+          :icon="mergeConfig.compound.appendIcon"
+        ></el-button>
 
-        <el-select v-if="mergeConfig.compound.prependSelect" v-model="prependSelectVal" slot="prepend" :placeholder="$t('selectPls')">
-          <el-option v-for="item in prependSelectOptions" :label="item[mergeConfig.compound.prependSelect.itemLabelField]" :value="item[mergeConfig.compound.prependSelect.itemValueField]" :key="item[mergeConfig.compound.prependSelect.itemValueField]"></el-option>
+        <el-select
+          v-if="mergeConfig.compound.prependSelect"
+          v-model="prependSelectVal"
+          slot="prepend"
+          :placeholder="$t('selectPls')"
+        >
+          <el-option
+            v-for="item in prependSelectOptions"
+            :label="item[mergeConfig.compound.prependSelect.itemLabelField]"
+            :value="item[mergeConfig.compound.prependSelect.itemValueField]"
+            :key="item[mergeConfig.compound.prependSelect.itemValueField]"
+          ></el-option>
         </el-select>
 
-        <el-select v-if="mergeConfig.compound.appendSelect" v-model="appendSelectVal" slot="append" :placeholder="$t('selectPls')">
-          <el-option v-for="item in appendSelectOptions" :label="item[mergeConfig.compound.appendSelect.itemLabelField]" :value="item[mergeConfig.compound.appendSelect.itemValueField]" :key="item[mergeConfig.compound.appendSelect.itemValueField]"></el-option>
+        <el-select
+          v-if="mergeConfig.compound.appendSelect"
+          v-model="appendSelectVal"
+          slot="append"
+          :placeholder="$t('selectPls')"
+        >
+          <el-option
+            v-for="item in appendSelectOptions"
+            :label="item[mergeConfig.compound.appendSelect.itemLabelField]"
+            :value="item[mergeConfig.compound.appendSelect.itemValueField]"
+            :key="item[mergeConfig.compound.appendSelect.itemValueField]"
+          ></el-option>
         </el-select>
       </template>
 
       <!--上传类型-->
       <template v-else-if="mergeConfig.type === 'file' && mergeConfig.upload">
-        <el-button slot="append" v-if="mergeConfig.upload.uploadUrl" class="ncform-input-upload" @click="handleClickUpload">{{isUploading ? $t('uploading') : mergeConfig.upload.uploadText || $t('upload')}}
-          <input type="file" ref="upload" :accept="mergeConfig.upload.accept || ''" @change="handleFileChange" />
+        <el-button
+          slot="append"
+          v-if="mergeConfig.upload.uploadUrl"
+          class="ncform-input-upload"
+          @click="handleClickUpload"
+        >
+          {{isUploading ? $t('uploading') : mergeConfig.upload.uploadText || $t('upload')}}
+          <input
+            type="file"
+            ref="upload"
+            :accept="mergeConfig.upload.accept || ''"
+            @change="handleFileChange"
+          >
         </el-button>
       </template>
     </el-input>
 
     <!-- 自动补全 -->
-    <el-autocomplete v-else :disabled="disabled" :readonly="readonly" :placeholder="placeholder" v-show="!hidden" :clearable="mergeConfig.clearable" :type="mergeConfig.type" :prefix-icon="mergeConfig.prefixIcon" :suffix-icon="mergeConfig.suffixIcon" :fetch-suggestions="querySearch" :trigger-on-focus="!!mergeConfig.autocomplete.immediateShow" :value-key="mergeConfig.autocomplete.itemValueField || 'value'" v-model="inputVal">
-
-      <template slot-scope="props" v-if="mergeConfig.autocomplete && mergeConfig.autocomplete.itemTemplate">
-        <component :is="itemTemplate" :item="props.item">
-        </component>
+    <el-autocomplete
+      v-else
+      :disabled="disabled"
+      :readonly="readonly"
+      :placeholder="placeholder"
+      v-show="!hidden"
+      :clearable="mergeConfig.clearable"
+      :type="mergeConfig.type"
+      :prefix-icon="mergeConfig.prefixIcon"
+      :suffix-icon="mergeConfig.suffixIcon"
+      :fetch-suggestions="querySearch"
+      :trigger-on-focus="!!mergeConfig.autocomplete.immediateShow"
+      :value-key="mergeConfig.autocomplete.itemValueField || 'value'"
+      v-model="inputVal"
+    >
+      <template
+        slot-scope="props"
+        v-if="mergeConfig.autocomplete && mergeConfig.autocomplete.itemTemplate"
+      >
+        <component :is="itemTemplate" :item="props.item"></component>
       </template>
 
       <template v-if="mergeConfig.compound">
-        <template slot="prepend" v-if="mergeConfig.compound.prependLabel">{{mergeConfig.compound.prependLabel}}</template>
-        <template slot="append" v-if="mergeConfig.compound.appendLabel">{{mergeConfig.compound.appendLabel}}</template>
+        <template
+          slot="prepend"
+          v-if="mergeConfig.compound.prependLabel"
+        >{{mergeConfig.compound.prependLabel}}</template>
+        <template
+          slot="append"
+          v-if="mergeConfig.compound.appendLabel"
+        >{{mergeConfig.compound.appendLabel}}</template>
 
-        <el-button slot="prepend" v-if="mergeConfig.compound.prependIcon" :icon="mergeConfig.compound.prependIcon"></el-button>
-        <el-button slot="append" v-if="mergeConfig.compound.appendIcon" :icon="mergeConfig.compound.appendIcon"></el-button>
+        <el-button
+          slot="prepend"
+          v-if="mergeConfig.compound.prependIcon"
+          :icon="mergeConfig.compound.prependIcon"
+        ></el-button>
+        <el-button
+          slot="append"
+          v-if="mergeConfig.compound.appendIcon"
+          :icon="mergeConfig.compound.appendIcon"
+        ></el-button>
 
-        <el-select v-if="mergeConfig.compound.prependSelect" v-model="prependSelectVal" slot="prepend" :placeholder="$t('selectPls')">
-          <el-option v-for="item in prependSelectOptions" :label="item[mergeConfig.compound.prependSelect.itemLabelField]" :value="item[mergeConfig.compound.prependSelect.itemValueField]" :key="item[mergeConfig.compound.prependSelect.itemValueField]"></el-option>
+        <el-select
+          v-if="mergeConfig.compound.prependSelect"
+          v-model="prependSelectVal"
+          slot="prepend"
+          :placeholder="$t('selectPls')"
+        >
+          <el-option
+            v-for="item in prependSelectOptions"
+            :label="item[mergeConfig.compound.prependSelect.itemLabelField]"
+            :value="item[mergeConfig.compound.prependSelect.itemValueField]"
+            :key="item[mergeConfig.compound.prependSelect.itemValueField]"
+          ></el-option>
         </el-select>
 
-        <el-select v-if="mergeConfig.compound.appendSelect" v-model="appendSelectVal" slot="append" :placeholder="$t('selectPls')">
-          <el-option v-for="item in appendSelectOptions" :label="item[mergeConfig.compound.appendSelect.itemLabelField]" :value="item[mergeConfig.compound.appendSelect.itemValueField]" :key="item[mergeConfig.compound.appendSelectVal.itemValueField]"></el-option>
+        <el-select
+          v-if="mergeConfig.compound.appendSelect"
+          v-model="appendSelectVal"
+          slot="append"
+          :placeholder="$t('selectPls')"
+        >
+          <el-option
+            v-for="item in appendSelectOptions"
+            :label="item[mergeConfig.compound.appendSelect.itemLabelField]"
+            :value="item[mergeConfig.compound.appendSelect.itemValueField]"
+            :key="item[mergeConfig.compound.appendSelectVal.itemValueField]"
+          ></el-option>
         </el-select>
       </template>
     </el-autocomplete>
@@ -55,29 +159,28 @@
 </template>
 
 <style lang="scss">
-  .ncform-input {
-    .el-select .el-input {
-      width: 130px;
-    }
-    .input-with-select .el-input-group__prepend {
-      background-color: #fff;
-    }
-    .ncform-input-upload {
-      [type="file"] {
-        display: none;
-      }
-    }
-    .el-autocomplete {
-      width: 100%;
+.ncform-input {
+  .el-select .el-input {
+    width: 130px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
+  }
+  .ncform-input-upload {
+    [type="file"] {
+      display: none;
     }
   }
-
+  .el-autocomplete {
+    width: 100%;
+  }
+}
 </style>
 
 <script>
-import ncformCommon from '@ncform/ncform-common';
+import ncformCommon from "@ncform/ncform-common";
 import _get from "lodash-es/get";
-import _cloneDeep from 'lodash-es/cloneDeep';
+import _cloneDeep from "lodash-es/cloneDeep";
 
 const controlMixin = ncformCommon.mixins.vue.controlMixin;
 
@@ -86,14 +189,29 @@ export default {
 
   i18nData: {
     en: {
-      selectPls: 'Select Please',
-      uploading: 'Uploading...',
-      upload: 'Upload'
+      selectPls: "Select Please",
+      uploading: "Uploading...",
+      upload: "Upload",
+      uploadFail: "Upload failed, please try again later!",
+      resolutionTip1:
+        "Please upload an image of <%= right %>, your image is <%= wrong %>",
+      resolutionTip2:
+        "Please upload an image with an aspect ratio of <%= right %>. Your image aspect ratio is <%= wrong %>",
+      sizeTips1:
+        "Please upload a file smaller than <%= right %>KB, your file is <%= wrong %>KB",
+      sizeTips2:
+        "Please upload a file larger than <%= right %>KB, your file is <%= wrong %>KB"
     },
     zh_cn: {
-      selectPls: '请选择',
-      uploading: '上传中...',
-      upload: '点击上传'
+      selectPls: "请选择",
+      uploading: "上传中...",
+      upload: "点击上传",
+      uploadFail: "上传失败，请稍后再试！",
+      resolutionTip1: "请上传<%= right %>的图片，你的图片为<%= wrong %>",
+      resolutionTip2:
+        "请上传宽高比为<%= right %>的图片，你的图片宽高比为<%= wrong %>",
+      sizeTips1: "请上传小于<%= right %>KB的文件，您的文件为<%= wrong %>KB",
+      sizeTips2: "请上传大于<%= right %>KB的文件，您的文件为<%= wrong %>KB"
     }
   },
 
@@ -190,7 +308,6 @@ export default {
         this.$emit("input", val);
       });
     }
-
   },
 
   data() {
@@ -281,7 +398,10 @@ export default {
 
   computed: {
     autocompleteOtherParams() {
-      let otherParams = _cloneDeep(_get(this.mergeConfig, 'autocomplete.enumSourceRemote.otherParams'), {});
+      let otherParams = _cloneDeep(
+        _get(this.mergeConfig, "autocomplete.enumSourceRemote.otherParams"),
+        {}
+      );
       for (let key in otherParams) {
         otherParams[key] = this._analyzeVal(otherParams[key]);
       }
@@ -347,9 +467,10 @@ export default {
         fileSize > vm.mergeConfig.upload.constraint.maxSize
       ) {
         vm.$message({
-          message: `请上传小于${
-            vm.mergeConfig.upload.constraint.maxSize
-          }KB的文件，您的文件为${fileSize.toFixed(0)}KB`,
+          message: vm.$t("sizeTips1", {
+            right: vm.mergeConfig.upload.constraint.maxSize,
+            wrong: fileSize.toFixed(0)
+          }),
           type: "error"
         });
         return;
@@ -359,9 +480,10 @@ export default {
         fileSize < vm.mergeConfig.upload.constraint.minSize
       ) {
         vm.$message({
-          message: `请上传大于${
-            vm.mergeConfig.upload.constraint.minSize
-          }KB的文件，您的文件为${fileSize.toFixed(0)}KB`,
+          message: vm.$t("sizeTips2", {
+            right: vm.mergeConfig.upload.constraint.minSize,
+            wrong: fileSize.toFixed(0)
+          }),
           type: "error"
         });
         return;
@@ -385,30 +507,36 @@ export default {
                   this.height === vm.mergeConfig.upload.constraint.height;
               } else {
                 pass =
-                  (this.width / this.height).toFixed(0) ===
+                  (this.width / this.height).toFixed(1) ===
                   (
                     vm.mergeConfig.upload.constraint.width /
                     vm.mergeConfig.upload.constraint.height
-                  ).toFixed(0);
+                  ).toFixed(1);
               }
               if (!pass) {
                 if (vm.mergeConfig.upload.constraint.sizeFixed) {
                   vm.$message({
-                    message: `请上传${vm.mergeConfig.upload.constraint.width}x${
-                      vm.mergeConfig.upload.constraint.height
-                    }的图片，你的图片为${this.width}x${this.height}`,
+                    message: vm.$t("resolutionTip1", {
+                      right: `${vm.mergeConfig.upload.constraint.width}x${
+                        vm.mergeConfig.upload.constraint.height
+                      }`,
+                      wrong: `${this.width}x${this.height}`
+                    }),
                     type: "error"
                   });
                 } else {
                   vm.$message({
-                    message: `请上传宽高比为${vm._getFractionalExpression(
-                      vm.mergeConfig.upload.constraint.width /
-                        vm.mergeConfig.upload.constraint.height,
-                      0.01
-                    )}的图片，你的图片宽高比为${vm._getFractionalExpression(
-                      this.width / this.height,
-                      0.01
-                    )}`,
+                    message: vm.$t("resolutionTip2", {
+                      right: vm._getFractionalExpression(
+                        vm.mergeConfig.upload.constraint.width /
+                          vm.mergeConfig.upload.constraint.height,
+                        0.01
+                      ),
+                      wrong: vm._getFractionalExpression(
+                        this.width / this.height,
+                        0.01
+                      )
+                    }),
                     type: "error"
                   });
                 }
@@ -439,7 +567,7 @@ export default {
             this.$data.isUploading = false;
           })
           .catch(() => {
-            vm.$message.error(`上传失败，请稍后再试！`);
+            vm.$message.error(this.$t("uploadFail"));
             this.$data.isUploading = false;
           });
       });
@@ -472,7 +600,7 @@ export default {
         val = this.$data.inputVal;
       }
 
-      if(this.$data.mergeConfig.trim){
+      if (this.$data.mergeConfig.trim) {
         val = val ? val.toString().trim() : val;
       }
 
@@ -503,8 +631,7 @@ export default {
           ] = this.$data.appendSelectVal;
         }
         return obj;
-      }
-      else{
+      } else {
         this.$data.inputVal = val;
         return val;
       }

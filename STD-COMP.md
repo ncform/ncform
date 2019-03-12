@@ -38,9 +38,9 @@ If you don't like the cold text description, click on the [interactive version](
 
   autocomplete: { // Automatic completion 
     itemValueField: 'value', // Item data represents the field of value
-    itemTemplate: '<span>{{item.value}}</span>', // Display item template
+    itemTemplate: '<span>{{item.value}} {{item.desc}}</span>', // Display item template
     immediateShow: false, // Whether to display immediately, if it is false, it will be displayed when input the keyword.
-    enumSource: [{value: [String | Number | Boolean], label: ''}], // Provided when the prompt data is local rather than remote
+    enumSource: [{value: [String | Number | Boolean], desc: ''}], // Provided when the prompt data is local rather than remote
     enumSourceRemote: {
       remoteUrl: '', // If it is remote call, fill in the url
       paramName: 'keyword', // Request parameter name, default is keyword

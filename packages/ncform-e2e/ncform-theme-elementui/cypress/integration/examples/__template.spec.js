@@ -1,18 +1,31 @@
 /// <reference types="Cypress" />
 
-const md5 = require('blueimp-md5');
-
 context('<context name>', () => {
 
   before(() => {
-    cy.visit('http://localhost:3000/examples/components/vue-ncform/<page name>.html')
+    cy.visit('http://localhost:3004/examples/components/playground/index.html')
   })
 
   it('<testcase name>', () => {
-    let id = md5('<testcase name>');
-    cy.get(`[data-cy=${id}]`).within(() => {
-      cy.get('label').contains('name').next().find('input').should('have.value', 'daniel');
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+
+      // common.submitForm();
     })
-  })
+
+  });
 
 })
