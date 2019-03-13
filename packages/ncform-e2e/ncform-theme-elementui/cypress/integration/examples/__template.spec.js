@@ -1,5 +1,7 @@
 /// <reference types="Cypress" />
 
+import common from './common';
+
 context('<context name>', () => {
 
   before(() => {

@@ -497,7 +497,7 @@ context('input', () => {
     });
   });
 
-  it.only('compound', () => {
+  it('compound', () => {
     cy.server();
     cy.route({
       method: 'GET',
