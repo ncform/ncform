@@ -639,7 +639,7 @@ context('input', () => {
               }
             }
           }
-        }
+        },
       }
     };
     cy.window()
@@ -708,27 +708,49 @@ context('input', () => {
             .should('have.value', 'Man');
         });
 
-        cy.wait(1000);
-        cy.get('label')
-          .contains('name4')
-          .parent()
-          .within(() => {
-            cy.get('.el-select')
-              .find('input')
-              .should('have.value', 'Girl');
-            cy.get('input')
-              .eq(1)
-              .should('have.value', 'sarah');
+      cy.wait(1000);
+      cy.get('label')
+        .contains('name4')
+        .parent()
+        .within(() => {
+          cy.get('.el-select')
+            .find('input')
+            .should('have.value', 'Girl');
+          cy.get('input')
+            .eq(1)
+            .should('have.value', 'sarah');
 
-            cy.get('.el-select').click();
-            cy.get('@body')
-              .find('li:not(:hidden)')
-              .contains('Boy')
-              .click();
-            cy.get('.el-select')
-              .find('input')
-              .should('have.value', 'Boy');
-          });
+          cy.get('.el-select').click();
+          cy.get('@body')
+            .find('li:not(:hidden)')
+            .contains('Boy')
+            .click();
+          cy.get('.el-select')
+            .find('input')
+            .should('have.value', 'Boy');
+        });
+
+      cy.wait(1000);
+      cy.get('label')
+        .contains('name5')
+        .parent()
+        .within(() => {
+          cy.get('.el-select')
+            .find('input')
+            .should('have.value', 'Girl');
+          cy.get('input')
+            .eq(0)
+            .should('have.value', 'sarah');
+
+          cy.get('.el-select').click();
+          cy.get('@body')
+            .find('li:not(:hidden)')
+            .contains('Boy')
+            .click();
+          cy.get('.el-select')
+            .find('input')
+            .should('have.value', 'Boy');
+        });
 
       // common.submitForm();
     });
