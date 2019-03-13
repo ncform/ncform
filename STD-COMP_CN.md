@@ -109,7 +109,7 @@
 ```js
 {
   rows: 2, // 行数
-  autosize: true, // 自适应内容高度，可选值：[boolean | { minRows: 2, maxRows: 6 }]
+  autoSize: true, // 自适应内容高度，可选值：[boolean | { minRows: 2, maxRows: 6 }]
 }
 ```
 

@@ -109,7 +109,7 @@ If you don't like the cold text description, click on the [interactive version](
 ```js
 {
   rows: 2, // Rows
-  autosize: true, // Adaptive content height, optional: [boolean | { minRows: 2, maxRows: 6 }]
+  autoSize: true, // Adaptive content height, optional: [boolean | { minRows: 2, maxRows: 6 }]
 }
 ```
 
