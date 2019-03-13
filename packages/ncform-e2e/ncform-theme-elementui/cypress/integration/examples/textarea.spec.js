@@ -104,7 +104,7 @@ context('textarea', () => {
     });
   });
 
-  it.only('autoSize', () => {
+  it('autoSize', () => {
     let formSchema = {
       type: 'object',
       properties: {
