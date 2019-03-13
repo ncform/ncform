@@ -47,33 +47,54 @@ context('input', () => {
     // common.submitForm();
 
     cy.get('.previewArea').within(() => {
-
-      cy.get('label').contains('name0').as('nameLabel0');
-      cy.get('@nameLabel0').next().find('input').as('nameInput0');
+      cy.get('label')
+        .contains('name0')
+        .as('nameLabel0');
+      cy.get('@nameLabel0')
+        .next()
+        .find('input')
+        .as('nameInput0');
       cy.get('@nameInput0').should('have.value', 'daniel');
 
-      cy.get('label').contains('name1').as('nameLabel1');
-      cy.get('@nameLabel1').next().find('input').as('nameInput1');
+      cy.get('label')
+        .contains('name1')
+        .as('nameLabel1');
+      cy.get('@nameLabel1')
+        .next()
+        .find('input')
+        .as('nameInput1');
       cy.get('@nameInput1').should('be.disabled');
 
-      cy.get('label').contains('name2').as('nameLabel2');
-      cy.get('@nameLabel2').next().find('input').as('nameInput2');
+      cy.get('label')
+        .contains('name2')
+        .as('nameLabel2');
+      cy.get('@nameLabel2')
+        .next()
+        .find('input')
+        .as('nameInput2');
       cy.get('@nameInput2').should('have.prop', 'readonly');
 
-      cy.get('label').contains('name3').as('nameLabel3');
-      cy.get('@nameLabel3').next().find('input').as('nameInput3');
+      cy.get('label')
+        .contains('name3')
+        .as('nameLabel3');
+      cy.get('@nameLabel3')
+        .next()
+        .find('input')
+        .as('nameInput3');
       cy.get('@nameInput3').should('not.be.visible');
 
-      cy.get('label').contains('name4').as('nameLabel4');
-      cy.get('@nameLabel4').next().find('input').as('nameInput4');
+      cy.get('label')
+        .contains('name4')
+        .as('nameLabel4');
+      cy.get('@nameLabel4')
+        .next()
+        .find('input')
+        .as('nameInput4');
       cy.get('@nameInput4').should('have.prop', 'placeholder', 'your name');
-
-    })
-
+    });
   });
 
   it('Simple Props', () => {
-
     let formSchema = {
       type: 'object',
       properties: {
@@ -101,7 +122,7 @@ context('input', () => {
           ui: {
             widgetConfig: {
               prefixIcon: 'el-icon-search',
-              suffixIcon: 'el-icon-date',
+              suffixIcon: 'el-icon-date'
             }
           }
         }
@@ -112,33 +133,72 @@ context('input', () => {
     // common.submitForm();
 
     cy.get('.previewArea').within(() => {
+      cy.get('label')
+        .contains('name1')
+        .as('nameLabel1');
+      cy.get('@nameLabel1')
+        .next()
+        .find('input')
+        .as('nameInput1');
+      cy.get('@nameInput1')
+        .type(' daniel  ')
+        .should('have.value', ' daniel  ');
+      cy.get('@nameInput1')
+        .parent()
+        .find('.el-icon-search')
+        .should('exist');
+      cy.get('@nameInput1')
+        .parent()
+        .find('.el-input__clear')
+        .should('not.be.visible');
 
-      cy.get('label').contains('name1').as('nameLabel1');
-      cy.get('@nameLabel1').next().find('input').as('nameInput1');
-      cy.get('@nameInput1').type(' daniel  ').should('have.value', ' daniel  ');
-      cy.get('@nameInput1').parent().find('.el-icon-search').should('exist');
-      cy.get('@nameInput1').parent().find('.el-input__clear').should('not.be.visible');
-
-      cy.get('label').contains('name2').as('nameLabel2');
-      cy.get('@nameLabel2').next().find('input').as('nameInput2');
-      cy.get('@nameInput2').parent().find('.el-input__clear').should('not.be.visible');
-      cy.get('@nameInput2').type(' daniel  ').should('have.value', 'daniel');
-      cy.get('@nameInput2').parent().find('.el-input__clear').should('be.visible');
-      cy.get('@nameInput2').parent().find('.el-input__clear').click();
+      cy.get('label')
+        .contains('name2')
+        .as('nameLabel2');
+      cy.get('@nameLabel2')
+        .next()
+        .find('input')
+        .as('nameInput2');
+      cy.get('@nameInput2')
+        .parent()
+        .find('.el-input__clear')
+        .should('not.be.visible');
+      cy.get('@nameInput2')
+        .type(' daniel  ')
+        .should('have.value', 'daniel');
+      cy.get('@nameInput2')
+        .parent()
+        .find('.el-input__clear')
+        .should('be.visible');
+      cy.get('@nameInput2')
+        .parent()
+        .find('.el-input__clear')
+        .click();
       cy.get('@nameInput2').should('have.value', '');
-      cy.get('@nameInput2').parent().find('.el-input__clear').should('not.be.visible');
-      cy.get('@nameInput2').parent().find('.el-icon-date').should('exist');
+      cy.get('@nameInput2')
+        .parent()
+        .find('.el-input__clear')
+        .should('not.be.visible');
+      cy.get('@nameInput2')
+        .parent()
+        .find('.el-icon-date')
+        .should('exist');
 
-      cy.get('label').contains('name3').parent().as('item');
-      cy.get('@item').find('.el-icon-search').should('exist');
-      cy.get('@item').find('.el-icon-date').should('exist');
-    })
-
+      cy.get('label')
+        .contains('name3')
+        .parent()
+        .as('item');
+      cy.get('@item')
+        .find('.el-icon-search')
+        .should('exist');
+      cy.get('@item')
+        .find('.el-icon-date')
+        .should('exist');
+    });
   });
 
   it('type', () => {
-
-    cy.server()
+    cy.server();
     cy.route({
       method: 'POST',
       url: '/upload',
@@ -177,7 +237,7 @@ context('input', () => {
                 },
                 fileField: 'photo',
                 accept: '.png',
-                uploadText: 'Upload Now',
+                uploadText: 'Upload Now'
               }
             },
             preview: {
@@ -199,7 +259,7 @@ context('input', () => {
                 constraint: {
                   maxSize: 30,
                   minSize: 10
-                },
+                }
               }
             },
             preview: {
@@ -222,7 +282,7 @@ context('input', () => {
                   width: 320,
                   height: 320,
                   sizeFixed: true
-                },
+                }
               }
             },
             preview: {
@@ -245,7 +305,7 @@ context('input', () => {
                   width: 320,
                   height: 320,
                   sizeFixed: false
-                },
+                }
               }
             },
             preview: {
@@ -259,65 +319,94 @@ context('input', () => {
     common.startRun();
 
     cy.get('.previewArea').within(() => {
+      cy.get('label')
+        .contains('name2')
+        .as('nameLabel2');
+      cy.get('@nameLabel2')
+        .next()
+        .find('input')
+        .as('nameInput2');
+      cy.get('@nameInput2')
+        .type('daniel')
+        .should('have.value', '');
+      cy.get('@nameInput2')
+        .type('123')
+        .should('have.value', '123');
 
-      cy.get('label').contains('name2').as('nameLabel2');
-      cy.get('@nameLabel2').next().find('input').as('nameInput2');
-      cy.get('@nameInput2').type('daniel').should('have.value', '');
-      cy.get('@nameInput2').type('123').should('have.value', '123');
+      cy.get('label')
+        .contains('name3')
+        .as('nameLabel3');
+      cy.get('@nameLabel3')
+        .next()
+        .find('input')
+        .as('nameInput3');
+      cy.get('@nameInput3')
+        .type('daniel123')
+        .should('have.value', 'daniel123')
+        .and('have.prop', 'type', 'password');
 
-      cy.get('label').contains('name3').as('nameLabel3');
-      cy.get('@nameLabel3').next().find('input').as('nameInput3');
-      cy.get('@nameInput3').type('daniel123').should('have.value', 'daniel123').and('have.prop', 'type', 'password');
-
-      cy.get('label').contains('name4').parent().within(() => {
-        cy.get('button').contains('Upload Now').should('exist')
-        common.uploadFile('assets/img/dx.png');
-        cy.wait('@upload').then(xhr => {
-          let uploadParams = {};
-          xhr.request.body.forEach((item, key) => uploadParams[key] = item);
-          cy.wrap(uploadParams).its('name').should('equal', 'daniel');
-          cy.wrap(uploadParams).should('have.property', 'photo');
+      cy.get('label')
+        .contains('name4')
+        .parent()
+        .within(() => {
+          cy.get('button')
+            .contains('Upload Now')
+            .should('exist');
+          common.uploadFile('assets/img/dx.png');
+          cy.wait('@upload').then(xhr => {
+            let uploadParams = {};
+            xhr.request.body.forEach((item, key) => (uploadParams[key] = item));
+            cy.wrap(uploadParams)
+              .its('name')
+              .should('equal', 'daniel');
+            cy.wrap(uploadParams).should('have.property', 'photo');
+          });
+          cy.get('input').should('have.value', 'https://avatars1.githubusercontent.com/u/22042268?s=40&v=4');
         });
-        cy.get('input').should('have.value', 'https://avatars1.githubusercontent.com/u/22042268?s=40&v=4')
-      });
 
-      cy.get('label').contains('name5').parent().within(() => {
-        common.uploadFile('assets/img/dx.png');
-        cy.wait(1000);
-        cy.get('input').should('have.value', '')
+      cy.get('label')
+        .contains('name5')
+        .parent()
+        .within(() => {
+          common.uploadFile('assets/img/dx.png');
+          cy.wait(1000);
+          cy.get('input').should('have.value', '');
 
-        common.uploadFile('assets/img/demo1.jpg');
-        cy.wait(1000);
-        cy.get('input').should('have.value', '')
-      });
+          common.uploadFile('assets/img/demo1.jpg');
+          cy.wait(1000);
+          cy.get('input').should('have.value', '');
+        });
 
-      cy.get('label').contains('name6').parent().within(() => {
-        common.uploadFile('assets/img/demo1.jpg');
-        cy.wait(1000);
-        cy.get('input').should('have.value', '')
+      cy.get('label')
+        .contains('name6')
+        .parent()
+        .within(() => {
+          common.uploadFile('assets/img/demo1.jpg');
+          cy.wait(1000);
+          cy.get('input').should('have.value', '');
 
-        common.uploadFile('assets/img/dx.png');
-        cy.wait(1000);
-        cy.get('input').should('have.value', '')
-      });
+          common.uploadFile('assets/img/dx.png');
+          cy.wait(1000);
+          cy.get('input').should('have.value', '');
+        });
 
-      cy.get('label').contains('name7').parent().within(() => {
-        common.uploadFile('assets/img/demo1.jpg');
-        cy.wait(1000);
-        cy.get('input').should('have.value', '')
+      cy.get('label')
+        .contains('name7')
+        .parent()
+        .within(() => {
+          common.uploadFile('assets/img/demo1.jpg');
+          cy.wait(1000);
+          cy.get('input').should('have.value', '');
 
-        common.uploadFile('assets/img/dx.png');
-        cy.wait(1000);
-        cy.get('input').should('have.value', 'https://avatars1.githubusercontent.com/u/22042268?s=40&v=4')
-      });
-
-    })
-
+          common.uploadFile('assets/img/dx.png');
+          cy.wait(1000);
+          cy.get('input').should('have.value', 'https://avatars1.githubusercontent.com/u/22042268?s=40&v=4');
+        });
+    });
   });
 
   it('autocomplete', () => {
-
-    cy.server()
+    cy.server();
     cy.route({
       method: 'GET',
       url: '/autocomplete?**',
@@ -345,8 +434,8 @@ context('input', () => {
               autocomplete: {
                 itemValueField: 'name',
                 immediateShow: false,
-                enumSource: [{ name: 'daniel' }, { name: 'sarah' }],
-              },
+                enumSource: [{ name: 'daniel' }, { name: 'sarah' }]
+              }
             }
           }
         },
@@ -364,9 +453,9 @@ context('input', () => {
                   otherParams: {
                     name: 'daniel'
                   },
-                  resField: 'data',
+                  resField: 'data'
                 }
-              },
+              }
             }
           }
         }
@@ -381,27 +470,267 @@ context('input', () => {
 
     cy.get('.previewArea').within(() => {
       // Declare action elements
-      cy.get('label').contains('name1').parent().within(() => {
-        cy.get('input').type('da');
-        cy.get('@body').find('li:contains("daniel")').click();
-        cy.get('input').should('have.value', 'daniel');
-      })
-
-      cy.get('label').contains('name2').parent().within(() => {
-        cy.get('input').focus();
-        cy.wait('@autocomplete').then(xhr => {
-          expect(xhr.url).to.be.contains('name=daniel&keyword=')
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('input').type('da');
+          cy.get('@body')
+            .find('li:contains("daniel")')
+            .click();
+          cy.get('input').should('have.value', 'daniel');
         });
-        cy.get('input').type('sa');
-        cy.wait('@autocomplete').then(xhr => {
-          expect(xhr.url).to.be.contains('name=daniel&keyword=sa')
+
+      cy.get('label')
+        .contains('name2')
+        .parent()
+        .within(() => {
+          cy.get('input').focus();
+          cy.wait('@autocomplete').then(xhr => {
+            expect(xhr.url).to.be.contains('name=daniel&keyword=');
+          });
+          cy.get('input').type('sa');
+          cy.wait('@autocomplete').then(xhr => {
+            expect(xhr.url).to.be.contains('name=daniel&keyword=sa');
+          });
         });
-      })
-
-    })
-
-
-
+    });
   });
 
+  it.only('compound', () => {
+    cy.server();
+    cy.route({
+      method: 'GET',
+      url: '/meta',
+      response: {
+        data: [
+          {
+            id: 1,
+            name: 'Boy'
+          },
+          {
+            id: 2,
+            name: 'Girl'
+          }
+        ]
+      }
+    }).as('meta');
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name1: {
+          type: 'string',
+          ui: {
+            widgetConfig: {
+              compound: {
+                prependLabel: 'http://',
+                appendLabel: 'go',
+                prependIcon: 'el-icon-search',
+                appendIcon: 'el-icon-date'
+              }
+            }
+          }
+        },
+        name2: {
+          type: 'object',
+          value: {
+            gender: 2,
+            name: 'sarah'
+          },
+          ui: {
+            widget: 'input',
+            widgetConfig: {
+              modelField: 'name',
+              compound: {
+                prependSelect: {
+                  itemLabelField: 'label',
+                  itemValueField: 'id',
+                  enumSource: [
+                    {
+                      id: 1,
+                      label: 'Man'
+                    },
+                    {
+                      id: 2,
+                      label: 'Woman'
+                    }
+                  ],
+                  modelField: 'gender'
+                }
+              }
+            }
+          }
+        },
+        name3: {
+          type: 'object',
+          value: {
+            gender: 2,
+            name: 'sarah'
+          },
+          ui: {
+            widget: 'input',
+            widgetConfig: {
+              modelField: 'name',
+              compound: {
+                appendSelect: {
+                  itemLabelField: 'label',
+                  itemValueField: 'id',
+                  enumSource: [
+                    {
+                      id: 1,
+                      label: 'Man'
+                    },
+                    {
+                      id: 2,
+                      label: 'Woman'
+                    }
+                  ],
+                  modelField: 'gender'
+                }
+              }
+            }
+          }
+        },
+        name4: {
+          type: 'object',
+          value: {
+            gender: 2,
+            name: 'sarah'
+          },
+          ui: {
+            widget: 'input',
+            widgetConfig: {
+              modelField: 'name',
+              compound: {
+                prependSelect: {
+                  itemLabelField: 'name',
+                  itemValueField: 'id',
+                  enumSourceRemote: {
+                    remoteUrl: '/meta',
+                    resField: 'data'
+                  },
+                  modelField: 'gender'
+                }
+              }
+            }
+          }
+        },
+        name5: {
+          type: 'object',
+          value: {
+            gender: 2,
+            name: 'sarah'
+          },
+          ui: {
+            widget: 'input',
+            widgetConfig: {
+              modelField: 'name',
+              compound: {
+                appendSelect: {
+                  itemLabelField: 'name',
+                  itemValueField: 'id',
+                  enumSourceRemote: {
+                    remoteUrl: '/meta',
+                    resField: 'data'
+                  },
+                  modelField: 'gender'
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('div')
+            .contains('http://')
+            .should('exist');
+          cy.get('div')
+            .contains('go')
+            .should('exist');
+          cy.get('i.el-icon-search').should('exist');
+          cy.get('i.el-icon-date').should('exist');
+        });
+
+      cy.get('label')
+        .contains('name2')
+        .parent()
+        .within(() => {
+          cy.get('.el-select')
+            .find('input')
+            .should('have.value', 'Woman');
+          cy.get('input')
+            .eq(1)
+            .should('have.value', 'sarah');
+
+          cy.get('.el-select').click();
+          cy.get('@body')
+            .find('li:not(:hidden)')
+            .contains('Man')
+            .click();
+          cy.get('.el-select')
+            .find('input')
+            .should('have.value', 'Man');
+        });
+
+      cy.wait(1000);
+      cy.get('label')
+        .contains('name3')
+        .parent()
+        .within(() => {
+          cy.get('.el-select')
+            .find('input')
+            .should('have.value', 'Woman');
+          cy.get('input')
+            .eq(0)
+            .should('have.value', 'sarah');
+
+          cy.get('.el-select').click();
+          cy.get('@body')
+            .find('li:not(:hidden)')
+            .contains('Man')
+            .click();
+          cy.get('.el-select')
+            .find('input')
+            .should('have.value', 'Man');
+        });
+
+        cy.wait(1000);
+        cy.get('label')
+          .contains('name4')
+          .parent()
+          .within(() => {
+            cy.get('.el-select')
+              .find('input')
+              .should('have.value', 'Girl');
+            cy.get('input')
+              .eq(1)
+              .should('have.value', 'sarah');
+
+            cy.get('.el-select').click();
+            cy.get('@body')
+              .find('li:not(:hidden)')
+              .contains('Boy')
+              .click();
+            cy.get('.el-select')
+              .find('input')
+              .should('have.value', 'Boy');
+          });
+
+      // common.submitForm();
+    });
+  });
 });
