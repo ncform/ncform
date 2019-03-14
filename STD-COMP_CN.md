@@ -122,7 +122,7 @@
   filterable: false, // 是否可搜索，即可输入关键字
   filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
 
-  itemTemplate: '<li value="{{value}}">{{label}}</li>', // 显示项的模板
+  itemTemplate: '<span>{{item.label}} : {{item.value}}</span>', // 显示项的模板
   itemLabelField: 'label', // 项数据表示label的字段
   itemValueField: 'value', // 项数据表示value的字段
   enumSource: [{value: [String | Number | Boolean], label: ''}], // 本地数据源

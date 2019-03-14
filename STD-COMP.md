@@ -122,7 +122,7 @@ If you don't like the cold text description, click on the [interactive version](
   filterable: false, // Whether searchable
   filterLocal: true, // Filter by local or remote data. if true, even with enumSourceRemote, data will only be retrieved once remotely.
 
-  itemTemplate: '<li value="{{value}}">{{label}}</li>', // Display item template
+  itemTemplate: '<span>{{item.label}} : {{item.value}}</span>', // Display item template
   itemLabelField: 'label', // Item data represents the field of the label
   itemValueField: 'value', // Item data represents the field of value
   enumSource: [{value: [String | Number | Boolean], label: ''}], // Local data source

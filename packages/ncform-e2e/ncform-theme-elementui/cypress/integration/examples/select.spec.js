@@ -161,7 +161,7 @@ context('select', () => {
     });
   });
 
-  it.only('Simple Props', () => {
+  it('Simple Props', () => {
     let formSchema = {
       type: 'object',
       properties: {
@@ -206,6 +206,27 @@ context('select', () => {
               ]
             }
           }
+        },
+        name3: {
+          type: 'string',
+          ui: {
+            widget: 'select',
+            widgetConfig: {
+              itemTemplate: '<span>{{item.id}} : {{item.name}}</span>',
+              itemLabelField: 'name',
+              itemValueField: 'id',
+              enumSource: [
+                {
+                  id: '1',
+                  name: 'daniel'
+                },
+                {
+                  id: '2',
+                  name: 'sarah'
+                }
+              ]
+            }
+          }
         }
       }
     };
@@ -218,39 +239,228 @@ context('select', () => {
 
     cy.get('.previewArea').within(() => {
       // Declare action elements
-      cy.get('label').contains('name1').parent().within(() => {
-        cy.get('input').eq(0).focus();
-        cy.get('@body').find('li:contains("daniel")').click().should('be.visible');
-        cy.get('@body').find('li:contains("sarah")').click().should('be.visible');
-        cy.get('.el-select__tags-text:contains("daniel")').should('exist').and('be.visible');
-        cy.get('.el-select__tags-text:contains("sarah")').should('exist').and('be.visible');
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          // multiple: true
+          cy.get('input')
+            .eq(0)
+            .focus();
+          cy.get('@body')
+            .find('li:contains("daniel")')
+            .find(':not(:hidden)')
+            .click()
+            .should('be.visible');
+          cy.get('@body')
+            .find('li:contains("sarah")')
+            .find(':not(:hidden)')
+            .click()
+            .should('be.visible');
+          cy.get('.el-select__tags-text:contains("daniel")')
+            .should('exist')
+            .and('be.visible');
+          cy.get('.el-select__tags-text:contains("sarah")')
+            .should('exist')
+            .and('be.visible');
 
-        cy.get('input').eq(0).type('d').should('have.value', 'd')
-        cy.get('@body').find('li:contains("sarah")').should('not.be.visible');
+          // filterable: true
+          cy.get('input')
+            .eq(0)
+            .type('d')
+            .should('have.value', 'd');
+          cy.get('@body')
+            .find('li:contains("sarah")')
+            .should('not.be.visible');
 
-        cy.get('.el-icon-arrow-up').trigger('mouseenter');
-        cy.get('.el-icon-circle-close').click();
-        cy.get('input').eq(0).should('have.value', '');
-      })
+          // clearable: true
+          cy.get('.el-icon-arrow-up').trigger('mouseenter');
+          cy.get('.el-icon-circle-close').click();
+          cy.get('input')
+            .eq(0)
+            .should('have.value', '');
+        });
 
-      // cy.get('label').contains('name2').parent().within(() => {
-      //   cy.get('input').eq(0).focus();
-      //   cy.get('@body').find('li:contains("daniel")').click().should('be.visible');
-      //   cy.get('@body').find('li:contains("sarah")').click().should('be.visible');
-      //   cy.get('.el-select__tags-text:contains("daniel")').should('exist').and('be.visible');
-      //   cy.get('.el-select__tags-text:contains("sarah")').should('exist').and('be.visible');
+      cy.wait(500);
+      cy.get('label')
+        .contains('name2')
+        .parent()
+        .within(() => {
+          // filterable: false
+          cy.get('input')
+            .eq(0)
+            .click()
+            .should('has.have.prop', 'readonly');
 
-      //   cy.get('input').eq(0).type('d').should('have.value', 'd')
-      //   cy.get('@body').find('li:contains("sarah")').should('not.be.visible');
+          // multiple: false
+          cy.get('@body')
+            .find('li:contains("daniel")')
+            .find(':not(:hidden)')
+            .click()
+            .should('be.visible');
+          cy.get('@body')
+            .find('li:contains("daniel")')
+            .should('not.be.visible');
+          cy.get('@body')
+            .find('li:contains("sarah")')
+            .should('not.be.visible');
+          cy.get('input')
+            .eq(0)
+            .should('have.value', 'daniel');
 
-      //   cy.get('.el-icon-arrow-up').trigger('mouseenter');
-      //   cy.get('.el-icon-circle-close').click();
-      //   cy.get('input').eq(0).should('have.value', '');
-      // })
+          // clearable: false
+          cy.get('.el-icon-arrow-up').trigger('mouseenter');
+          cy.get('.el-icon-circle-close').should('not.be.visible');
+        });
+
+      cy.wait(100);
+      cy.get('label')
+        .contains('name3')
+        .parent()
+        .within(() => {
+          cy.get('input')
+            .eq(0)
+            .click();
+
+          cy.get('@body')
+            .find('li:contains("1 : daniel")')
+            .should('be.visible');
+          cy.get('@body')
+            .find('li:contains("2 : sarah")')
+            .click()
+            .should('be.visible');
+          cy.get('input')
+            .eq(0)
+            .should('have.value', 'sarah');
+        });
 
       // common.submitForm();
-    })
-
+    });
   });
 
+  it('enumSourceRemote', () => {
+    let callCount = 0;
+    cy.server();
+    cy.route(() => {
+      return {
+        method: 'GET',
+        url: '/list?**',
+        response: {
+          data: [
+            {
+              value: '1',
+              label: 'daniel'
+            },
+            {
+              value: '2',
+              label: 'sarah'
+            }
+          ]
+        },
+        onRequest: () => {
+          callCount++;
+        }
+      };
+    }).as('list');
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name1: {
+          type: 'string',
+          ui: {
+            widget: 'select',
+            widgetConfig: {
+              filterable: true,
+              filterLocal: true,
+              enumSourceRemote: {
+                remoteUrl: '/list',
+                paramName: 'keyword',
+                otherParams: {
+                  status: 1
+                },
+                resField: 'data',
+                selectFirstItem: true
+              }
+            }
+          }
+        },
+        name2: {
+          type: 'string',
+          ui: {
+            widget: 'select',
+            widgetConfig: {
+              filterable: true,
+              filterLocal: false,
+              enumSourceRemote: {
+                remoteUrl: '/list',
+                paramName: 'keyword',
+                otherParams: {
+                  status: 1
+                },
+                resField: 'data',
+                selectFirstItem: false
+              }
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.wait('@list');
+          cy.get('input')
+            .eq(0)
+            .should('have.value', 'daniel');
+          expect(callCount).to.be.equal(2);
+          cy.get('input')
+            .eq(0)
+            .type('da');
+          cy.get('@body')
+            .find('li:contains("daniel")')
+            .should('be.visible');
+          cy.get('@body')
+            .find('li:contains("sarah")')
+            .should('not.be.visible');
+          // filter from local
+          cy.wait(100).then(() => expect(callCount).to.be.equal(2));
+
+          cy.get('label').click();
+        });
+
+      cy.get('label')
+        .contains('name2')
+        .parent()
+        .within(() => {
+          cy.wait('@list');
+          cy.get('input')
+            .eq(0)
+            .should('have.value', '');
+          expect(callCount).to.be.equal(2);
+          cy.get('input')
+            .eq(0)
+            .type('d');
+
+          // new http request
+          cy.wait('@list').then(xhr => {
+            expect(xhr.url.search('status=1&keyword=d')).to.be.greaterThan(0)
+            expect(callCount).to.be.equal(3);
+          });
+        });
+
+      // common.submitForm();
+    });
+  });
 });

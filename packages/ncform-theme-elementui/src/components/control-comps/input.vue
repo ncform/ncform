@@ -337,7 +337,7 @@ export default {
         // autocomplete: { // 自动补全
         //   itemLabelField: 'label', // 项数据表示label的字段
         //   itemValueField: 'value', // 项数据表示value的字段
-        //   itemTemplate: '<li value="{{value}}">{{label}}</li>', // 显示项的模板
+        //   itemTemplate: '<span>{{item.label}} : {{item.value}}</span>', // 显示项的模板
         //   immediateShow: false, // 是否立即显示，如果为false则当输入关键字才显示
         //   enumSource: [{value: [String | Number | Boolean], label: ''}], // 当提示数据是本地而非远程时提供
         //   enumSourceRemote: {

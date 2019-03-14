@@ -369,12 +369,14 @@ context('input', () => {
         .parent()
         .within(() => {
           common.uploadFile('assets/img/dx.png');
-          cy.wait(1000);
-          cy.get('input').should('have.value', '');
+          cy.wait(100).then(() => {
+            cy.get('input').should('have.value', '');
+          })
 
           common.uploadFile('assets/img/demo1.jpg');
-          cy.wait(1000);
-          cy.get('input').should('have.value', '');
+          cy.wait(100).then(() => {
+            cy.get('input').should('have.value', '');
+          })
         });
 
       cy.get('label')
@@ -382,12 +384,14 @@ context('input', () => {
         .parent()
         .within(() => {
           common.uploadFile('assets/img/demo1.jpg');
-          cy.wait(1000);
-          cy.get('input').should('have.value', '');
+          cy.wait(100).then(() => {
+            cy.get('input').should('have.value', '');
+          })
 
           common.uploadFile('assets/img/dx.png');
-          cy.wait(1000);
-          cy.get('input').should('have.value', '');
+          cy.wait(100).then(() => {
+            cy.get('input').should('have.value', '');
+          })
         });
 
       cy.get('label')
@@ -395,12 +399,14 @@ context('input', () => {
         .parent()
         .within(() => {
           common.uploadFile('assets/img/demo1.jpg');
-          cy.wait(1000);
-          cy.get('input').should('have.value', '');
+          cy.wait(100).then(() => {
+            cy.get('input').should('have.value', '');
+          })
 
           common.uploadFile('assets/img/dx.png');
-          cy.wait(1000);
-          cy.get('input').should('have.value', 'https://avatars1.githubusercontent.com/u/22042268?s=40&v=4');
+          cy.wait(100).then(() => {
+            cy.get('input').should('have.value', 'https://avatars1.githubusercontent.com/u/22042268?s=40&v=4');
+          });
         });
     });
   });
@@ -686,7 +692,7 @@ context('input', () => {
             .should('have.value', 'Man');
         });
 
-      cy.wait(1000);
+      cy.wait(500);
       cy.get('label')
         .contains('name3')
         .parent()
@@ -708,7 +714,7 @@ context('input', () => {
             .should('have.value', 'Man');
         });
 
-      cy.wait(1000);
+      cy.wait(500);
       cy.get('label')
         .contains('name4')
         .parent()
@@ -730,7 +736,7 @@ context('input', () => {
             .should('have.value', 'Boy');
         });
 
-      cy.wait(1000);
+      cy.wait(500);
       cy.get('label')
         .contains('name5')
         .parent()
