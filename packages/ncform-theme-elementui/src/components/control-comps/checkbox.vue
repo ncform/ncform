@@ -7,7 +7,7 @@
       v-if="mergeConfig.selectAll && !readonly"
       :class="'check-all'"
       :disabled="disabled"
-      :indeterminate="mergeConfig.isIndeterminate"
+      :indeterminate="isIndeterminate"
       v-model="mergeConfig.checkAll"
       @change="handleCheckAllChange"
     >{{$t('all')}}</el-checkbox>
@@ -123,9 +123,9 @@
 
     data() {
       return {
+        isIndeterminate: false,
         // 组件特有的配置属性
         defaultConfig: {
-          isIndeterminate: true,
           selectAll: false, // 是否显示全选
           checkAll: false,
           arrangement: 'h', // 排列 可选值 [v | h]
@@ -178,13 +178,13 @@
           arrResAll.push(obj[itemValueField]);
         });
         vm.modelVal = val ? arrResAll : [];
-        vm.mergeConfig.isIndeterminate = false;
+        vm.isIndeterminate = false;
       },
       handleCheckedOptChange(value) {
         const vm = this;
         let checkedCount = value.length;
         vm.mergeConfig.checkAll = checkedCount === vm.mergeConfig.enumSource.length;
-        vm.mergeConfig.isIndeterminate = checkedCount > 0 && checkedCount < vm.mergeConfig.enumSource.lengths;
+        vm.isIndeterminate = checkedCount > 0 && checkedCount < vm.mergeConfig.enumSource.length;
       },
       getRemoteSource() {
         try {
