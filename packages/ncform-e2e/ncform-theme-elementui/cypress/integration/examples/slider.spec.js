@@ -43,7 +43,7 @@ context('Slider', () => {
         .contains('name0')
         .parent()
         .within(() => {
-          cy.get('.el-slider__bar').should('have.css', 'width', '91px');
+          cy.get('.el-slider__bar').should('have.css', 'width', '92px');
         });
 
       cy.get('label')

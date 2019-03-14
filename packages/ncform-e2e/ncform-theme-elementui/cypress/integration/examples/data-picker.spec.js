@@ -235,7 +235,9 @@ context('data-picker', () => {
         .contains('name5')
         .parent()
         .within(() => {
-          cy.get('input').should('have.value', '2017-12-03 14:55:08');
+          cy.get('input').then($dom => {
+            expect($dom.val().replace(/\d+:\d+:\d+/, 'xx:xx:xx')).to.be.equal('2017-12-03 xx:xx:xx');
+          })
         });
 
       // common.submitForm();
