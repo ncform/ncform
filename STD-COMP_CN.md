@@ -144,7 +144,7 @@
   arrangement: 'h', // 排列 可选值 [v | h]
 
   itemValueField: '', // 值字段 默认值为value
-  itemLabelField: '' // 显示字段 默认值为label
+  itemLabelField: '', // 显示字段 默认值为label
   enumSource: [{value: [String | Number | Boolean], label: ''}], // 可选项，默认[{value: true, label: '是'}, {value: false, label: '否'}]
   enumSourceRemote: { // 远程数据源
     remoteUrl: '', // 如果是远程访问，则填写该url
@@ -162,7 +162,7 @@
   type: 'checkbox', // 显示类型，可选值：[checkbox | button]
 
   itemValueField: '', // 值字段 默认值为value
-  itemLabelField: '' // 显示字段 默认值为label
+  itemLabelField: '', // 显示字段 默认值为label
   enumSource: [{value: [String | Number | Boolean], label: ''}], // 可选项，默认值[{label: '是'}]
   enumSourceRemote: { // 远程数据源
     remoteUrl: '', // 如果是远程访问，则填写该url

@@ -144,7 +144,7 @@ If you don't like the cold text description, click on the [interactive version](
   arrangement: 'h', // Arrange. optional values: [v | h]
 
   itemValueField: '', // Value field. default value is "value"
-  itemLabelField: '' // Display field. default value is "label"
+  itemLabelField: '', // Display field. default value is "label"
   enumSource: [{value: [String | Number | Boolean], label: ''}], // Local data source. default: [{value: true, label: '是'}, {value: false, label: '否'}]
   enumSourceRemote: { // Remote data source
     remoteUrl: '', // If it is remote call, fill in the url
@@ -162,7 +162,7 @@ If you don't like the cold text description, click on the [interactive version](
   type: 'checkbox', // Display type, optional values: [checkbox | button]
 
   itemValueField: '', // Value field. default value is "value"
-  itemLabelField: '' // Display field. default value is "label"
+  itemLabelField: '', // Display field. default value is "label"
   enumSource: [{value: [String | Number | Boolean], label: ''}], //  Local data source. default: [{label: '是'}]
   enumSourceRemote: { // Remote data source
     remoteUrl: '', // If it is remote call, fill in the url
