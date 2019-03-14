@@ -3,17 +3,20 @@
 import common from './common';
 
 context('<context name>', () => {
-
   before(() => {
-    cy.visit('http://localhost:3004/examples/components/playground/index.html')
-  })
+    cy.visit('http://localhost:3004/examples/components/playground/index.html');
+  });
 
   it('<testcase name>', () => {
     let formSchema = {
       type: 'object',
       properties: {
-        name: {
+        name1: {
           type: 'string',
+          ui: {
+            widget: '',
+            widgetConfig: {}
+          }
         }
       }
     };
@@ -24,10 +27,12 @@ context('<context name>', () => {
 
     cy.get('.previewArea').within(() => {
       // Declare action elements
-
+      cy.get('label')
+      .contains('name1')
+      .parent()
+      .within(() => {
+      });
       // common.submitForm();
-    })
-
+    });
   });
-
-})
+});
