@@ -228,7 +228,7 @@ context('Upload', () => {
 
           common.uploadImage('assets/img/dx.png');
           // listType: 'picture-card'
-          cy.get('el-upload-list--picture-card li')
+          cy.get('.el-upload-list--picture-card li')
             .its('length')
             .should('equal', 1);
           cy.get('.el-upload-dragger').should('exist');
