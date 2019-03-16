@@ -4,6 +4,7 @@
     :placeholder="placeholder || $t(typeOptions[mergeConfig.type].placeholder)"
     :disabled="disabled"
     :readonly="readonly"
+    :clearable="mergeConfig.clearable"
     v-show="!hidden"
     v-model="modelVal"
     :type="mergeConfig.type"

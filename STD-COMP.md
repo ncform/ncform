@@ -38,9 +38,9 @@ If you don't like the cold text description, click on the [interactive version](
 
   autocomplete: { // Automatic completion 
     itemValueField: 'value', // Item data represents the field of value
-    itemTemplate: '<span>{{item.value}}</span>', // Display item template
+    itemTemplate: '<span>{{item.value}} {{item.desc}}</span>', // Display item template
     immediateShow: false, // Whether to display immediately, if it is false, it will be displayed when input the keyword.
-    enumSource: [{value: [String | Number | Boolean], label: ''}], // Provided when the prompt data is local rather than remote
+    enumSource: [{value: [String | Number | Boolean], desc: ''}], // Provided when the prompt data is local rather than remote
     enumSourceRemote: {
       remoteUrl: '', // If it is remote call, fill in the url
       paramName: 'keyword', // Request parameter name, default is keyword
@@ -109,7 +109,7 @@ If you don't like the cold text description, click on the [interactive version](
 ```js
 {
   rows: 2, // Rows
-  autosize: true, // Adaptive content height, optional: [boolean | { minRows: 2, maxRows: 6 }]
+  autoSize: true, // Adaptive content height, optional: [boolean | { minRows: 2, maxRows: 6 }]
 }
 ```
 
@@ -122,7 +122,7 @@ If you don't like the cold text description, click on the [interactive version](
   filterable: false, // Whether searchable
   filterLocal: true, // Filter by local or remote data. if true, even with enumSourceRemote, data will only be retrieved once remotely.
 
-  itemTemplate: '<li value="{{value}}">{{label}}</li>', // Display item template
+  itemTemplate: '<span>{{item.label}} : {{item.value}}</span>', // Display item template
   itemLabelField: 'label', // Item data represents the field of the label
   itemValueField: 'value', // Item data represents the field of value
   enumSource: [{value: [String | Number | Boolean], label: ''}], // Local data source
@@ -144,7 +144,7 @@ If you don't like the cold text description, click on the [interactive version](
   arrangement: 'h', // Arrange. optional values: [v | h]
 
   itemValueField: '', // Value field. default value is "value"
-  itemLabelField: '' // Display field. default value is "label"
+  itemLabelField: '', // Display field. default value is "label"
   enumSource: [{value: [String | Number | Boolean], label: ''}], // Local data source. default: [{value: true, label: '是'}, {value: false, label: '否'}]
   enumSourceRemote: { // Remote data source
     remoteUrl: '', // If it is remote call, fill in the url
@@ -162,7 +162,7 @@ If you don't like the cold text description, click on the [interactive version](
   type: 'checkbox', // Display type, optional values: [checkbox | button]
 
   itemValueField: '', // Value field. default value is "value"
-  itemLabelField: '' // Display field. default value is "label"
+  itemLabelField: '', // Display field. default value is "label"
   enumSource: [{value: [String | Number | Boolean], label: ''}], //  Local data source. default: [{label: '是'}]
   enumSourceRemote: { // Remote data source
     remoteUrl: '', // If it is remote call, fill in the url
@@ -190,13 +190,6 @@ If you don't like the cold text description, click on the [interactive version](
   listType: 'text', // The type of file list. Optional value: [ text | picture | picture-card ]
   autoUpload: false, // Whether to upload immediately after selecting a file
   limit: -1, // Maximum number of uploads allowed
-  constraint: { // constraint
-    width: 0, // Image width [image only]
-    height: 0, // Image height [image only]
-    sizeFixed: true, // Whether the size of the image size constraint is a fixed value, and when it is false, it is proportional [image only valid]
-    maxSize: 0, // Maximum picture size, in KB, 0 means no limit
-    minSize: 0 // Minimum picture size, in KB, 0 means no limit
-  }
 }
 ```
 

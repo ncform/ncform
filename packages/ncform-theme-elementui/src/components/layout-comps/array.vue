@@ -3,14 +3,14 @@
   <div class="__array-form-item">
 
     <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">
-      {{schema.ui.legend}}
+      {{_analyzeVal(schema.ui.legend)}}
       <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !mergeConfig.collapsed, 'el-icon-arrow-down': mergeConfig.collapsed}"></i>
     </legend>
 
     <div v-show="!mergeConfig.collapsed" v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" class="list-item">
 
       <div class="list-item-label">
-        <label>{{dataItem.__dataSchema.ui.label}} {{idx + 1}}</label>
+        <label>{{_analyzeVal(dataItem.__dataSchema.ui.label)}} {{idx + 1}}</label>
 
         <!-- 项控制按钮 -->
         <div class="el-button-group">

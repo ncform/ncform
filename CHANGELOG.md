@@ -1,3 +1,10 @@
+<a name="0.1.28"></a>
+## [0.1.28](https://github.com/ncform/ncform/compare/v0.1.27...v0.1.28) (2019-03-04)
+
+### Bug Fixes
+
+Fixed init lang parameter default value bugs && array-table required flag display bugs([cc38c47](https://github.com/ncform/ncform/commit/cc38c47))
+
 <a name="0.1.27"></a>
 ## [0.1.27](https://github.com/ncform/ncform/compare/v0.1.26...v0.1.27) (2019-03-03)
 

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-ncform Example</title>
+
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  </head>
+
+  <body>
+    <div id="demo" class="container">
+      <template v-for="item in formSchemas">
+        <div :data-cy="item.id" v-if="mode !== 'only' || item.only" :key="item.formName">
+          <h4>[CASE] {{ item.title }}</h4>
+          <ncform :form-schema="item.formSchema" v-model="item.formSchema.value" :form-name="item.formName"></ncform>
+          <hr />
+        </div>
+      </template>
+    </div>
+
+    <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"></script>
+    <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+    <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+    <script type="text/javascript">
+      Vue.use(vueNcform, { lang: 'en' });
+
+      new Vue({
+        el: '#demo',
+        data: {
+          mode: 'all', // all or only. if only mode, only objects with only:true in formSchemas are valid
+          formSchemas: [
+            {
+              id: md5('Specify true value'),
+              title: 'Specify true value',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string',
+                        rules: {
+                          required: true
+                        }
+                      }
+                    }
+                  },
+                  users1: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        firstname: {
+                          type: 'string',
+                          rules: {
+                            required: {
+                              value: true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  users2: {
+                    type: 'array',
+                    items: {
+                      type: 'string',
+                      rules: {
+                        required: {
+                          value: true
+                        }
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Object: Specify dx value'),
+              title: 'Object: Specify dx value',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  age: {
+                    type: 'number',
+                    ui: {
+                      columns: 4
+                    }
+                  },
+                  firstname: {
+                    type: 'string',
+                    ui: {
+                      columns: 4
+                    },
+                    rules: {
+                      required: 'dx: {{$root.age}} > 18'
+                    }
+                  },
+                  lastname: {
+                    type: 'string',
+                    ui: {
+                      columns: 4
+                    },
+                    rules: {
+                      required: {
+                        value: 'dx: {{$root.age}} > 18'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Array: Specify dx value'),
+              title: 'Array: Specify dx value',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  age: {
+                    type: 'number'
+                  },
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        firstname: {
+                          type: 'string',
+                          ui: {
+                            columns: 4
+                          },
+                          rules: {
+                            required: 'dx: {{$root.age}} > 18'
+                          }
+                        },
+                        lastname: {
+                          type: 'string',
+                          ui: {
+                            columns: 4
+                          },
+                          rules: {
+                            required: {
+                              value: 'dx: {{$root.age}} > 18'
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  users1: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        age: {
+                          type: 'number',
+                          ui: {
+                            columns: 4
+                          }
+                        },
+                        name: {
+                          type: 'string',
+                          ui: {
+                            columns: 4
+                          },
+                          rules: {
+                            required: {
+                              value: 'dx: {{$root.users1[i].age}} > 18'
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Table: Specify dx value'),
+              title: 'Table: Specify dx value',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  age: {
+                    type: 'number'
+                  },
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        firstname: {
+                          type: 'string',
+                          ui: {
+                            columns: 4
+                          },
+                          rules: {
+                            required: 'dx: {{$root.age}} > 18'
+                          }
+                        },
+                        lastname: {
+                          type: 'string',
+                          ui: {
+                            columns: 4
+                          },
+                          rules: {
+                            required: {
+                              value: 'dx: {{$root.age}} > 18'
+                            }
+                          }
+                        }
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  },
+                  users1: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        age: {
+                          type: 'number',
+                          ui: {
+                            columns: 4,
+                            linkFields: [
+                              {
+                                fieldPath: 'users1[i].name',
+                                rules: [ 'required' ]
+                              }
+                            ]
+                          }
+                        },
+                        name: {
+                          type: 'string',
+                          ui: {
+                            columns: 4
+                          },
+                          rules: {
+                            required: {
+                              value: 'dx: {{$root.users1[i].age}} > 18'
+                            }
+                          }
+                        }
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>

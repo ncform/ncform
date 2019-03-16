@@ -32,17 +32,12 @@ function build() {
     .src(path.join("src", config.entryFileName))
     .pipe(
       webpackStream({
+        mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
         output: {
           filename: `${exportFileName}.js`,
           libraryTarget: "umd",
           library: config.mainVarName
         },
-        // Add your own externals here. For instance,
-        // {
-        //   jquery: true
-        // }
-        // would externalize the `jquery` module.
-        externals: {},
         module: {
           rules: [
             // {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}

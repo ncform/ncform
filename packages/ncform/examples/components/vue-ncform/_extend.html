@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-ncform Example</title>
+
+    <link
+      rel="stylesheet"
+      href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="demo" class="container">
+      <template v-for="item in formSchemas">
+        <div
+          :data-cy="item.id"
+          v-if="mode !== 'only' || item.only"
+          :key="item.formName"
+        >
+          <h4>[CASE] {{ item.title }}</h4>
+          <ncform
+            :form-schema="item.formSchema"
+            v-model="item.formSchema.value"
+            :form-name="item.formName"
+          ></ncform>
+          <hr />
+        </div>
+      </template>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="../../../node_modules/vue/dist/vue.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"
+    ></script>
+    <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+    <script type="text/javascript">
+      let extComponents = {
+        helloWorld: {
+          mixins: [ncformCommon.mixins.vue.controlMixin],
+          template: '<div>{{$t("hi", {msg: modelVal})}} {{modelVal}}</div>',
+          i18nData: {
+            en: {
+              hi: 'hello world: <%= msg %>'
+            },
+            zh_cn: {
+              hi: '你好 世界: <%= msg %>'
+            }
+          },
+          props: {
+            value: {
+              type: [String]
+            }
+          }
+        },
+        helloDaniel: {
+          mixins: [ncformCommon.mixins.vue.controlMixin],
+          template: '<div>{{$t("hi", {msg: modelVal})}} {{modelVal}}</div>',
+          i18nData: {
+            en: {
+              hi: 'Hi daniel: <%= msg %>'
+            },
+            zh_cn: {
+              hi: '你好 丹尼尔: <%= msg %>'
+            }
+          },
+          props: {
+            value: {
+              type: [String]
+            }
+          }
+        }
+      };
+
+      class HelloWorld extends ncformCommon.ValidationRule {
+        constructor(props) {
+          super(props);
+          this.name = 'myCustom';
+          this.defaultErrMsg = 'yeah, show my custom rule message';
+        }
+
+        validateLogic(val, ruleVal) {
+          this.errMsg = "must fill in 'world'";
+          return val === 'world';
+        }
+      }
+      class HelloDaniel extends ncformCommon.ValidationRule {
+        constructor(props) {
+          super(props);
+          this.name = 'myCustom';
+          this.defaultErrMsg = 'yeah, show my custom rule message';
+        }
+
+        validateLogic(val, ruleVal) {
+          this.errMsg = "must fill in 'daniel'";
+          return val === 'daniel';
+        }
+      }
+
+      Vue.use(vueNcform, {
+        lang: 'en',
+        extComponents: { helloWorld: extComponents.helloWorld },
+        extRules: [{ helloWorld: HelloWorld }]
+      });
+
+      new Vue({
+        el: '#demo',
+        created() {
+          this.$ncformAddWidget({
+            name: 'helloDaniel',
+            widget: extComponents.helloDaniel
+          });
+          this.$ncformAddRule({ name: 'helloDaniel', rule: HelloDaniel });
+        },
+        data: {
+          mode: 'all', // all or only. if only mode, only objects with only:true in formSchemas are valid
+          formSchemas: [
+            {
+              id: md5('Control: extend'),
+              title: 'Control: extend',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  helloWorld: {
+                    type: 'string',
+                    value: 'ncform',
+                    ui: {
+                      widget: 'hello-world'
+                    }
+                  },
+                  helloDaniel: {
+                    type: 'string',
+                    value: 'ncform',
+                    ui: {
+                      widget: 'hello-daniel'
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('Rule: extend'),
+              title: 'Rule: extend',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  helloWorld: {
+                    type: 'string',
+                    rules: {
+                      helloWorld: true
+                    }
+                  },
+                  helloDaniel: {
+                    type: 'string',
+                    rules: {
+                      helloDaniel: true
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -9,6 +9,16 @@
 
     <!-- 引入样式 -->
     <link rel="stylesheet" href="../../node_modules/element-ui/lib/theme-chalk/index.css" />
+
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?027aa17f0e14133f0b8aa5f1f0af3ca7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
   </head>
 
   <body>
@@ -98,44 +108,6 @@
         },
         {
           title: {
-            cn: '[属性] trim: 前后去空格。默认值是true',
-            en: '[ATTR] trim: remove the spaces before and after. Default is true'
-          },
-          schema: {
-            type: 'object',
-            properties: {
-              name: {
-                type: 'string',
-                ui: {
-                  widgetConfig: {
-                    trim: false
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          title: {
-            cn: '[属性] clearable: 当有内容时显示清空按钮。默认值是false',
-            en: '[ATTR] clearable: With clear button. Default is false'
-          },
-          schema: {
-            type: 'object',
-            properties: {
-              name: {
-                type: 'string',
-                ui: {
-                  widgetConfig: {
-                    clearable: true
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          title: {
             cn: '[属性] readonly: 只读状态',
             en: '[ATTR] readonly: read-only state'
           },
@@ -198,6 +170,44 @@
                 ui: {
                   widgetConfig: {
                     type: 'password'
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] trim: 前后去空格。默认值是true',
+            en: '[ATTR] trim: remove the spaces before and after. Default is true'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                ui: {
+                  widgetConfig: {
+                    trim: false
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] clearable: 当有内容时显示清空按钮。默认值是false',
+            en: '[ATTR] clearable: With clear button. Default is false'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                ui: {
+                  widgetConfig: {
+                    clearable: true
                   }
                 }
               }

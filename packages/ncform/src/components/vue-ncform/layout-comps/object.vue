@@ -1,6 +1,6 @@
 <template>
   <div class="__object-form-item">
-    <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">{{schema.ui.legend}}</legend>
+    <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
 
     <!-- 垂直布局，即label上，control下 -->
     <div v-if="mergeConfig.layout === 'v'" v-show="!mergeConfig.collapsed" class="form-row v-layout" style="width: 100%">
@@ -10,15 +10,14 @@
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="form-group">
         <template>
-            <label v-if="!isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}">
+            <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}">
               <!-- 必填标识 -->
               <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
 
-              {{fieldSchema.ui.label}}
+              {{_analyzeVal(fieldSchema.ui.label)}}
 
-              <!-- TODO daniel: 提示信息组件未加 -->
               <!--  提示信息 -->
-              <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+              <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
             </label>
 
             <slot :name="field"></slot>
@@ -42,10 +41,10 @@
           <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}" class="col-form-label">
             <!-- 必填标识 -->
             <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-            {{fieldSchema.ui.label}}
-            <!-- TODO daniel: 提示信息组件未加 -->
+            {{_analyzeVal(fieldSchema.ui.label)}}
+
             <!--  提示信息 -->
-            <a v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+            <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
             :
           </label>
           <div :style="{'margin-left': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}" :class="{'col-md-9': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace)}">

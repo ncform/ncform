@@ -27,10 +27,10 @@
       ui: {
 
         columns: 6, // The number of columns, total is 12. 6 represents half
-        label: 'First Name', // Label display content
+        label: 'First Name', // Label display content [support dx expression]
         showLabel: true, // Whether to show the label (when it is false, it still takes up space)
         noLabelSpace: false, // Whether the label does not occupy space, the priority is higher than showLabel
-        legend: '', // Legend content, valid when the type is object or array
+        legend: '', // Legend content, valid when the type is object or array [support dx expression]
         showLegend: true, // Whether to display the legend. When the type is object or array, showLegend takes precedence over showLabel, so the label takes effect when showLegend is set to false.
         description: 'Fill in the first name', // Field description information [support dx expression]
         placeholder: 'first name', // Placeholder content [support dx expression]

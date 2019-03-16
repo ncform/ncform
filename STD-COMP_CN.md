@@ -38,9 +38,9 @@
 
   autocomplete: { // 自动补全 
     itemValueField: 'value', // 项数据表示value的字段
-    itemTemplate: '<span>{{item.value}}</span>', // 显示项的模板
+    itemTemplate: '<span>{{item.value}} {{item.desc}}</span>', // 显示项的模板
     immediateShow: false, // 是否立即显示，如果为false则当输入关键字才显示
-    enumSource: [{value: [String | Number | Boolean], label: ''}], // 当提示数据是本地而非远程时提供
+    enumSource: [{value: [String | Number | Boolean], desc: ''}], // 当提示数据是本地而非远程时提供
     enumSourceRemote: {
       remoteUrl: '', // 如果是远程访问，则填写该url
       paramName: 'keyword', // 请求参数名，默认是keyword
@@ -109,7 +109,7 @@
 ```js
 {
   rows: 2, // 行数
-  autosize: true, // 自适应内容高度，可选值：[boolean | { minRows: 2, maxRows: 6 }]
+  autoSize: true, // 自适应内容高度，可选值：[boolean | { minRows: 2, maxRows: 6 }]
 }
 ```
 
@@ -122,7 +122,7 @@
   filterable: false, // 是否可搜索，即可输入关键字
   filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
 
-  itemTemplate: '<li value="{{value}}">{{label}}</li>', // 显示项的模板
+  itemTemplate: '<span>{{item.label}} : {{item.value}}</span>', // 显示项的模板
   itemLabelField: 'label', // 项数据表示label的字段
   itemValueField: 'value', // 项数据表示value的字段
   enumSource: [{value: [String | Number | Boolean], label: ''}], // 本地数据源
@@ -144,7 +144,7 @@
   arrangement: 'h', // 排列 可选值 [v | h]
 
   itemValueField: '', // 值字段 默认值为value
-  itemLabelField: '' // 显示字段 默认值为label
+  itemLabelField: '', // 显示字段 默认值为label
   enumSource: [{value: [String | Number | Boolean], label: ''}], // 可选项，默认[{value: true, label: '是'}, {value: false, label: '否'}]
   enumSourceRemote: { // 远程数据源
     remoteUrl: '', // 如果是远程访问，则填写该url
@@ -162,7 +162,7 @@
   type: 'checkbox', // 显示类型，可选值：[checkbox | button]
 
   itemValueField: '', // 值字段 默认值为value
-  itemLabelField: '' // 显示字段 默认值为label
+  itemLabelField: '', // 显示字段 默认值为label
   enumSource: [{value: [String | Number | Boolean], label: ''}], // 可选项，默认值[{label: '是'}]
   enumSourceRemote: { // 远程数据源
     remoteUrl: '', // 如果是远程访问，则填写该url
@@ -190,13 +190,6 @@
   listType: 'text', // 文件列表的类型。 可选值：text/picture/picture-card
   autoUpload: false, // 是否在选取文件后立即进行上传
   limit: -1, // 最大允许上传个数
-  constraint: { // 约束
-    width: 0, // 图片宽度 [仅图片有效]
-    height: 0, // 图片高度 [仅图片有效]
-    sizeFixed: true, // 图片尺寸约束的大小是否按固定值，当为false时按比例 [仅图片有效]
-    maxSize: 0, // 最大图片大小，单位KB，0代表不限
-    minSize: 0 // 最小图片大小，单位KB，0代表不限
-  }
 }
 ```
 

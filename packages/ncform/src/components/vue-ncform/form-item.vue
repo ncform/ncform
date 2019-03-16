@@ -39,7 +39,9 @@
         <span class="clear" v-if="schema.ui.preview.clearable" @click="clearComponentValue()">x</span>
         <div class="wrapper" :class="[schema.ui.preview.outward ? schema.ui.preview.outward.shape : '']">
           <!-- 图片 -->
-          <img v-if="schema.ui.preview.type === 'image'" :src="getPreviewVal(schema.ui.preview.value, schema.value)" alt="预览区域">
+          <img v-if="schema.ui.preview.type === 'image'"
+            :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ?  schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}"
+            :src="getPreviewVal(schema.ui.preview.value, schema.value)" alt="预览区域">
           <!-- 视频 -->
           <video v-if="schema.ui.preview.type === 'video'" :src="getPreviewVal(schema.ui.preview.value, schema.value)" controls="controls"></video>
           <!-- 音频 -->
@@ -111,6 +113,8 @@ const ncformUtils = ncformCommon.ncformUtils;
 export default {
   name: "form-item", // 声明name可以嵌套自身
 
+  _init4valueTemplate: true,
+
   props: {
     schema: {
       type: Object,
@@ -145,13 +149,28 @@ export default {
 
   computed: {
     valueTemplate() {
-      return ncformUtils.smartAnalyzeVal(this.schema.valueTemplate, {
+
+      if (!this.schema.valueTemplate) return undefined;
+
+      // Put it here to let the dx expression in valueTemplate being watched
+      let result = ncformUtils.smartAnalyzeVal(this.schema.valueTemplate, {
         idxChain: this.idxChain,
         data: {
           rootData: this.formData,
           constData: this.globalConfig.constants
         }
       });
+
+      if (this.$options._init4valueTemplate) { // Prevent init value from being overwritten
+        if (this.schema.value) result = this.schema.value;
+        // User nextTick will cause the init value to be incorrect when field item in list
+        // so here use setTimeout instead
+        setTimeout(() => {
+          this.$options._init4valueTemplate = false;
+        }, 100)
+      }
+
+      return result;
     },
     htmlTypeVal() {
       return ncformUtils.smartAnalyzeVal(this.schema.value, {
@@ -220,7 +239,8 @@ export default {
 
   watch: {
     valueTemplate(newVal) {
-      this.schema.value = newVal;
+      if (newVal !== undefined)
+        this.schema.value = newVal;
     },
     schema: {
       handler: function(newVal) {

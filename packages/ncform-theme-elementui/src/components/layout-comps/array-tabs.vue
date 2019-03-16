@@ -3,7 +3,7 @@
   <div class="__array-tabs-form-item">
 
     <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">
-      {{schema.ui.legend}}
+      {{_analyzeVal(schema.ui.legend)}}
       <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !mergeConfig.collapsed, 'el-icon-arrow-down': mergeConfig.collapsed}"></i>
     </legend>
 
@@ -11,7 +11,7 @@
       <el-tab-pane v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" :name="'' + idx">
 
         <span slot="label">
-          {{dataItem.__dataSchema.ui.label + ' ' + (idx + 1)}}
+          {{_analyzeVal(dataItem.__dataSchema.ui.label) + ' ' + (idx + 1)}}
           <!-- 提示信息 -->
           <el-tooltip class="item" effect="dark" placement="right-start">
             <div slot="content" v-html="dataItem.__dataSchema.ui.help.content"></div>

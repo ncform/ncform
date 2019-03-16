@@ -70,7 +70,7 @@ gulp.task("serve", () => {
       port: 3004,
       logLevel: "debug",
       logPrefix: "VC",
-      ghostMode: false, // 禁止同步机制
+      ghostMode: true, // 禁止同步机制
       open: true,
       middleware: Object.keys(mockConfig).map(route => ({
         route,

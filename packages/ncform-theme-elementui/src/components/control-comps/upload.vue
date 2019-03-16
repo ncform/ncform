@@ -21,13 +21,14 @@
     :file-list="fileList"
     :name="mergeConfig.fileField"
   >
-    <!-- 可拖拽 -->
+    <!-- 1. 可拖拽 -->
     <template v-if="!readonly && mergeConfig.drag" slot="trigger">
       <i class="el-icon-upload"></i>
       <div class="el-upload__text" v-html="$t('uploadTips')"></div>
     </template>
     <div v-if="mergeConfig.drag && disabled" class="disabled-mask"></div>
 
+    <!-- 2 可拖拽，非自动上传 -->
     <el-button
       v-if="!readonly && mergeConfig.drag && !mergeConfig.autoUpload"
       :disabled="disabled"
@@ -37,7 +38,7 @@
       @click="submitUpload"
     >{{$t('uploadServer')}}</el-button>
 
-    <!-- 不能可拖拽 是否自动上传 维度-->
+    <!-- 3. 不可拖拽，自动上传-->
     <el-button
       v-if="!readonly && !mergeConfig.drag && mergeConfig.autoUpload"
       :disabled="disabled"
@@ -45,6 +46,7 @@
       type="primary"
     >{{$t('upload')}}</el-button>
 
+    <!-- 4. 不可拖拽，非自动上传 -->
     <template v-if="!readonly && !mergeConfig.drag && !mergeConfig.autoUpload">
       <el-button
         :disabled="disabled"
@@ -203,7 +205,7 @@
       listType() {
         const vm = this;
         const listType = vm.mergeConfig.listType;
-        return listType === 'picture-card' ? '' : listType;
+        return listType;
       },
       fileList() {
         const vm = this;
