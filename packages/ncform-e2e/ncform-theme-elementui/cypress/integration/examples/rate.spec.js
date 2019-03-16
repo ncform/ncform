@@ -79,7 +79,7 @@ context('Rate', () => {
     });
   });
 
-  it.only('Simple Props', () => {
+  it('Simple Props', () => {
     let formSchema = {
       type: 'object',
       properties: {

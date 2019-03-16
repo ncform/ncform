@@ -112,7 +112,7 @@ context('Radio', () => {
     });
   });
 
-  it.only('Source', () => {
+  it('Source', () => {
     cy.server();
     cy.route(() => {
       return {
