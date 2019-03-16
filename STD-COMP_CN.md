@@ -190,13 +190,6 @@
   listType: 'text', // 文件列表的类型。 可选值：text/picture/picture-card
   autoUpload: false, // 是否在选取文件后立即进行上传
   limit: -1, // 最大允许上传个数
-  constraint: { // 约束
-    width: 0, // 图片宽度 [仅图片有效]
-    height: 0, // 图片高度 [仅图片有效]
-    sizeFixed: true, // 图片尺寸约束的大小是否按固定值，当为false时按比例 [仅图片有效]
-    maxSize: 0, // 最大图片大小，单位KB，0代表不限
-    minSize: 0 // 最小图片大小，单位KB，0代表不限
-  }
 }
 ```
 

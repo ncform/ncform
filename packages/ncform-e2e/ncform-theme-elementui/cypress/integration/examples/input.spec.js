@@ -352,7 +352,7 @@ context('input', () => {
           cy.get('button')
             .contains('Upload Now')
             .should('exist');
-          common.uploadFile('assets/img/dx.png');
+          common.uploadImage('assets/img/dx.png');
           cy.wait('@upload').then(xhr => {
             let uploadParams = {};
             xhr.request.body.forEach((item, key) => (uploadParams[key] = item));
@@ -368,12 +368,12 @@ context('input', () => {
         .contains('name5')
         .parent()
         .within(() => {
-          common.uploadFile('assets/img/dx.png');
+          common.uploadImage('assets/img/dx.png');
           cy.wait(100).then(() => {
             cy.get('input').should('have.value', '');
           })
 
-          common.uploadFile('assets/img/demo1.jpg');
+          common.uploadImage('assets/img/demo1.jpg');
           cy.wait(100).then(() => {
             cy.get('input').should('have.value', '');
           })
@@ -383,12 +383,12 @@ context('input', () => {
         .contains('name6')
         .parent()
         .within(() => {
-          common.uploadFile('assets/img/demo1.jpg');
+          common.uploadImage('assets/img/demo1.jpg');
           cy.wait(100).then(() => {
             cy.get('input').should('have.value', '');
           })
 
-          common.uploadFile('assets/img/dx.png');
+          common.uploadImage('assets/img/dx.png');
           cy.wait(100).then(() => {
             cy.get('input').should('have.value', '');
           })
@@ -398,12 +398,12 @@ context('input', () => {
         .contains('name7')
         .parent()
         .within(() => {
-          common.uploadFile('assets/img/demo1.jpg');
+          common.uploadImage('assets/img/demo1.jpg');
           cy.wait(100).then(() => {
             cy.get('input').should('have.value', '');
           })
 
-          common.uploadFile('assets/img/dx.png');
+          common.uploadImage('assets/img/dx.png');
           cy.wait(100).then(() => {
             cy.get('input').should('have.value', 'https://avatars1.githubusercontent.com/u/22042268?s=40&v=4');
           });

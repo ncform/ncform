@@ -61,7 +61,7 @@
       }
 
       Mock.mock(/getFileInfo/, function(options) {
-        return { data: { name: 'shoe.jpg', url: '//a.vpimg2.com/upload/upimg2/ued/cxy/xinke/02-sport.jpg' } };
+        return { data: { name: 'shoe.jpg', url: '//user-gold-cdn.xitu.io/2019/3/15/1697f38df3ba0613?w=570&h=273&f=jpeg&s=40278' } };
       });
 
       Vue.use(vueNcform, { extComponents: { object: object.default, upload: upload.default }, lang: lang === 'cn' ? 'zh_cn' : 'en' });
@@ -98,7 +98,7 @@
             properties: {
               files: {
                 type: 'array',
-                value: [{ name: 'girl.jpg', url: '//a.vpimg2.com/upload/111.jpg' }],
+                value: [{ name: 'girl.jpg', url: '//user-gold-cdn.xitu.io/2019/3/15/1697f38df3ba0613?w=570&h=273&f=jpeg&s=40278' }],
                 ui: {
                   widget: 'upload'
                 }
@@ -342,7 +342,7 @@ url: file url
             properties: {
               files: {
                 type: 'array',
-                value: [{ name: 'girl.jpg', url: '//a.vpimg2.com/upload/merchandise/pdc/176/162/8951543587594162176/0/2152212-5.jpg' }],
+                value: [{ name: 'girl.jpg', url: '//user-gold-cdn.xitu.io/2019/3/15/1697f38df3ba0613?w=570&h=273&f=jpeg&s=40278' }],
                 ui: {
                   widget: 'upload',
                   widgetConfig: {
@@ -364,7 +364,7 @@ url: file url
             properties: {
               files: {
                 type: 'array',
-                value: [{ name: 'girl.jpg', url: '//a.vpimg2.com/upload/merchandise/pdc/176/162/8951543587594162176/0/2152212-5.jpg' }],
+                value: [{ name: 'girl.jpg', url: '//user-gold-cdn.xitu.io/2019/3/15/1697f38df3ba0613?w=570&h=273&f=jpeg&s=40278' }],
                 ui: {
                   widget: 'upload',
                   widgetConfig: {
@@ -438,7 +438,7 @@ url: file url
                   widgetConfig: {
                     uploadUrl: '/api/upload/getFileInfo', // 上传的地址
                     limit: 4,
-                    multiples: true
+                    multiple: true
                   }
                 }
               }

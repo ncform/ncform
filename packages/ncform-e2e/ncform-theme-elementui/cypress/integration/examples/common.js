@@ -1,3 +1,5 @@
+const path = require('path');
+
 export function fillInSchema(formSchema) {
   return cy.window()
     .its('editor')
@@ -12,13 +14,16 @@ export function submitForm() {
   return cy.get('button').contains('Get Data').click()
 }
 
-export function uploadFile(fileUrl) {
+export function uploadImage(fileUrl) {
+  const extName = path.extname(fileUrl).replace('.', '');
   return cy.fixture(fileUrl).as('logo')
     .get('input[type=file]').then(function (el) {
-      return Cypress.Blob.base64StringToBlob(this.logo, 'image/png')
+      return Cypress.Blob.base64StringToBlob(this.logo, 'image/' + extName)
         .then(blob => {
-          el[0].files[0] = blob
-          el[0].dispatchEvent(new Event('change', { bubbles: true }))
+          const testFile = new File([blob], path.basename(fileUrl), { type: 'image/' + extName })
+          const dataTransfer = new DataTransfer()
+          dataTransfer.items.add(testFile)
+          el[0].files = dataTransfer.files;
         })
     })
 }
@@ -27,5 +32,5 @@ export default {
   startRun,
   submitForm,
   fillInSchema,
-  uploadFile
+  uploadImage
 }

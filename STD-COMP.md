@@ -190,13 +190,6 @@ If you don't like the cold text description, click on the [interactive version](
   listType: 'text', // The type of file list. Optional value: [ text | picture | picture-card ]
   autoUpload: false, // Whether to upload immediately after selecting a file
   limit: -1, // Maximum number of uploads allowed
-  constraint: { // constraint
-    width: 0, // Image width [image only]
-    height: 0, // Image height [image only]
-    sizeFixed: true, // Whether the size of the image size constraint is a fixed value, and when it is false, it is proportional [image only valid]
-    maxSize: 0, // Maximum picture size, in KB, 0 means no limit
-    minSize: 0 // Minimum picture size, in KB, 0 means no limit
-  }
 }
 ```
 
