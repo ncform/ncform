@@ -77,7 +77,7 @@ context('Upload', () => {
     });
   });
 
-  it.only('Simple Props', () => {
+  it('Simple Props', () => {
     cy.server();
     cy.route({
       method: 'POST',
