@@ -192,4 +192,65 @@ context('Checkbox', () => {
       // common.submitForm();
     });
   });
+
+  it('dx config', () => {
+
+    cy.server();
+    cy.route(() => {
+      return {
+        method: 'GET',
+        url: '/100/users',
+        response: {
+          data: [
+            {
+              value: '1',
+              label: 'daniel'
+            },
+            {
+              value: '2',
+              label: 'sarah'
+            }
+          ]
+        }
+      };
+    }).as('users');
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'number',
+          value: 100
+        },
+        name1: {
+          type: 'array',
+          ui: {
+            widget: 'checkbox',
+            widgetConfig: {
+              enumSourceRemote: {
+                remoteUrl: 'dx: "/" + {{$root.name0}} + "/users"',
+                resField: 'data'
+              }
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('label')
+      .contains('name1')
+      .parent()
+      .within(() => {
+        cy.get('label.el-checkbox').contains('daniel')
+        cy.get('label.el-checkbox').contains('sarah')
+      });
+      // common.submitForm();
+    });
+  });
 });

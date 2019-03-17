@@ -8,7 +8,7 @@
       :class="'check-all'"
       :disabled="disabled"
       :indeterminate="isIndeterminate"
-      v-model="mergeConfig.checkAll"
+      v-model="isCheckAll"
       @change="handleCheckAllChange"
     >{{$t('all')}}</el-checkbox>
 
@@ -20,7 +20,7 @@
       @change="handleCheckedOptChange"
     >
       <component :is="'el-checkbox' + (mergeConfig.type === 'button' ? '-button' : '')"
-        v-for="opt in mergeConfig.enumSource"
+        v-for="opt in dataSource"
         :key="opt[mergeConfig.itemValueField]"
         :label="opt[mergeConfig.itemValueField]"
         :class="mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
@@ -123,6 +123,8 @@
 
     data() {
       return {
+        dataSource: [],
+        isCheckAll: false,
         isIndeterminate: false,
         // 组件特有的配置属性
         defaultConfig: {
@@ -174,7 +176,7 @@
         const mergeConfig = vm.mergeConfig;
         const itemValueField = mergeConfig.itemValueField;
         const arrResAll = [];
-        mergeConfig.enumSource.map(obj => {
+        vm.$data.dataSource.map(obj => {
           arrResAll.push(obj[itemValueField]);
         });
         vm.modelVal = val ? arrResAll : [];
@@ -183,8 +185,8 @@
       handleCheckedOptChange(value) {
         const vm = this;
         let checkedCount = value.length;
-        vm.mergeConfig.checkAll = checkedCount === vm.mergeConfig.enumSource.length;
-        vm.isIndeterminate = checkedCount > 0 && checkedCount < vm.mergeConfig.enumSource.length;
+        vm.$data.isCheckAll = checkedCount === vm.$data.dataSource.length;
+        vm.isIndeterminate = checkedCount > 0 && checkedCount < vm.$data.dataSource.length;
       },
       getRemoteSource() {
         try {
@@ -201,10 +203,10 @@
           }).then(res => {
             if (res.status === 200 ) {
               let data = res.data;
-              vm.mergeConfig.enumSource = _get(data, enumSourceRemote.resField || '', []);
+              vm.$data.dataSource = _get(data, enumSourceRemote.resField || '', []);
             }
           }).catch(err => {
-            vm.mergeConfig.enumSource = [];
+            vm.$data.dataSource = [];
           });
         } catch(err) {
           console.error(err);
@@ -217,7 +219,9 @@
       if (enumSourceRemote && enumSourceRemote.remoteUrl) {
         vm.getRemoteSource();
       } else if (!vm.mergeConfig.enumSource.length) {
-        vm.mergeConfig.enumSource = [ {label: this.$t('yes'), value: true}];
+        vm.$data.dataSource = [ {label: this.$t('yes'), value: true}];
+      } else {
+        vm.$data.dataSource = vm.mergeConfig.enumSource;
       }
     }
   }

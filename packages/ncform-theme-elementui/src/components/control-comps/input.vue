@@ -232,34 +232,34 @@ export default {
       this.$data.inputVal =
         ["string", "number"].indexOf(typeof this.$data.modelVal) >= 0
           ? this.$data.modelVal
-          : this.$data.modelVal[this.$data.mergeConfig.modelField];
+          : this.$data.modelVal[this.mergeConfig.modelField];
     }
 
-    if (_get(this.$data.mergeConfig, "autocomplete.itemTemplate")) {
+    if (_get(this.mergeConfig, "autocomplete.itemTemplate")) {
       this.$data.itemTemplate.template = _get(
-        this.$data.mergeConfig,
+        this.mergeConfig,
         "autocomplete.itemTemplate"
       );
     }
 
-    if (_get(this.$data.mergeConfig, "compound.prependSelect")) {
-      if (_get(this.$data.mergeConfig, "compound.prependSelect.enumSource")) {
+    if (_get(this.mergeConfig, "compound.prependSelect")) {
+      if (_get(this.mergeConfig, "compound.prependSelect.enumSource")) {
         this.$data.prependSelectOptions = _get(
-          this.$data.mergeConfig,
+          this.mergeConfig,
           "compound.prependSelect.enumSource"
         );
       } else {
         this.$http({
           url: _get(
-            this.$data.mergeConfig,
+            this.mergeConfig,
             "compound.prependSelect.enumSourceRemote.remoteUrl"
           )
         }).then(res => {
-          this.$data.prependSelectOptions = this.$data.mergeConfig.compound
+          this.$data.prependSelectOptions = this.mergeConfig.compound
             .prependSelect.enumSourceRemote.resField
             ? _get(
                 res.data,
-                this.$data.mergeConfig.compound.prependSelect.enumSourceRemote
+                this.mergeConfig.compound.prependSelect.enumSourceRemote
                   .resField
               )
             : res.data;
@@ -267,7 +267,7 @@ export default {
       }
       this.$data.prependSelectVal = _get(
         this.value,
-        _get(this.$data.mergeConfig, "compound.prependSelect.modelField")
+        _get(this.mergeConfig, "compound.prependSelect.modelField")
       );
       this.$watch("prependSelectVal", function() {
         let val = this._processModelVal();
@@ -275,24 +275,24 @@ export default {
       });
     }
 
-    if (_get(this.$data.mergeConfig, "compound.appendSelect")) {
-      if (_get(this.$data.mergeConfig, "compound.appendSelect.enumSource")) {
+    if (_get(this.mergeConfig, "compound.appendSelect")) {
+      if (_get(this.mergeConfig, "compound.appendSelect.enumSource")) {
         this.$data.appendSelectOptions = _get(
-          this.$data.mergeConfig,
+          this.mergeConfig,
           "compound.appendSelect.enumSource"
         );
       } else {
         this.$http({
           url: _get(
-            this.$data.mergeConfig,
+            this.mergeConfig,
             "compound.appendSelect.enumSourceRemote.remoteUrl"
           )
         }).then(res => {
-          this.$data.appendSelectOptions = this.$data.mergeConfig.compound
+          this.$data.appendSelectOptions = this.mergeConfig.compound
             .appendSelect.enumSourceRemote.resField
             ? _get(
                 res.data,
-                this.$data.mergeConfig.compound.appendSelect.enumSourceRemote
+                this.mergeConfig.compound.appendSelect.enumSourceRemote
                   .resField
               )
             : res.data;
@@ -300,7 +300,7 @@ export default {
       }
       this.$data.appendSelectVal = _get(
         this.value,
-        _get(this.$data.mergeConfig, "compound.appendSelect.modelField")
+        _get(this.mergeConfig, "compound.appendSelect.modelField")
       );
 
       this.$watch("appendSelectVal", function() {
@@ -396,22 +396,9 @@ export default {
     };
   },
 
-  computed: {
-    autocompleteOtherParams() {
-      let otherParams = _cloneDeep(
-        _get(this.mergeConfig, "autocomplete.enumSourceRemote.otherParams"),
-        {}
-      );
-      for (let key in otherParams) {
-        otherParams[key] = this._analyzeVal(otherParams[key]);
-      }
-      return otherParams;
-    }
-  },
-
   methods: {
     querySearch(queryString, cb) {
-      const autoCpl = this.$data.mergeConfig.autocomplete;
+      const autoCpl = this.mergeConfig.autocomplete;
 
       // 本地数据源的处理
       if (autoCpl.enumSource) {
@@ -429,9 +416,7 @@ export default {
       // 下面是远程数据源的处理
       const options = {
         url: autoCpl.enumSourceRemote.remoteUrl,
-        params: this.autocompleteOtherParams
-          ? JSON.parse(JSON.stringify(this.autocompleteOtherParams))
-          : {}
+        params: _get(this.mergeConfig, "autocomplete.enumSourceRemote.otherParams")
       };
       options.params[autoCpl.enumSourceRemote.paramName] = queryString;
 
@@ -592,7 +577,7 @@ export default {
       if (newVal !== undefined) {
         // mixin调用的
         if (typeof this.value === "object") {
-          val = newVal[this.$data.mergeConfig.modelField];
+          val = newVal[this.mergeConfig.modelField];
         } else {
           val = newVal;
         }
@@ -600,11 +585,11 @@ export default {
         val = this.$data.inputVal;
       }
 
-      if (this.$data.mergeConfig.trim) {
+      if (this.mergeConfig.trim) {
         val = val ? val.toString().trim() : val;
       }
 
-      switch (this.$data.mergeConfig.type) {
+      switch (this.mergeConfig.type) {
         case "number":
           val = parseFloat(val);
           val = isNaN(val) ? "" : val;
@@ -619,13 +604,13 @@ export default {
 
       if (typeof this.value === "object") {
         const obj = {};
-        obj[this.$data.mergeConfig.modelField] = val;
-        if (_get(this.$data.mergeConfig, "compound.prependSelect")) {
+        obj[this.mergeConfig.modelField] = val;
+        if (_get(this.mergeConfig, "compound.prependSelect")) {
           obj[
             this.mergeConfig.compound.prependSelect.modelField
           ] = this.$data.prependSelectVal;
         }
-        if (_get(this.$data.mergeConfig, "compound.appendSelect")) {
+        if (_get(this.mergeConfig, "compound.appendSelect")) {
           obj[
             this.mergeConfig.compound.appendSelect.modelField
           ] = this.$data.appendSelectVal;
