@@ -2,8 +2,6 @@ const gulp = require("gulp");
 const path = require("path");
 const rm = require("rimraf");
 const webpack = require("webpack");
-const notify = require("gulp-notify");
-const gulpSequence = require("gulp-sequence");
 const url = require("url");
 const querystring = require("querystring");
 const browserSync = require("browser-sync").create();
@@ -30,13 +28,7 @@ function handleErrors(err, stats) {
   }
 }
 
-function watchBuild() {
-  gulp.watch(path.join(config.src, "**/*.*"), ["build"]);
-}
-
-/* ====================== gulp tasks ====================== */
-
-gulp.task("webpack", done => {
+function webpackBuild(done) {
   webpack(webpackConfig, (err, stats) => {
     if (err || stats.hasErrors()) {
       handleErrors(err, stats);
@@ -50,21 +42,24 @@ gulp.task("webpack", done => {
       done();
     }
   });
-});
+}
 
-gulp.task("clean", next => {
-  rm(config.dist, () => next());
-});
+function watchBuild() {
+  gulp.watch(["src/**/*"], webpackBuild);
+}
 
-gulp.task("watch", () => {
-  gulp.watch(path.join(config.src, "**/*.*"), () => {
-    gulpSequence("webpack")(err => {
-      if (!err) reload();
-    });
+function clean(cb) {
+  rm(config.dist, () => cb());
+}
+
+function watch() {
+  gulp.watch(["src/**/*"], cb => {
+    webpackBuild(reload);
+    cb();
   });
-});
+}
 
-gulp.task("serve", () => {
+function serve() {
   function startServer() {
     delete require.cache[require.resolve("./mock/data")];
     const mockConfig = require("./mock/data");
@@ -108,12 +103,14 @@ gulp.task("serve", () => {
     browserSync.exit();
     startServer();
   });
-});
+}
 
-gulp.task("build", cb => {
-  gulpSequence("clean", ["webpack"])(cb);
-});
+/* ====================== gulp tasks ====================== */
 
-gulp.task("watch-build", watchBuild);
+exports.build = gulp.series(clean, webpackBuild);
 
-gulp.task("dev", gulpSequence("build", ["serve", "watch"]));
+exports["watch-build"] = watchBuild;
+
+exports.dev = gulp.series(webpackBuild, gulp.parallel(serve, watch));
+
+exports.default = exports.build;
