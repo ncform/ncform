@@ -95,7 +95,7 @@ context('Object', () => {
     });
   });
 
-  it.only('dx config', () => {
+  it('dx config', () => {
     let formSchema = {
       type: 'object',
       properties: {
