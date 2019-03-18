@@ -89,10 +89,10 @@
       },
 
       _supportItemsCollapse() {
-        if (!this.$data.mergeConfig.disableItemCollapse) {
+        if (!this.mergeConfig.disableItemCollapse) {
           this.schema.value.forEach(dataItem => {
             if (dataItem.__dataSchema._expand === undefined)
-              this.$set(dataItem.__dataSchema, '_expand', !this.$data.mergeConfig.itemCollapse);
+              this.$set(dataItem.__dataSchema, '_expand', !this.mergeConfig.itemCollapse);
           })
         }
       }
