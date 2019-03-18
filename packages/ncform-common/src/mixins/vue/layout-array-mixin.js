@@ -25,20 +25,7 @@ export default {
       this.addItem(idx);
     });
 
-    this.$data.mergeConfig = extend(
-      true,
-      {},
-      this.$data.defaultConfig,
-      this.config
-    );
-    this.$watch("config", () => {
-      this.$data.mergeConfig = extend(
-        true,
-        {},
-        this.$data.defaultConfig,
-        this.config
-      );
-    });
+    this.$data.collapsed = this.mergeConfig.collapsed;
 
   },
 
@@ -72,7 +59,7 @@ export default {
 
   data() {
     return {
-      mergeConfig: {},
+      collapsed: false,
       defaultConfig: {
         collapsed: false,
         disableCollapse: false,
@@ -84,6 +71,23 @@ export default {
       },
       i18n: {},
     };
+  },
+
+  computed: {
+    mergeConfig() {
+      let newConfig = extend(
+        true,
+        {},
+        this.$data.defaultConfig,
+        this.config
+      )
+      return ncformUtils.traverseJSON(newConfig, (...params) => {
+        let val = params[1];
+        if (val !== null && typeof val !== 'object')
+          return this._analyzeVal(val);
+        else return val;
+      })
+    }
   },
 
   methods: {
@@ -150,8 +154,8 @@ export default {
     },
 
     collapse() {
-      if (!this.$data.mergeConfig.disableCollapse)
-        this.$data.mergeConfig.collapsed = !this.$data.mergeConfig.collapsed;
+      if (!this.mergeConfig.disableCollapse)
+        this.$data.collapsed = !this.$data.collapsed;
     },
 
     $t(key, data) {

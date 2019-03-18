@@ -3,7 +3,7 @@
     <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
 
     <!-- 垂直布局，即label上，control下 -->
-    <div v-if="mergeConfig.layout === 'v'" v-show="!mergeConfig.collapsed" class="form-row v-layout" style="width: 100%">
+    <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="form-row v-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
           :class="['col-md-' + (fieldSchema.ui.columns || 12)]"
@@ -31,7 +31,7 @@
     </div>
 
     <!-- 水平布局，即label左，control右 -->
-    <div v-if="mergeConfig.layout === 'h'" v-show="!mergeConfig.collapsed" class="form-row h-layout" style="width: 100%">
+    <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="form-row h-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
           :class="['col-md-' + (fieldSchema.ui.columns || 12)]"

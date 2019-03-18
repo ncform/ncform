@@ -293,7 +293,5 @@
   tabPosition: 'top', // 可选值：left / top
   collapsed: false, // 是否默认折叠
   disableCollapse: false, // 是否允许折叠
-  addTxt: 'Add', // 新建文字
-  delAllTxt: 'Del All' // 删除全部文字
 }
 ```

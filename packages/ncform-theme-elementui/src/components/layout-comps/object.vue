@@ -2,11 +2,11 @@
   <div class="__object-form-item">
     <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">
       {{_analyzeVal(schema.ui.legend)}}
-      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !mergeConfig.collapsed, 'el-icon-arrow-down': mergeConfig.collapsed}"></i>
+      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
     </legend>
 
     <!-- 垂直布局，即label上，control下 -->
-    <div v-if="mergeConfig.layout === 'v'" v-show="!mergeConfig.collapsed" class="el-row v-layout" style="width: 100%">
+    <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="el-row v-layout" style="width: 100%">
 
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
@@ -38,7 +38,7 @@
     </div>
 
     <!-- 水平布局，即label左，control右 -->
-    <div v-if="mergeConfig.layout === 'h'" v-show="!mergeConfig.collapsed" class="el-row h-layout" style="width: 100%">
+    <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="el-row h-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
           :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"

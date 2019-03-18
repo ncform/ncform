@@ -293,7 +293,5 @@ If you don't like the cold text description, click on the [interactive version](
   tabPosition: 'top', // Optional value：[left | top]
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
-  addTxt: 'Add', // New display text
-  delAllTxt: 'Del All' // Delete all display text
 }
 ```

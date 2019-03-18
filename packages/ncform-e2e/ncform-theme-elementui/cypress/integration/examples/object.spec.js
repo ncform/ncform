@@ -94,4 +94,51 @@ context('Object', () => {
       // common.submitForm();
     });
   });
+
+  it.only('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'number',
+          value: '80'
+        },
+        user: {
+          type: 'object',
+          properties: {
+            firstname: {
+              type: 'string'
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h',
+              labelWidth: 'dx: {{$root.name0}} + "px"'
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+
+      cy.get('label').contains('name0').next().find('input').as('rowInput');
+
+      cy.get('legend')
+      .contains('user')
+      .parent()
+      .within(() => {
+        cy.get('label').contains('firstname').should('have.css', 'width', '80px');
+        cy.get('@rowInput').clear().type('120')
+        cy.get('label').contains('firstname').should('have.css', 'width', '120px');
+      });
+      // common.submitForm();
+    });
+  });
+
 });
