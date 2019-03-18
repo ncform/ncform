@@ -558,6 +558,22 @@ const ncformUtils = {
     return Math.random()
       .toString(36)
       .substring(2, num + 2);
+  },
+
+  /**
+   * Traversing JSON
+   * @param {*} json
+   * @param {*} func
+   */
+  traverseJSON(json, func) {
+    let newJson = json;
+    for (var i in newJson) {
+      newJson[i] = func.apply(this, [i, newJson[i]]);
+      if (newJson[i] !== null && typeof (newJson[i]) == "object") {
+        newJson[i] = ncformUtils.traverseJSON(newJson[i], func);
+      }
+    }
+    return newJson;
   }
 };
 

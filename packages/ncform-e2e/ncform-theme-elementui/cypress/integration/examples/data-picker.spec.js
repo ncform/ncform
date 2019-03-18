@@ -243,4 +243,39 @@ context('data-picker', () => {
       // common.submitForm();
     });
   });
+
+  it('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name1: {
+          type: 'string',
+          value: '1512284108066',
+          ui: {
+            widget: 'date-picker',
+            widgetConfig: {
+              format: 'dx: "(yyyy)MM-dd"'
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          // format
+          cy.get('input').should('have.value', '(2017)12-03');
+        });
+      // common.submitForm();
+    });
+  });
+
 });

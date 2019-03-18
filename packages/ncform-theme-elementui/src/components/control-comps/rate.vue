@@ -76,7 +76,6 @@
           textColor: '#1F2D3D', // 辅助文字的颜色
           texts: ['极差', '失望', '一般', '满意', '惊喜'] // 辅助文字数组
         }
-        // mergeConfig: 请使用该值去绑定你的组件的属性，它包含了defaultConfig data和config props的值
         // modelVal：请使用该值来绑定实际的组件的model
       }
     },

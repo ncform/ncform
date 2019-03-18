@@ -989,4 +989,52 @@ describe('/src/ncform-utils.js', () => {
     result = ncformUtils.genRandomId(11);
     assert(result.length === 10);
   });
+
+  // --- traverseJSON
+  it("traverseJSON", () => {
+    let json = { a: 1, b: null };
+    let result = ncformUtils.traverseJSON(json, (key, val) => {
+      if (val !== null && typeof val !== 'object')
+        return val + 1;
+      else return val;
+    });
+    assert(result.a === 2)
+    assert(result.b === null)
+
+    json = { a: { b: 1, c: { d: 2 } } };
+    result = ncformUtils.traverseJSON(json, (key, val) => {
+      if (val !== null && typeof val !== 'object')
+        return val + 1;
+      else return val;
+    });
+    assert(result.a.b === 2)
+    assert(result.a.c.d === 3)
+
+    json = { a: [1, [2]] };
+    result = ncformUtils.traverseJSON(json, (key, val) => {
+      if (val !== null && typeof val !== 'object')
+        return val + 1;
+      else return val;
+    });
+    assert(result.a[0] === 2)
+    assert(result.a[1][0] === 3)
+
+    json = { a: [1, { b: 2 }] };
+    result = ncformUtils.traverseJSON(json, (key, val) => {
+      if (val !== null && typeof val !== 'object')
+        return val + 1;
+      else return val;
+    });
+    assert(result.a[0] === 2)
+    assert(result.a[1].b === 3)
+
+    json = [1, {a: 2}];
+    result = ncformUtils.traverseJSON(json, (key, val) => {
+      if (val !== null && typeof val !== 'object')
+        return val + 1;
+      else return val;
+    });
+    assert(result[0] === 2)
+    assert(result[1].a === 3)
+  });
 });

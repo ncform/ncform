@@ -189,7 +189,7 @@
   accept: '', // 接受上传的文件类型
   listType: 'text', // 文件列表的类型。 可选值：text/picture/picture-card
   autoUpload: false, // 是否在选取文件后立即进行上传
-  limit: -1, // 最大允许上传个数
+  limit: 1, // 最大允许上传个数
 }
 ```
 
@@ -293,7 +293,5 @@
   tabPosition: 'top', // 可选值：left / top
   collapsed: false, // 是否默认折叠
   disableCollapse: false, // 是否允许折叠
-  addTxt: 'Add', // 新建文字
-  delAllTxt: 'Del All' // 删除全部文字
 }
 ```

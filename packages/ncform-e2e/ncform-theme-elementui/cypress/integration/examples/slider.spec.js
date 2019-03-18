@@ -93,16 +93,82 @@ context('Slider', () => {
         .parent()
         .within(() => {
           cy.get('.el-slider__button-wrapper').trigger('mouseenter');
-          cy.get('@body').find('.el-tooltip__popper').should('contain', '10');
+          cy.get('@body')
+            .find('.el-tooltip__popper')
+            .should('contain', '10');
 
-          cy.get('.el-slider__button-wrapper').trigger('mousedown')
-          cy.get('.el-slider__button-wrapper').trigger('mousemove', { clientX: 550 })
-          cy.get('@body').find('.el-tooltip__popper').should('contain', '15');
+          cy.get('.el-slider__button-wrapper').trigger('mousedown');
+          cy.get('.el-slider__button-wrapper').trigger('mousemove', { clientX: 550 });
+          cy.get('@body')
+            .find('.el-tooltip__popper')
+            .should('contain', '15');
 
-          cy.get('.el-slider__button-wrapper').trigger('mousemove', { clientX: 1200 })
-          cy.get('@body').find('.el-tooltip__popper').should('contain', '60');
+          cy.get('.el-slider__button-wrapper').trigger('mousemove', { clientX: 1200 });
+          cy.get('@body')
+            .find('.el-tooltip__popper')
+            .should('contain', '60');
         });
 
+      // common.submitForm();
+    });
+  });
+
+  it('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'number'
+        },
+        name1: {
+          type: 'number',
+          ui: {
+            widget: 'slider',
+            widgetConfig: {
+              max: 'dx: {{$root.name0}}'
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+
+      cy.get('label')
+        .contains('name0')
+        .next()
+        .find('input')
+        .as('maxInput');
+
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('@maxInput')
+            .clear()
+            .type('80');
+          cy.get('.el-slider__button-wrapper').trigger('mousedown');
+          cy.get('.el-slider__button-wrapper').trigger('mousemove', { clientX: 1550 });
+          cy.get('@body')
+            .find('.el-tooltip__popper')
+            .should('contain', '80');
+
+          cy.get('@maxInput')
+            .clear()
+            .type('60');
+          cy.get('.el-slider__button-wrapper').trigger('mousedown');
+          cy.get('.el-slider__button-wrapper').trigger('mousemove', { clientX: 1550 });
+          cy.get('@body')
+            .find('.el-tooltip__popper')
+            .should('contain', '60');
+        });
       // common.submitForm();
     });
   });

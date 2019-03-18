@@ -4,13 +4,13 @@
     :class="['ncform-upload', readonly ? 'is-read-only' : '']"
     :disabled="readonly || disabled"
     :style="{display: hidden ? 'none' : ''}"
-    :action="uploadUrl"
+    :action="mergeConfig.uploadUrl"
     :multiple="mergeConfig.multiple"
     :data="mergeConfig.data"
     :show-file-list="showFileList"
     :drag="mergeConfig.drag"
     :accept="mergeConfig.accept"
-    :list-type="listType"
+    :list-type="mergeConfig.listType"
     :auto-upload="mergeConfig.autoUpload"
     :limit="mergeConfig.limit"
     :on-change="handleUploadChange"
@@ -190,23 +190,13 @@
             error: 0  // 失败个数
           }
         }
-        // mergeConfig: 请使用该值去绑定你的组件的属性，它包含了defaultConfig data和config props的值
         // modelVal：请使用该值来绑定实际的组件的model--> [{name: 'xx', url: ''}]
       }
     },
 
     computed: {
       // disabled / readonly / hidden / placeholder 你可以直接使用这些变量来控制组件的行为
-      uploadUrl() {
-        return this.mergeConfig.uploadUrl
-            || this.config.uploadUrl
-            || this.defaultConfig.uploadUrl;
-      },
-      listType() {
-        const vm = this;
-        const listType = vm.mergeConfig.listType;
-        return listType;
-      },
+
       fileList() {
         const vm = this;
         const modelVal = vm.modelVal;
@@ -220,6 +210,7 @@
         vm.uploadInfo.numUploaded = numUploaded;
         return modelVal;
       },
+
       showFileList() {
         return this.readonly || this.mergeConfig.showFileList;
       }

@@ -189,7 +189,7 @@ If you don't like the cold text description, click on the [interactive version](
   accept: '', // Accept uploaded file types
   listType: 'text', // The type of file list. Optional value: [ text | picture | picture-card ]
   autoUpload: false, // Whether to upload immediately after selecting a file
-  limit: -1, // Maximum number of uploads allowed
+  limit: 1, // Maximum number of uploads allowed
 }
 ```
 
@@ -293,7 +293,5 @@ If you don't like the cold text description, click on the [interactive version](
   tabPosition: 'top', // Optional value：[left | top]
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
-  addTxt: 'Add', // New display text
-  delAllTxt: 'Del All' // Delete all display text
 }
 ```

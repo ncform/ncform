@@ -2,22 +2,9 @@ import extend from "extend";
 import ncformUtils from "../../ncform-utils";
 
 export default {
-  created() {
-    this.$data.mergeConfig = extend(
-      true,
-      {},
-      this.$data.defaultConfig,
-      this.config
-    );
 
-    this.$watch("config", () => {
-      this.$data.mergeConfig = extend(
-        true,
-        {},
-        this.$data.defaultConfig,
-        this.config
-      );
-    });
+  created() {
+    this.$data.collapsed = this.mergeConfig.collapsed;
   },
 
   props: {
@@ -50,7 +37,7 @@ export default {
 
   data() {
     return {
-      mergeConfig: {},
+      collapsed: false,
       defaultConfig: {
         collapsed: false,
         disableCollapse: false,
@@ -58,6 +45,23 @@ export default {
         labelWidth: "100px"
       }
     };
+  },
+
+  computed: {
+    mergeConfig() {
+      let newConfig = extend(
+        true,
+        {},
+        this.$data.defaultConfig,
+        this.config
+      )
+      return ncformUtils.traverseJSON(newConfig, (...params) => {
+        let val = params[1];
+        if (val !== null && typeof val !== 'object')
+          return this._analyzeVal(val);
+        else return val;
+      })
+    }
   },
 
   methods: {
@@ -68,8 +72,8 @@ export default {
       });
     },
     collapse() {
-      if (!this.$data.mergeConfig.disableCollapse)
-        this.$data.mergeConfig.collapsed = !this.$data.mergeConfig.collapsed;
+      if (!this.mergeConfig.disableCollapse)
+        this.$data.collapsed = !this.$data.collapsed;
     },
     isNormalObjSchema: ncformUtils.isNormalObjSchema,
     isNormalArrSchema: ncformUtils.isNormalArrSchema

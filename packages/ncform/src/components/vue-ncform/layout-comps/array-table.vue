@@ -4,7 +4,7 @@
 
     <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
 
-    <table v-show="!mergeConfig.collapsed" class="table table-bordered">
+    <table v-show="!collapsed" class="table table-bordered">
       <thead>
         <tr>
           <th v-for="(renderSchema, idx) in renderSchemas" :key="renderSchema.ui.label" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">

@@ -457,7 +457,7 @@ context('input', () => {
                   remoteUrl: '/autocomplete',
                   paramName: 'keyword',
                   otherParams: {
-                    name: 'daniel'
+                    name: 'dx: "daniel"'
                   },
                   resField: 'data'
                 }
@@ -761,4 +761,48 @@ context('input', () => {
       // common.submitForm();
     });
   });
+
+  it('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'string',
+        },
+        name1: {
+          type: 'string',
+          ui: {
+            widgetConfig: {
+              compound: {
+                appendLabel: 'dx: {{$root.name0}}'
+              }
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('label')
+      .contains('name0')
+      .parent()
+      .within(() => {
+        cy.get('input').type('daniel')
+      });
+
+      cy.get('label')
+      .contains('name1')
+      .parent()
+      .within(() => {
+        cy.get('.el-input-group__append').contains('daniel')
+      });
+      // common.submitForm();
+    });
+  });
+
 });

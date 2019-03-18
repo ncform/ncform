@@ -100,4 +100,48 @@ context('Array', () => {
       // common.submitForm();
     });
   });
+
+  it('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'string',
+          value: 'Add One'
+        },
+        users: {
+          type: 'array',
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widgetConfig: {
+              addTxt: 'dx: {{$root.name0}}',
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+
+      cy.get('label').contains('name0').next().find('input').as('rowInput');
+
+      cy.get('legend')
+      .contains('users')
+      .parent()
+      .within(() => {
+        cy.get('button:contains("Add One")').should('exist')
+        cy.get('@rowInput').clear().type('AddItem')
+        cy.get('button:contains("AddItem")').should('exist')
+      });
+      // common.submitForm();
+    });
+  });
+
 });
