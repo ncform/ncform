@@ -122,4 +122,48 @@ context('input-number', () => {
       // common.submitForm();
     });
   });
+
+  it('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'number',
+        },
+        name1: {
+          type: 'number',
+          ui: {
+            widget: 'input-number',
+            widgetConfig: {
+              max: 'dx: {{$root.name0}}',
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+
+      cy.get('label').contains('name0').next().find('input').as('maxInput');
+
+      cy.get('label')
+      .contains('name1')
+      .parent()
+      .within(() => {
+
+        cy.get('@maxInput').clear().type('10')
+        cy.get('input').clear().type('11').blur().should('have.value', '10')
+
+        cy.get('@maxInput').clear().type('15')
+        cy.get('input').clear().type('11').blur().should('have.value', '11')
+      });
+      // common.submitForm();
+    });
+  });
+
 });

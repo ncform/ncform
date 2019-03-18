@@ -194,4 +194,56 @@ context('Radio', () => {
       // common.submitForm();
     });
   });
+
+  it('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'array',
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widget: 'array-table'
+          }
+        },
+        name1: {
+          type: 'string',
+          ui: {
+            widget: 'radio',
+            widgetConfig: {
+              enumSource: 'dx: {{$root.name0}}.map(item => ({label: item, vallue: item}))'
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('legend')
+      .contains('name0')
+      .parent()
+      .within(() => {
+        cy.get('button').contains('Add').click();
+        cy.get('input').eq(0).type('daniel')
+        cy.get('input').eq(1).type('sarah')
+      });
+
+      cy.get('label')
+      .contains('name1')
+      .parent()
+      .within(() => {
+        cy.get('.el-radio').contains('daniel')
+        cy.get('.el-radio').contains('sarah')
+      });
+      // common.submitForm();
+    });
+  });
+
 });

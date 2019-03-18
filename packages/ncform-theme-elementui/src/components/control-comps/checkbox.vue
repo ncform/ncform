@@ -111,6 +111,10 @@
       }
     },
 
+    created() {
+      this._getDataSource();
+    },
+
     props: {
       value: {
         // type: [String, Number, Boolean, Array],
@@ -140,7 +144,6 @@
             resField: '', // 响应结果的字段
           }
         },
-        // mergeConfig: 请使用该值去绑定你的组件的属性，它包含了defaultConfig data和config props的值
         // modelVal：请使用该值来绑定实际的组件的model
       }
     },
@@ -150,16 +153,16 @@
       labelRead() {
         let res = [];
         const vm = this;
-        const { enumSource, enumSourceRemote, itemValueField, itemLabelField } = vm.mergeConfig;
+        const { itemValueField, itemLabelField } = vm.mergeConfig;
         const modelVal = vm.modelVal;
 
         if (typeof modelVal === 'boolean') {
           res.push(modelVal ? this.$t('yes') : this.$t('no'));
         } else {
           for (let m in modelVal) {
-            for (let i in enumSource) {
-              if (enumSource[i][itemValueField] === modelVal[m]) {
-                res.push(enumSource[i][itemLabelField]);
+            for (let i in vm.$data.dataSource) {
+              if (vm.$data.dataSource[i][itemValueField] === modelVal[m]) {
+                res.push(vm.$data.dataSource[i][itemLabelField]);
                 break;
               }
             }
@@ -167,6 +170,21 @@
         }
 
         return res;
+      }
+    },
+
+    watch: {
+      'mergeConfig.enumSourceRemote': {
+        handler() {
+          this._getDataSource();
+        },
+        deep: true
+      },
+      'mergeConfig.enumSource': {
+        handler() {
+          this._getDataSource();
+        },
+        deep: true
       }
     },
 
@@ -211,18 +229,18 @@
         } catch(err) {
           console.error(err);
         }
+      },
+      _getDataSource() {
+        const vm = this;
+        const enumSourceRemote = vm.mergeConfig.enumSourceRemote;
+        if (enumSourceRemote && enumSourceRemote.remoteUrl) {
+          vm.getRemoteSource();
+        } else if (!vm.mergeConfig.enumSource.length) {
+          vm.$data.dataSource = [ {label: this.$t('yes'), value: true}];
+        } else {
+          vm.$data.dataSource = vm.mergeConfig.enumSource;
+        }
       }
     },
-    created() {
-      const vm = this;
-      const enumSourceRemote = vm.mergeConfig.enumSourceRemote;
-      if (enumSourceRemote && enumSourceRemote.remoteUrl) {
-        vm.getRemoteSource();
-      } else if (!vm.mergeConfig.enumSource.length) {
-        vm.$data.dataSource = [ {label: this.$t('yes'), value: true}];
-      } else {
-        vm.$data.dataSource = vm.mergeConfig.enumSource;
-      }
-    }
   }
 </script>

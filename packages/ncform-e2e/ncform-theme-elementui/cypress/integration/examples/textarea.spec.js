@@ -188,4 +188,47 @@ context('textarea', () => {
 
   });
 
+  it('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'number',
+        },
+        name1: {
+          type: 'string',
+          ui: {
+            widget: 'textarea',
+            widgetConfig: {
+              rows: 'dx: {{$root.name0}}',
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+
+      cy.get('label').contains('name0').next().find('input').as('rowInput');
+
+      cy.get('label')
+      .contains('name1')
+      .parent()
+      .within(() => {
+
+        cy.get('@rowInput').clear().type('4')
+        cy.get('textarea').should('have.prop', 'rows', 4);
+
+        cy.get('@rowInput').clear().type('6')
+        cy.get('textarea').should('have.prop', 'rows', 6);
+      });
+      // common.submitForm();
+    });
+  });
+
 });

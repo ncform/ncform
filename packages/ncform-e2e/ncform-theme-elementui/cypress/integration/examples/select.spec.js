@@ -455,11 +455,106 @@ context('select', () => {
 
           // new http request
           cy.wait('@list').then(xhr => {
-            expect(xhr.url.search('status=1&keyword=d')).to.be.greaterThan(0)
+            expect(xhr.url.search('status=1&keyword=d')).to.be.greaterThan(0);
             expect(callCount).to.be.equal(3);
           });
         });
 
+      // common.submitForm();
+    });
+  });
+
+  it('dx-config', () => {
+    cy.server();
+    cy.route(() => {
+      return {
+        method: 'GET',
+        url: '/list?**',
+        response: {
+          data: [
+            {
+              value: '1',
+              label: 'daniel'
+            },
+            {
+              value: '2',
+              label: 'sarah'
+            }
+          ]
+        }
+      };
+    }).as('list');
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'string'
+        },
+        name1: {
+          type: 'string',
+          ui: {
+            widget: 'select',
+            widgetConfig: {
+              enumSourceRemote: {
+                remoteUrl: '/list',
+                otherParams: {
+                  name: 'dx: {{$root.name0}}'
+                },
+                resField: 'data'
+              }
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('label')
+        .contains('name0')
+        .next()
+        .find('input')
+        .as('paramInput');
+
+      cy.wait('@list')
+
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('@paramInput')
+            .clear()
+            .type('d');
+          cy.wait('@list').then(xhr => {
+            expect(xhr.url.search('name=d')).to.be.greaterThan(0);
+          });
+
+          cy.get('input')
+            .eq(0).click();
+          cy.get('@body')
+            .find('li:contains("sarah")')
+            .find(':not(:hidden)')
+            .click();
+            cy.get('input')
+            .eq(0)
+            .should('have.value', 'sarah');
+
+          cy.get('@paramInput').type('s');
+          cy.wait('@list').then(xhr => {
+            expect(xhr.url.search('name=ds')).to.be.greaterThan(0);
+
+            cy.get('input')
+              .eq(0)
+              .should('have.value', '');
+          });
+        });
       // common.submitForm();
     });
   });

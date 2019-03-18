@@ -70,25 +70,15 @@ export default {
       default: ''
     }
   },
-  created() {
-    this.$data.type = this.mergeConfig.type;
-  },
 
   mounted() {
     if(this.$data.modelVal){
       this.$data.modelVal = new Date(parseInt(this.$data.modelVal));
     }
-
-    this.$nextTick(()=>{
-      if(!this.$data.typeOptions[this.$data.type]){
-        this.$data.type = 'date';
-      }
-    });
   },
 
   data() {
     return {
-      type: 'date',
       typeOptions: {
         year: {
           format: '',
@@ -115,13 +105,19 @@ export default {
       defaultConfig: {
         type: "date"  // year/month/date/week/datetime
       }
-      // mergeConfig: 请使用该值去绑定你的组件的属性，它包含了defaultConfig data和config props的值
       // modelVal：请使用该值来绑定实际的组件的model
     };
   },
 
   computed: {
     // disabled / readonly / hidden / placeholder 你可以直接使用这些变量来控制组件的行为
+    type() {
+      if(!this.$data.typeOptions[this.mergeConfig.type]){
+        return 'date';
+      } else {
+        return this.mergeConfig.type;
+      }
+    }
   },
 
   methods: {

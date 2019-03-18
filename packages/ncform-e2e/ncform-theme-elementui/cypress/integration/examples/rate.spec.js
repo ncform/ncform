@@ -93,11 +93,7 @@ context('Rate', () => {
               allowHalf: true,
               lowThreshold: 4,
               highThreshold: 6,
-              colors: [
-                'rgb(92,107,192)',
-                'rgb(156,204,101)',
-                'rgb(255,167,38)'
-              ],
+              colors: ['rgb(92,107,192)', 'rgb(156,204,101)', 'rgb(255,167,38)'],
               voidColor: 'rgb(97,97,97)'
             }
           }
@@ -108,11 +104,7 @@ context('Rate', () => {
           ui: {
             widget: 'rate',
             widgetConfig: {
-              iconClasses: [
-                'el-icon-goods',
-                'el-icon-sold-out',
-                'el-icon-news'
-              ],
+              iconClasses: ['el-icon-goods', 'el-icon-sold-out', 'el-icon-news'],
               voidIconClass: 'el-icon-view'
             }
           }
@@ -158,33 +150,17 @@ context('Rate', () => {
 
           cy.get('.el-rate__decimal').should('exist');
 
-          cy.get('.el-icon-star-off').should(
-            'have.css',
-            'color',
-            'rgb(97, 97, 97)'
-          );
+          cy.get('.el-icon-star-off').should('have.css', 'color', 'rgb(97, 97, 97)');
 
-          cy.get('.el-icon-star-on').should(
-            'have.css',
-            'color',
-            'rgb(92, 107, 192)'
-          );
+          cy.get('.el-icon-star-on').should('have.css', 'color', 'rgb(92, 107, 192)');
           cy.get('.el-rate__icon')
             .eq(4)
             .trigger('mousemove');
-          cy.get('.el-icon-star-on').should(
-            'have.css',
-            'color',
-            'rgb(156, 204, 101)'
-          );
+          cy.get('.el-icon-star-on').should('have.css', 'color', 'rgb(156, 204, 101)');
           cy.get('.el-rate__icon')
             .eq(6)
             .trigger('mousemove');
-          cy.get('.el-icon-star-on').should(
-            'have.css',
-            'color',
-            'rgb(255, 167, 38)'
-          );
+          cy.get('.el-icon-star-on').should('have.css', 'color', 'rgb(255, 167, 38)');
         });
 
       cy.get('label')
@@ -236,7 +212,7 @@ context('Rate', () => {
           cy.get('.el-rate__text').should('contain', 'E');
         });
 
-        cy.get('label')
+      cy.get('label')
         .contains('name4')
         .parent()
         .within(() => {
@@ -261,6 +237,59 @@ context('Rate', () => {
           cy.get('.el-rate__text').should('contain', '5');
         });
 
+      // common.submitForm();
+    });
+  });
+
+  it('dx config', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'number'
+        },
+        name1: {
+          type: 'number',
+          ui: {
+            widget: 'rate',
+            widgetConfig: {
+              max: 'dx: {{$root.name0}}'
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('label')
+        .contains('name0')
+        .next()
+        .find('input')
+        .as('maxInput');
+
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('@maxInput')
+            .clear()
+            .type('6');
+          cy.get('.el-rate__item')
+            .its('length')
+            .should('equal', 6);
+
+          cy.get('@maxInput')
+            .clear()
+            .type('8');
+          cy.get('.el-rate__item')
+            .its('length')
+            .should('equal', 8);
+        });
       // common.submitForm();
     });
   });
