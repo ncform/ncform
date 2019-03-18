@@ -3,7 +3,7 @@
 import common from './common';
 
 context('Upload', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('http://localhost:3004/examples/components/playground/index.html');
   });
 
@@ -233,6 +233,77 @@ context('Upload', () => {
             .should('equal', 1);
           cy.get('.el-upload-dragger').should('exist');
         });
+      // common.submitForm();
+    });
+  });
+
+  it('dx config', () => {
+
+    cy.server();
+    cy.route({
+      method: 'POST',
+      url: '/upload/1',
+      response: {
+        data: {
+          picName: 'pic-1.jpg',
+          picUrl: '//user-gold-cdn.xitu.io/2019/3/15/1697f38df3ba0613?w=570&h=273&f=jpeg&s=40278'
+        }
+      }
+    }).as('upload1');
+    cy.route({
+      method: 'POST',
+      url: '/upload/2',
+      response: {
+        data: {
+          picName: 'pic-2.jpg',
+          picUrl: '//user-gold-cdn.xitu.io/2019/3/15/1697f52a0086caeb?w=570&h=273&f=jpeg&s=39101'
+        }
+      }
+    }).as('upload2');
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name0: {
+          type: 'number',
+        },
+        name1: {
+          type: 'array',
+          ui: {
+            widget: 'upload',
+            widgetConfig: {
+              uploadUrl: 'dx: "/upload/" + {{$root.name0}}',
+              listType: 'picture-card',
+              autoUpload: true,
+              limit: 2
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+
+      cy.get('label').contains('name0').next().find('input').as('input');
+
+      cy.get('label')
+      .contains('name1')
+      .parent()
+      .within(() => {
+
+        cy.get('@input').clear().type('1')
+        common.uploadImage('assets/img/dx.png');
+        cy.wait('@upload1')
+
+        cy.get('@input').clear().type('2')
+        common.uploadImage('assets/img/dx.png');
+        cy.wait('@upload2')
+      });
       // common.submitForm();
     });
   });

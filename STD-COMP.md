@@ -189,7 +189,7 @@ If you don't like the cold text description, click on the [interactive version](
   accept: '', // Accept uploaded file types
   listType: 'text', // The type of file list. Optional value: [ text | picture | picture-card ]
   autoUpload: false, // Whether to upload immediately after selecting a file
-  limit: -1, // Maximum number of uploads allowed
+  limit: 1, // Maximum number of uploads allowed
 }
 ```
 
