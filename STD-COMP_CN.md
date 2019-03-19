@@ -10,10 +10,10 @@
 
 ```js
 {
-  disabled: false, // 是否禁用。支持dx表达式
-  readonly: false, // 是否只读。支持dx表达式
-  placeholder: '', // 占位显示。支持dx表达式
-  hidden: false, // 是否隐藏。支持dx表达式
+  disabled: false, // 是否禁用。
+  readonly: false, // 是否只读。
+  placeholder: '', // 占位显示
+  hidden: false, // 是否隐藏。
 }
 ```
 
@@ -44,7 +44,7 @@
     enumSourceRemote: {
       remoteUrl: '', // 如果是远程访问，则填写该url
       paramName: 'keyword', // 请求参数名，默认是keyword
-      otherParams: {}, // 其它请求参数，值支持 dx表达式
+      otherParams: {}, // 其它请求参数
       resField: '', // 响应结果的字段
     }
   },
@@ -129,7 +129,7 @@
   enumSourceRemote: { // 远程数据源
     remoteUrl: '', // 如果是远程访问，则填写该url
     paramName: 'keyword', // 请求参数名，默认是keyword
-    otherParams: {}, // 额外的请求参数。支持dx表达式
+    otherParams: {}, // 额外的请求参数
     resField: '', // 响应结果的字段
     selectFirstItem: false // 默认选中第一项
   },

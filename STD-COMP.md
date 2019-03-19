@@ -10,10 +10,10 @@ If you don't like the cold text description, click on the [interactive version](
 
 ```js
 {
-  disabled: false, // Whether to disable. Support for dx expressions
-  readonly: false, // Whether it is read only. Support for dx expressions
-  placeholder: '', // Placeholder display. Support for dx expressions
-  hidden: false, // Whether it is hidden. Support for dx expressions
+  disabled: false, // Whether to disable.
+  readonly: false, // Whether it is read only.
+  placeholder: '', // Placeholder display.
+  hidden: false, // Whether it is hidden.
 }
 ```
 
@@ -44,7 +44,7 @@ If you don't like the cold text description, click on the [interactive version](
     enumSourceRemote: {
       remoteUrl: '', // If it is remote call, fill in the url
       paramName: 'keyword', // Request parameter name, default is keyword
-      otherParams: {}, // Other request parameters, values support dx expressions
+      otherParams: {}, // Other request parameters
       resField: '', // Response result field
     }
   },
@@ -129,7 +129,7 @@ If you don't like the cold text description, click on the [interactive version](
   enumSourceRemote: { // Remote data source
     remoteUrl: '', // If it is remote call, fill in the url
     paramName: 'keyword', // Request parameter name, default is keyword
-    otherParams: {}, // Additional request parameters. Support for dx expressions
+    otherParams: {}, // Additional request parameters.
     resField: '', // Response result field
     selectFirstItem: false // Whether the first item is selected by default
   },
