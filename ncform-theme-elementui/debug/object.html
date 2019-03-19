@@ -50,27 +50,95 @@
               user: {
                 type: 'object',
                 properties: {
-                  info: {
-                    type: 'object',
-                    properties: {
-                      firstname: {
-                        type: 'string'
-                      },
-                      lastname: {
-                        type: 'string'
-                      }
-                    },
-                    ui: {
-                      showLegend:false,
-                      label: 'haha',
-                    }
+                  name: {
+                    type: 'string'
                   }
                 },
                 ui: {
-                  widgetConfig: {
-                    layout: 'h'
-                  }
+                  label: 'haha',
+                  legend: 'HAHa'
                 }
+              },
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
+            }
+          }
+        },
+        {
+          title: '默认状态1',
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'object',
+                properties: {
+                  name: {
+                    type: 'string'
+                  }
+                },
+                ui: {
+                  label: 'haha',
+                  legend: 'HAHa'
+                }
+              },
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'v'
+              }
+            }
+          }
+        },
+        {
+          title: '默认状态2',
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'object',
+                properties: {
+                  name: {
+                    type: 'string'
+                  }
+                },
+                ui: {
+                  label: 'haha',
+                  showLegend: false
+                }
+              },
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'v'
+              }
+            }
+          }
+        },
+        {
+          title: '默认状态2',
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'object',
+                properties: {
+                  name: {
+                    type: 'string'
+                  }
+                },
+                ui: {
+                  legend: 'HAHA',
+                  showLabel: false,
+                  noLabelSpace: true
+                }
+              },
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'v'
               }
             }
           }

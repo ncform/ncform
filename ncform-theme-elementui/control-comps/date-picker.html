@@ -181,6 +181,26 @@
         },
         {
           title: {
+            cn: '[属性] clearable: 是否显示清除按钮',
+            en: '[ATTR] clearable: Whether to display the clear button'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              date: {
+                type: 'string',
+                ui: {
+                  widget: 'date-picker',
+                  widgetConfig: {
+                    clearable: false
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
             cn: '[属性] format: 显示格式. ',
             en: '[ATTR] format: display format. '
           },
