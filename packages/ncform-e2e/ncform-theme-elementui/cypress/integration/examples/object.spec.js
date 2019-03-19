@@ -130,18 +130,18 @@ context('Object', () => {
       cy.get('label').contains('name0').next().find('input').as('rowInput');
 
       cy.get('legend')
-      .contains('user')
-      .parent()
-      .within(() => {
-        cy.get('label').contains('firstname').should('have.css', 'width', '80px');
-        cy.get('@rowInput').clear().type('120')
-        cy.get('label').contains('firstname').should('have.css', 'width', '120px');
-      });
+        .contains('user')
+        .parent()
+        .within(() => {
+          cy.get('label').contains('firstname').should('have.css', 'width', '80px');
+          cy.get('@rowInput').clear().type('120')
+          cy.get('label').contains('firstname').should('have.css', 'width', '120px');
+        });
       // common.submitForm();
     });
   });
 
-  it.only('label and legend', () => {
+  it('label and legend', () => {
     let formSchema = {
       type: 'object',
       properties: {
@@ -149,57 +149,131 @@ context('Object', () => {
           type: 'object',
           properties: {
             name: {
-              type: 'string'
+              type: 'object',
+              properties: {
+                firstName: {
+                  type: 'string'
+                }
+              },
+              ui: {
+                label: 'name',
+                legend: 'NAME'
+              }
             }
           },
           ui: {
-            label: 'User',
-            legend: 'User'
+            showLegend: false
           }
         },
         user2: {
           type: 'object',
           properties: {
             name: {
-              type: 'string'
+              type: 'object',
+              properties: {
+                firstName: {
+                  type: 'string'
+                }
+              },
+              ui: {
+                label: 'name',
+                showLegend: false
+              }
             }
           },
           ui: {
-            noLabelSpace: true,
-            legend: 'User'
+            showLegend: false
           }
         },
         user3: {
           type: 'object',
           properties: {
             name: {
-              type: 'string'
+              type: 'object',
+              properties: {
+                firstName: {
+                  type: 'string'
+                }
+              },
+              ui: {
+                noLabelSpace: true,
+                legend: 'NAME'
+              }
             }
           },
           ui: {
-            label: 'User',
-            legend: 'User',
-            widgetConfig: {
-              layout: 'h'
-            }
+            showLegend: false
           }
         },
         user4: {
           type: 'object',
           properties: {
             name: {
-              type: 'string'
+              type: 'object',
+              properties: {
+                firstName: {
+                  type: 'string'
+                }
+              },
+              ui: {
+                label: 'name',
+                legend: 'NAME'
+              }
             }
           },
           ui: {
-            label: 'User',
-            legend: 'User',
+            showLegend: false,
             widgetConfig: {
-              noLabelSpace: true,
-              layout: 'h'
+              layout: 'h',
             }
           }
-        }
+        },
+        user5: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'object',
+              properties: {
+                firstName: {
+                  type: 'string'
+                }
+              },
+              ui: {
+                label: 'name',
+                showLegend: false
+              }
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h',
+            },
+            showLegend: false
+          }
+        },
+        user6: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'object',
+              properties: {
+                firstName: {
+                  type: 'string'
+                }
+              },
+              ui: {
+                noLabelSpace: true,
+                legend: 'NAME'
+              }
+            }
+          },
+          ui: {
+            widgetConfig: {
+              layout: 'h',
+            },
+            showLegend: false
+          }
+        },
       }
     };
     cy.window()
@@ -210,10 +284,52 @@ context('Object', () => {
     cy.get('.previewArea').within(() => {
       // Declare action elements
       cy.get('label')
-      .contains('name1')
-      .parent()
-      .within(() => {
-      });
+        .contains('user1')
+        .parent()
+        .then($dom => {
+          expect($dom.find('label:contains("name")').offset().top).to.be.lessThan($dom.find('legend:contains("NAME")').offset().top);
+          expect($dom.find('label:contains("name")').offset().left).to.be.equal($dom.find('legend:contains("NAME")').offset().left);
+        });
+
+      cy.get('label')
+        .contains('user2')
+        .parent()
+        .then($dom => {
+          expect($dom.find('label:contains("name")').offset().top).to.be.lessThan($dom.find('label:contains("name")').next().offset().top);
+          expect($dom.find('label:contains("name")').offset().left).to.be.equal($dom.find('label:contains("name")').next().offset().left);
+          cy.wrap($dom.find('legend:contains("NAME")')).should('not.exist');
+        });
+
+      cy.get('label')
+        .contains('user3')
+        .parent()
+        .then($dom => {
+          cy.wrap($dom.find('label:contains("name")')).should('not.exist');
+          cy.wrap($dom.find('legend:contains("NAME")')).should('exist');
+        });
+
+      cy.get('label')
+        .contains('user4')
+        .parent()
+        .then($dom => {
+          expect($dom.find('label:contains("name")').offset().left).to.be.lessThan($dom.find('legend:contains("NAME")').offset().left);
+        });
+
+      cy.get('label')
+        .contains('user5')
+        .parent()
+        .then($dom => {
+          expect($dom.find('label:contains("name")').offset().left).to.be.lessThan($dom.find('label:contains("name")').next().offset().left);
+          cy.wrap($dom.find('legend:contains("NAME")')).should('not.exist');
+        });
+
+      cy.get('label')
+        .contains('user6')
+        .parent()
+        .then($dom => {
+          cy.wrap($dom.find('label:contains("name")')).should('not.exist');
+          cy.wrap($dom.find('legend:contains("NAME")')).should('exist');
+        });
       // common.submitForm();
     });
   });

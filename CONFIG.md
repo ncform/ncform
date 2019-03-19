@@ -31,7 +31,7 @@
         showLabel: true, // Whether to show the label (when it is false, it still takes up space)
         noLabelSpace: false, // Whether the label does not occupy space, the priority is higher than showLabel
         legend: '', // Legend content, valid when the type is object or array [support dx expression]
-        showLegend: true, // Whether to display the legend. (Note: when it is an object widget, only one of legend and label can be valid, and legend takes precedence over label)
+        showLegend: true, // Whether to display the legend.
         description: '', // Description information [support dx expression]
         placeholder: '', // Placeholder content [support dx expression]
         disabled: false, // Whether to disable [support dx expression]

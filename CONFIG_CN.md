@@ -32,7 +32,7 @@
         showLabel: true, // 是否显示标签（注意：当为 false 时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
         legend: '', // 标题内容，当 widget 为 object，array 等布局时有效【支持dx表达式】
-        showLegend: true, // 是否显示标题。（注意：当为 object widget 时，legend 和 label 二选一，且 legend 优先于 label）
+        showLegend: true, // 是否显示标题。
         description: '', // 描述信息【支持dx表达式】
         placeholder: '', // 占位内容【支持dx表达式】
         disabled: false, // 是否禁用【支持dx表达式】
