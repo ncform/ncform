@@ -1,3 +1,24 @@
+<a name="1.0.0"></a>
+## [1.0.0](https://github.com/ncform/ncform/compare/v0.1.28...v1.0.0) (2019-03-19)
+
+### Bug Fixes
+
+* Fixed object layout cann't show label when setting v layout ([ff65ac1](https://github.com/ncform/ncform/commit/ff65ac1))
+* **ncform:** fixed image width or height not adaptive when preview ([61bea74](https://github.com/ncform/ncform/commit/61bea74))
+* **ncform:** fixed the bug that the valueTemplate initialization value is overwritten by the dynamically calculated value ([7a8ca09](https://github.com/ncform/ncform/commit/7a8ca09))
+
+### Features
+
+* All stardard widgets's widgetConfig support dx expression ([ae829e0](https://github.com/ncform/ncform/commit/ae829e0))
+* ui.legend support dx expression ([45af266](https://github.com/ncform/ncform/commit/45af266))
+* ui.label support dx expression ([cc0f585](https://github.com/ncform/ncform/commit/cc0f585))
+* Fully tested
+
+### BREAKING CHANGES
+
+* All custom widgets's widgetConfig configuration properties automatically support dx expressions
+* Widget's mergeConfig is readonly now. don't use it as data for assignment.
+
 <a name="0.1.28"></a>
 ## [0.1.28](https://github.com/ncform/ncform/compare/v0.1.27...v0.1.28) (2019-03-04)
 
