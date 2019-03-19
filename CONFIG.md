@@ -9,31 +9,31 @@
 ## ncform schema
 ```js
 {
-  type: 'object', // Root node: can only be object
-  properties: { // Root node: form fields
-    firstName: {
+  type: 'object', // Root node. object type only
+  properties: {
+    <field name>: {
       
       /* Data */
-      type: 'string', // Data type: string / number / integer / boolean / object / array / HTML / COMP 
-      // Note: The type of uppercase is a special read-only type, and the general scenario is to display a separator bar. This data will be automatically filtered out
-      // HTML: configure "value" field, the value is a piece of HTML [support dx expression];
-      // COMP: configure ui.widget and ui.widgetConfig
+      type: 'string', // Data type. options: string / number / integer / boolean / object / array / HTML / COMP 
+      // Note: The type of uppercase is a special read-only type, and the common use case is to display a separator bar. The data will be auto filtered out when the form is submitted.
+      // HTML: set "value", the value is a piece of HTML [support dx expression];
+      // COMP: set ui.widget and ui.widgetConfig
       
-      value: '', // Value of the data
-      default: '', // The default value of the data. When the "value" is empty, take this one. 
-      valueTemplate: '', // Value template. note: when there is a "dx expression" inside, the expression value changes, it will overwrite the value filled by the user
+      value: '', // Value of the field
+      default: '', // The default value of the field. Take this one when the "value" is empty. 
+      valueTemplate: '', // Value template. Dynamically calculate the "value" based on the supplied dx expression [support dx expression]
 
       /* UI */
       ui: {
 
-        columns: 6, // The number of columns, total is 12. 6 represents half
-        label: 'First Name', // Label display content [support dx expression]
+        columns: 6, // Total are 12 columns.
+        label: '', // Label display [support dx expression]
         showLabel: true, // Whether to show the label (when it is false, it still takes up space)
         noLabelSpace: false, // Whether the label does not occupy space, the priority is higher than showLabel
         legend: '', // Legend content, valid when the type is object or array [support dx expression]
-        showLegend: true, // Whether to display the legend. When the type is object or array, showLegend takes precedence over showLabel, so the label takes effect when showLegend is set to false.
-        description: 'Fill in the first name', // Field description information [support dx expression]
-        placeholder: 'first name', // Placeholder content [support dx expression]
+        showLegend: true, // Whether to display the legend. (Note: when it is an object widget, only one of legend and label can be valid, and legend takes precedence over label)
+        description: '', // Description information [support dx expression]
+        placeholder: '', // Placeholder content [support dx expression]
         disabled: false, // Whether to disable [support dx expression]
         readonly: false, // Whether read-only [support dx expression]
         hidden: false, // Whether to hide [support dx expression]
@@ -43,93 +43,98 @@
           iconCls: '', // Help icon class name
           text: '' // Help text
         },
-        itemClass: '', // The class name added to the form item
+        itemClass: '', // The form item class name
         preview: { // Preview
-          type: '', // Preview type, optional values: video / audio / image / link
+          type: '', // Preview type. Options: video / audio / image / link
           value: '', // Default: 'dx: {{$self}}' [supports dx expressions]
-          clearable: false, // Whether it can be cleared
-          outward: { // outward appearance
+          clearable: false, // Whether to display the clear button
+          outward: { // outward appearance. Valid only if type=image
             width: 0, // Width, 0 means unlimited
             height: 0, // Height, 0 means unlimited
-            shape: '', // Appearance shape, optional values: '' / rounded / circle. default is ''
+            shape: '', // Appearance shape. Options: '' / rounded / circle. default is ''
           }
         },
-        linkFields: [ // Associated fields, when the value changes, it will trigger some actions of the associated field, such as rules check
+        linkFields: [ // Associated fields. when the value changes, it will trigger some actions of the associated field, such as rules check
           {
-            fieldPath: '', // The associated item field path. When it is an array item, use [i], such as a.b[i].c
-            rules: [], // the rules, such as required, number
+            fieldPath: '', // The associated item field path. such as 'user.name'，'user[i].name'
+            rules: [], // The rules, such as ['required']
           }
         ],
 
         /* Rendering Widget */
-        widget: 'textarea', // Widget component name
+        widget: '', // Widget component name
         widgetConfig: {}, // widget component config
       },
 
       /* Verification rules */
       rules: {
+
+        // All validation rules have two forms of assignment:
+        // Simple version: <rule name>: <rule value>. Such as required: true, minimum: 10
+        // Detailed version: <rule name>: { value: <rule value>, errMsg: '', options: { deplay: xxx, delayMsg: '' } }. Such as the following required example
+
         // for Any Instance Type
         required: {
           value: true, // The value passed to the validation rule
           errMsg: 'it is required!', // Error message
-          options: { // Validation rule options
+          options: { // Rule options
             delay: 300, // Delayed verification time (ms)
             delayMsg: 'Checking...' // Prompt for delayed verification
           }
         },
-        number,
+        number, // value:boolean
         ajax, // Value: { remoteUrl: 'remote api url', method: 'get or post', paramName: 'request parameter name, the value is the control\'s value', otherParams: {} }
 
         // for Numeric Instances 
-        minimum,
-        maximum,
-        multipleOf,
-        exclusiveMaximum,
-        exclusiveMinimum,
+        minimum, // value: number
+        maximum, // value: number
+        multipleOf, // value: number
+        exclusiveMaximum, // value: number
+        exclusiveMinimum, // value: number
 
         // for Strings
-        url,
-        tel,
-        ipv4,
-        ipv6,        
-        email,
-        pattern,
-        hostname,
-        dateTime,
-        maxLength,
-        minLength,
+        url, // value: boolean
+        tel, // value: boolean
+        ipv4, // value: boolean
+        ipv6, // value: boolean       
+        email, // value: boolean
+        pattern, // value: string。 such as "\\d+"
+        hostname, // value: boolean
+        dateTime, // value: boolean
+        maxLength, // value: number
+        minLength, // value: number
 
         // for Arrays
-        contains,
-        maxItems,
-        minItems,
-        uniqueItems,
+        contains, // value: any
+        maxItems, // value: number
+        minItems, // value: number
+        uniqueItems, // value: boolean
 
         // for Objects
-        maxProperties,
-        minProperties,
+        maxProperties, // value: number
+        minProperties, // value: number
 
         /* Custom Validation Rules */
         customRule: [{
           script: '', // [Support dx expression]
           errMsg: '', // Error message
-          linkItems: [ // When the check is triggered, these associated items are also triggered for verification (recommended to use ui.linkFields instead of this feature)
+          linkItems: [ // When the check is triggered, the customRule rule validation of these associated items is also triggered (recommended using ui.linkFields instead)
             {
-              fieldPath: '', // The associated item field path. When it is an array item, use [i], such as a.b[i].c
-              customRuleIdx: 0 // The index of the triggered item's custom validation rules
+              fieldPath: '', // The associated item field path. such as 'user.name'，'user[i].name'
+              customRuleIdx: 0 // The index of the customRule of the link item
             }
           ]
         }]
       },
     }
   },
-  globalConfig: { // Root node: global configuration
-    ignoreRulesWhenHidden: true, // When the control is hidden, its validation rules are automatically ignored, Default is true
+  globalConfig: { // Global configuration
+    ignoreRulesWhenHidden: true, // When the controls are hidden, its validation rules are automatically ignored. Default is true
     style: { // Global style configuration
-      formCls: '', // form class
-      invalidFeedbackCls: '', // invalid feedback class 
+      formCls: '', // Form class
+      invalidFeedbackCls: '', // Invalid feedback class 
     },
-    constants: { // Global constant configuration, accessible via {{$const.}} in dx expressions, such as {{$const.userName}}
+    constants: { // Global constant configuration, can be accessed by {{$const.userName}}
       userName: 'daniel'
     }
   }
@@ -141,7 +146,7 @@
 
 - form-schema
 
-Used to describe the schema configuration data of the form. For the specific data structure, please refer to [ncform schema](#ncform-schema)
+Used to describe the schema configuration of the form. For the specific data structure, please refer to [ncform schema](#ncform-schema)
 
 ```
 // Demo code
@@ -170,7 +175,7 @@ Form value
 
 Is used to identify whether the value of the form is dirty (ie modified)
 
-The usual usage scenario is to use this value to determine if the submit button is available.
+The common use case is to determine if the submit button is available.
 
 ```
 // Demo code
@@ -203,7 +208,7 @@ Verify all fields of the form.
 // Demo code:
 this.$ncformValidate('demoForm').then(data => {
   if (data.result) { // Verification pass
-    // do whatever you like to do. e.g. save form
+    // do whatever you like to do. e.g. save data
   }
 })
 ```

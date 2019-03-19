@@ -1,6 +1,6 @@
 # ncform 
 
-[![CircleCI](https://circleci.com/gh/ncform/ncform/tree/e2e.svg?style=svg)](https://circleci.com/gh/ncform/ncform/tree/e2e)
+[![CircleCI](https://img.shields.io/circleci/project/github/ncform/ncform/master.svg)](https://circleci.com/gh/ncform/ncform/tree/master)
 ![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
 ![license MIT](https://img.shields.io/npm/l/vue.svg)
 [![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://dashboard.cypress.io/#/projects/enxoqt/runs)
