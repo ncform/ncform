@@ -141,4 +141,81 @@ context('Object', () => {
     });
   });
 
+  it.only('label and legend', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        user1: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string'
+            }
+          },
+          ui: {
+            label: 'User',
+            legend: 'User'
+          }
+        },
+        user2: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string'
+            }
+          },
+          ui: {
+            noLabelSpace: true,
+            legend: 'User'
+          }
+        },
+        user3: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string'
+            }
+          },
+          ui: {
+            label: 'User',
+            legend: 'User',
+            widgetConfig: {
+              layout: 'h'
+            }
+          }
+        },
+        user4: {
+          type: 'object',
+          properties: {
+            name: {
+              type: 'string'
+            }
+          },
+          ui: {
+            label: 'User',
+            legend: 'User',
+            widgetConfig: {
+              noLabelSpace: true,
+              layout: 'h'
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('label')
+      .contains('name1')
+      .parent()
+      .within(() => {
+      });
+      // common.submitForm();
+    });
+  });
+
 });
