@@ -2,7 +2,140 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.1
+      - image: circleci/node:8.15
+    working_directory: ~/project/ncform
     steps:
       - checkout
-      - run: echo "hello ncform"
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-{{ checksum "packages/ncform/package.json" }}
+            - v1-dependencies-ncform
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-common-{{ checksum "packages/ncform-common/package.json" }}
+            - v1-dependencies-ncform-common
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-show-{{ checksum "packages/ncform-show/package.json" }}
+            - v1-dependencies-ncform-show
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-theme-elementui-{{ checksum "packages/ncform-theme-elementui/package.json" }}
+            - v1-dependencies-ncform-theme-elementui
+      - restore_cache:
+          keys:
+            - v1-dependencies-ncform-e2e-{{ checksum "packages/ncform-e2e/package.json" }}
+            - v1-dependencies-ncform-e2e
+      - run: npm run bootstrap
+      - save_cache:
+          paths:
+            - packages/ncform/node_modules
+          key: v1-dependencies-ncform-{{ checksum "packages/ncform/package.json" }}
+      - save_cache:
+          paths:
+            - packages/ncform-common/node_modules
+          key: v1-dependencies-ncform-common-{{ checksum "packages/ncform-common/package.json" }}
+      - save_cache:
+          paths:
+            - packages/ncform-show/node_modules
+          key: v1-dependencies-ncform-show-{{ checksum "packages/ncform-show/package.json" }}
+      - save_cache:
+          paths:
+            - packages/ncform-theme-elementui/node_modules
+          key: v1-dependencies-ncform-theme-elementui-{{ checksum "packages/ncform-theme-elementui/package.json" }}
+      - save_cache:
+          paths:
+            - packages/ncform-e2e/node_modules
+          key: v1-dependencies-ncform-e2e-{{ checksum "packages/ncform-e2e/package.json" }}
+      - run: npm run build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - ncform
+  unittest:
+    docker:
+      - image: circleci/node:8.15
+    working_directory: ~/project/ncform
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: npm run test
+  e2etest-ncform:
+    docker:
+      - image: cypress/base:8
+    working_directory: ~/project/ncform
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          keys:
+            - v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
+            - v1-deps-cypress
+      - run: cd packages/ncform-e2e && npm ci
+      - save_cache:
+          key: v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
+          paths:
+            - ~/.cache
+            - ~/.npm
+      - run:
+          command: npx http-server packages/ncform -p 3000
+          background: true
+      - run:
+          shell: /bin/sh
+          command: |
+            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://127.0.0.1:3000/examples/components/vue-ncform/_value-default.html
+            :
+      - run: cd packages/ncform-e2e && npm run test-ncform:cli
+  e2etest-ncform-theme-elem:
+    docker:
+      - image: cypress/base:8
+    working_directory: ~/project/ncform
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          keys:
+            - v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
+            - v1-deps-cypress
+      - run: cd packages/ncform-e2e && npm ci
+      - save_cache:
+          key: v1-deps-cypress-{{ checksum "packages/ncform-e2e/package.json" }}
+          paths:
+            - ~/.cache
+            - ~/.npm
+      - run:
+          command: npx http-server packages/ncform-show -p 3004
+          background: true
+      - run:
+          shell: /bin/sh
+          command: |
+            wget --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 10 http://127.0.0.1:3004/examples/components/playground/index.html
+            :
+      - run: cd packages/ncform-e2e && npm run test-theme-elem:cli
+
+workflows:
+  version: 2
+  unit-test:
+    jobs:
+      - build
+      - unittest:
+          requires:
+            - build
+  e2e-test:
+    jobs:
+      - build
+      - e2etest-ncform:
+          requires:
+            - build
+      - e2etest-ncform-theme-elem:
+          requires:
+            - build

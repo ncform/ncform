@@ -1,13 +1,14 @@
 <template>
   <el-date-picker class="ncform-date-picker"
-    v-if="mergeConfig.type && typeOptions[mergeConfig.type]"
-    :placeholder="placeholder || $t(typeOptions[mergeConfig.type].placeholder)"
+    v-if="type && typeOptions[type]"
+    :placeholder="placeholder || $t(typeOptions[type].placeholder)"
     :disabled="disabled"
     :readonly="readonly"
+    :clearable="mergeConfig.clearable"
     v-show="!hidden"
     v-model="modelVal"
-    :type="mergeConfig.type"
-    :format="mergeConfig.format || $t(typeOptions[mergeConfig.type].format)"
+    :type="type"
+    :format="mergeConfig.format || $t(typeOptions[type].format)"
     >
   </el-date-picker>
 </template>
@@ -69,19 +70,11 @@ export default {
       default: ''
     }
   },
-  created() {
-  },
 
   mounted() {
     if(this.$data.modelVal){
       this.$data.modelVal = new Date(parseInt(this.$data.modelVal));
     }
-
-    this.$nextTick(()=>{
-      if(!this.$data.typeOptions[this.$data.mergeConfig.type]){
-        this.$data.mergeConfig.type = 'date';
-      }
-    });
   },
 
   data() {
@@ -112,13 +105,19 @@ export default {
       defaultConfig: {
         type: "date"  // year/month/date/week/datetime
       }
-      // mergeConfig: 请使用该值去绑定你的组件的属性，它包含了defaultConfig data和config props的值
       // modelVal：请使用该值来绑定实际的组件的model
     };
   },
 
   computed: {
     // disabled / readonly / hidden / placeholder 你可以直接使用这些变量来控制组件的行为
+    type() {
+      if(!this.$data.typeOptions[this.mergeConfig.type]){
+        return 'date';
+      } else {
+        return this.mergeConfig.type;
+      }
+    }
   },
 
   methods: {

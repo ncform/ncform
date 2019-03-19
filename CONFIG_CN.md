@@ -10,125 +10,130 @@
 
 ```js
 {
-  type: 'object', // 根节点：只能是object
-  properties: { // 根节点：表单字段
-    firstName: {
+  type: 'object', // 根节点。只能是 object
+  properties: {
+    <filed name>: {
       
       /* 数据 */
-      type: 'string', // 数据类型 string / number / integer / boolean / object / array / HTML / COMP 
-      // 注意：大写的类型为特殊只读类型，一般应用场景为显示一个分隔栏。该数据会自动过滤掉
-      // HTML: 配置value，值为一段HTML【支持dx表达式】; 
-      // COMP: 配置ui.widget和ui.widgetConfig
+      type: 'string', // 数据类型。可选：string / number / integer / boolean / object / array / HTML / COMP 
+      // 注意：大写的类型为特殊只读类型，一般使用场景为显示一个分隔栏。该数据在提交表单时会自动过滤掉
+      // HTML: 配置 value，值为一段HTML【支持dx表达式】; 
+      // COMP: 配置 ui.widget 和 ui.widgetConfig
       
-      value: '', // 数据的值
-      default: '', // 数据的默认值，value为空的时候取该值 
-      valueTemplate: '', // 值模板，当里面有dx表达式时，表达式值发生改变，会优化取该值作为value（即会覆盖用户所填的值）
+      value: '', // 字段值
+      default: '', // 字段默认值。value为空时取该值 
+      valueTemplate: '', // 值模板。根据提供的 dx表达式 动态计算 value 的值
 
       /* UI */
       ui: {
 
-        columns: 6, // 占用列数，一共12列。6代表占一半
-        label: 'First Name', // 标签内容
-        showLabel: true, // 是否显示标签（当为false不显示时，依然占着空间）
+        columns: 6, // 占用列数，共12列。
+        label: '', // 标签内容【支持dx表达式】
+        showLabel: true, // 是否显示标签（注意：当为 false 时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
-        legend: '', // 标题内容，当对象，数组布局数据类型时有效
-        showLegend: true, // 是否显示标题。当为object类型时，showLegend优先于showLabel，所以需要设置showLegend为false时label才生效
-        description: 'Fill in the first name', // 字段描述信息【支持dx表达式】
-        placeholder: 'first name', // 占位内容【支持dx表达式】
+        legend: '', // 标题内容，当 widget 为 object，array 等布局时有效【支持dx表达式】
+        showLegend: true, // 是否显示标题。
+        description: '', // 描述信息【支持dx表达式】
+        placeholder: '', // 占位内容【支持dx表达式】
         disabled: false, // 是否禁用【支持dx表达式】
         readonly: false, // 是否只读【支持dx表达式】
         hidden: false, // 是否隐藏【支持dx表达式】
         help: { // 帮助信息
-          show: true, // 是否显示，默认不显示
-          content: '', // 帮助信息
+          show: true, // 是否显示。默认不显示
+          content: '', // 帮助具体内容
           iconCls: '', // 帮助图标样式名
-          text: '' // 帮助文字
+          text: '' // 帮助文本
         },
-        itemClass: '', // 给表单项添加的样式名
+        itemClass: '', // 表单项样式名
         preview: { // 预览
-          type: '', // 预览类型，可选值：video / audio / image / link
+          type: '', // 预览类型。可选值：video / audio / image / link
           value: '', // 默认值: 'dx: {{$self}}'【支持dx表达式】
-          clearable: false, // 是否可删除
-          outward: { // 外观
+          clearable: false, // 是否显示删除按钮
+          outward: { // 外观，仅 type=image 时有效
             width: 0, // 宽度，0代表无限制
             height: 0, // 高度，0代表无限制
-            shape: '', // 外观形状，可选值：空值 / rounded / circle / ，默认值为空
+            shape: '', // 外观形状。可选值：空值 / rounded / circle / ，默认值为空
           }
         },
-        linkFields: [ // 关联字段，当值发生变化时，会触发关联字段的一些动作，比如校验
+        linkFields: [ // 关联字段。当值发生变化时，会触发关联字段的一些动作，比如校验
           {
-            fieldPath: '', // 关联项字段路径。当为数组项时，则用[i]，如a.b[i].c
-            rules: [], // 校验规则名，如required, number
+            fieldPath: '', // 关联项字段路径。如：'user.name'，'user[i].name'
+            rules: [], // 校验规则名，如：['required']
           }
         ],
 
         /* 渲染组件 */
-        widget: 'textarea', // 渲染的组件名
+        widget: '', // 渲染组件名
         widgetConfig: {}, // 组件配置
       },
 
       /* 验证规则 */
       rules: {
+
+        // 所有验证规则都有两种赋值形式：
+        // 简单版：<rule name>: <rule value>。如 required: true，minimum: 10
+        // 详细版：<rule name>: { value: <rule value>, errMsg: '', options: { deplay: xxx, delayMsg: '' } }。如以下 required 示例
+
         // for Any Instance Type
         required: {
-          value: true, // 传给验证规则的配置值
-          errMsg: 'it is required!', // 错误信息
-          options: { // 验证规则选项
+          value: true, // 规则配置值
+          errMsg: 'it is required!', // 错误提示信息
+          options: { // 可选项
             delay: 300, // 延迟验证的时间（毫秒）
             delayMsg: '异步验证中..' // 延迟验证时的提示
           }
         },
-        number,
-        ajax, // value值：{ remoteUrl: '远程接口Url', method: 'get or post', paramName: '请求参数名，值为控件的值', otherParams: {} }
+        number, // value:boolean
+        ajax, // value：{ remoteUrl: '<url>', method: '<get or post>', paramName: '<请求参数名，值为控件的值>', otherParams: {} }
 
         // for Numeric Instances 
-        minimum,
-        maximum,
-        multipleOf,
-        exclusiveMaximum,
-        exclusiveMinimum,
+        minimum, // value: number
+        maximum, // value: number
+        multipleOf, // value: number
+        exclusiveMaximum, // value: number
+        exclusiveMinimum, // value: number
 
         // for Strings
-        url,
-        tel,
-        ipv4,
-        ipv6,        
-        email,
-        pattern,
-        hostname,
-        dateTime,
-        maxLength,
-        minLength,
+        url, // value: boolean
+        tel, // value: boolean
+        ipv4, // value: boolean
+        ipv6, // value: boolean       
+        email, // value: boolean
+        pattern, // value: string。 如 "\\d+"
+        hostname, // value: boolean
+        dateTime, // value: boolean
+        maxLength, // value: number
+        minLength, // value: number
 
         // for Arrays
-        contains,
-        maxItems,
-        minItems,
-        uniqueItems,
+        contains, // value: any
+        maxItems, // value: number
+        minItems, // value: number
+        uniqueItems, // value: boolean
 
         // for Objects
-        maxProperties,
-        minProperties,
+        maxProperties, // value: number
+        minProperties, // value: number
 
         /* 自定义的验证规则 */
         customRule: [{
           script: '', // 【支持dx表达式】
           errMsg: '', // 验证错误信息
-          linkItems: [ // 当触发校验时，同时触发这些关联的项进行校验（ 建议使用ui.linkFields来替代这里的功能 ）
+          linkItems: [ // 当触发校验时，同时触发这些关联项的 customRule 规则校验（ 建议使用 ui.linkFields 来替代 ）
             {
-              fieldPath: '', // 关联项字段路径。当为数组项时，则用[i]，如a.b[i].c
-              customRuleIdx: 0 // 触发该项的自定义验证规则的索引
+              fieldPath: '', // 关联项字段路径。如：'user.name'，'user[i].name'
+              customRuleIdx: 0 // 触发该项的 customRule 的索引项规则
             }
           ]
         }]
       },
     }
   },
-  globalConfig: { // 根节点：全局配置
+  globalConfig: { // 全局配置
     ignoreRulesWhenHidden: true, // 当控件隐藏时自动忽略掉其验证规则，即隐藏的控件验证规则不生效。默认为true
     style: { // 全局样式配置
-      formCls: '', // form class
-      invalidFeedbackCls: '', // invalid feedback class 
+      formCls: '', // 添加到 form 的样式
+      invalidFeedbackCls: '', // 错误提示消息的样式 
     },
     constants: { // 全局常量配置，可在dx表达中通过{{$const.}}来访问，如{{$const.userName}}
       userName: 'daniel'
@@ -151,7 +156,7 @@
 
 - form-name
 
-表单名称，当使用部分[ncform API](#ncform-api)时需要提供该值
+表单名称，当使用部分 [ncform API](#ncform-api) 时需要提供该值
 
 ```
 // Demo code

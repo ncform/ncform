@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-ncform Example</title>
+
+    <link
+      rel="stylesheet"
+      href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="demo" class="container">
+      <template v-for="item in formSchemas">
+        <div
+          :data-cy="item.id"
+          v-if="mode !== 'only' || item.only"
+          :key="item.formName"
+        >
+          <h4>[CASE] {{ item.title }}</h4>
+          <ncform
+            :form-schema="item.formSchema"
+            v-model="item.formSchema.value"
+            :form-name="item.formName"
+          ></ncform>
+          <hr />
+        </div>
+      </template>
+    </div>
+
+    <script
+      type="text/javascript"
+      src="../../../node_modules/vue/dist/vue.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"
+    ></script>
+    <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+    <script type="text/javascript">
+      Vue.use(vueNcform, { lang: 'en' });
+
+      new Vue({
+        el: '#demo',
+        data: {
+          mode: 'all', // all or only. if only mode, only objects with only:true in formSchemas are valid
+          formSchemas: [
+            {
+              id: md5('layout:v & collapsed: false'),
+              title: 'layout:v & collapsed: false',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string'
+                      }
+                    },
+                    ui: {
+                      widgetConfig: {
+                        layout: 'v',
+                        collapsed: false
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('layout:h & collapsed: true'),
+              title: 'layout:h & collapsed: true',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string'
+                      }
+                    },
+                    ui: {
+                      widgetConfig: {
+                        layout: 'h',
+                        collapsed: true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('disableCollapse: true'),
+              title: 'disableCollapse: true',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string'
+                      }
+                    },
+                    ui: {
+                      widgetConfig: {
+                        disableCollapse: true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('array: all disableXXX are true'),
+              title: 'array: all disableXXX are true',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widget: 'array',
+                      widgetConfig: {
+                        disableAdd: true,
+                        disableDel: true,
+                        disableReorder: true,
+                        disableCollapse: true,
+                        disableItemCollapse: true
+                      }
+                    }
+                  }
+                },
+                value: {
+                  users: [
+                    'daniel', 'sarah'
+                  ]
+                }
+              }
+            },
+            {
+              id: md5('array: collapsed / itemCollapse true and txts change'),
+              title: 'array: collapsed / itemCollapse true and txts change',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widgetConfig: {
+                        collapsed: true,
+                        itemCollapse: true,
+                        addTxt: 'Add Item',
+                        delAllTxt: 'Remove All',
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('table: all disableXXX are true'),
+              title: 'table: all disableXXX are true',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widget: 'array-table',
+                      widgetConfig: {
+                        disableAdd: true,
+                        disableDel: true,
+                        disableReorder: true,
+                        disableCollapse: true,
+                      }
+                    }
+                  }
+                },
+                value: {
+                  users: [
+                    'daniel', 'sarah'
+                  ]
+                }
+              }
+            },
+            {
+              id: md5('table: collapsed true and txts change'),
+              title: 'table: collapsed true and txts change',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widget: 'array-table',
+                      widgetConfig: {
+                        collapsed: true,
+                        addTxt: 'Add Item',
+                        delAllTxt: 'Remove All',
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>

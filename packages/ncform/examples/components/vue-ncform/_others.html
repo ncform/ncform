@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>vue-ncform Example</title>
+
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  </head>
+
+  <body>
+    <div id="demo" class="container">
+      <template v-for="item in formSchemas">
+        <div :data-cy="item.id" v-if="mode !== 'only' || item.only" :key="item.formName">
+          <h4>[CASE] {{ item.title }}</h4>
+          <ncform :form-schema="item.formSchema" v-model="item.formSchema.value" :form-name="item.formName" @submit="submit(item.formName)" :is-dirty.sync="item.isFormDirty"></ncform>
+
+          <button v-if="['v-model: external update', 'reset', 'is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary" @click="changeModel(item.formSchema)">
+            Updated Model
+          </button>
+          <button v-if="['reset', 'is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary" @click="reset(item.formName)">Reset</button>
+          <button v-if="['is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary" :disabled="!item.isFormDirty">Submit</button>
+
+          <hr />
+        </div>
+      </template>
+    </div>
+
+    <script type="text/javascript" src="../../../node_modules/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/blueimp-md5@2.10.0/js/md5.js"></script>
+    <script type="text/javascript" src="../../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
+    <script type="text/javascript" src="../../../dist/vueNcform.js"></script>
+    <script type="text/javascript">
+      Vue.use(vueNcform, { lang: 'en' });
+
+      new Vue({
+        el: '#demo',
+        data: {
+          mode: 'all', // all or only. if only mode, only objects with only:true in formSchemas are valid
+          formSchemas: [
+            {
+              id: md5('v-model: external update'),
+              title: 'v-model: external update',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('reset'),
+              title: 'reset',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('submit event && $ncformValidate api'),
+              title: 'submit event && $ncformValidate api',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      firstname: {
+                        type: 'string',
+                        ui: {
+                          columns: 6
+                        },
+                        rules: {
+                          required: true
+                        }
+                      },
+                      lastname: {
+                        type: 'string',
+                        ui: {
+                          columns: 6
+                        },
+                        rules: {
+                          required: true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              id: md5('is-dirty.sync'),
+              title: 'is-dirty.sync',
+              isFormDirty: false,
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  user: {
+                    type: 'object',
+                    properties: {
+                      name: {
+                        type: 'string'
+                      }
+                    }
+                  }
+                }
+              }
+            },
+          ]
+        },
+        methods: {
+          submit(formName) {
+            this.$ncformValidate(formName)
+          },
+          reset(formName) {
+            this.$ncformReset(formName);
+          },
+          changeModel(formSchema) {
+            formSchema.value = { user: { name: 'daniel' } };
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,12 +1,12 @@
 <template>
   <div class="__object-form-item">
     <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">
-      {{schema.ui.legend}}
-      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !mergeConfig.collapsed, 'el-icon-arrow-down': mergeConfig.collapsed}"></i>
+      {{_analyzeVal(schema.ui.legend)}}
+      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
     </legend>
 
     <!-- 垂直布局，即label上，control下 -->
-    <div v-if="mergeConfig.layout === 'v'" v-show="!mergeConfig.collapsed" class="el-row v-layout" style="width: 100%">
+    <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="el-row v-layout" style="width: 100%">
 
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
@@ -15,12 +15,10 @@
           class="el-col el-form-item">
 
         <template>
-            <label v-if="!isNormalObjSchema(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}" class="el-form-item__label">
+            <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}" class="el-form-item__label">
               <!-- 必填标识 -->
               <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-
-              {{fieldSchema.ui.label}}
-
+              {{_analyzeVal(fieldSchema.ui.label)}}
               <!-- 提示信息 -->
               <el-tooltip class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
                 <div slot="content" v-html="fieldSchema.ui.help.content"></div>
@@ -28,7 +26,9 @@
               </el-tooltip>
             </label>
 
-            <slot :name="field"></slot>
+            <div style="clear: both">
+              <slot :name="field"></slot>
+            </div>
 
             <!-- 说明信息 -->
             <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">
@@ -40,17 +40,17 @@
     </div>
 
     <!-- 水平布局，即label左，control右 -->
-    <div v-if="mergeConfig.layout === 'h'" v-show="!mergeConfig.collapsed" class="el-row h-layout" style="width: 100%">
+    <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="el-row h-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
           :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>
-          <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
+          <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label">
             <!-- 必填标识 -->
             <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-            {{fieldSchema.ui.label}}
+            {{_analyzeVal(fieldSchema.ui.label)}}
             <!-- 提示信息 -->
             <el-tooltip class="item" effect="dark" placement="right-start">
               <div slot="content" v-html="fieldSchema.ui.help.content"></div>
@@ -58,7 +58,7 @@
             </el-tooltip>
             :
           </label>
-          <div class="el-form-item__content" :style="{'margin-left': (legendEnable(fieldSchema) || fieldSchema.ui.noLabelSpace) ? '0px' : mergeConfig.labelWidth}">
+          <div class="el-form-item__content" :style="{'margin-left': (fieldSchema.ui.noLabelSpace) ? '0px' : mergeConfig.labelWidth}">
             <slot :name="field"></slot>
             <!-- 说明信息 -->
             <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">

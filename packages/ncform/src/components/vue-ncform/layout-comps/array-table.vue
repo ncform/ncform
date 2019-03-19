@@ -2,18 +2,18 @@
 
   <div class="__array-table-form-item">
 
-    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">{{schema.ui.legend}}</legend>
+    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
 
-    <table v-show="!mergeConfig.collapsed" class="table table-bordered">
+    <table v-show="!collapsed" class="table table-bordered">
       <thead>
         <tr>
           <th v-for="(renderSchema, idx) in renderSchemas" :key="renderSchema.ui.label" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
 
             <i v-if="showRequiredFlag(renderSchema.rules.required)" class="text-danger">*</i>
 
-            {{renderSchema.ui.label}}<!--  标签信息 -->
+            {{_analyzeVal(renderSchema.ui.label)}}<!--  标签信息 -->
 
-            <a v-if="renderSchema.ui.help.show === true" href="#"><span :class="renderSchema.ui.help.iconCls">{{renderSchema.ui.help.text}}</span></a>
+            <a v-if="renderSchema.ui.help.show === true" :title="renderSchema.ui.help.content" href="#"><span :class="renderSchema.ui.help.iconCls">{{renderSchema.ui.help.text}}</span></a>
 
             <!-- 说明信息 -->
             <small v-if="renderSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(renderSchema.ui.description)">

@@ -3,14 +3,14 @@
   <div class="__array-form-item">
 
     <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">
-      {{schema.ui.legend}}
-      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !mergeConfig.collapsed, 'el-icon-arrow-down': mergeConfig.collapsed}"></i>
+      {{_analyzeVal(schema.ui.legend)}}
+      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
     </legend>
 
-    <div v-show="!mergeConfig.collapsed" v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" class="list-item">
+    <div v-show="!collapsed" v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" class="list-item">
 
       <div class="list-item-label">
-        <label>{{dataItem.__dataSchema.ui.label}} {{idx + 1}}</label>
+        <label>{{_analyzeVal(dataItem.__dataSchema.ui.label)}} {{idx + 1}}</label>
 
         <!-- 项控制按钮 -->
         <div class="el-button-group">
@@ -43,7 +43,7 @@
     </div>
 
     <!-- 列表控制按钮 -->
-    <div v-show="!mergeConfig.collapsed" class="el-button-group" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
+    <div v-show="!collapsed" class="el-button-group" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
       <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt || $t('add')}}</button>
       <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt || $t('delAll')}}</button>
     </div>
@@ -119,10 +119,10 @@
       },
 
       _supportItemsCollapse() {
-        if (!this.$data.mergeConfig.disableItemCollapse) {
+        if (!this.mergeConfig.disableItemCollapse) {
           this.schema.value.forEach(dataItem => {
             if (dataItem.__dataSchema._expand === undefined)
-              this.$set(dataItem.__dataSchema, '_expand', !this.$data.mergeConfig.itemCollapse);
+              this.$set(dataItem.__dataSchema, '_expand', !this.mergeConfig.itemCollapse);
           })
         }
       }

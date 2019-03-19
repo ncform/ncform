@@ -19,22 +19,6 @@ export default {
       this.$http = this.$axios || this.axios || axios;
     }
 
-    this.$data.mergeConfig = extend(
-      true,
-      {},
-      this.$data.defaultConfig,
-      this.config
-    );
-
-    this.$watch("config", () => {
-      this.$data.mergeConfig = extend(
-        true,
-        {},
-        this.$data.defaultConfig,
-        this.config
-      );
-    });
-
   },
 
   props: {
@@ -70,7 +54,6 @@ export default {
 
   data() {
     return {
-      mergeConfig: {},
       defaultConfig: {},
       modelVal: this.value,
       i18n: {},
@@ -89,6 +72,20 @@ export default {
     },
     hidden() {
       return this._analyzeVal(this.config.hidden);
+    },
+    mergeConfig() {
+      let newConfig = extend(
+        true,
+        {},
+        this.$data.defaultConfig,
+        this.config
+      )
+      return ncformUtils.traverseJSON(newConfig, (...params) => {
+        let val = params[1];
+        if (val !== null && typeof val !== 'object')
+          return this._analyzeVal(val);
+        else return val;
+      })
     }
   },
 

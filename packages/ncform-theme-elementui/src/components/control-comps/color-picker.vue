@@ -30,7 +30,6 @@
         // 组件特有的配置属性
         defaultConfig: {
         }
-        // mergeConfig: 请使用该值去绑定你的组件的属性，它包含了defaultConfig data和config props的值
         // modelVal：请使用该值来绑定实际的组件的model
       }
     },

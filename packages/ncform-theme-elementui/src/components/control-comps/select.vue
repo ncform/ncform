@@ -1,24 +1,25 @@
 <template>
-
-      <el-select v-model="modelVal" :placeholder="placeholder || $t('selectPls')" v-show="!hidden" :disabled="disabled || readonly"
-      :clearable="mergeConfig.clearable"
-      :multiple="mergeConfig.multiple"
-      :filterable="mergeConfig.filterable"
-      :remote="!isLocalSource && !mergeConfig.filterLocal"
-      :remote-method="remoteMethod"
-      :loading="loading">
-      <el-option
-        v-for="item in options"
-        :key="item[mergeConfig.itemValueField]"
-        :label="item[mergeConfig.itemLabelField]"
-        :value="item[mergeConfig.itemValueField]">
-        <component
-          v-if="itemTemplate.template"
-          :item="item"
-          :is="itemTemplate"></component>
-      </el-option>
-    </el-select>
-
+  <el-select
+    v-model="modelVal"
+    :placeholder="placeholder || $t('selectPls')"
+    v-show="!hidden"
+    :disabled="disabled || readonly"
+    :clearable="mergeConfig.clearable"
+    :multiple="mergeConfig.multiple"
+    :filterable="mergeConfig.filterable"
+    :remote="!isLocalSource && !mergeConfig.filterLocal"
+    :remote-method="remoteMethod"
+    :loading="loading"
+  >
+    <el-option
+      v-for="item in options"
+      :key="item[mergeConfig.itemValueField]"
+      :label="item[mergeConfig.itemLabelField]"
+      :value="item[mergeConfig.itemValueField]"
+    >
+      <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
+    </el-option>
+  </el-select>
 </template>
 
 <style lang="scss" scoped>
@@ -26,8 +27,8 @@
 
 <script>
 import _get from "lodash-es/get";
-import _cloneDeep from 'lodash-es/cloneDeep';
-import ncformCommon from '@ncform/ncform-common';
+import _cloneDeep from "lodash-es/cloneDeep";
+import ncformCommon from "@ncform/ncform-common";
 
 const controlMixin = ncformCommon.mixins.vue.controlMixin;
 const ncformUtils = ncformCommon.ncformUtils;
@@ -37,52 +38,30 @@ export default {
 
   i18nData: {
     en: {
-      selectPls: 'Select Please'
+      selectPls: "Select Please"
     },
     zh_cn: {
-      selectPls: '请选择'
+      selectPls: "请选择"
     }
   },
 
   props: {
     value: {
       type: [String, Number, Boolean, Object, Array],
-      default: ''
+      default: ""
     }
   },
   created() {
-    if(typeof this.value === 'boolean'){
-      this.$data.valueType = 'boolean';
+    if (typeof this.value === "boolean") {
+      this.$data.valueType = "boolean";
       this.$data.modelVal = this.$data.modelVal ? 1 : 0;
     }
-  },
-
-  mounted() {
-    // 判断是否存在自定义模板
-    this.$data.itemTemplate.template = this.$data.mergeConfig.itemTemplate;
-
-    // 标记是否使用本地数据
-    if (this.$data.mergeConfig.enumSource.length == 0) {
-      this.$data.isLocalSource = false;
-      if(ncformUtils.getValType(this.value) == 'boolean'){
-        this.$data.options = [{
-          value: 1,
-          label: 'true'
-        },{
-          value: 0,
-          label: 'false'
-        }]
-      }
-    } else {
-      this.$data.options = this.$data.mergeConfig.enumSource;
-    }
-
+    this.$data.itemTemplate.template = this.mergeConfig.itemTemplate;
+    this._getDataSource();
   },
 
   data() {
     return {
-
-      // mergeConfig: 请使用该值去绑定你的组件的属性，它包含了defaultConfig data和config props的值
       // modelVal：请使用该值来绑定实际的组件的model
 
       // 组件特有的配置属性
@@ -93,8 +72,8 @@ export default {
         filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
         itemTemplate: "", // 显示项的模板
 
-        itemLabelField: 'label', // 项数据表示label的字段
-        itemValueField: 'value', // 项数据表示value的字段
+        itemLabelField: "label", // 项数据表示label的字段
+        itemValueField: "value", // 项数据表示value的字段
         enumSource: [], // 本地数据源
         enumSourceRemote: {
           // 远程数据源
@@ -102,14 +81,14 @@ export default {
           paramName: "keyword", // 请求参数名，默认是keyword
           otherParams: {}, // 其它请求的参数，支持字符串表达式
           resField: "", // 响应结果的字段
-          selectFirstItem: false, // 默认选中第一项
+          selectFirstItem: false // 默认选中第一项
         }
       },
 
       isLocalSource: true,
       options: [],
       itemTemplate: {
-        template: "",
+        template: '',
         props: ["item"]
       },
 
@@ -119,39 +98,60 @@ export default {
 
   computed: {
     // disabled / readonly / hidden / placeholder 你可以直接使用这些变量来控制组件的行为
-
-    //【使config支持字符串表达式】(1) 声明computed属性，使用this._analyzeVal方法分析值
-    otherParams() {
-      let otherParams = _cloneDeep(_get(this.mergeConfig, 'enumSourceRemote.otherParams'), {});
-      for (let key in otherParams) {
-        otherParams[key] = this._analyzeVal(otherParams[key]);
-      }
-      return otherParams;
-    }
   },
 
   methods: {
     remoteMethod(query) {
-
-      if(!_get(this.mergeConfig, 'enumSourceRemote.remoteUrl')){ return; };
+      if (!_get(this.mergeConfig, "enumSourceRemote.remoteUrl")) {
+        return;
+      }
 
       const options = {
         url: this.mergeConfig.enumSourceRemote.remoteUrl,
-        params: JSON.parse(JSON.stringify(this.otherParams)) // //【使config支持字符串表达式】(3) 使用computed属性
+        params: _get(this.mergeConfig, "enumSourceRemote.otherParams", {})
       };
-      options.params[
-        this.$data.mergeConfig.enumSourceRemote.paramName
-      ] = query;
+      options.params[this.mergeConfig.enumSourceRemote.paramName] = query;
       this.$http(options).then(res => {
-        this.$data.options = this.$data.mergeConfig.enumSourceRemote.resField ? _get(res.data, this.$data.mergeConfig.enumSourceRemote.resField) : res.data;
-        if (this.mergeConfig.enumSourceRemote.selectFirstItem && this.$data.options.length > 0) {
-          this.$data.modelVal = this.$data.modelVal || this.$data.options[0][this.$data.mergeConfig.itemValueField];
+        this.$data.options = this.mergeConfig.enumSourceRemote.resField
+          ? _get(res.data, this.mergeConfig.enumSourceRemote.resField)
+          : res.data;
+        if (
+          this.mergeConfig.enumSourceRemote.selectFirstItem &&
+          this.$data.options.length > 0
+        ) {
+          this.$data.modelVal =
+            this.$data.modelVal ||
+            this.$data.options[0][this.mergeConfig.itemValueField];
         }
       });
     },
 
-    _processModelVal(newVal){
-      if(this.$data.valueType === 'boolean'){
+    _getDataSource() {
+      if (_get(this.mergeConfig, "enumSourceRemote.remoteUrl")) {
+        this.$data.isLocalSource = false;
+        this.remoteMethod();
+      } else {
+        if (this.mergeConfig.enumSource.length == 0) {
+          if (ncformUtils.getValType(this.value) == "boolean") {
+            this.$data.options = [
+              {
+                value: 1,
+                label: "true"
+              },
+              {
+                value: 0,
+                label: "false"
+              }
+            ];
+          }
+        } else {
+          this.$data.options = this.mergeConfig.enumSource;
+        }
+      }
+    },
+
+    _processModelVal(newVal) {
+      if (this.$data.valueType === "boolean") {
         return newVal ? true : false;
       }
       return newVal;
@@ -160,16 +160,19 @@ export default {
 
   watch: {
     //【使config支持字符串表达式】(2) watch在computed声明的属性，当发生变化时，执行相关的动作
-    otherParams(newVal, oldVal) {
-      if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-        if (oldVal !== undefined) { // 非第一次
-          if (Array.isArray(this.modelVal)) {
-            this.modelVal = [];
-          } else {
-            this.modelVal = null;
+    "mergeConfig.enumSourceRemote.otherParams": {
+      handler: function(newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          if (oldVal !== undefined) {
+            // 非第一次
+            if (Array.isArray(this.modelVal)) {
+              this.modelVal = [];
+            } else {
+              this.modelVal = null;
+            }
           }
+          this.remoteMethod();
         }
-        this.remoteMethod();
       }
     }
   }

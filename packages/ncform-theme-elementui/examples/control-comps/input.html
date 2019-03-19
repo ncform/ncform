@@ -108,44 +108,6 @@
         },
         {
           title: {
-            cn: '[属性] trim: 前后去空格。默认值是true',
-            en: '[ATTR] trim: remove the spaces before and after. Default is true'
-          },
-          schema: {
-            type: 'object',
-            properties: {
-              name: {
-                type: 'string',
-                ui: {
-                  widgetConfig: {
-                    trim: false
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          title: {
-            cn: '[属性] clearable: 当有内容时显示清空按钮。默认值是false',
-            en: '[ATTR] clearable: With clear button. Default is false'
-          },
-          schema: {
-            type: 'object',
-            properties: {
-              name: {
-                type: 'string',
-                ui: {
-                  widgetConfig: {
-                    clearable: true
-                  }
-                }
-              }
-            }
-          }
-        },
-        {
-          title: {
             cn: '[属性] readonly: 只读状态',
             en: '[ATTR] readonly: read-only state'
           },
@@ -208,6 +170,44 @@
                 ui: {
                   widgetConfig: {
                     type: 'password'
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] trim: 前后去空格。默认值是true',
+            en: '[ATTR] trim: remove the spaces before and after. Default is true'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                ui: {
+                  widgetConfig: {
+                    trim: false
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] clearable: 当有内容时显示清空按钮。默认值是false',
+            en: '[ATTR] clearable: With clear button. Default is false'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                ui: {
+                  widgetConfig: {
+                    clearable: true
                   }
                 }
               }

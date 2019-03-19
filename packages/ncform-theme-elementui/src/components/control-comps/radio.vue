@@ -7,7 +7,7 @@
         size="mini"
       >
         <component :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
-          v-for="opt in mergeConfig.enumSource"
+          v-for="opt in dataSource"
           :key="opt[mergeConfig.itemValueField]"
           :label="opt[mergeConfig.itemValueField]"
           :class="mergeConfig.type === 'radio' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
@@ -78,6 +78,10 @@
       }
     },
 
+    created() {
+      this._getDataSource();
+    },
+
     props: {
       value: {
         type: [String, Number, Boolean]
@@ -86,6 +90,7 @@
 
     data() {
       return {
+        dataSource: [],
         // 组件特有的配置属性
         defaultConfig: {
           isIndeterminate: true,
@@ -101,7 +106,6 @@
             resField: '', // 响应结果的字段
           }
         },
-        // mergeConfig: 请使用该值去绑定你的组件的属性，它包含了defaultConfig data和config props的值
         // modelVal：请使用该值来绑定实际的组件的model
       }
     },
@@ -111,15 +115,30 @@
       labelRead() {
         let res = '';
         const vm = this;
-        const { enumSource, enumSourceRemote, itemValueField, itemLabelField } = vm.mergeConfig;
+        const { itemValueField, itemLabelField } = vm.mergeConfig;
 
-        for (let i in enumSource) {
-          if (enumSource[i][itemValueField] === vm.modelVal) {
-            res = enumSource[i][itemLabelField];
+        for (let i in vm.$data.dataSource) {
+          if (vm.$data.dataSource[i][itemValueField] === vm.modelVal) {
+            res = vm.$data.dataSource[i][itemLabelField];
             break;
           }
         }
         return res;
+      },
+    },
+
+    watch: {
+      'mergeConfig.enumSourceRemote': {
+        handler() {
+          this._getDataSource();
+        },
+        deep: true
+      },
+      'mergeConfig.enumSource': {
+        handler() {
+          this._getDataSource();
+        },
+        deep: true
       }
     },
 
@@ -139,36 +158,26 @@
           }).then(res => {
             if (res.status === 200 ) {
               let data = res.data;
-              vm.mergeConfig.enumSource = enumSourceRemote.resField ? _get(data, enumSourceRemote.resField, []) : data;
+              vm.$data.dataSource = enumSourceRemote.resField ? _get(data, enumSourceRemote.resField, []) : data;
             }
           }).catch(err => {
-            vm.mergeConfig.enumSource = [];
+            vm.$data.dataSource = [];
           });
         } catch(err) {
           console.error(err);
         }
       },
-      // // 你可以通过该方法在modelVal传出去之前进行加工处理，即在this.$emit('input')之前
-      // _processModelVal(modelVal) {
-      //   let val = modelVal;
-      //   switch(this.config.type) {
-      //     case 'number':
-      //       val = parseFloat(val);
-      //       break;
-      //     case 'integer':
-      //       val = parseInt(val);
-      //       break;
-      //   }
-      //   return val;
-      // }
-    },
-    created() {
-      const vm = this;
-      const enumSourceRemote = vm.mergeConfig.enumSourceRemote;
-      if (enumSourceRemote && enumSourceRemote.remoteUrl) {
-        vm.getRemoteSource();
-      } else if (!vm.mergeConfig.enumSource.length) {
-        vm.mergeConfig.enumSource = [ {value: true, label: this.$t('yes')}, {value: false, label: this.$t('no')} ];
+
+      _getDataSource() {
+        const vm = this;
+        const enumSourceRemote = vm.mergeConfig.enumSourceRemote;
+        if (enumSourceRemote && enumSourceRemote.remoteUrl) {
+          vm.getRemoteSource();
+        } else if (!vm.mergeConfig.enumSource.length) {
+          vm.$data.dataSource = [ {value: true, label: this.$t('yes')}, {value: false, label: this.$t('no')} ];
+        } else {
+          vm.$data.dataSource = vm.mergeConfig.enumSource
+        }
       }
     }
   }
