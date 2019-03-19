@@ -1,7 +1,7 @@
 {
   "name": "@ncform/ncform",
   "version": "0.1.28",
-  "description": "nice form",
+  "description": "ncform, a very nice configuration generation way to develop form ( vue, json-schema, form, generator )",
   "author": "daniel.xiao",
   "main": "dist/vueNcform.min.js",
   "keywords": [
