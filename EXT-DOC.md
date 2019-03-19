@@ -3,7 +3,6 @@
 - Table Of Contents
   - [Custom Validation Rule](#Custom-validation-rule)
   - [Custom Form Widget](#Custom-form-widget)
-  - [widgetConfig support `dx expression`](#widgetConfig-support-dx-expression)
 
 ## Custom Validation Rule
 
@@ -75,8 +74,8 @@ npm i @ncform/ncform-common --save
     <!-- use $t to get i18n data -->
     <label>{{$t('hi', {name: mergeConfig.name})}}</label>
 
-    <!-- disabled / readonly / placeholder / hidden : use the computed version, not the config version. defined in controlMixin -->
-    <!-- modelVal: for binding value. defined in controlMixin -->
+    <!-- disabled / readonly / placeholder / hidden : use the computed version, not the config version. -->
+    <!-- modelVal: for binding value. -->
     <input 
       :disabled="disabled" 
       :readonly="readonly"
@@ -106,19 +105,19 @@ export default {
 
   data() {
     return {
-      defaultConfig: { // your config's default value（Note: use mergeConfig when use config value）
+      defaultConfig: { // your config's default value ( Note: use mergeConfig to get config value )
         name: 'daniel'
       }
     }
   },
 
   methods: {
-    // you can handle the modelVal before $emit it (before this.$emit('input'))
+    // you can handle the modelVal before $emit it ( before this.$emit('input') )
     _processModelVal(modelVal) {
       return modelVal;
     },
 
-    // you can use this.$http the make some http request (this.$http is the same as axios)
+    // you can use this.$http to make some http requests ( this.$http is the same as axios )
   }
 }
 
@@ -147,53 +146,5 @@ ui: {
 }
 ```
 
-## widgetConfig support `dx expression`
-
-```
-# myCustomComp.vue
-
-<template>
-  <div >
-    <label>{{msg}}</label>
-    ...
-  </div>
-</template>
-
-<style></style>
-
-<script>
-
-import ncformCommon from '@ncform/ncform-common';
-
-export default {
-  mixins: [ncformCommon.mixins.vue.controlMixin],
-
-  data() {
-    return {
-      defaultConfig: {
-        msg: 'hello'
-      }
-    }
-  },
-
-  computed: {
-    msg() { // add computed field to replace config field, call the powerful method: _analyzeVal
-      return this._analyzeVal(this.config.msg);
-    },
-  }
-
-}
-
-</script>
-
-# Use example
-
-ui: {
-  widget: 'my-custom-comp',
-  widgetConfig: {
-    msg: 'dx: {{$root.otherField}}'
-  }
-}
-
-```
+**Note:**  After version 1.0, all widgetConfig configuration properties automatically support dx expressions.
 
