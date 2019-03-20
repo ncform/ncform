@@ -9,7 +9,7 @@
 
 [English Version](README.md)
 
-![preview](docs/images/preview.png)
+<img src="docs/images/ncform-banner.gif" alt="preview" style="max-width:100%;">
 
 ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表单UI及其交互行为。
 
