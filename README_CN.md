@@ -9,7 +9,7 @@
 
 [English Version](README.md)
 
-<img src="docs/images/ncform-banner.gif" alt="preview" style="max-width:100%;">
+<img src="docs/images/ncform-banner.gif" alt="preview" style="max-width:100%;box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important">
 
 ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表单UI及其交互行为。
 
