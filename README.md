@@ -9,7 +9,7 @@
 
 [中文版](README_CN.md)
 
-<img src="docs/images/ncform-banner.gif" alt="preview" style="border: 2px solid orange">
+<img src="docs/images/ncform-banner.gif" alt="preview" style="max-width:100%;box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important">
 
 ncform, a nice form development way that generates form UIs and their interactions with just configuration.
 
