@@ -10,7 +10,7 @@
       :indeterminate="isIndeterminate"
       v-model="isCheckAll"
       @change="handleCheckAllChange"
-    >{{$t('all')}}</el-checkbox>
+    >{{$nclang('all')}}</el-checkbox>
 
     <el-checkbox-group
       v-if="!readonly"
@@ -157,7 +157,7 @@
         const modelVal = vm.modelVal;
 
         if (typeof modelVal === 'boolean') {
-          res.push(modelVal ? this.$t('yes') : this.$t('no'));
+          res.push(modelVal ? this.$nclang('yes') : this.$nclang('no'));
         } else {
           for (let m in modelVal) {
             for (let i in vm.$data.dataSource) {
@@ -236,7 +236,7 @@
         if (enumSourceRemote && enumSourceRemote.remoteUrl) {
           vm.getRemoteSource();
         } else if (!vm.mergeConfig.enumSource.length) {
-          vm.$data.dataSource = [ {label: this.$t('yes'), value: true}];
+          vm.$data.dataSource = [ {label: this.$nclang('yes'), value: true}];
         } else {
           vm.$data.dataSource = vm.mergeConfig.enumSource;
         }

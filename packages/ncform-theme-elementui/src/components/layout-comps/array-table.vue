@@ -26,7 +26,7 @@
             </small>
           </th>
 
-          <th v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">{{$t('action')}}</th>
+          <th v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">{{$nclang('action')}}</th>
       </thead>
       <tbody>
         <tr v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id">
@@ -49,8 +49,8 @@
           <td :colspan="renderSchemas.length + 1">
             <!-- 列表控制按钮 -->
             <div class="el-button-group" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
-              <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt || $t('add')}}</button>
-              <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt || $t('delAll')}}</button>
+              <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt || $nclang('add')}}</button>
+              <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt || $nclang('delAll')}}</button>
             </div>
           </td>
         </tr>

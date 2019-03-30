@@ -46,7 +46,7 @@
       let extComponents = {
         helloWorld: {
           mixins: [ncformCommon.mixins.vue.controlMixin],
-          template: '<div>{{$t("hi", {msg: modelVal})}} {{modelVal}}</div>',
+          template: '<div>{{$nclang("hi", {msg: modelVal})}} {{modelVal}}</div>',
           i18nData: {
             en: {
               hi: 'hello world: <%= msg %>'
@@ -63,7 +63,7 @@
         },
         helloDaniel: {
           mixins: [ncformCommon.mixins.vue.controlMixin],
-          template: '<div>{{$t("hi", {msg: modelVal})}} {{modelVal}}</div>',
+          template: '<div>{{$nclang("hi", {msg: modelVal})}} {{modelVal}}</div>',
           i18nData: {
             en: {
               hi: 'Hi daniel: <%= msg %>'

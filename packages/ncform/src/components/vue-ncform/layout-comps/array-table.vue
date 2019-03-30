@@ -20,7 +20,7 @@
             </small>
           </th>
 
-          <th v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">{{$t('action')}}</th>
+          <th v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">{{$nclang('action')}}</th>
         </tr>
       </thead>
       <tbody>
@@ -44,8 +44,8 @@
           <td :colspan="renderSchemas.length + 1">
             <!-- 列表控制按钮 -->
             <div class="btn-group btn-group-sm" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
-              <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="btn btn-secondary">{{mergeConfig.addTxt || $t('add')}}</button>
-              <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">{{mergeConfig.delAllTxt || $t('delAll')}}</button>
+              <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="btn btn-secondary">{{mergeConfig.addTxt || $nclang('add')}}</button>
+              <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">{{mergeConfig.delAllTxt || $nclang('delAll')}}</button>
             </div>
           </td>
         </tr>

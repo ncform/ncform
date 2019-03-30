@@ -1,7 +1,7 @@
 <template>
   <el-select
     v-model="modelVal"
-    :placeholder="placeholder || $t('selectPls')"
+    :placeholder="placeholder || $nclang('selectPls')"
     v-show="!hidden"
     :disabled="disabled || readonly"
     :clearable="mergeConfig.clearable"

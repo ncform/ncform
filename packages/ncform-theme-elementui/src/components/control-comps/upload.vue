@@ -24,7 +24,7 @@
     <!-- 1. 可拖拽 -->
     <template v-if="!readonly && mergeConfig.drag" slot="trigger">
       <i class="el-icon-upload"></i>
-      <div class="el-upload__text" v-html="$t('uploadTips')"></div>
+      <div class="el-upload__text" v-html="$nclang('uploadTips')"></div>
     </template>
     <div v-if="mergeConfig.drag && disabled" class="disabled-mask"></div>
 
@@ -36,7 +36,7 @@
       size="small"
       type="success"
       @click="submitUpload"
-    >{{$t('uploadServer')}}</el-button>
+    >{{$nclang('uploadServer')}}</el-button>
 
     <!-- 3. 不可拖拽，自动上传-->
     <el-button
@@ -44,7 +44,7 @@
       :disabled="disabled"
       size="small"
       type="primary"
-    >{{$t('upload')}}</el-button>
+    >{{$nclang('upload')}}</el-button>
 
     <!-- 4. 不可拖拽，非自动上传 -->
     <template v-if="!readonly && !mergeConfig.drag && !mergeConfig.autoUpload">
@@ -53,14 +53,14 @@
         slot="trigger"
         size="small"
         type="primary"
-      >{{$t('chFile')}}</el-button>
+      >{{$nclang('chFile')}}</el-button>
       <el-button
         :disabled="disabled"
         class="upload-btn"
         size="small"
         type="success"
         @click="submitUpload"
-      >{{$t('uploadServer')}}</el-button>
+      >{{$nclang('uploadServer')}}</el-button>
     </template>
 
   </el-upload>
@@ -228,7 +228,7 @@
           && !vm.mergeConfig.showFileList
           && fileList.length) {
             vm.$message({
-              message: this.$t('successChTips', {fileCount: fileList.length}),
+              message: this.$nclang('successChTips', {fileCount: fileList.length}),
               type: 'success'
             });
         }
@@ -265,12 +265,12 @@
           let content;
           if (total === vm.uploadInfo.num[state]) {
             vm.$message({
-              message: state === 'success' ? vm.$t('uploadSuccess') : vm.$t('uploadFail'),
+              message: state === 'success' ? vm.$nclang('uploadSuccess') : vm.$nclang('uploadFail'),
               type: state
             });
           } else {
             vm.$message({
-              message: vm.$t('uploadSomeFail'),
+              message: vm.$nclang('uploadSomeFail'),
               type: 'error'
             });
           }
@@ -284,7 +284,7 @@
       handleUploadExceed(files, fileList) {
         const vm = this;
         vm.$message({
-          message: vm.$t('limitTips', {limit: vm.mergeConfig.limit}),
+          message: vm.$nclang('limitTips', {limit: vm.mergeConfig.limit}),
           type: 'warning'
         });
       },

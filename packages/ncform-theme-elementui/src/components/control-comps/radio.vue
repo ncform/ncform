@@ -174,7 +174,7 @@
         if (enumSourceRemote && enumSourceRemote.remoteUrl) {
           vm.getRemoteSource();
         } else if (!vm.mergeConfig.enumSource.length) {
-          vm.$data.dataSource = [ {value: true, label: this.$t('yes')}, {value: false, label: this.$t('no')} ];
+          vm.$data.dataSource = [ {value: true, label: this.$nclang('yes')}, {value: false, label: this.$nclang('no')} ];
         } else {
           vm.$data.dataSource = vm.mergeConfig.enumSource
         }

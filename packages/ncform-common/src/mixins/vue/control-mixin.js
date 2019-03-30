@@ -119,7 +119,7 @@ export default {
       return modelVal;
     },
 
-    $t(key, data) {
+    $nclang(key, data) {
       return Object.prototype.toString.call(data) !== "[object Object]" ? this.$data.i18n[key] : _template(this.$data.i18n[key])(data);
     }
   }
