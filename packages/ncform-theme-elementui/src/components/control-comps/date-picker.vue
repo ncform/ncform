@@ -1,14 +1,14 @@
 <template>
   <el-date-picker class="ncform-date-picker"
     v-if="type && typeOptions[type]"
-    :placeholder="placeholder || $t(typeOptions[type].placeholder)"
+    :placeholder="placeholder || $nclang(typeOptions[type].placeholder)"
     :disabled="disabled"
     :readonly="readonly"
     :clearable="mergeConfig.clearable"
     v-show="!hidden"
     v-model="modelVal"
     :type="type"
-    :format="mergeConfig.format || $t(typeOptions[type].format)"
+    :format="mergeConfig.format || $nclang(typeOptions[type].format)"
     >
   </el-date-picker>
 </template>

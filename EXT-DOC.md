@@ -71,8 +71,8 @@ npm i @ncform/ncform-common --save
 
 <template>
   <div >
-    <!-- use $t to get i18n data -->
-    <label>{{$t('hi', {name: mergeConfig.name})}}</label>
+    <!-- use $nclang to get i18n data -->
+    <label>{{$nclang('hi', {name: mergeConfig.name})}}</label>
 
     <!-- disabled / readonly / placeholder / hidden : use the computed version, not the config version. -->
     <!-- modelVal: for binding value. -->

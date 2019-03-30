@@ -38,7 +38,7 @@
           v-if="mergeConfig.compound.prependSelect"
           v-model="prependSelectVal"
           slot="prepend"
-          :placeholder="$t('selectPls')"
+          :placeholder="$nclang('selectPls')"
         >
           <el-option
             v-for="item in prependSelectOptions"
@@ -52,7 +52,7 @@
           v-if="mergeConfig.compound.appendSelect"
           v-model="appendSelectVal"
           slot="append"
-          :placeholder="$t('selectPls')"
+          :placeholder="$nclang('selectPls')"
         >
           <el-option
             v-for="item in appendSelectOptions"
@@ -71,7 +71,7 @@
           class="ncform-input-upload"
           @click="handleClickUpload"
         >
-          {{isUploading ? $t('uploading') : mergeConfig.upload.uploadText || $t('upload')}}
+          {{isUploading ? $nclang('uploading') : mergeConfig.upload.uploadText || $nclang('upload')}}
           <input
             type="file"
             ref="upload"
@@ -130,7 +130,7 @@
           v-if="mergeConfig.compound.prependSelect"
           v-model="prependSelectVal"
           slot="prepend"
-          :placeholder="$t('selectPls')"
+          :placeholder="$nclang('selectPls')"
         >
           <el-option
             v-for="item in prependSelectOptions"
@@ -144,7 +144,7 @@
           v-if="mergeConfig.compound.appendSelect"
           v-model="appendSelectVal"
           slot="append"
-          :placeholder="$t('selectPls')"
+          :placeholder="$nclang('selectPls')"
         >
           <el-option
             v-for="item in appendSelectOptions"
@@ -452,7 +452,7 @@ export default {
         fileSize > vm.mergeConfig.upload.constraint.maxSize
       ) {
         vm.$message({
-          message: vm.$t("sizeTips1", {
+          message: vm.$nclang("sizeTips1", {
             right: vm.mergeConfig.upload.constraint.maxSize,
             wrong: fileSize.toFixed(0)
           }),
@@ -465,7 +465,7 @@ export default {
         fileSize < vm.mergeConfig.upload.constraint.minSize
       ) {
         vm.$message({
-          message: vm.$t("sizeTips2", {
+          message: vm.$nclang("sizeTips2", {
             right: vm.mergeConfig.upload.constraint.minSize,
             wrong: fileSize.toFixed(0)
           }),
@@ -501,7 +501,7 @@ export default {
               if (!pass) {
                 if (vm.mergeConfig.upload.constraint.sizeFixed) {
                   vm.$message({
-                    message: vm.$t("resolutionTip1", {
+                    message: vm.$nclang("resolutionTip1", {
                       right: `${vm.mergeConfig.upload.constraint.width}x${
                         vm.mergeConfig.upload.constraint.height
                       }`,
@@ -511,7 +511,7 @@ export default {
                   });
                 } else {
                   vm.$message({
-                    message: vm.$t("resolutionTip2", {
+                    message: vm.$nclang("resolutionTip2", {
                       right: vm._getFractionalExpression(
                         vm.mergeConfig.upload.constraint.width /
                           vm.mergeConfig.upload.constraint.height,
@@ -552,7 +552,7 @@ export default {
             this.$data.isUploading = false;
           })
           .catch(() => {
-            vm.$message.error(this.$t("uploadFail"));
+            vm.$message.error(this.$nclang("uploadFail"));
             this.$data.isUploading = false;
           });
       });
