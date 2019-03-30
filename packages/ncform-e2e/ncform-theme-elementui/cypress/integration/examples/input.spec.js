@@ -411,11 +411,11 @@ context('input', () => {
     });
   });
 
-  it('autocomplete', () => {
+  it.only('autocomplete', () => {
     cy.server();
     cy.route({
       method: 'GET',
-      url: '/autocomplete?**',
+      url: '/autocomplete**',
       response: {
         data: [
           {
@@ -464,6 +464,23 @@ context('input', () => {
               }
             }
           }
+        },
+        // no otherParams && paramName
+        name3: {
+          type: 'string',
+          ui: {
+            widgetConfig: {
+              autocomplete: {
+                itemValueField: 'name',
+                itemTemplate: '<span>{{item.name}} [{{item.desc}}]</span>',
+                immediateShow: true,
+                enumSourceRemote: {
+                  remoteUrl: '/autocomplete',
+                  resField: 'data'
+                }
+              }
+            }
+          }
         }
       }
     };
@@ -499,6 +516,24 @@ context('input', () => {
           cy.wait('@autocomplete').then(xhr => {
             expect(xhr.url).to.be.contains('name=daniel&keyword=sa');
           });
+          cy.get('@body')
+          .find('li:contains("daniel")')
+          .click();
+          cy.get('input').should('have.value', 'daniel');
+        });
+
+      cy.get('label')
+        .contains('name3')
+        .parent()
+        .within(() => {
+          cy.get('input').focus();
+          cy.wait('@autocomplete').then(xhr => {
+            expect(xhr.url).to.be.equal('http://localhost:3004/autocomplete');
+          });
+          cy.get('@body')
+          .find('li:contains("daniel")')
+          .click();
+          cy.get('input').should('have.value', 'daniel');
         });
     });
   });

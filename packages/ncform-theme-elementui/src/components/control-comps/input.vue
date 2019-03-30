@@ -416,9 +416,10 @@ export default {
       // 下面是远程数据源的处理
       const options = {
         url: autoCpl.enumSourceRemote.remoteUrl,
-        params: _get(this.mergeConfig, "autocomplete.enumSourceRemote.otherParams")
+        params: _get(this.mergeConfig, "autocomplete.enumSourceRemote.otherParams", {})
       };
-      options.params[autoCpl.enumSourceRemote.paramName] = queryString;
+      if (autoCpl.enumSourceRemote.paramName)
+        options.params[autoCpl.enumSourceRemote.paramName] = queryString;
 
       this.$http(options).then(res => {
         cb(
