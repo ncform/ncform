@@ -1,3 +1,11 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/ncform/ncform/compare/v1.1.0...v1.1.1) (2019-03-30)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed error when not provide otherParams ([66d1713](https://github.com/ncform/ncform/commit/66d1713))
+* **ncform-theme-elementui:** fixed select widget bugs ([ea05422](https://github.com/ncform/ncform/commit/ea05422))
+
 <a name="1.1.0"></a>
 ## [1.1.0](https://github.com/ncform/ncform/compare/v1.0.0...v1.1.0) (2019-03-30)
 
