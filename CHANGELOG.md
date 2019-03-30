@@ -1,3 +1,10 @@
+<a name="1.1.0"></a>
+## [1.1.0](https://github.com/ncform/ncform/compare/v1.0.0...v1.1.0) (2019-03-30)
+
+### Code Refactoring
+
+* rename $t to $nclang, in order to avoid conflicts with vue-i18n method ([6df509e](https://github.com/ncform/ncform/commit/6df509e)), closes [#51](https://github.com/ncform/ncform/issues/51)
+
 <a name="1.0.0"></a>
 ## [1.0.0](https://github.com/ncform/ncform/compare/v0.1.28...v1.0.0) (2019-03-19)
 
