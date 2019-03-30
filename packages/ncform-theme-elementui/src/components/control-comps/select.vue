@@ -108,9 +108,10 @@ export default {
 
       const options = {
         url: this.mergeConfig.enumSourceRemote.remoteUrl,
-        params: _get(this.mergeConfig, "enumSourceRemote.otherParams", {})
+        params: _cloneDeep(_get(this.mergeConfig, "enumSourceRemote.otherParams", {}))
       };
-      options.params[this.mergeConfig.enumSourceRemote.paramName] = query;
+      if (this.mergeConfig.enumSourceRemote.paramName)
+        options.params[this.mergeConfig.enumSourceRemote.paramName] = query;
       this.$http(options).then(res => {
         this.$data.options = this.mergeConfig.enumSourceRemote.resField
           ? _get(res.data, this.mergeConfig.enumSourceRemote.resField)

@@ -363,6 +363,25 @@ context('select', () => {
       };
     }).as('list');
 
+    cy.route(() => {
+      return {
+        method: 'GET',
+        url: '/list1**',
+        response: {
+          data: [
+            {
+              value: '1',
+              label: 'daniel'
+            },
+            {
+              value: '2',
+              label: 'sarah'
+            }
+          ]
+        }
+      };
+    }).as('list1');
+
     let formSchema = {
       type: 'object',
       properties: {
@@ -400,6 +419,22 @@ context('select', () => {
                 },
                 resField: 'data',
                 selectFirstItem: false
+              }
+            }
+          }
+        },
+        // filter > select > clear > select
+        name3: {
+          type: 'string',
+          ui: {
+            widget: 'select',
+            widgetConfig: {
+              filterable: true,
+              filterLocal: false,
+              enumSourceRemote: {
+                remoteUrl: '/list1',
+                itemTemplate: '<span>{{item.id}} : {{item.name}}</span>',
+                resField: 'data'
               }
             }
           }
@@ -458,6 +493,41 @@ context('select', () => {
             expect(xhr.url.search('status=1&keyword=d')).to.be.greaterThan(0);
             expect(callCount).to.be.equal(3);
           });
+
+          cy.get('@body')
+            .find('li:contains("daniel"):visible')
+            .click()
+          cy.get('input')
+            .eq(0)
+            .should('have.value', 'daniel');
+        });
+
+      cy.get('label')
+        .contains('name3')
+        .parent()
+        .within(() => {
+          cy.wait('@list1');
+          cy.get('input')
+            .eq(0)
+            .click();
+
+          cy.get('@body')
+            .find('li:contains("daniel"):visible:last')
+            .click()
+          cy.get('input')
+            .eq(0)
+            .should('have.value', 'daniel');
+
+          cy.get('input')
+            .eq(0)
+            .click().clear();
+
+          cy.get('@body')
+            .find('li:contains("sarah"):visible:last')
+            .click()
+          cy.get('input')
+            .eq(0)
+            .should('have.value', 'sarah');
         });
 
       // common.submitForm();
@@ -542,7 +612,7 @@ context('select', () => {
             .find('li:contains("sarah")')
             .find(':not(:hidden)')
             .click();
-            cy.get('input')
+          cy.get('input')
             .eq(0)
             .should('have.value', 'sarah');
 

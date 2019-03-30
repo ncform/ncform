@@ -411,7 +411,7 @@ context('input', () => {
     });
   });
 
-  it.only('autocomplete', () => {
+  it('autocomplete', () => {
     cy.server();
     cy.route({
       method: 'GET',
