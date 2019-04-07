@@ -18,15 +18,15 @@ const ncformUtils = {
       } catch (err) {
         throw new Error("fromSchema must be a valid json format", err);
       }
-    } else if (formSchema instanceof Object) {
+    } else if (Object.prototype.toString.call(formSchema) === '[object Object]') {
       returnSchema = formSchema;
     } else {
       throw new Error("fromSchema must be a json object");
     }
 
     // 验证格式
-    if (returnSchema.type !== "object" && returnSchema.type !== "array") {
-      throw new Error("fromSchema' root field type must be object or array");
+    if (returnSchema.type !== "object") {
+      throw new Error("fromSchema' root field type must be object");
     }
 
     // 补全数据
