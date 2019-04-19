@@ -1,6 +1,6 @@
 # ncform
 
-![ncform](https://github.com/ncform/ncform/raw/master/docs/images/preview.png)
+![ncform](https://github.com/ncform/ncform/raw/master/docs/images/ncform-banner.gif)
 
 ncform, a nice form development way that generates form UIs and their interactions with just configuration.
 
