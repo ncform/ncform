@@ -123,7 +123,7 @@ export default {
   methods: {
     // 你可以通过该方法在modelVal传出去之前进行加工处理，即在this.$emit('input')之前
     _processModelVal(newVal){
-      return `${new Date(newVal).getTime()}`;
+      return `${newVal ? new Date(newVal).getTime() : ''}`;
     }
   }
 };

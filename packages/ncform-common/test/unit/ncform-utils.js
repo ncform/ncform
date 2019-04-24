@@ -5,37 +5,93 @@ import ncformUtils from '../../src/ncform-utils.js';
 describe('/src/ncform-utils.js', () => {
   // --- perfectFormSchema
 
-  it("perfectFormSchema - 填充对象", () => {
+  it("perfectFormSchema - Data format check", () => {
+    // not a valid json string
+    let formSchema = "{a: 1}";
+    assert.throws(ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema), /fromSchema must be a valid json format/);
+
+    // not array
+    formSchema = [];
+    assert.throws(ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema), /fromSchema must be a json object/);
+
+    // root node's type is not 'object'
+    formSchema = {
+      type: 'array'
+    };
+    assert.throws(ncformUtils.perfectFormSchema.bind(ncformUtils, formSchema), /fromSchema' root field type must be object/);
+  });
+  it("perfectFormSchema - Implicit widget and widgetConfig", () => {
     let formSchema = {
       type: 'object',
       properties: {
         name: {
           type: 'string'
+        },
+        note: {},
+        age: {
+          type: 'integer'
+        },
+        grade: {
+          type: 'number'
+        },
+        audit: {
+          type: 'boolean'
+        },
+        hobbies: {
+          type: 'array',
+          items: {
+            type: 'string'
+          }
         }
       }
     };
     let newFormSchema = ncformUtils.perfectFormSchema(formSchema);
-    assert(newFormSchema.globalConfig.style.hasOwnProperty('formCls'));
-
-    formSchema = {
+    assert.equal(newFormSchema.ui.widget, 'object');
+    assert.equal(newFormSchema.properties.hobbies.ui.widget, 'array');
+    assert.equal(newFormSchema.properties.name.ui.widget, 'input');
+    assert.equal(newFormSchema.properties.name.ui.widgetConfig.type, 'text');
+    assert.equal(newFormSchema.properties.note.type, 'string');
+    assert.equal(newFormSchema.properties.note.ui.widget, 'input');
+    assert.equal(newFormSchema.properties.note.ui.widgetConfig.type, 'text');
+    assert.equal(newFormSchema.properties.age.ui.widget, 'input');
+    assert.equal(newFormSchema.properties.age.ui.widgetConfig.type, 'number');
+    assert.equal(newFormSchema.properties.grade.ui.widget, 'input');
+    assert.equal(newFormSchema.properties.grade.ui.widgetConfig.type, 'number');
+    assert.equal(newFormSchema.properties.audit.ui.widget, 'radio');
+  });
+  it("perfectFormSchema - Other fields", () => {
+    let formSchema = {
       type: 'object',
       properties: {
         name: {
-          type: 'string',
-          ui: {
-            widget: 'myCustom'
-          }
-        }
-      },
-      globalConfig: {
-        style: {
-          formCls: 'bs-form'
+          type: 'string'
+        },
+        obj: {
+          type: 'object'
+        },
+        _link: {
+          type: 'HTML'
         }
       }
     };
-    newFormSchema = ncformUtils.perfectFormSchema(formSchema);
-    assert(newFormSchema.globalConfig.style.formCls === 'bs-form');
-    assert(newFormSchema.properties.name.ui.widget === 'my-custom');
+    let newFormSchema = ncformUtils.perfectFormSchema(formSchema);
+    assert.equal(newFormSchema.ui.showLabel, true);
+    assert.equal(newFormSchema.ui.showLegend, true);
+    assert.equal(newFormSchema.ui.noLabelSpace, false);
+    assert.deepEqual(newFormSchema.globalConfig, {
+      style: {
+        formCls: "",
+        invalidFeedbackCls: ""
+      },
+      validationMsg: {},
+      constants: {}
+    })
+    assert.equal(newFormSchema.properties.name.ui.label, 'name');
+    assert.equal(newFormSchema.properties.name.ui.showLabel, true);
+    assert.equal(newFormSchema.properties.name.ui.noLabelSpace, false);
+    assert.equal(newFormSchema.properties.obj.ui.label, 'obj');
+    assert.equal(newFormSchema.properties.obj.ui.showLegend, false);
+    assert.equal(newFormSchema.properties._link.ui.noLabelSpace, true);
   });
 
   // --- getModelFromSchema
