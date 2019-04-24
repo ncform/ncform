@@ -8,7 +8,7 @@
     :multiple="mergeConfig.multiple"
     :filterable="mergeConfig.filterable"
     :remote="!isLocalSource && !mergeConfig.filterLocal"
-    :remote-method="remoteMethod"
+    :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
     :loading="loading"
   >
     <el-option
