@@ -96,14 +96,14 @@ export default {
             console.log('initBuildJsonSchema',JSON.stringify(initBuildJsonSchema));
             this.buildJsonSchemaForm = initBuildJsonSchema;
         },
-        //构建预览表单
+        //构建运营表单
         initJsonSchemaComponents(jsonSchema){
             const currentProperties = {};
 
             for(const key in jsonSchema){
                 const componentItem = jsonSchema[key];
                 if(componentItem.type && componentItem.label && componentItem.name){
-                    const componentItemKey = `json-form-item-${this.componentKeyIndex}`;
+                    const componentItemKey = `json-form-item-${key}`;
                     const componentItemProperties = deepCopy(require(`./components-schema/${componentItem.type}`));
                     
                     componentItemProperties.key = componentItemKey;
