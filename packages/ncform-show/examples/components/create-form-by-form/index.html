@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ncform Playground</title>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1140662_7xsrl0zru89.css">
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <script>
       var _hmt = _hmt || [];
@@ -27,7 +28,7 @@
 
   <!--演示区域-->
   <div id="demo">
-    <playground></playground>
+    <create-form-by-form></create-form-by-form>
   </div>
   <script type="text/javascript" src="../../../node_modules/ace-builds/src-min-noconflict/ace.js"></script>
   <script type="text/javascript" src="../../../node_modules/vue/dist/vue.min.js"></script>
@@ -38,7 +39,7 @@
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script src="https://unpkg.com/mockjs"></script>
   <script src="https://unpkg.com/js-url"></script>
-  <script type="text/javascript" src="../../../dist/playground.js"></script>
+  <script type="text/javascript" src="../../../dist/createFormByForm.js"></script>
   <script type="text/javascript">
 
     Mock.mock(/getProvinces/, function (options) {
@@ -60,7 +61,7 @@
     new Vue({
       el: '#demo',
       components: {
-        playground: playground.default
+        createFormByForm: createFormByForm.default
       }
     });
   </script>

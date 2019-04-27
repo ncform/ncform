@@ -9,7 +9,8 @@ module.exports = {
 
   entry: {
     playground: path.join(config.src, "components", "playground", "index.vue"),
-    schemaGen: path.join(config.src, "components", "schema-gen", "index.vue")
+    schemaGen: path.join(config.src, "components", "schema-gen", "index.vue"),
+    createFormByForm: path.join(config.src, "components", "create-form-by-form", "index.vue")
     // Don't touch me - components
 
     // Don't touch me - directives

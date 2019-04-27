@@ -1,0 +1,15 @@
+{
+    "type": "string",
+    "ui": {
+      "label": "",
+      "columns": 12,
+      "widget": "textarea",
+      "widgetConfig": {
+        "rows": 4
+      }
+    },
+    "rules": {
+      "required": true,
+      "maxLength": 500
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "type": "object",
+    "properties": {
+      
+    },
+    "ui": {
+        "label": "",
+        "showLegend": false
+    }
+}

@@ -1,0 +1,159 @@
+{
+    "name": {
+      "type": "string",
+      "ui": {
+        "columns": 6,
+        "label": "姓名"
+      },
+      "rules": {
+        "required": true
+      }
+    },
+    "message": {
+      "type": "string",
+      "ui": {
+        "columns": 12,
+        "widget": "textarea",
+        "label": "消息",
+        "widgetConfig": {
+          "rows": 4
+        }
+      },
+      "rules": {
+        "required": true
+      }
+    },
+    "users": {
+      "type": "array",
+      "ui": {
+        "columns": 12,
+        "label": "用户列表",
+        "widget": "array-table",
+        "showLegend": false
+      },
+      "rules": {
+        "required": true
+      },
+      "items": {
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "ui": {
+              "columns": 6,
+              "label": "注册时间",
+              "widget": "date-picker",
+              "widgetConfig": {
+                "type": "datetime",
+                "format": "yyyy-MM-dd HH:mm:ss"
+              }
+            },
+            "rules": {
+              "required": true
+            }
+          },
+          "educationBackground": {
+            "type": "array",
+            "rules": {
+              "required": true
+            },
+            "ui": {
+              "columns": 6,
+              "label": "学历",
+              "widget": "select",
+              "widgetConfig": {
+                "clearable": true,
+                "filterable": true,
+                "multiple": true,
+                "enumSource": [
+                  {
+                    "value": "primarySchool",
+                    "label": "小学"
+                  },
+                  {
+                    "value": "juniorHighSchool",
+                    "label": "初中"
+                  },
+                  {
+                    "value": "seniorHighSchool",
+                    "label": "高中"
+                  },
+                  {
+                    "value": "juniorCollege",
+                    "label": "专科"
+                  },
+                  {
+                    "value": "college",
+                    "label": "本科"
+                  },
+                  {
+                    "value": "master",
+                    "label": "硕士"
+                  },
+                  {
+                    "value": "doctor",
+                    "label": "博士"
+                  }
+                ]
+              }
+            }
+          },
+          "email": {
+            "type": "string",
+            "rules": {
+                "required": true
+            },
+            "ui": {
+              "columns": 6,
+              "label": "邮箱"
+            }
+          }
+        }
+      }
+    },
+    "date": {
+      "type": "string",
+      "ui": {
+        "columns": 6,
+        "label": "时间",
+        "widget": "date-picker",
+        "widgetConfig": {
+          "type": "datetime",
+          "format": "yyyy-MM-dd HH:mm:ss"
+        }
+      },
+      "rules": {
+        "required": true
+      }
+    },
+    "choice": {
+      "type": "array",
+      "rules": {
+        "required": true
+      },
+      "ui": {
+        "columns": 6,
+        "label": "下拉框",
+        "widget": "select",
+        "widgetConfig": {
+          "clearable": true,
+          "filterable": true,
+          "multiple": true,
+          "enumSource": [
+            {
+              "value": 1,
+              "label": "option1"
+            },
+            {
+              "value": 2,
+              "label": "option2"
+            },
+            {
+              "value": 3,
+              "label": "option3"
+            }
+          ]
+        }
+      }
+    }
+  }

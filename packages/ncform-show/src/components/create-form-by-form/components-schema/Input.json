@@ -1,0 +1,13 @@
+{
+    "type": "string",
+    "ui": {
+      "label": "",
+      "columns": 6,
+      "widgetConfig": {
+        "trim": false
+      }
+    },
+    "rules": {
+      "required": true
+    }
+}

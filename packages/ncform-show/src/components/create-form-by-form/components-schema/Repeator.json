@@ -1,0 +1,18 @@
+{
+    "type": "array",
+    "ui": {
+        "label": "",
+        "columns": 12,
+        "widget": "array-table",
+        "showLegend": false
+    },
+    "rules": {
+        "required": true
+    },
+    "items": {
+        "type": "object",
+        "properties": {
+
+        }
+    }
+}
