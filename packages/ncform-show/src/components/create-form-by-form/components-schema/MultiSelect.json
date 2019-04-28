@@ -1,0 +1,17 @@
+{
+    "type": "array",
+    "rules": {
+        "required": true
+    },
+    "ui": {
+        "label": "",
+        "columns": 6,
+        "widget": "select",
+        "widgetConfig": {
+            "clearable": true,
+            "filterable": true,
+            "multiple": true,
+            "enumSource": []
+        }
+    }
+}

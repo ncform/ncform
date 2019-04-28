@@ -1,0 +1,51 @@
+{
+    "key": "",
+    "type": "object",
+    "properties": {
+        "type": {
+            "type": "string",
+            "value": "TextArea",
+            "rules": {
+                "required": {
+                    "value": true,
+                    "errMsg": "该字段必填"
+                }
+            },
+            "ui": {
+                "hidden": true,
+                "disabled": true
+            }
+        },
+        "label": {
+            "type": "string",
+            "rules": {
+                "required": {
+                    "value": true,
+                    "errMsg": "该字段必填"
+                }
+            },
+            "ui": {
+                "label": "字段名称(label)",
+                "columns": 6
+            }
+        },
+        "name": {
+            "type": "string",
+            "rules": {
+                "required": {
+                    "value": true,
+                    "errMsg": "该字段必填"
+                }
+            },
+            "ui": {
+                "label": "字段(name)",
+                "columns": 6
+            }
+        }
+    },
+    "ui": {
+        "label": "文本框",
+        "itemClass": "",
+        "showLegend": false
+    }
+}

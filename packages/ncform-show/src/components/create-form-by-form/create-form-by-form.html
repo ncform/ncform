@@ -1,0 +1,38 @@
+
+<div class="create-form-by-form">
+    <el-row>
+        <el-col :span="12">
+            <h3 class="title">定义运营表单</h3>
+            <ncform class="ncform" :form-schema="buildJsonSchemaForm" form-name="build-business-form" v-model="buildJsonSchemaForm.value"/>
+            <div class="bottom-action">
+                <el-popover placement="bottom" trigger="click"  v-model="addComponentPopoverShow">
+                    <el-button slot="reference">添加组件</el-button>
+                    <div class="component-type-menu popover-menu">
+                        <a href="javascript:;" @click="addComponent('Input');addComponentPopoverShow=false;"><i class="luyou-icon iconshurukuang"/> Input</a>
+                        <a href="javascript:;" @click="addComponent('Select');addComponentPopoverShow=false;"><i class="luyou-icon iconxialakuangpeizhi"/> Select</a>
+                        <a href="javascript:;" @click="addComponent('MultiSelect');addComponentPopoverShow=false;"><i class="luyou-icon iconmulti-selection"/> MultiSelect</a>
+                        <a href="javascript:;" @click="addComponent('DatePicker');addComponentPopoverShow=false;"><i class="luyou-icon icondate"/> DatePicker</a>
+                        <a href="javascript:;" @click="addComponent('Object');addComponentPopoverShow=false;"><i class="luyou-icon iconjson"/> Object</a>
+                        <a href="javascript:;" @click="addComponent('TextArea');addComponentPopoverShow=false;"><i class="luyou-icon icontextarea"/> TextArea</a>
+                        <a href="javascript:;" @click="addComponent('Repeator');addComponentPopoverShow=false;"><i class="luyou-icon icontable"/> Repeator</a>
+                    </div>
+                </el-popover>
+                <el-popover placement="bottom" trigger="click"  v-model="removeComponentPopoverShow">
+                    <el-button slot="reference">删除组件</el-button>
+                    <div class="component-remove-menu popover-menu">
+                        <a v-for="item in buildJsonSchemaForm.properties" :key="item.key" href="javascript:;" @click="removeComponent(item.key);removeComponentPopoverShow=false;">{{item.ui.label}}</a>
+                    </div>
+                </el-popover>
+                
+                <el-button type="primary" @click="submit">生成表单json scheme</el-button>
+            </div>
+        </el-col>
+        <el-col :span="12">
+            <h3 class="title">预览运营表单</h3>
+                <ncform class="ncform" :form-schema="previewJsonSchemaForm" form-name="json-data-form" v-model="previewJsonSchemaForm.value"/>
+                <div class="bottom-action">
+                    <el-button type="primary" @click="submitJsonData">提交数据</el-button>
+                </div>
+        </el-col>
+    </el-row>
+</div>
