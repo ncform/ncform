@@ -67,9 +67,9 @@ export default {
         initBuildJsonSchemaComponents(buildJsonSchema){
 
             console.log('buildJsonSchemaComponents',buildJsonSchema);
-            const configProperties = {...buildJsonSchema.properties};
+            const configProperties = deepCopy(buildJsonSchema.properties);
             console.log('configProperties',configProperties);
-            const configValues = {...buildJsonSchema.value};
+            const configValues = deepCopy(buildJsonSchema.value);
             const propertiesKeyList = Object.keys(configProperties);
             this.componentCount = propertiesKeyList.length || 0;
             this.componentKeyIndex = propertiesKeyList.length || 0;
@@ -85,7 +85,7 @@ export default {
 
                     // 塞入后端返回的初始化value，value只用作初始化，不存放在schema中，
                     // 在提交format config data时请删除value字段！另外field=type的value请勿删除！
-                    configProperties[key].properties[field].value = configValues[key][field];
+                    configProperties[key].properties[field].value = deepCopy(configValues[key][field]);
                 }
             }
             const initBuildJsonSchema = {
@@ -99,7 +99,7 @@ export default {
         //构建运营表单
         initJsonSchemaComponents(jsonSchema){
             const currentProperties = {};
-
+            jsonSchema = deepCopy(jsonSchema);
             for(const key in jsonSchema){
                 const componentItem = jsonSchema[key];
                 if(componentItem.type && componentItem.label && componentItem.name){
