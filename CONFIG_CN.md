@@ -254,6 +254,24 @@ class MyCustomRule extends ncformCommon.ValidationRule {
 this.$ncformAddRule({name: 'myCustom', rule: MyCustomRule});
 ```
 
+- $ncformAllRules()
+
+取得ncform所有注册的校验规则
+
+```
+// Demo code:
+const allRules = this.$ncformAllRules();
+```
+
+- $ncformAllWidgets()
+
+取得ncform所有注册的表单组件
+
+```
+// Demo code:
+const allRules = this.$ncformAllWidgets();
+```
+
 ## ncform event
 
 - submit

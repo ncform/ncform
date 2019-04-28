@@ -80,4 +80,11 @@ context('Others', () => {
     })
   })
 
+  it('$ncformAllWidgets and $ncformAllRules()', () => {
+    cy.window().then(win => {
+      expect(win.Vue.prototype.$ncformAllRules()).to.deep.equal(["contains", "exclusiveMinimum", "ipv6", "maximum", "minimum", "required", "dateTime", "hostname", "maxItems", "minItems", "multipleOf", "tel", "email", "maxLength", "minLength", "number", "uniqueItems", "exclusiveMaximum", "ipv4", "maxProperties", "minProperties", "pattern", "url", "ajax"]);
+      expect(win.Vue.prototype.$ncformAllWidgets()).to.deep.equal(["object", "array", "array-table", "input"]);
+    })
+  })
+
 })
