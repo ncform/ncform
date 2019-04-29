@@ -268,7 +268,7 @@ Get all registered widgets of ncform
 
 ```
 // Demo code:
-const allRules = this.$ncformAllWidgets();
+const allWidgets = this.$ncformAllWidgets();
 ```
 
 ## ncform event

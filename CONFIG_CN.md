@@ -269,7 +269,7 @@ const allRules = this.$ncformAllRules();
 
 ```
 // Demo code:
-const allRules = this.$ncformAllWidgets();
+const allWidgets = this.$ncformAllWidgets();
 ```
 
 ## ncform event
