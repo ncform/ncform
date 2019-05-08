@@ -288,6 +288,10 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 - [Daniel.xiao](https://github.com/daniel-dx) ：ncform的设计者和主要实现者
 - Kyle.lo ：ncform表单校验部分的实现者和标准组件的主力开发者
 
+## 贡献者
+
+<table><tr><td align="center"><a href="https://github.com/daniel-dx"><img src="https://avatars3.githubusercontent.com/u/22042268?s=460&v=4"width="100px;"alt="daniel.xiao"/><br/><sub><b>daniel.xiao</b></sub></a><br/><a href="https://github.com/daniel-dx"title="Author">☺️</a></td><td align="center"><a href="https://github.com/Kyleloh"><img src="https://avatars3.githubusercontent.com/u/5841513?s=460&v=4"width="100px;"alt="Kyleloh"/><br/><sub><b>Kyleloh</b></sub></a><br/><a href="https://github.com/Kyleloh"title="Developer">💻</a></td><td align="center"><a href="https://github.com/liuxuewei"><img src="https://avatars3.githubusercontent.com/u/1960603?s=460&v=4"width="100px;"alt="liuxuewei"/><br/><sub><b>liuxuewei</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td></tr></table>
+
 ## 赞助支持
 
 ncform 是MIT许可的开源项目，完全免费使用。 如果它对你有用，也许你可以请我一杯咖啡:)。
