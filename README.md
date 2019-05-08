@@ -27,13 +27,14 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
     - [In node.js](#In-nodejs)
     - [In browser](#In-browser)
   - [Features](#Features)
-  - [Documents](#Documents)
+  - [📄Documents](#Documents)
   - [Solve Pain Points](#Solve-Pain-Points)
   - [Repeat the wheel?](#Repeat-the-wheel)
   - [Why not use the standard json-schema?](#Why-not-use-the-standard-json-schema)
   - [dx expression](#dx-expression)
   - [Design Thinking](#Design-Thinking)
   - [Schema Generator](#Schema-Generator)
+  - [☕Sponsor](#Sponsor)
 
 ## Playground
 
@@ -286,3 +287,21 @@ You can accelerate the speed of writing form schemas with [Schema Generator](htt
 
 - [Daniel.xiao](https://github.com/daniel-dx) : ncform designer and main implementer
 - Kyle.lo : The implementer of the ncform form validation part and the main developer of the standard component
+
+## Sponsor
+
+ncform is an MIT licensed open source project and completely free to use. If it is useful for you, you can give me a cup of coffee :).
+
+### One-time donation
+
+<a href="https://paypal.me/danieldx666" target="_blank" style="margin-right: 30px;">
+  <img src="docs/images/paypal.png" style="width:100px;">
+</a>
+
+<a href="docs/images/wechat-pay.jpg" target="_blank" style="margin-right: 30px;">
+  <img src="docs/images/wechat-pay-logo.png" style="width:100px">
+</a>
+
+<a href="docs/images/alipay-pay.jpg" target="_blank">
+  <img src="docs/images/alipay-logo.png" style="width:100px">
+</a>

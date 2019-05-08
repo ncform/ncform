@@ -27,13 +27,14 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
     - [In node.js](#In-nodejs)
     - [In browser](#In-browser)
   - [特性](#特性)
-  - [文档](#文档)
+  - [📄文档](#文档)
   - [解决痛点](#解决痛点)
   - [重复造轮子？](#重复造轮子)
   - [为什么不用标准的json-schema？](#为什么不用标准的json-schema)
   - [dx表达式](#dx表达式)
   - [设计思想](#设计思想)
   - [Schema Generator](#Schema-Generator)
+  - [☕赞助支持](#赞助支持)
 
 ## Playground
 
@@ -284,5 +285,23 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 ## 作者
 
-- 肖玮（Daniel.xiao），ncform的设计者和主要实现者
-- 罗振考（Kyle.lo），ncform表单校验部分的实现者和标准组件的主力开发者
+- [Daniel.xiao](https://github.com/daniel-dx) ：ncform的设计者和主要实现者
+- Kyle.lo ：ncform表单校验部分的实现者和标准组件的主力开发者
+
+## 赞助支持
+
+ncform 是MIT许可的开源项目，完全免费使用。 如果它对你有用，也许你可以请我一杯咖啡:)。
+
+### 一次性支持
+
+<a href="https://paypal.me/danieldx666" target="_blank" style="margin-right: 30px;">
+  <img src="docs/images/paypal.png" style="width:100px;">
+</a>
+
+<a href="docs/images/wechat-pay.jpg" target="_blank" style="margin-right: 30px;">
+  <img src="docs/images/wechat-pay-logo.png" style="width:100px">
+</a>
+
+<a href="docs/images/alipay-pay.jpg" target="_blank">
+  <img src="docs/images/alipay-logo.png" style="width:100px">
+</a>
