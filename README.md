@@ -288,6 +288,10 @@ You can accelerate the speed of writing form schemas with [Schema Generator](htt
 - [Daniel.xiao](https://github.com/daniel-dx) : ncform designer and main implementer
 - Kyle.lo : The implementer of the ncform form validation part and the main developer of the standard component
 
+## Contributors
+
+<table><tr><td align="center"><a href="https://github.com/daniel-dx"><img src="https://avatars3.githubusercontent.com/u/22042268?s=460&v=4"width="100px;"alt="daniel.xiao"/><br/><sub><b>daniel.xiao</b></sub></a><br/><a href="https://github.com/daniel-dx"title="Author">☺️</a></td><td align="center"><a href="https://github.com/Kyleloh"><img src="https://avatars3.githubusercontent.com/u/5841513?s=460&v=4"width="100px;"alt="Kyleloh"/><br/><sub><b>Kyleloh</b></sub></a><br/><a href="https://github.com/Kyleloh"title="Developer">💻</a></td><td align="center"><a href="https://github.com/liuxuewei"><img src="https://avatars3.githubusercontent.com/u/1960603?s=460&v=4"width="100px;"alt="liuxuewei"/><br/><sub><b>liuxuewei</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td></tr></table>
+
 ## Sponsor
 
 ncform is an MIT licensed open source project and completely free to use. If it is useful for you, you can give me a cup of coffee :).
