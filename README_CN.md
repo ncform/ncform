@@ -294,14 +294,8 @@ ncform 是MIT许可的开源项目，完全免费使用。 如果它对你有用
 
 ### 一次性支持
 
-<a href="https://paypal.me/danieldx666" target="_blank" style="margin-right: 30px;">
-  <img src="docs/images/paypal.png" style="width:100px;">
-</a>
+[![](docs/images/paypal.jpg)](https://paypal.me/danieldx666)
 
-<a href="docs/images/wechat-pay.jpg" target="_blank" style="margin-right: 30px;">
-  <img src="docs/images/wechat-pay-logo.png" style="width:100px">
-</a>
+[![](docs/images/wechat-pay-logo.png)](docs/images/wechat-pay.jpg)
 
-<a href="docs/images/alipay-pay.jpg" target="_blank">
-  <img src="docs/images/alipay-logo.png" style="width:100px">
-</a>
+[![](docs/images/alipay-logo.png)](docs/images/alipay-pay.jpg)

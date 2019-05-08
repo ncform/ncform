@@ -294,14 +294,8 @@ ncform is an MIT licensed open source project and completely free to use. If it 
 
 ### One-time donation
 
-<a href="https://paypal.me/danieldx666" target="_blank" style="margin-right: 30px;">
-  <img src="docs/images/paypal.png" style="width:100px;">
-</a>
+[![](docs/images/paypal.jpg)](https://paypal.me/danieldx666)
 
-<a href="docs/images/wechat-pay.jpg" target="_blank" style="margin-right: 30px;">
-  <img src="docs/images/wechat-pay-logo.png" style="width:100px">
-</a>
+[![](docs/images/wechat-pay-logo.png)](docs/images/wechat-pay.jpg)
 
-<a href="docs/images/alipay-pay.jpg" target="_blank">
-  <img src="docs/images/alipay-logo.png" style="width:100px">
-</a>
+[![](docs/images/alipay-logo.png)](docs/images/alipay-pay.jpg)
