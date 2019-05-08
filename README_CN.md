@@ -299,3 +299,7 @@ ncform 是MIT许可的开源项目，完全免费使用。 如果它对你有用
 [![](docs/images/wechat-pay-logo.png)](docs/images/wechat-pay.jpg)
 
 [![](docs/images/alipay-logo.png)](docs/images/alipay-pay.jpg)
+
+### 每月支持
+
+[通过 Patreon 成为支持者或赞助者](https://www.patreon.com/ncform)
