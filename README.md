@@ -27,13 +27,14 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
     - [In node.js](#In-nodejs)
     - [In browser](#In-browser)
   - [Features](#Features)
-  - [Documents](#Documents)
+  - [📄Documents](#Documents)
   - [Solve Pain Points](#Solve-Pain-Points)
   - [Repeat the wheel?](#Repeat-the-wheel)
   - [Why not use the standard json-schema?](#Why-not-use-the-standard-json-schema)
   - [dx expression](#dx-expression)
   - [Design Thinking](#Design-Thinking)
   - [Schema Generator](#Schema-Generator)
+  - [☕Sponsor](#Sponsor)
 
 ## Playground
 
@@ -286,3 +287,19 @@ You can accelerate the speed of writing form schemas with [Schema Generator](htt
 
 - [Daniel.xiao](https://github.com/daniel-dx) : ncform designer and main implementer
 - Kyle.lo : The implementer of the ncform form validation part and the main developer of the standard component
+
+## Sponsor
+
+ncform is an MIT licensed open source project and completely free to use. If it is useful for you, you can give me a cup of coffee :).
+
+### One-time donation
+
+[![](docs/images/paypal.jpg)](https://paypal.me/danieldx666)
+
+[![](docs/images/wechat-pay-logo.png)](docs/images/wechat-pay.jpg)
+
+[![](docs/images/alipay-logo.png)](docs/images/alipay-pay.jpg)
+
+### Monthly support
+
+[Become a backer or sponsor via Patreon](https://www.patreon.com/ncform)
