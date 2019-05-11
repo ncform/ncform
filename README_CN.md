@@ -19,6 +19,8 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 > 如果你犹豫不决，你可以阅读这篇文章：[如何选型](https://forum.vuejs.org/t/topic/57784)
 
+[![Playground](docs/images/playground.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
+
 ---
 
 - 目录
