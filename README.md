@@ -19,7 +19,7 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
 
 > If you are hesitant, you can read this article: [How to choose](https://forum.vuejs.org/t/ncform-let-you-happily-develop-forms/57795)
 
-[![Playground](docs/images/playground.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
+[![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
 
 ---
 
