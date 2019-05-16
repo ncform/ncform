@@ -1,3 +1,12 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/ncform/ncform/compare/v1.1.1...v1.1.2) (2019-04-24)
+
+### Bug Fixes
+
+* **ncform-common:** Improve the format verification of the form schema ([395cdfb](https://github.com/ncform/ncform/commit/395cdfb))
+* **ncform-theme-elementui:** fixed modelVal becomes '0' when the date-picker value is cleared ([c054a0a](https://github.com/ncform/ncform/commit/c054a0a)), closes [#56](https://github.com/ncform/ncform/issues/56)
+* fixed the problem of displaying empty options when entering keyword with no matches and blur ([e175661](https://github.com/ncform/ncform/commit/e175661))
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/ncform/ncform/compare/v1.1.0...v1.1.1) (2019-03-30)
 

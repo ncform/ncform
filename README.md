@@ -19,6 +19,8 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
 
 > If you are hesitant, you can read this article: [How to choose](https://forum.vuejs.org/t/ncform-let-you-happily-develop-forms/57795)
 
+[![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
+
 ---
 
 - Table Of Contents
@@ -27,13 +29,14 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
     - [In node.js](#In-nodejs)
     - [In browser](#In-browser)
   - [Features](#Features)
-  - [Documents](#Documents)
+  - [📄Documents](#Documents)
   - [Solve Pain Points](#Solve-Pain-Points)
   - [Repeat the wheel?](#Repeat-the-wheel)
   - [Why not use the standard json-schema?](#Why-not-use-the-standard-json-schema)
   - [dx expression](#dx-expression)
   - [Design Thinking](#Design-Thinking)
   - [Schema Generator](#Schema-Generator)
+  - [☕Sponsor](#Sponsor)
 
 ## Playground
 
@@ -286,3 +289,23 @@ You can accelerate the speed of writing form schemas with [Schema Generator](htt
 
 - [Daniel.xiao](https://github.com/daniel-dx) : ncform designer and main implementer
 - Kyle.lo : The implementer of the ncform form validation part and the main developer of the standard component
+
+## Contributors
+
+<table><tr><td align="center"><a href="https://github.com/daniel-dx"><img src="https://avatars3.githubusercontent.com/u/22042268?s=460&v=4"width="100px;"alt="daniel.xiao"/><br/><sub><b>daniel.xiao</b></sub></a><br/><a href="https://github.com/daniel-dx"title="Author">☺️</a></td><td align="center"><a href="https://github.com/Kyleloh"><img src="https://avatars3.githubusercontent.com/u/5841513?s=460&v=4"width="100px;"alt="Kyleloh"/><br/><sub><b>Kyleloh</b></sub></a><br/><a href="https://github.com/Kyleloh"title="Developer">💻</a></td><td align="center"><a href="https://github.com/liuxuewei"><img src="https://avatars3.githubusercontent.com/u/1960603?s=460&v=4"width="100px;"alt="liuxuewei"/><br/><sub><b>liuxuewei</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td></tr></table>
+
+## Sponsor
+
+ncform is an MIT licensed open source project and completely free to use. If it is useful for you, you can give me a cup of coffee :).
+
+### One-time donation
+
+[![](docs/images/paypal.jpg)](https://paypal.me/danieldx666)
+
+[![](docs/images/wechat-pay-logo.png)](docs/images/wechat-pay.jpg)
+
+[![](docs/images/alipay-logo.png)](docs/images/alipay-pay.jpg)
+
+### Monthly support
+
+[Become a backer or sponsor via Patreon](https://www.patreon.com/ncform)

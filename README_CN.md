@@ -19,6 +19,8 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 > 如果你犹豫不决，你可以阅读这篇文章：[如何选型](https://forum.vuejs.org/t/topic/57784)
 
+[![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
+
 ---
 
 - 目录
@@ -27,13 +29,14 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
     - [In node.js](#In-nodejs)
     - [In browser](#In-browser)
   - [特性](#特性)
-  - [文档](#文档)
+  - [📄文档](#文档)
   - [解决痛点](#解决痛点)
   - [重复造轮子？](#重复造轮子)
   - [为什么不用标准的json-schema？](#为什么不用标准的json-schema)
   - [dx表达式](#dx表达式)
   - [设计思想](#设计思想)
   - [Schema Generator](#Schema-Generator)
+  - [☕赞助支持](#赞助支持)
 
 ## Playground
 
@@ -284,5 +287,25 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 ## 作者
 
-- 肖玮（Daniel.xiao），ncform的设计者和主要实现者
-- 罗振考（Kyle.lo），ncform表单校验部分的实现者和标准组件的主力开发者
+- [Daniel.xiao](https://github.com/daniel-dx) ：ncform的设计者和主要实现者
+- Kyle.lo ：ncform表单校验部分的实现者和标准组件的主力开发者
+
+## 贡献者
+
+<table><tr><td align="center"><a href="https://github.com/daniel-dx"><img src="https://avatars3.githubusercontent.com/u/22042268?s=460&v=4"width="100px;"alt="daniel.xiao"/><br/><sub><b>daniel.xiao</b></sub></a><br/><a href="https://github.com/daniel-dx"title="Author">☺️</a></td><td align="center"><a href="https://github.com/Kyleloh"><img src="https://avatars3.githubusercontent.com/u/5841513?s=460&v=4"width="100px;"alt="Kyleloh"/><br/><sub><b>Kyleloh</b></sub></a><br/><a href="https://github.com/Kyleloh"title="Developer">💻</a></td><td align="center"><a href="https://github.com/liuxuewei"><img src="https://avatars3.githubusercontent.com/u/1960603?s=460&v=4"width="100px;"alt="liuxuewei"/><br/><sub><b>liuxuewei</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td></tr></table>
+
+## 赞助支持
+
+ncform 是MIT许可的开源项目，完全免费使用。 如果它对你有用，也许你可以请我一杯咖啡:)。
+
+### 一次性支持
+
+[![](docs/images/paypal.jpg)](https://paypal.me/danieldx666)
+
+[![](docs/images/wechat-pay-logo.png)](docs/images/wechat-pay.jpg)
+
+[![](docs/images/alipay-logo.png)](docs/images/alipay-pay.jpg)
+
+### 每月支持
+
+[通过 Patreon 成为支持者或赞助者](https://www.patreon.com/ncform)
