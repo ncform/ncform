@@ -153,6 +153,37 @@
               }
             },
             {
+              id: md5('array: deletion requires confirmation'),
+              title: 'array: deletion requires confirmation',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widget: 'array',
+                      widgetConfig: {
+                        requiredDelConfirm: true,
+                        delConfirmText: {
+                          item: 'Sure to delete this item?',
+                          all: 'Sure to delete all items?'
+                        },
+                      }
+                    }
+                  }
+                },
+                value: {
+                  users: [
+                    'daniel', 'sarah'
+                  ]
+                }
+              }
+            },
+            {
               id: md5('array: collapsed / itemCollapse true and txts change'),
               title: 'array: collapsed / itemCollapse true and txts change',
               formName: 'form_' + Math.random(),
@@ -229,7 +260,34 @@
                   }
                 }
               }
-            }
+            },
+            {
+              id: md5('table: deletion requires confirmation'),
+              title: 'table: deletion requires confirmation',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widget: 'array-table',
+                      widgetConfig: {
+                        requiredDelConfirm: true,
+                      }
+                    }
+                  }
+                },
+                value: {
+                  users: [
+                    'daniel', 'sarah'
+                  ]
+                }
+              }
+            },
           ]
         }
       });
