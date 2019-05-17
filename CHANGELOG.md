@@ -1,3 +1,15 @@
+<a name="1.2.0"></a>
+## [1.2.0](https://github.com/ncform/ncform/compare/v1.1.2...v1.2.0) (2019-05-17)
+
+### Bug Fixes
+
+* fixed "TypeError: Cannot read property 'showLegend' of undefined" ([beead19](https://github.com/ncform/ncform/commit/beead19)), closes [#57](https://github.com/ncform/ncform/issues/57)
+
+### Features
+
+* **ncform:** add $ncformAllRules and $ncformAllWidgets apis ([c565992](https://github.com/ncform/ncform/commit/c565992))
+* add requiredDelConfirm and delConfirmText configs for array type layouts ([886148b](https://github.com/ncform/ncform/commit/886148b)), closes [#62](https://github.com/ncform/ncform/issues/62)
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/ncform/ncform/compare/v1.1.1...v1.1.2) (2019-04-24)
 
