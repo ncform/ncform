@@ -159,7 +159,7 @@ export default {
   },
   methods: {
     legendEnable(fieldSchema) {
-      return fieldSchema.ui.showLegend && fieldSchema.ui.legend;
+      return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
     }
   },
   mixins: [layoutObjectMixin]

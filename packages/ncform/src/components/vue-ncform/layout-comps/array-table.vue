@@ -32,7 +32,7 @@
           <td v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">
             <!-- 项控制按钮 -->
             <div class="btn-group btn-group-sm">
-              <button @click="delItem(idx)" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">Del</button>
+              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">Del</button>
               <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" type="button" class="btn btn-secondary">Up</button>
               <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" type="button" class="btn btn-secondary">Down</button>
             </div>
@@ -45,7 +45,7 @@
             <!-- 列表控制按钮 -->
             <div class="btn-group btn-group-sm" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
               <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="btn btn-secondary">{{mergeConfig.addTxt || $nclang('add')}}</button>
-              <button @click="delAllItems()" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">{{mergeConfig.delAllTxt || $nclang('delAll')}}</button>
+              <button @click="delAllItems(mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.all || $nclang('delAllTips'))" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">{{mergeConfig.delAllTxt || $nclang('delAll')}}</button>
             </div>
           </td>
         </tr>
@@ -83,12 +83,16 @@
       en: {
         action: 'Action',
         add: 'Add',
-        delAll: 'Delete All'
+        delAll: 'Delete All',
+        delItemTips: 'Are you sure to delete this item?',
+        delAllTips: 'Are you sure to delete all?'
       },
       zh_cn: {
         action: '操作',
         add: '增加',
-        delAll: '删除全部'
+        delAll: '删除全部',
+        delItemTips: '确定要删除该项吗？',
+        delAllTips: '确定要删除全部吗？'
       }
     },
 

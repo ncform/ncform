@@ -42,6 +42,20 @@ context('Array', () => {
               disableItemCollapse: true
             }
           }
+        },
+        users3: {
+          type: 'array',
+          value: [
+            'daniel', 'sarah'
+          ],
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widgetConfig: {
+              requiredDelConfirm: true
+            }
+          }
         }
       }
     };
@@ -49,6 +63,8 @@ context('Array', () => {
       .its('editor')
       .invoke('setValue', JSON.stringify(formSchema, null, 2));
     common.startRun();
+
+    cy.get('body').as('body');
 
     cy.get('.previewArea').within(() => {
       // Declare action elements
@@ -97,6 +113,22 @@ context('Array', () => {
           cy.get('button:contains("Delete All")').should('not.exist');
           cy.get('.el-icon-remove').should('not.exist');
         });
+
+      cy.get('legend')
+        .contains('users3')
+        .parent()
+        .within(() => {
+          cy.get('.el-icon-remove').eq(0).click();
+          cy.get('@body').find('.el-message-box__message').should('have.text', 'Are you sure to delete this item?');
+          cy.get('@body').find('.el-message-box__btns .el-button--primary').click();
+          cy.get('input').its('length').should('equal', 1);
+
+          cy.get('button:contains("Delete All")').click();
+          cy.get('@body').find('.el-message-box__message').should('have.text', 'Are you sure to delete all?');
+          cy.get('@body').find('.el-message-box__btns .el-button--primary').click();
+          cy.get('input').should('not.exist');
+        });
+
       // common.submitForm();
     });
   });

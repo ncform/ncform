@@ -93,6 +93,15 @@
 
     mixins: [layoutArrayMixin],
 
+    i18nData: {
+      en: {
+        delItemTips: 'Are you sure to delete this item?',
+      },
+      zh_cn: {
+        delItemTips: '确定要删除该项吗？',
+      }
+    },
+
     data() {
       return {
         defaultConfig: {
@@ -107,7 +116,7 @@
           this.addItem();
         }
         if (action === 'remove') {
-          this.delItem(targetName);
+          this.delItem(targetName, this.mergeConfig.requiredDelConfirm, this.mergeConfig.delConfirmText.item || this.$nclang('delItemTips'));
         }
       }
     }

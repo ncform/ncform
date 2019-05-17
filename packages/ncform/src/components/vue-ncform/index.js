@@ -22,6 +22,8 @@ module.exports = {
   install: (Vue, options = { extComponents: {}, extRules: [], lang: '' }) => {
     window.__$ncform = {}; // 属于ncform的全局变量
 
+    window.__$ncform.__ncformComponents = {};
+
     window.__$ncform.__ncFormsGlobalList = {};
 
     window.__$ncform.__ncformRegularValidation = new RegularValidation();
@@ -31,7 +33,7 @@ module.exports = {
     // 注册组件
     _map(
       Object.assign(defLayouts, defControls, options.extComponents || {}),
-      (compItem, name) => Vue.component(`ncform-${_kebabCase(name)}`, compItem)
+      (compItem, name) => { window.__$ncform.__ncformComponents[_kebabCase(name)] = 1; Vue.component(`ncform-${_kebabCase(name)}`, compItem) }
     );
 
     // 注册验证规则
@@ -62,6 +64,7 @@ module.exports = {
     };
 
     Vue.prototype.$ncformAddWidget = function({name, widget}) {
+      window.__$ncform.__ncformComponents[_kebabCase(name)] = 1;
       Vue.component(`ncform-${_kebabCase(name)}`, widget)
     }
 
@@ -69,6 +72,14 @@ module.exports = {
       let ruleItem = {};
       ruleItem[name] = rule;
       window.__$ncform.__ncformRegularValidation.registerRule(ruleItem);
+    }
+
+    Vue.prototype.$ncformAllRules = function() {
+      return Object.keys(window.__$ncform.__ncformRegularValidation.allRules);
+    }
+
+    Vue.prototype.$ncformAllWidgets = function() {
+      return Object.keys(window.__$ncform.__ncformComponents);
     }
 
     Vue.component("ncform", ncform);

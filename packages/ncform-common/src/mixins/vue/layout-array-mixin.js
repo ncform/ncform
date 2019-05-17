@@ -68,6 +68,11 @@ export default {
         disableDel: false,
         addTxt: "",
         delAllTxt: "",
+        requiredDelConfirm: false,
+        delConfirmText: {
+          item: '',
+          all: ''
+        },
       },
       i18n: {},
     };
@@ -125,12 +130,45 @@ export default {
       }
     },
 
-    delItem(idx) {
-      this.schema.value.splice(idx, 1);
+    delItem(idx, requiredConfirm, confirmText) {
+      if (this.$confirm) { // use element-ui
+        if (requiredConfirm) {
+          this.$confirm(confirmText, '', {
+            type: 'warning'
+          }).then(() => {
+            this.schema.value.splice(idx, 1);
+          })
+        } else {
+          this.schema.value.splice(idx, 1);
+        }
+      } else {
+        if (requiredConfirm) {
+          window.confirm(confirmText) && this.schema.value.splice(idx, 1);
+        } else {
+          this.schema.value.splice(idx, 1);
+        }
+      }
     },
 
-    delAllItems() {
-      this.schema.value = [];
+    delAllItems(requiredConfirm, confirmText) {
+      if (this.$confirm) { // use element-ui
+        if (requiredConfirm) {
+          this.$confirm(confirmText, '', {
+            type: 'warning'
+          }).then(() => {
+            this.schema.value = [];
+          })
+        } else {
+          this.schema.value = [];
+        }
+      } else {
+        if (requiredConfirm) {
+          window.confirm(confirmText) && (this.schema.value = []);
+        } else {
+          this.schema.value = [];
+        }
+      }
+
     },
 
     itemUp(idx) {

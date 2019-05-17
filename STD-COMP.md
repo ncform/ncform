@@ -266,7 +266,12 @@ If you don't like the cold text description, click on the [interactive version](
   disableItemCollapse: false, // Whether to allow items to be folded
   itemCollapse: false, // Whether the item is folded by default
   addTxt: 'Add', // New display text
-  delAllTxt: 'Del All' // Delete all display text
+  delAllTxt: 'Del All', // Delete all display text
+  requiredDelConfirm: false, // Whether the deletion requires confirmation
+  delConfirmText: { // Delete confirmation text
+    item: '',
+    all: ''
+  }, 
 }
 ```
 
@@ -280,7 +285,12 @@ If you don't like the cold text description, click on the [interactive version](
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
   addTxt: 'Add', // New display text
-  delAllTxt: 'Del All' // Delete all display text
+  delAllTxt: 'Del All', // Delete all display text
+  requiredDelConfirm: false, // Whether the deletion requires confirmation
+  delConfirmText: { // Delete confirmation text
+    item: '',
+    all: ''
+  }, 
 }
 ```
 
@@ -293,5 +303,10 @@ If you don't like the cold text description, click on the [interactive version](
   tabPosition: 'top', // Optional value：[left | top]
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
+  requiredDelConfirm: false, // Whether the deletion requires confirmation
+  delConfirmText: { // Delete confirmation text
+    item: '',
+    all: ''
+  }, 
 }
 ```
