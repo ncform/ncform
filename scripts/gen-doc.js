@@ -74,7 +74,7 @@ function genNcformShowDoc() {
           path.join(ncformShowRoot, "node_modules", sourcePath),
           path.join(docTempPathNcformShow, "assets", fileName)
         );
-      } else if (itemUrl.search(/dist/) >= 0) {
+      } else if (itemUrl.search(/\.\.\/dist\//) >= 0) {
         const sourcePath = itemUrl.replace(/(.*dist|['"]+)/g, "");
         const fileName = path.basename(sourcePath);
         fs.copyFileSync(
@@ -131,7 +131,6 @@ function genNcformThemeElementuiDoc() {
   [
     "lodash/lodash.min.js",
     "axios/dist/axios.min.js",
-    "vue/dist/vue.min.js",
     "@ncform/ncform-common/dist/ncformCommon.min.js",
     "@ncform/ncform/dist/vueNcform.min.js",
     "element-ui/lib/theme-chalk/index.css"
