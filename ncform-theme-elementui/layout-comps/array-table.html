@@ -54,7 +54,7 @@
     ></script>
     <script
       type="text/javascript"
-      src="../assets/vue.min.js"
+      src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"
     ></script>
     <script
       type="text/javascript"
@@ -272,6 +272,49 @@
                 }
               }
             }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] requiredDelConfirm: 是否需要删除确认。默认 false',
+            en:
+              '[ATTR] requiredDelConfirm:  Whether the deletion requires confirmation. Default is false'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-table',
+                  widgetConfig: {
+                    requiredDelConfirm: true,
+                    delConfirmText: {
+                      item: 'Are you sure to delete this item?',
+                      all: 'Are you sure to delete all?'
+                    }
+                  }
+                }
+              }
+            },
+            value: {
+              user: [ 'Daniel', 'Sarah' ]
+            }
+          },
+          detail: {
+            cn: `
+当 requiredDelConfirm 为 true 时，可通过 delConfirmText 配置提示信息
+1. delConfirmText.item: 删除项确认信息
+2. delConfirmText.all: 删除全部确认信息
+        `,
+            en: `
+Prompt information can be configured via delConfirmText when requiredDelConfirm is true
+1. delConfirmText.item: delete item confirmation information
+2. delConfirmText.all: delete all confirmation information
+         `
           }
         }
       ];
