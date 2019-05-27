@@ -36,7 +36,7 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
   - [dx expression](#dx-expression)
   - [Design Thinking](#Design-Thinking)
   - [Schema Generator](#Schema-Generator)
-  - [☕Sponsor](#Sponsor)
+  - [❤️Sponsor](#Sponsor)
 
 ## Playground
 
