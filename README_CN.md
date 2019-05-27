@@ -36,7 +36,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
   - [dx表达式](#dx表达式)
   - [设计思想](#设计思想)
   - [Schema Generator](#Schema-Generator)
-  - [☕赞助支持](#赞助支持)
+  - [❤️赞助支持](#赞助支持)
 
 ## Playground
 
