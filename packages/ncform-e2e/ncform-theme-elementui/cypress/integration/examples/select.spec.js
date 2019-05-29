@@ -575,6 +575,28 @@ context('select', () => {
               }
             }
           }
+        },
+        name2: {
+          type: 'string',
+          default: JSON.stringify([
+            {
+              "value": 1,
+              "label": "option1"
+            },
+            {
+              "value": 2,
+              "label": "option2"
+            }
+          ])
+        },
+        name3: {
+          type: 'string',
+          ui: {
+            widget: 'select',
+            widgetConfig: {
+              enumSource: 'dx: try { JSON.parse({{$root.name2}}) } catch(e) { [] }'
+            }
+          }
         }
       }
     };
@@ -592,6 +614,11 @@ context('select', () => {
         .next()
         .find('input')
         .as('paramInput');
+      cy.get('label')
+        .contains('name2')
+        .next()
+        .find('input')
+        .as('name2');
 
       cy.wait('@list')
 
@@ -624,6 +651,24 @@ context('select', () => {
               .eq(0)
               .should('have.value', '');
           });
+        });
+
+        cy.get('label')
+        .contains('name3')
+        .parent()
+        .within(() => {
+          cy.get('input')
+            .eq(0).click();
+          cy.get('@body')
+            .find('li:contains("option1")').should('be.visible')
+
+          cy.get('@name2').clear().type(JSON.stringify([{"value":1,"label":"sarah"},{"value":2,"label":"daniel"}]).replace(/([\{])/g, '{$1}'))
+          cy.get('input')
+          .eq(0).click();
+          cy.get('@body')
+          .find('li:contains("option1")').should('not.be.visible')
+          cy.get('@body')
+          .find('li:contains("daniel")').should('be.visible')
         });
       // common.submitForm();
     });

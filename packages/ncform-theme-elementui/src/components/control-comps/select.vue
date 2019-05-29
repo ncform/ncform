@@ -12,7 +12,7 @@
     :loading="loading"
   >
     <el-option
-      v-for="item in options"
+      v-for="item in optionsData"
       :key="item[mergeConfig.itemValueField]"
       :label="item[mergeConfig.itemLabelField]"
       :value="item[mergeConfig.itemValueField]"
@@ -98,6 +98,9 @@ export default {
 
   computed: {
     // disabled / readonly / hidden / placeholder 你可以直接使用这些变量来控制组件的行为
+    optionsData() {
+      return (this.$data.isLocalSource && this.mergeConfig.enumSource.length > 0) ? this.mergeConfig.enumSource : this.$data.options;
+    }
   },
 
   methods: {
