@@ -146,5 +146,15 @@ ui: {
 }
 ```
 
+🔖 If you want to develop a standalone widget project, you can use the ncform widget generator.
+```
+# Install generator
+npm install -g yo
+npm install -g generator-ncform-widget
+
+# Create ncform widget project
+yo ncform-widget
+```
+
 **Note:**  After version 1.0, all widgetConfig configuration properties automatically support dx expressions.
 
