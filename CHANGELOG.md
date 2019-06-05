@@ -1,3 +1,12 @@
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/ncform/ncform/compare/v1.2.0...v1.2.1) (2019-06-05)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** add inVLayout config to correct distance to label when in v layout ([fbcfcce](https://github.com/ncform/ncform/commit/fbcfcce)), closes [#69](https://github.com/ncform/ncform/issues/69)
+* **ncform-theme-elementui:** auto active tab when adding and deleting ([5ce6e36](https://github.com/ncform/ncform/commit/5ce6e36)), closes [#71](https://github.com/ncform/ncform/issues/71)
+* **ncform-theme-elementui:** fixed select enumSource not support dx expression bug ([cc5209b](https://github.com/ncform/ncform/commit/cc5209b))
+
 <a name="1.2.0"></a>
 ## [1.2.0](https://github.com/ncform/ncform/compare/v1.1.2...v1.2.0) (2019-05-17)
 
