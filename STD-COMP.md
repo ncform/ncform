@@ -21,6 +21,7 @@ If you don't like the cold text description, click on the [interactive version](
 
 ```js
 {
+  inVLayout: false, // is in a vertical layout or not (when in a vertical layout, the distance to the label can be corrected by setting it to true)
   multiLine: false, // Whether to display multiple lines (if false, display with "..." when the content overflows, user can move the mouse up to display the complete content)
 }
 ```

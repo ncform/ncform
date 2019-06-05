@@ -7,7 +7,7 @@
       <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
     </legend>
 
-    <el-tabs v-show="!collapsed" :closable="!mergeConfig.disableDel" :addable="!mergeConfig.disableAdd" type="card" :tab-position="mergeConfig.tabPosition" @edit="handleTabsEdit">
+    <el-tabs v-show="!collapsed" :closable="!mergeConfig.disableDel" :addable="!mergeConfig.disableAdd" type="card" :tab-position="mergeConfig.tabPosition" @edit="handleTabsEdit" v-model="activeName">
       <el-tab-pane v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" :name="'' + idx">
 
         <span slot="label">
@@ -104,6 +104,7 @@
 
     data() {
       return {
+        activeName: '0',
         defaultConfig: {
           tabPosition: 'top',
         },
@@ -114,9 +115,25 @@
       handleTabsEdit(targetName, action) {
         if (action === 'add') {
           this.addItem();
+          this.$data.activeName = (this.schema.value.length - 1) + '';
         }
         if (action === 'remove') {
           this.delItem(targetName, this.mergeConfig.requiredDelConfirm, this.mergeConfig.delConfirmText.item || this.$nclang('delItemTips'));
+          this.$nextTick(() => {
+            let tabIdx = parseInt(targetName);
+            if (targetName === this.$data.activeName) { // Remote item is the active item
+              if (tabIdx === 0) { // First item
+                this.$data.activeName = '0'
+              } else {
+                this.$data.activeName = (tabIdx - 1) + '';
+              }
+            } else {
+              let activeIdx = parseInt(this.$data.activeName);
+              if (activeIdx > tabIdx) { // active item at the right side
+                this.$data.activeName = (activeIdx - 1) + '';
+              }
+            }
+          })
         }
       }
     }

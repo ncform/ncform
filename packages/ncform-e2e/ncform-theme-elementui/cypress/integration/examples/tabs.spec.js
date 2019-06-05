@@ -79,15 +79,35 @@ context('Tabs', () => {
           cy.get('legend').click();
           cy.get('legend').next().should('be.visible');
 
-          cy.get('.el-icon-plus').click()
+          cy.get('.el-icon-plus').click();
           cy.get('.el-tabs__item').its('length').should('equal', 2);
+          cy.get('.el-tabs__item:last-child').should('have.class', 'is-active');
 
-          cy.get('input').eq(0).type('daniel')
+          // Add two items, now has three items
+          cy.get('.el-icon-plus').click();
+
+          // Delete the first item with selected state, the next item is auto selected
+          cy.get('.el-tabs__item').eq(0).click();
+          cy.get('.el-icon-close').eq(0).click();
+          cy.get('.el-tabs__item:first-child').should('have.class', 'is-active');
+
+          // Delete the last item with selected state, the prev item is auto selected
+          cy.get('.el-icon-plus').click();
+          cy.get('.el-icon-close').eq(2).click();
+          cy.get('.el-tabs__item:last-child').should('have.class', 'is-active');
+
+          // Now has three items
+          cy.get('.el-icon-plus').click();
+
+          // Delete the item after active item, no change
           cy.get('.el-tabs__item').eq(1).click();
-          cy.get('input').eq(1).type('sarah')
+          cy.get('.el-icon-close').eq(2).click();
+          cy.get('.el-tabs__item:last-child').should('have.class', 'is-active');
 
-          cy.get('.el-icon-close:visible').click();
-          cy.get('.el-tabs__item').its('length').should('equal', 1);
+          // Delet the item before active item, no change
+          cy.get('.el-icon-close').eq(0).click({ force: true });
+          cy.get('.el-tabs__item:last-child').should('have.class', 'is-active');
+
         });
 
       cy.get('legend')
