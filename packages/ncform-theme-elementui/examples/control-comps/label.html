@@ -72,7 +72,10 @@
                 type: 'string',
                 default: 'ncform',
                 ui: {
-                  widget: 'label'
+                  widget: 'label',
+                  widgetConfig: {
+                    inVLayout: true
+                  }
                 }
               }
             }
@@ -119,6 +122,11 @@
                     multiLine: true
                   }
                 }
+              }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
               }
             }
           }
