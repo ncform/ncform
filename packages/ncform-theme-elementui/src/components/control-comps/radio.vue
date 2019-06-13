@@ -5,6 +5,7 @@
         :disabled="disabled"
         v-show="!hidden && !readonly"
         size="mini"
+        @change="handleChange"
       >
         <component :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
           v-for="opt in dataSource"
@@ -104,7 +105,8 @@
           enumSourceRemote: { // 远程数据源
             remoteUrl: '', // 如果是远程访问，则填写该url
             resField: '', // 响应结果的字段
-          }
+          },
+          itemDataKey: "", // 选中项的数据字段，可通过 {{$temp.[key]}} 取得
         },
         // modelVal：请使用该值来绑定实际的组件的model
       }
@@ -159,12 +161,21 @@
             if (res.status === 200 ) {
               let data = res.data;
               vm.$data.dataSource = enumSourceRemote.resField ? _get(data, enumSourceRemote.resField, []) : data;
+              this._keepSelectedItem();
             }
           }).catch(err => {
             vm.$data.dataSource = [];
+            this._keepSelectedItem();
           });
         } catch(err) {
           console.error(err);
+        }
+      },
+
+      _keepSelectedItem() {
+        if (this.mergeConfig.itemDataKey) {
+          let selectedModelVal = this.$data.dataSource.find(item => item[this.mergeConfig.itemValueField] === this.$data.modelVal);
+          this._setTempData(this.mergeConfig.itemDataKey, selectedModelVal);
         }
       },
 
@@ -175,8 +186,10 @@
           vm.getRemoteSource();
         } else if (!vm.mergeConfig.enumSource.length) {
           vm.$data.dataSource = [ {value: true, label: this.$nclang('yes')}, {value: false, label: this.$nclang('no')} ];
+          this._keepSelectedItem();
         } else {
-          vm.$data.dataSource = vm.mergeConfig.enumSource
+          vm.$data.dataSource = vm.mergeConfig.enumSource;
+          this._keepSelectedItem();
         }
       }
     }

@@ -25,6 +25,10 @@ export default {
       type: Object
     },
 
+    tempData: {
+      type: Object
+    },
+
     globalConst: {
       type: Object
     },
@@ -68,8 +72,11 @@ export default {
     _analyzeVal(val) {
       return ncformUtils.smartAnalyzeVal(val, {
         idxChain: this.idxChain,
-        data: { rootData: this.formData, constData: this.globalConst }
+        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
       });
+    },
+    _setTempData(key, value) {
+      this.$set(this.tempData, key, value);
     },
     collapse() {
       if (!this.mergeConfig.disableCollapse)

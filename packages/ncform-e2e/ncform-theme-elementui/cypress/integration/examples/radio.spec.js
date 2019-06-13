@@ -246,4 +246,106 @@ context('Radio', () => {
     });
   });
 
+  it('itemDataKey', () => {
+    cy.server();
+    cy.route(() => {
+      return {
+        method: 'GET',
+        url: '/list',
+        response: {
+          data: [
+            {
+              value: '1',
+              label: 'daniel',
+              desc: 'boy'
+            },
+            {
+              value: '2',
+              label: 'sarah',
+              desc: 'girl'
+            }
+          ]
+        }
+      };
+    }).as('list');
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name1: {
+          type: 'string',
+          value: '1',
+          ui: {
+            description: 'dx: {{$temp.selectedItem1.desc}}',
+            widget: 'radio',
+            widgetConfig: {
+              itemDataKey: 'selectedItem1',
+              enumSourceRemote: {
+                remoteUrl: '/list',
+                resField: 'data'
+              }
+            }
+          }
+        },
+        name2: {
+          type: 'string',
+          value: '1',
+          ui: {
+            description: 'dx: {{$temp.selectedItem2.desc}}',
+            widget: 'radio',
+            widgetConfig: {
+              itemDataKey: 'selectedItem2',
+              enumSource: [
+                {
+                  value: '1',
+                  label: 'ncform',
+                  desc: 'ncform is a very nice configuration generation way to develop forms'
+                },
+                {
+                  value: '2',
+                  label: 'daniel',
+                  desc: 'Daniel is the author of ncform'
+                }
+              ]
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.wait('@list');
+
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('.form-desc').as('desc');
+          cy.get('@desc').should('have.text', 'boy');
+
+          cy.get('.el-radio:contains("sarah")').click();
+          cy.get('@desc').should('have.text', 'girl');
+        });
+
+      cy.get('label')
+        .contains('name2')
+        .parent()
+        .within(() => {
+          cy.get('.form-desc').as('desc');
+          cy.get('@desc').should('have.text', 'ncform is a very nice configuration generation way to develop forms');
+
+          cy.get('.el-radio:contains("daniel")').click();
+          cy.get('@desc').should('have.text', 'Daniel is the author of ncform');
+        });
+      // common.submitForm();
+    });
+  });
+
 });

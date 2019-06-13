@@ -123,6 +123,8 @@ If you don't like the cold text description, click on the [interactive version](
   filterable: false, // Whether searchable
   filterLocal: true, // Filter by local or remote data. if true, even with enumSourceRemote, data will only be retrieved once remotely.
 
+  itemDataKey: "", // The key of the selected item's data, can accessed by {{$temp[itemDataKey]}}
+
   itemTemplate: '<span>{{item.label}} : {{item.value}}</span>', // Display item template
   itemLabelField: 'label', // Item data represents the field of the label
   itemValueField: 'value', // Item data represents the field of value
@@ -144,6 +146,8 @@ If you don't like the cold text description, click on the [interactive version](
   type: 'radio', // Display type. optional values: [radio | button]
   arrangement: 'h', // Arrange. optional values: [v | h]
 
+  itemDataKey: "", // The key of the selected item's data, can accessed by {{$temp[itemDataKey]}}
+
   itemValueField: '', // Value field. default value is "value"
   itemLabelField: '', // Display field. default value is "label"
   enumSource: [{value: [String | Number | Boolean], label: ''}], // Local data source. default: [{value: true, label: '是'}, {value: false, label: '否'}]
@@ -161,6 +165,8 @@ If you don't like the cold text description, click on the [interactive version](
   selectAll: false, // Whether to display all selections
   arrangement: 'h', // Arrange. optional values: [v | h]
   type: 'checkbox', // Display type, optional values: [checkbox | button]
+
+  itemDataKey: "", // The key of the selected item's data, can accessed by {{$temp[itemDataKey]}}
 
   itemValueField: '', // Value field. default value is "value"
   itemLabelField: '', // Display field. default value is "label"

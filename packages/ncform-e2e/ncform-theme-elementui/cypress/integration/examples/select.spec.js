@@ -496,7 +496,7 @@ context('select', () => {
 
           cy.get('@body')
             .find('li:contains("daniel"):visible')
-            .click()
+            .click();
           cy.get('input')
             .eq(0)
             .should('have.value', 'daniel');
@@ -513,18 +513,19 @@ context('select', () => {
 
           cy.get('@body')
             .find('li:contains("daniel"):visible:last')
-            .click()
+            .click();
           cy.get('input')
             .eq(0)
             .should('have.value', 'daniel');
 
           cy.get('input')
             .eq(0)
-            .click().clear();
+            .click()
+            .clear();
 
           cy.get('@body')
             .find('li:contains("sarah"):visible:last')
-            .click()
+            .click();
           cy.get('input')
             .eq(0)
             .should('have.value', 'sarah');
@@ -580,12 +581,12 @@ context('select', () => {
           type: 'string',
           default: JSON.stringify([
             {
-              "value": 1,
-              "label": "option1"
+              value: 1,
+              label: 'option1'
             },
             {
-              "value": 2,
-              "label": "option2"
+              value: 2,
+              label: 'option2'
             }
           ])
         },
@@ -620,7 +621,7 @@ context('select', () => {
         .find('input')
         .as('name2');
 
-      cy.wait('@list')
+      cy.wait('@list');
 
       cy.get('label')
         .contains('name1')
@@ -634,7 +635,8 @@ context('select', () => {
           });
 
           cy.get('input')
-            .eq(0).click();
+            .eq(0)
+            .click();
           cy.get('@body')
             .find('li:contains("sarah")')
             .find(':not(:hidden)')
@@ -653,22 +655,147 @@ context('select', () => {
           });
         });
 
-        cy.get('label')
+      cy.get('label')
         .contains('name3')
         .parent()
         .within(() => {
           cy.get('input')
-            .eq(0).click();
+            .eq(0)
+            .click();
           cy.get('@body')
-            .find('li:contains("option1")').should('be.visible')
+            .find('li:contains("option1")')
+            .should('be.visible');
 
-          cy.get('@name2').clear().type(JSON.stringify([{"value":1,"label":"sarah"},{"value":2,"label":"daniel"}]).replace(/([\{])/g, '{$1}'))
+          cy.get('@name2')
+            .clear()
+            .type(JSON.stringify([{ value: 1, label: 'sarah' }, { value: 2, label: 'daniel' }]).replace(/([\{])/g, '{$1}'));
           cy.get('input')
-          .eq(0).click();
+            .eq(0)
+            .click();
           cy.get('@body')
-          .find('li:contains("option1")').should('not.be.visible')
+            .find('li:contains("option1")')
+            .should('not.be.visible');
           cy.get('@body')
-          .find('li:contains("daniel")').should('be.visible')
+            .find('li:contains("daniel")')
+            .should('be.visible');
+        });
+      // common.submitForm();
+    });
+  });
+
+  it('itemDataKey', () => {
+    cy.server();
+    cy.route(() => {
+      return {
+        method: 'GET',
+        url: '/list',
+        response: {
+          data: [
+            {
+              value: '1',
+              label: 'daniel',
+              desc: 'boy'
+            },
+            {
+              value: '2',
+              label: 'sarah',
+              desc: 'girl'
+            }
+          ]
+        }
+      };
+    }).as('list');
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        name1: {
+          type: 'array',
+          value: ['1'],
+          ui: {
+            description: 'dx: ({{$temp.selectedItem1}} || []).map(item => item.desc).join(",")',
+            widget: 'select',
+            widgetConfig: {
+              itemDataKey: 'selectedItem1',
+              multiple: true,
+              enumSourceRemote: {
+                remoteUrl: '/list',
+                resField: 'data'
+              }
+            }
+          }
+        },
+        name2: {
+          type: 'string',
+          value: '1',
+          ui: {
+            description: 'dx: {{$temp.selectedItem2.desc}}',
+            widget: 'select',
+            widgetConfig: {
+              itemDataKey: 'selectedItem2',
+              enumSource: [
+                {
+                  value: '1',
+                  label: 'ncform',
+                  desc: 'ncform is a very nice configuration generation way to develop forms'
+                },
+                {
+                  value: '2',
+                  label: 'daniel',
+                  desc: 'Daniel is the author of ncform'
+                }
+              ]
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.wait('@list');
+
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('.form-desc').as('desc');
+          cy.get('@desc').should('have.text', 'boy');
+
+          cy.get('input')
+            .eq(0)
+            .click({force: true});
+          cy.get('@body')
+            .find('li:contains("sarah")')
+            .find(':not(:hidden)')
+            .click();
+          cy.get('@body').click();
+          cy.get('@desc').should('have.text', 'boy,girl');
+        });
+
+      cy.wait(500);
+
+      cy.get('label')
+        .contains('name2')
+        .parent()
+        .within(() => {
+          cy.get('.form-desc').as('desc');
+          cy.get('@desc').should('have.text', 'ncform is a very nice configuration generation way to develop forms');
+
+          cy.get('input')
+            .eq(0)
+            .click({force: true});
+          cy.get('@body')
+            .find('li:contains("daniel")')
+            .find(':not(:hidden)')
+            .click();
+          cy.get('@desc').should('have.text', 'Daniel is the author of ncform');
         });
       // common.submitForm();
     });

@@ -10,6 +10,7 @@
     :remote="!isLocalSource && !mergeConfig.filterLocal"
     :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
     :loading="loading"
+    @change="handleChange"
   >
     <el-option
       v-for="item in optionsData"
@@ -72,6 +73,8 @@ export default {
         filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
         itemTemplate: "", // 显示项的模板
 
+        itemDataKey: "", // 选中项的数据字段，可通过 {{$temp.[key]}} 取得
+
         itemLabelField: "label", // 项数据表示label的字段
         itemValueField: "value", // 项数据表示value的字段
         enumSource: [], // 本地数据源
@@ -127,7 +130,20 @@ export default {
             this.$data.modelVal ||
             this.$data.options[0][this.mergeConfig.itemValueField];
         }
+
+        this._keepSelectedItem();
       });
+    },
+
+    handleChange() {
+      this._keepSelectedItem();
+    },
+
+    _keepSelectedItem() {
+      if (this.mergeConfig.itemDataKey) {
+        let selectedModelVal = Array.isArray(this.$data.modelVal) ? this.$data.options.filter(item => this.$data.modelVal.indexOf(item[this.mergeConfig.itemValueField]) >= 0) : this.$data.options.find(item => item[this.mergeConfig.itemValueField] === this.$data.modelVal);
+        this._setTempData(this.mergeConfig.itemDataKey, selectedModelVal);
+      }
     },
 
     _getDataSource() {
@@ -147,9 +163,11 @@ export default {
                 label: "false"
               }
             ];
+            this._keepSelectedItem();
           }
         } else {
           this.$data.options = this.mergeConfig.enumSource;
+          this._keepSelectedItem();
         }
       }
     },

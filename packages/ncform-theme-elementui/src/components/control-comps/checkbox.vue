@@ -142,7 +142,8 @@
           enumSourceRemote: { // 远程数据源
             remoteUrl: '', // 如果是远程访问，则填写该url
             resField: '', // 响应结果的字段
-          }
+          },
+          itemDataKey: "", // 选中项的数据字段，可通过 {{$temp.[key]}} 取得
         },
         // modelVal：请使用该值来绑定实际的组件的model
       }
@@ -199,12 +200,16 @@
         });
         vm.modelVal = val ? arrResAll : [];
         vm.isIndeterminate = false;
+
+        vm._keepSelectedItem();
       },
       handleCheckedOptChange(value) {
         const vm = this;
         let checkedCount = value.length;
         vm.$data.isCheckAll = checkedCount === vm.$data.dataSource.length;
         vm.isIndeterminate = checkedCount > 0 && checkedCount < vm.$data.dataSource.length;
+
+        vm._keepSelectedItem();
       },
       getRemoteSource() {
         try {
@@ -222,12 +227,20 @@
             if (res.status === 200 ) {
               let data = res.data;
               vm.$data.dataSource = _get(data, enumSourceRemote.resField || '', []);
+              vm._keepSelectedItem();
             }
           }).catch(err => {
             vm.$data.dataSource = [];
+            vm._keepSelectedItem();
           });
         } catch(err) {
           console.error(err);
+        }
+      },
+      _keepSelectedItem() {
+        if (this.mergeConfig.itemDataKey) {
+          let selectedModelVal = Array.isArray(this.$data.modelVal) ? this.$data.dataSource.filter(item => this.$data.modelVal.indexOf(item[this.mergeConfig.itemValueField]) >= 0) : this.$data.dataSource.find(item => item[this.mergeConfig.itemValueField] === this.$data.modelVal);
+          this._setTempData(this.mergeConfig.itemDataKey, selectedModelVal);
         }
       },
       _getDataSource() {
@@ -237,8 +250,10 @@
           vm.getRemoteSource();
         } else if (!vm.mergeConfig.enumSource.length) {
           vm.$data.dataSource = [ {label: this.$nclang('yes'), value: true}];
+          vm._keepSelectedItem();
         } else {
           vm.$data.dataSource = vm.mergeConfig.enumSource;
+          vm._keepSelectedItem();
         }
       }
     },

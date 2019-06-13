@@ -246,6 +246,43 @@ remoteUrl: remote api url
 resField: Which field of the response data as the data source, as the example returns {result: [{ id: 1, label: "iphone" }, ...]}, then fill in "result"
          `
           }
+        },
+        {
+          title: {
+            cn: '[属性] itemDataKey: 选中项的数据的字段，可通过 {{$temp.[itemDataKey]}} 访问',
+            en: "[ATTR] itemDataKey: The key of the selected item's data, can be accessed by {{$temp[itemDataKey]}}"
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              choice: {
+                type: 'string',
+                ui: {
+                  description: 'dx: {{$temp.selectedItem.desc}}',
+                  widget: 'radio',
+                  widgetConfig: {
+                    itemDataKey: 'selectedItem',
+                    enumSource: [
+                      {
+                        value: '1',
+                        label: 'ncform',
+                        desc: 'ncform is a very nice configuration generation way to develop forms'
+                      },
+                      {
+                        value: '2',
+                        label: 'daniel',
+                        desc: "Daniel is the author of ncform"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          detail: {
+            cn: `可通过该 itemDataKey 去访问选中项的除了 value 和 label 之外的其它字段的值`,
+            en: `ItemDataKey can be used to access the values of other fields except the "value" and "label" of the selected item.`
+          }
         }
       ];
 

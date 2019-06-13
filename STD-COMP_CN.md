@@ -123,6 +123,8 @@
   filterable: false, // 是否可搜索，即可输入关键字
   filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
 
+  itemDataKey: "", // 选中项的数据的字段，可通过 {{$temp.[itemDataKey]}} 访问
+
   itemTemplate: '<span>{{item.label}} : {{item.value}}</span>', // 显示项的模板
   itemLabelField: 'label', // 项数据表示label的字段
   itemValueField: 'value', // 项数据表示value的字段
@@ -144,6 +146,8 @@
   type: 'radio', // 显示类型，可选值：[radio | button]
   arrangement: 'h', // 排列 可选值 [v | h]
 
+  itemDataKey: "", // 选中项的数据的字段，可通过 {{$temp.[itemDataKey]}} 访问
+
   itemValueField: '', // 值字段 默认值为value
   itemLabelField: '', // 显示字段 默认值为label
   enumSource: [{value: [String | Number | Boolean], label: ''}], // 可选项，默认[{value: true, label: '是'}, {value: false, label: '否'}]
@@ -161,6 +165,8 @@
   selectAll: false, // 是否显示全选
   arrangement: 'h', // 排列 可选值 [v | h]
   type: 'checkbox', // 显示类型，可选值：[checkbox | button]
+
+  itemDataKey: "", // 选中项的数据的字段，可通过 {{$temp.[itemDataKey]}} 访问
 
   itemValueField: '', // 值字段 默认值为value
   itemLabelField: '', // 显示字段 默认值为label
