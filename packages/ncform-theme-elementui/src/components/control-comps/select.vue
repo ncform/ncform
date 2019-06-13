@@ -141,7 +141,7 @@ export default {
 
     _keepSelectedItem() {
       if (this.mergeConfig.itemDataKey) {
-        let selectedModelVal = Array.isArray(this.$data.modelVal) ? this.$data.options.filter(item => this.$data.modelVal.indexOf(item[this.mergeConfig.itemValueField]) >= 0) : this.$data.options.find(item => item[this.mergeConfig.itemValueField] === this.$data.modelVal);
+        let selectedModelVal = Array.isArray(this.$data.modelVal) ? this.optionsData.filter(item => this.$data.modelVal.indexOf(item[this.mergeConfig.itemValueField]) >= 0) : this.optionsData.find(item => item[this.mergeConfig.itemValueField] === this.$data.modelVal);
         this._setTempData(this.mergeConfig.itemDataKey, selectedModelVal);
       }
     },
