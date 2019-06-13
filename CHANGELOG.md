@@ -1,3 +1,10 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/ncform/ncform/compare/v1.2.1...v1.3.0) (2019-06-13)
+
+### Features
+
+* select/radio/checkbox adds itemDataKey config ([1d7fba3](https://github.com/ncform/ncform/commit/1d7fba3))
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/ncform/ncform/compare/v1.2.0...v1.2.1) (2019-06-05)
 
