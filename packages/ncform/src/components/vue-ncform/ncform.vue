@@ -1,7 +1,7 @@
 <template>
 <div class="ncform">
   <form v-if="!isSchemaChanging" novalidate :class="dataFormSchema.globalConfig.style.formCls">
-    <form-item :schema="dataFormSchema" :form-data="formData" :global-config="dataFormSchema.globalConfig" :complete-schema="dataFormSchema"></form-item>
+    <form-item :schema="dataFormSchema" :form-data="formData" :temp-data="tempData" :global-config="dataFormSchema.globalConfig" :complete-schema="dataFormSchema"></form-item>
     <!-- button这样处理是为了在Mac下的Safari能否正常使用回车键触发表单的submit事件 -->
     <button @click.prevent="submit()" type="submit" style="position: absolute; left: -100px; visibility: hidden"></button>
   </form>
@@ -149,6 +149,7 @@ export default {
       name: this.formName,
       dataFormSchema: {},
       formData: {},
+      tempData: {},
       isSchemaChanging: false // 利用该属性，当schema变化时，整个form表单重建，这样确保组件的生命周期跟预想的一致
     };
   },

@@ -177,6 +177,13 @@ export default {
             cn: "高级玩法-跟随 dx表达式",
             en: "Adv-Follow [dx expression]"
           },
+        },
+        {
+          value: "14",
+          label: {
+            cn: "高级玩法-临时变量 dx表达式",
+            en: "Adv-Temp Value [dx expression]"
+          },
         }
       ],
       templates: {
@@ -990,6 +997,36 @@ export default {
               ui: {
                 columns: 12
               }
+            }
+          }
+        },
+        "14": {
+          type: "object",
+          properties: {
+            item: {
+              type: 'string',
+              ui: {
+                description: 'Currently only select, radio, checkbox supports this feature.',
+                widget: 'select',
+                widgetConfig: {
+                  itemDataKey: 'selectedItem',
+                  enumSource: [
+                    {
+                      value: '1',
+                      label: 'ncform',
+                      desc: 'ncform is a very nice configuration generation way to develop forms'
+                    },
+                    {
+                      value: '2',
+                      label: 'daniel',
+                      desc: "Daniel is the author of ncform"
+                    }
+                  ]
+                }
+              }
+            },
+            desc: {
+              valueTemplate: 'dx: {{$temp.selectedItem.desc}} || ""',
             }
           }
         }

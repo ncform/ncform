@@ -327,7 +327,7 @@ const ncformUtils = {
    * @param {*} val
    * @param {*}
    *   idxChain: 该值的索引链，即所在的路径中的所有数组中的索引，比如 persons[0].name[1].firstname，即该值为"0,1"
-   *   data: {rootData: 代表$root的值, constData: 代表$const的值, selfData: 代表$self的值 }
+   *   data: {rootData: 代表$root的值, constData: 代表$const的值, selfData: 代表$self的值, tempData: 代表$tempData的值 }
    * 规则：
    * 1. 普通值直接返回
    * 2. 函数类型返回执行后的值
@@ -335,7 +335,7 @@ const ncformUtils = {
    */
   smartAnalyzeVal(
     val,
-    { idxChain = "", data = { rootData: {}, constData: {}, selfData: {} } } = {}
+    { idxChain = "", data = { rootData: {}, constData: {}, selfData: {}, tempData: {} } } = {}
   ) {
     return ncformUtils.smartAnalyze(val, {
       idxChain,
@@ -351,6 +351,10 @@ const ncformUtils = {
         {
           symbol: "$self",
           value: data.selfData
+        },
+        {
+          symbol: "$temp",
+          value: data.tempData
         }
       ]
     });
