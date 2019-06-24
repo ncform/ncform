@@ -238,6 +238,7 @@ If you don't like the cold text description, click on the [interactive version](
   clearable: false, // Whether to display the clear button
   type: 'date', // year/month/date/week/datetime
   format: '', // Format display
+  valueFormat: '', // The format of the output value. Empty means a millisecond string
 }
 ```
 

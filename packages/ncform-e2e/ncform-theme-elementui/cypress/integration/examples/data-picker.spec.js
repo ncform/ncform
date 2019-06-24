@@ -100,6 +100,20 @@ context('data-picker', () => {
               clearable: false
             }
           }
+        },
+        name3: {
+          type: 'string',
+          value: '2019-12-10',
+          ui: {
+            widget: 'date-picker',
+            widgetConfig: {
+              valueFormat: 'yyyy-MM-dd'
+            }
+          }
+        },
+        labelTest: {
+          type: 'string',
+          valueTemplate: 'dx: {{$root.name3}}',
         }
       }
     };
@@ -108,8 +122,12 @@ context('data-picker', () => {
       .invoke('setValue', JSON.stringify(formSchema, null, 2));
     common.startRun();
 
+    cy.get('body').as('body');
+
     cy.get('.previewArea').within(() => {
       // Declare action elements
+
+      cy.get('label').contains('labelTest').parent().find('input').as('labelTest');
 
       cy.get('label')
         .contains('name1')
@@ -133,6 +151,16 @@ context('data-picker', () => {
           cy.wait(100).then(() => {
             cy.get('.el-icon-circle-close').should('not.be.visible');
           });
+        });
+
+      cy.get('label')
+        .contains('name3')
+        .parent()
+        .within(() => {
+          cy.get('input').should('have.value', '2019-12-10');
+          cy.get('input').click();
+          cy.get('@body').find('.el-date-table__row td.available.current+td').click();
+          cy.get('@labelTest').should('have.value', '2019-12-11');
         });
 
       // common.submitForm();

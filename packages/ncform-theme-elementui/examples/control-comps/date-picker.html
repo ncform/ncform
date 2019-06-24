@@ -224,7 +224,28 @@
             cn: '年 yyyy，月 MM，日 dd，小时 HH，分 mm，秒 ss',
             en: 'Year yyyy, month MM, day dd, hour HH, minute mm, second ss'
           }
-        }
+        },
+        {
+          title: {
+            cn: '[属性] valueFormat: 输出值的格式。空为毫秒数字符串',
+            en: '[ATTR] valueFormat: The format of the output value. Empty means a millisecond string'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              date: {
+                type: 'string',
+                value: '2019-12-12',
+                ui: {
+                  widget: 'date-picker',
+                  widgetConfig: {
+                    valueFormat: 'yyyy-MM-dd'
+                  }
+                }
+              }
+            }
+          }
+        },
       ];
 
       // Bootstrap the app
