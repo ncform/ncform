@@ -10,6 +10,8 @@ Have powerful control interaction and extension capabilities, do what you want.
 
 For more details, please visit the official website: [https://github.com/ncform/ncform](https://github.com/ncform/ncform)
 
+[![Playground](https://github.com/ncform/ncform/raw/master/docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
+
 # How to dev
 
 Step 1: prepare the dependency nc libraries

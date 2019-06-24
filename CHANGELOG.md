@@ -1,3 +1,17 @@
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/ncform/ncform/compare/v1.3.1...v1.3.2) (2019-06-24)
+
+### Features
+
+* **ncform-theme-elementui:** add valueFormat config for date-picker widget ([7d38dc6](https://github.com/ncform/ncform/commit/7d38dc6)), closes [#68](https://github.com/ncform/ncform/issues/68)
+
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/ncform/ncform/compare/v1.3.0...v1.3.1) (2019-06-13)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed itemDataKey get undefined value when enumSource be setted by dx express ([631b6c7](https://github.com/ncform/ncform/commit/631b6c7))
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/ncform/ncform/compare/v1.2.1...v1.3.0) (2019-06-13)
 
