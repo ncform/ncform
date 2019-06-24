@@ -238,6 +238,7 @@
   clearable: false, // 是否显示清除按钮
   type: 'date', // year/month/date/week/datetime
   format: '', // 格式显示
+  valueFormat: '', // 输出值的格式。空为毫秒数字符串
 }
 ```
 

@@ -9,6 +9,7 @@
     v-model="modelVal"
     :type="type"
     :format="mergeConfig.format || $nclang(typeOptions[type].format)"
+    :value-format="mergeConfig.valueFormat"
     >
   </el-date-picker>
 </template>
@@ -73,7 +74,7 @@ export default {
 
   mounted() {
     if(this.$data.modelVal){
-      this.$data.modelVal = new Date(parseInt(this.$data.modelVal));
+      this.$data.modelVal = this.mergeConfig.valueFormat ? this.$data.modelVal : new Date(parseInt(this.$data.modelVal));
     }
   },
 
@@ -103,7 +104,10 @@ export default {
       },
       // 组件特有的配置属性
       defaultConfig: {
-        type: "date"  // year/month/date/week/datetime
+        clearable: false,
+        type: "date",  // year/month/date/week/datetime
+        format: '',
+        valueFormat: ''
       }
       // modelVal：请使用该值来绑定实际的组件的model
     };
@@ -123,7 +127,7 @@ export default {
   methods: {
     // 你可以通过该方法在modelVal传出去之前进行加工处理，即在this.$emit('input')之前
     _processModelVal(newVal){
-      return `${newVal ? new Date(newVal).getTime() : ''}`;
+      return `${newVal ? (this.mergeConfig.valueFormat ? newVal : +new Date(newVal)) : ''}`;
     }
   }
 };

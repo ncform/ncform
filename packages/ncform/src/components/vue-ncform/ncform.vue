@@ -57,7 +57,7 @@ export default {
     }
 
     this.$watch('formSchema', (newVal, oldVal) => {
-      if (newVal !== oldVal) {
+      if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
         this.$data.isSchemaChanging = true;
         this.$nextTick(() => {
           this.$data.isSchemaChanging = false;
