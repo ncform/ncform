@@ -5,7 +5,6 @@
         :disabled="disabled"
         v-show="!hidden && !readonly"
         size="mini"
-        @change="handleChange"
       >
         <component :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
           v-for="opt in dataSource"
