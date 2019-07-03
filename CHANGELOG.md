@@ -1,3 +1,10 @@
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/ncform/ncform/compare/v1.3.2...v1.3.3) (2019-07-03)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed: Invalid handler for event "change": got undefined ([373848f](https://github.com/ncform/ncform/commit/373848f))
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/ncform/ncform/compare/v1.3.1...v1.3.2) (2019-06-24)
 
