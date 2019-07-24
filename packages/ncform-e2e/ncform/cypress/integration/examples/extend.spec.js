@@ -11,8 +11,8 @@ context('Extend', () => {
   it('Control: extend', () => {
     let id = md5('Control: extend');
     cy.get(`[data-cy=${id}]`).within(() => {
-      cy.get('.__ncform-control').contains('hello world: ncform ncform').should('exist');
-      cy.get('.__ncform-control').contains('Hi daniel: ncform ncform').should('exist');
+      cy.get('.__ncform-control').contains('hello world: ncform ncform 2').should('exist');
+      cy.get('.__ncform-control').contains('Hi daniel: ncform ncform dx: 1+1').should('exist');
     })
   })
 

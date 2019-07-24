@@ -328,7 +328,7 @@ export default {
 
       defaultConfig: {
         type: "text",
-        trim: true,
+        trim: false,
         clearable: false,
         prefixIcon: "",
         suffixIcon: "",
