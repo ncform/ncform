@@ -5,6 +5,8 @@ import ncformUtils from "../../ncform-utils";
 
 export default {
 
+  autoDX: true, // 当不需要config自动支持dx表达式，可将该值设为false
+
   i18nData: {
     en: {},
     zh_cn: {}
@@ -84,12 +86,12 @@ export default {
         this.$data.defaultConfig,
         this.config
       )
-      return ncformUtils.traverseJSON(newConfig, (...params) => {
+      return this.$options.autoDX ? ncformUtils.traverseJSON(newConfig, (...params) => {
         let val = params[1];
         if (val !== null && typeof val !== 'object')
           return this._analyzeVal(val);
         else return val;
-      })
+      }) : newConfig
     }
   },
 

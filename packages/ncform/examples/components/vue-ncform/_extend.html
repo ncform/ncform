@@ -46,7 +46,7 @@
       let extComponents = {
         helloWorld: {
           mixins: [ncformCommon.mixins.vue.controlMixin],
-          template: '<div>{{$nclang("hi", {msg: modelVal})}} {{modelVal}}</div>',
+          template: '<div>{{$nclang("hi", {msg: modelVal})}} {{modelVal}} {{mergeConfig.name}}</div>',
           i18nData: {
             en: {
               hi: 'hello world: <%= msg %>'
@@ -59,11 +59,19 @@
             value: {
               type: [String]
             }
+          },
+          data() {
+            return {
+              defaultConfig: {
+                name: ''
+              }
+            }
           }
         },
         helloDaniel: {
+          autoDX: false,
           mixins: [ncformCommon.mixins.vue.controlMixin],
-          template: '<div>{{$nclang("hi", {msg: modelVal})}} {{modelVal}}</div>',
+          template: '<div>{{$nclang("hi", {msg: modelVal})}} {{modelVal}} {{mergeConfig.name}}</div>',
           i18nData: {
             en: {
               hi: 'Hi daniel: <%= msg %>'
@@ -75,6 +83,13 @@
           props: {
             value: {
               type: [String]
+            }
+          },
+          data() {
+            return {
+              defaultConfig: {
+                name: ''
+              }
             }
           }
         }
@@ -134,14 +149,20 @@
                     type: 'string',
                     value: 'ncform',
                     ui: {
-                      widget: 'hello-world'
+                      widget: 'hello-world',
+                      widgetConfig: {
+                        name: 'dx: 1+1'
+                      }
                     }
                   },
                   helloDaniel: {
                     type: 'string',
                     value: 'ncform',
                     ui: {
-                      widget: 'hello-daniel'
+                      widget: 'hello-daniel',
+                      widgetConfig: {
+                        name: 'dx: 1+1'
+                      }
                     }
                   }
                 }
