@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform-common",
-  "version": "1.3.0",
+  "version": "1.3.4",
   "description": "ncform common",
   "main": "dist/ncformCommon.min.js",
   "scripts": {
