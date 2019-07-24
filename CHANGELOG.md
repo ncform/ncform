@@ -1,3 +1,10 @@
+<a name="1.3.4"></a>
+## [1.3.4](https://github.com/ncform/ncform/compare/v1.3.3...v1.3.4) (2019-07-24)
+
+### Features
+
+* **ncform:** add autoDX option to control whether widget configuration supports dx expression automatically or not ([62d23ee](https://github.com/ncform/ncform/commit/62d23ee))
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://github.com/ncform/ncform/compare/v1.3.2...v1.3.3) (2019-07-03)
 
