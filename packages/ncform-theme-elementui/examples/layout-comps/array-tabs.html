@@ -273,7 +273,31 @@ Prompt information can be configured via delConfirmText when requiredDelConfirm 
 1. delConfirmText.item: delete item confirmation information
          `
           }
-        }
+        },
+        {
+          title: {
+            cn: '[属性] showOneIfEmpty: 当空值时是否显示一项',
+            en:
+              '[ATTR] showOneIfEmpty: Show one item at least if empty'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    showOneIfEmpty: true
+                  }
+                }
+              }
+            }
+          }
+        },
       ];
 
       // Bootstrap the app

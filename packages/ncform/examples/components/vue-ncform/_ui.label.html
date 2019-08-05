@@ -248,7 +248,10 @@
                       type: 'string'
                     },
                     ui: {
-                      legend: 'dx: {{$root.users[0]}} + " info-array"'
+                      legend: 'dx: {{$root.users[0]}} + " info-array"',
+                      widgetConfig: {
+                        showOneIfEmpty: true
+                      }
                     }
                   },
                   users1: {
@@ -258,7 +261,10 @@
                     },
                     ui: {
                       legend: 'dx: {{$root.users1[0]}} + " info-table"',
-                      widget: 'array-table'
+                      widget: 'array-table',
+                      widgetConfig: {
+                        showOneIfEmpty: true
+                      }
                     }
                   }
                 }
@@ -283,7 +289,10 @@
                       }
                     },
                     ui: {
-                      widget: 'array-table'
+                      widget: 'array-table',
+                      widgetConfig: {
+                        showOneIfEmpty: true
+                      }
                     }
                   },
                   users1: {
@@ -292,6 +301,11 @@
                       type: 'string',
                       ui: {
                         label: 'dx: "dx from: " + {{$root.company}}'
+                      }
+                    },
+                    ui: {
+                      widgetConfig: {
+                        showOneIfEmpty: true
                       }
                     }
                   }

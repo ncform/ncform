@@ -444,7 +444,8 @@ resField: Which field of the response data as the data source, as the example re
                         itemLabelField: 'label', // 项数据表示label的字段
                         itemValueField: 'value', // 项数据表示value的字段
                         enumSource: [{ value: 1, label: 'Man' }, { value: 2, label: 'Woman' }], // 本地数据源
-                        modelField: 'gender' // 用于绑定input value值的某个属性
+                        modelField: 'gender', // 用于绑定input value值的某个属性
+                        placeholder: 'Select',
                       }
                     }
                   }
@@ -489,7 +490,8 @@ note:
                           remoteUrl: '/api/input/getDomains', // 如果是远程访问，则填写该url
                           resField: '' // 响应结果的字段
                         },
-                        modelField: 'domain' // 用于绑定input value值的某个属性
+                        modelField: 'domain', // 用于绑定input value值的某个属性
+                        placeholder: '',
                       }
                     }
                   }

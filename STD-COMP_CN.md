@@ -63,7 +63,8 @@
         remoteUrl: '', // 如果是远程访问，则填写该url
         resField: '', // 响应结果的字段
       },
-      modelField: '' // 用于绑定input value值的某个属性
+      modelField: '', // 用于绑定input value值的某个属性
+      placeholder: '', // 占位描述
     },
     appendSelect: { // 后置下拉框，使用该种的数据必须是对象
       itemLabelField: 'label', // 项数据表示label的字段
@@ -73,7 +74,8 @@
         remoteUrl: '', // 如果是远程访问，则填写该url
         resField: '', // 响应结果的字段
       },
-      modelField: '' // 用于绑定input value值的某个属性
+      modelField: '', // 用于绑定input value值的某个属性
+      placeholder: '', // 占位描述
     }
   }，
 
@@ -280,6 +282,7 @@
     item: '',
     all: ''
   }, 
+  showOneIfEmpty: false, // 当空值时是否显示一项
 }
 ```
 
@@ -299,6 +302,7 @@
     item: '',
     all: ''
   },
+  showOneIfEmpty: false, // 当空值时是否显示一项
 }
 ```
 
@@ -316,5 +320,6 @@
     item: '',
     all: ''
   },
+  showOneIfEmpty: false, // 当空值时是否显示一项
 }
 ```

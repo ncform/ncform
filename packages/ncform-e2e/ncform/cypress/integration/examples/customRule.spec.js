@@ -29,6 +29,8 @@ context('rules.customRule', () => {
   it('rules.customRule in Array', () => {
     let id = md5('rules.customRule in Array');
     cy.get(`[data-cy=${id}]`).within(() => {
+      cy.get('legend').contains('rows').parent().find('button').contains('Add').click();
+
       cy.get('label').contains('maxNum').next().find('input').as('maxNumInput');
       cy.get('label').contains('minNum').next().find('input').as('minNumInput');
 
