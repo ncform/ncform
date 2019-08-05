@@ -205,7 +205,10 @@ context('Radio', () => {
             type: 'string'
           },
           ui: {
-            widget: 'array-table'
+            widget: 'array-table',
+            widgetConfig: {
+              showOneIfEmpty: true
+            }
           }
         },
         name1: {

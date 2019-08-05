@@ -282,6 +282,7 @@
     item: '',
     all: ''
   }, 
+  showOneIfEmpty: false, // 当空值时是否显示一项
 }
 ```
 
@@ -301,6 +302,7 @@
     item: '',
     all: ''
   },
+  showOneIfEmpty: false, // 当空值时是否显示一项
 }
 ```
 
@@ -318,5 +320,6 @@
     item: '',
     all: ''
   },
+  showOneIfEmpty: false, // 当空值时是否显示一项
 }
 ```

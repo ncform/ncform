@@ -76,9 +76,11 @@ context('Array', () => {
           cy.get('legend').click();
           cy.get('legend').next().should('be.visible');
 
+          cy.get('button').contains('Add Item').click();
           cy.get('input').should('not.be.visible');
           cy.get('button').find('.el-icon-arrow-up').click()
           cy.get('input').should('be.visible');
+          cy.get('input').its('length').should('equal', 1);
 
           cy.get('button').contains('Add Item').click();
           cy.get('button').find('.el-icon-arrow-up:visible').click()
@@ -363,4 +365,57 @@ context('Array', () => {
     });
   });
 
+  it('showOneIfEmpty option', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        users1: {
+          type: 'array',
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widgetConfig: {
+              showOneIfEmpty: true
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('legend')
+        .contains('users1')
+        .parent()
+        .within(() => {
+          // 默认有一项
+          cy.get('input').its('length').should('equal', 1);
+          cy.get('input').eq(0).should('have.value', '');
+
+          // 填写值然后删除该项
+          cy.get('input').eq(0).type('daniel');
+          cy.get('input').eq(0).should('have.value', 'daniel');
+          cy.get('.el-icon-remove').eq(0).click();
+          cy.get('input').eq(0).should('have.value', '');
+
+          // 增加多一项，然后删除全部
+          cy.get('button').contains('Add').click();
+          cy.get('input').its('length').should('equal', 2);
+          cy.get('input').eq(0).type('daniel');
+          cy.get('input').eq(1).type('sarah');
+          cy.get('button:contains("Delete All")').click();
+          cy.get('input').its('length').should('equal', 1);
+          cy.get('input').eq(0).should('have.value', '');
+        });
+
+      // common.submitForm();
+    });
+  });
 });

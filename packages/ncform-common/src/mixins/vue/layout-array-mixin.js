@@ -17,13 +17,14 @@ export default {
     this.$options.lang = window.__$ncform.lang;
     this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
 
-    this.schema.value =
-      this.schema.value && this.schema.value.length > 0
-        ? this.schema.value
-        : [ncformUtils.getDefVal(this.schema.items.type)];
-    this.schema.value.forEach((item, idx) => {
-      this.addItem(idx);
-    });
+    this.schema.value = this.schema.value || [];
+    if (this.schema.value.length === 0) {
+      this._addEmptyItem();
+    } else {
+      this.schema.value.forEach((item, idx) => {
+        this.addItem(idx);
+      });
+    }
 
     this.$data.collapsed = this.mergeConfig.collapsed;
 
@@ -111,6 +112,12 @@ export default {
       this.$set(this.tempData, key, value);
     },
 
+    _addEmptyItem() {
+      if (this.schema.value.length === 0 && this.mergeConfig.showOneIfEmpty) {
+        this.$nextTick(() => this.addItem());
+      }
+    },
+
     isNormalObjSchema: ncformUtils.isNormalObjSchema,
 
     isNormalArrSchema: ncformUtils.isNormalArrSchema,
@@ -145,15 +152,18 @@ export default {
             type: 'warning'
           }).then(() => {
             this.schema.value.splice(idx, 1);
+            this._addEmptyItem();
           })
         } else {
           this.schema.value.splice(idx, 1);
+          this._addEmptyItem();
         }
       } else {
         if (requiredConfirm) {
-          window.confirm(confirmText) && this.schema.value.splice(idx, 1);
+          window.confirm(confirmText) && this.schema.value.splice(idx, 1) && this._addEmptyItem();
         } else {
           this.schema.value.splice(idx, 1);
+          this._addEmptyItem();
         }
       }
     },
@@ -165,15 +175,18 @@ export default {
             type: 'warning'
           }).then(() => {
             this.schema.value = [];
+            this._addEmptyItem();
           })
         } else {
           this.schema.value = [];
+          this._addEmptyItem();
         }
       } else {
         if (requiredConfirm) {
-          window.confirm(confirmText) && (this.schema.value = []);
+          window.confirm(confirmText) && (this.schema.value = []) && this._addEmptyItem();
         } else {
           this.schema.value = [];
+          this._addEmptyItem();
         }
       }
 

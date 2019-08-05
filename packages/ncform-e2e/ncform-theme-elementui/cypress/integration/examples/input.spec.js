@@ -104,7 +104,7 @@ context('input', () => {
           ui: {
             widgetConfig: {
               prefixIcon: 'el-icon-search',
-              trim: false
+              trim: true
             }
           }
         },
@@ -142,7 +142,7 @@ context('input', () => {
         .as('nameInput1');
       cy.get('@nameInput1')
         .type(' daniel  ')
-        .should('have.value', ' daniel  ');
+        .should('have.value', 'daniel');
       cy.get('@nameInput1')
         .parent()
         .find('.el-icon-search')
@@ -165,7 +165,7 @@ context('input', () => {
         .should('not.be.visible');
       cy.get('@nameInput2')
         .type(' daniel  ')
-        .should('have.value', 'daniel');
+        .should('have.value', ' daniel  ');
       cy.get('@nameInput2')
         .parent()
         .find('.el-input__clear')

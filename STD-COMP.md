@@ -282,6 +282,7 @@ If you don't like the cold text description, click on the [interactive version](
     item: '',
     all: ''
   }, 
+  showOneIfEmpty: false, // Show one item if empty
 }
 ```
 
@@ -301,6 +302,7 @@ If you don't like the cold text description, click on the [interactive version](
     item: '',
     all: ''
   }, 
+  showOneIfEmpty: false, // Show one item if empty
 }
 ```
 
@@ -318,5 +320,6 @@ If you don't like the cold text description, click on the [interactive version](
     item: '',
     all: ''
   }, 
+  showOneIfEmpty: false, // Show one item if empty
 }
 ```
