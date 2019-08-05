@@ -38,7 +38,7 @@
           v-if="mergeConfig.compound.prependSelect"
           v-model="prependSelectVal"
           slot="prepend"
-          :placeholder="$nclang('selectPls')"
+          :placeholder="mergeConfig.compound.prependSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in prependSelectOptions"
@@ -52,7 +52,7 @@
           v-if="mergeConfig.compound.appendSelect"
           v-model="appendSelectVal"
           slot="append"
-          :placeholder="$nclang('selectPls')"
+          :placeholder="mergeConfig.compound.appendSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in appendSelectOptions"
@@ -130,7 +130,7 @@
           v-if="mergeConfig.compound.prependSelect"
           v-model="prependSelectVal"
           slot="prepend"
-          :placeholder="$nclang('selectPls')"
+          :placeholder="mergeConfig.compound.prependSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in prependSelectOptions"
@@ -144,7 +144,7 @@
           v-if="mergeConfig.compound.appendSelect"
           v-model="appendSelectVal"
           slot="append"
-          :placeholder="$nclang('selectPls')"
+          :placeholder="mergeConfig.compound.appendSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in appendSelectOptions"

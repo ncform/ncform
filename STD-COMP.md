@@ -63,7 +63,8 @@ If you don't like the cold text description, click on the [interactive version](
         remoteUrl: '', // If it is remote call, fill in the url
         resField: '', // Response result field
       },
-      modelField: '' // An attribute used to bind the value of the input value
+      modelField: '', // An attribute used to bind the value of the input value
+      placeholder: '', // placeholder
     },
     appendSelect: { // Append select, The data used for this kind must be an object
       itemLabelField: 'label', // Item data represents the field of the label
@@ -73,7 +74,8 @@ If you don't like the cold text description, click on the [interactive version](
         remoteUrl: '', // If it is remote call, fill in the url
         resField: '', // Response result field
       },
-      modelField: '' // An attribute used to bind the value of the input value
+      modelField: '', // An attribute used to bind the value of the input value
+      placeholder: '', // placeholder
     }
   }，
 
