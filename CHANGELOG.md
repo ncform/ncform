@@ -1,3 +1,17 @@
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/ncform/ncform/compare/v1.3.2...v1.4.0) (2019-08-05)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed invalid handler for event "change": got undefined ([373848f](https://github.com/ncform/ncform/commit/373848f))
+
+### Features
+
+* **ncform:** add autoDX option to control whether config auto support dx expression or not ([62d23ee](https://github.com/ncform/ncform/commit/62d23ee))
+* **ncform:** add item change event ([49a9617](https://github.com/ncform/ncform/commit/49a9617)), closes [#86](https://github.com/ncform/ncform/issues/86)
+* **ncform-theme-elementui:** add compound.appendSelect.placeholder and compound.prependSelect for input widget ([0ab6584](https://github.com/ncform/ncform/commit/0ab6584)), closes [#85](https://github.com/ncform/ncform/issues/85)
+* Add showOneIfEmpty option for array / array-table / array-tabs widgets ([5255597](https://github.com/ncform/ncform/commit/5255597)), closes [#87](https://github.com/ncform/ncform/issues/87)
+
 <a name="1.3.4"></a>
 ## [1.3.4](https://github.com/ncform/ncform/compare/v1.3.3...v1.3.4) (2019-07-24)
 
