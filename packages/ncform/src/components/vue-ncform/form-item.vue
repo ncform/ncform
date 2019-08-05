@@ -6,7 +6,7 @@
     <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig">
 
       <template v-for="(fieldSchema, fieldName) in schema.properties" :slot="fieldName">
-        <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :key="fieldName" :global-config="globalConfig" :complete-schema="completeSchema"></form-item>
+        <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :key="fieldName" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths ? paths + '.' + fieldName : fieldName" :form-name="formName"></form-item>
       </template>
 
     </component>
@@ -15,7 +15,7 @@
     <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig" class="__ncform-control">
 
       <template v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})" :slot="fieldName" slot-scope="props">
-        <form-item :schema="props.schema" :key="fieldName" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema"></form-item>
+        <form-item :schema="props.schema" :key="fieldName" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths + '[' + props.idx + ']'" :form-name="formName"></form-item>
       </template>
 
     </component>
@@ -136,6 +136,13 @@ export default {
     },
     idxChain: {
       // 用于记录在数组中的索引
+      type: String
+    },
+    paths: {
+      // 用于记录字段的路径
+      type: String
+    },
+    formName: {
       type: String
     }
   },
@@ -263,6 +270,15 @@ export default {
 
         // 对比控件改变前后的值，判断是否需要对其进行校验。
         if (changed) {
+          if (!ncformUtils.isNormalObjSchema(newVal) && !ncformUtils.isNormalArrSchema(newVal)) { // 叶子结点
+            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
+            formVM.$emit('change', {
+              paths: this.paths,
+              itemValue: this.schema.value,
+              formValue: this.formData
+            })
+          }
+
           if (ncformUtils.isNormalArrSchema(newVal)) {
             this.$data.itemValue = ncformUtils.getModelFromSchema(newVal);
           } else {

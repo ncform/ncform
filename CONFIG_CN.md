@@ -282,3 +282,18 @@ const allWidgets = this.$ncformAllWidgets();
 // Demo code:
 <ncform @submit="submit()"></ncform>
 ```
+
+- change
+
+表单项值更改事件
+
+```
+// Demo code:
+<ncform @change="onChange"></ncform>
+
+onChange({paths, itemValue, formValue}) {
+  // paths: 发生值变化的项的路径
+  // itemValue：发生值变化的项的最新值
+  // formVallue: 表单的最新值
+}
+```

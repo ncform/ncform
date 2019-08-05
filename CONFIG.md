@@ -281,3 +281,18 @@ Submit a form.
 // Demo code:
 <ncform @submit="submit()"></ncform>
 ```
+
+- change
+
+Form item value change event
+
+```
+// Demo code:
+<ncform @change="onChange"></ncform>
+
+onChange({paths, itemValue, formValue}) {
+  // paths: the path of the item whose value changes
+  // itemValue: the latest value of the item whose value has changed
+  // formVallue: the latest value of the form
+}
+```
