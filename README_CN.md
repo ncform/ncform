@@ -17,7 +17,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 具备强大的 **控件交互** 和 **扩展能力**，做你所想。
 
-> 如果你犹豫不决，你可以阅读这篇文章：[如何选型](https://forum.vuejs.org/t/topic/57784)
+> 如果你犹豫不决，你可以阅读这篇文章：[如何选型](https://github.com/ncform/ncform/wiki/%E8%AE%A9%E5%89%8D%E7%AB%AF%E5%B0%8F%E5%A7%90%E5%A7%90%E6%84%89%E5%BF%AB%E5%9C%B0%E5%BC%80%E5%8F%91%E8%A1%A8%E5%8D%95)
 
 [![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
 
