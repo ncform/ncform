@@ -93,6 +93,7 @@
       minSize: 0 // 最小文件大小，单位KB，0代表不限
     },
     uploadText: '点击上传', //  上传按钮的名称
+    headers: {}, // 设置上传的请求头部
   }
 }
 ```
@@ -199,6 +200,7 @@
   listType: 'text', // 文件列表的类型。 可选值：text/picture/picture-card
   autoUpload: false, // 是否在选取文件后立即进行上传
   limit: 1, // 最大允许上传个数
+  headers: {}, // 设置上传的请求头部
 }
 ```
 

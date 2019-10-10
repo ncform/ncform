@@ -93,6 +93,7 @@ If you don't like the cold text description, click on the [interactive version](
       minSize: 0 // Minimum file size in KB, 0 means no limit
     },
     uploadText: 'Click to upload', //  Upload button name
+    headers: {}, // Set the request headers for the upload
   }
 }
 ```
@@ -199,6 +200,7 @@ If you don't like the cold text description, click on the [interactive version](
   listType: 'text', // The type of file list. Optional value: [ text | picture | picture-card ]
   autoUpload: false, // Whether to upload immediately after selecting a file
   limit: 1, // Maximum number of uploads allowed
+  headers: {}, // Set the request headers for the upload
 }
 ```
 

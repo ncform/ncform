@@ -390,7 +390,8 @@ export default {
             minSize: 0 // 最小图片大小，单位KB，0代表不限
           },
           resField: "", // 获取返回结果的字段,
-          uploadText: "" //  上传按钮的名称
+          uploadText: "", //  上传按钮的名称
+          headers: {}
         }
       }
     };
@@ -442,7 +443,7 @@ export default {
     handleFileChange() {
       const vm = this;
       const fd = new FormData();
-      const { uploadUrl, data, resField, fileField } = vm.mergeConfig.upload;
+      const { uploadUrl, data, resField, fileField, headers = {} } = vm.mergeConfig.upload;
       const sendObj = Object.assign({}, data);
       sendObj[fileField] = this.$refs.upload.files[0];
 
@@ -546,7 +547,8 @@ export default {
         this.$http({
           method: "POST",
           url: uploadUrl,
-          data: fd
+          data: fd,
+          headers: headers
         })
           .then(res => {
             this.$data.inputVal = _get(res, resField || "");
