@@ -1,3 +1,13 @@
+
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/ncform/ncform/compare/v1.4.0...v1.5.0) (2019-10-11)
+
+### Features
+
+* **ncform-theme-elementui:** add the switch widget to the standard components ([1180196](https://github.com/ncform/ncform/commit/1180196)), closes [#73](https://github.com/ncform/ncform/issues/73)
+* **ncform-theme-elementui:** upload and input.upload add headers config ([16c0511](https://github.com/ncform/ncform/commit/16c0511)), closes [#93](https://github.com/ncform/ncform/issues/93)
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/ncform/ncform/compare/v1.3.2...v1.4.0) (2019-08-05)
 
