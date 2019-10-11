@@ -93,6 +93,7 @@ If you don't like the cold text description, click on the [interactive version](
       minSize: 0 // Minimum file size in KB, 0 means no limit
     },
     uploadText: 'Click to upload', //  Upload button name
+    headers: {}, // Set the request headers for the upload
   }
 }
 ```
@@ -199,6 +200,7 @@ If you don't like the cold text description, click on the [interactive version](
   listType: 'text', // The type of file list. Optional value: [ text | picture | picture-card ]
   autoUpload: false, // Whether to upload immediately after selecting a file
   limit: 1, // Maximum number of uploads allowed
+  headers: {}, // Set the request headers for the upload
 }
 ```
 
@@ -248,6 +250,22 @@ If you don't like the cold text description, click on the [interactive version](
 
 ```js
 {
+}
+```
+
+- switch
+
+```js
+{
+  width: 40, // Switch's width（pixel）
+  activeIconClass: '', // The class name of the icon displayed when the switch is turned on. Setting this item ignores activeText
+  inactiveIconClass: '', // The class name of the icon displayed when the switch is closed. Setting this item ignores inactiveText
+  activeText: '', // Text description when switch is turned on
+  inactiveText: '', // Text description when switch is off
+  activeValue: '', // The value of the switch when it is turned on. default is true [boolean / string / number]
+  inactiveValue: '', //  The value of the switch when it is turned off. default is false [ boolean / string / number ]
+  activeColor: '#409EFF', // Background color when switch is on
+  inactiveColor: '#C0CCDA', // Background color when switch is off
 }
 ```
 

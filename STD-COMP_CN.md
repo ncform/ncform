@@ -93,6 +93,7 @@
       minSize: 0 // 最小文件大小，单位KB，0代表不限
     },
     uploadText: '点击上传', //  上传按钮的名称
+    headers: {}, // 设置上传的请求头部
   }
 }
 ```
@@ -199,6 +200,7 @@
   listType: 'text', // 文件列表的类型。 可选值：text/picture/picture-card
   autoUpload: false, // 是否在选取文件后立即进行上传
   limit: 1, // 最大允许上传个数
+  headers: {}, // 设置上传的请求头部
 }
 ```
 
@@ -248,6 +250,22 @@
 
 ```js
 {
+}
+```
+
+- switch
+
+```js
+{
+  width: 40, // switch 的宽度（像素）
+  activeIconClass: '', // switch 打开时所显示图标的类名，设置此项会忽略 activeText
+  inactiveIconClass: '', // switch 关闭时所显示图标的类名，设置此项会忽略 inactiveText
+  activeText: '', // switch 打开时的文字描述
+  inactiveText: '', // switch 关闭时的文字描述 
+  activeValue: '', // switch 打开时的值。默认值是true。 boolean / string / number
+  inactiveValue: '', //  switch 关闭时的值。默认值是false。 boolean / string / number
+  activeColor: '#409EFF', // switch 打开时的背景色
+  inactiveColor: '#C0CCDA', // switch 关闭时的背景色
 }
 ```
 

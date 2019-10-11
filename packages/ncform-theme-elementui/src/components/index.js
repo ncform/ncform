@@ -10,6 +10,7 @@ import datePicker from "./control-comps/date-picker.vue";
 import slider from "./control-comps/slider.vue";
 import rate from "./control-comps/rate.vue";
 import label from "./control-comps/label.vue";
+import switchWidget from "./control-comps/switch.vue";
 // Don't touch me - import controls
 
 import object from "./layout-comps/object.vue";
@@ -31,6 +32,7 @@ const components = {
   slider,
   rate,
   label,
+  switch: switchWidget,
   // Don't touch me - export controls
 
   object,

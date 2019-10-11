@@ -237,7 +237,10 @@ context('input', () => {
                 },
                 fileField: 'photo',
                 accept: '.png',
-                uploadText: 'Upload Now'
+                uploadText: 'Upload Now',
+                headers: {
+                  author: 'daniel'
+                }
               }
             },
             preview: {
@@ -356,6 +359,9 @@ context('input', () => {
           cy.wait('@upload').then(xhr => {
             let uploadParams = {};
             xhr.request.body.forEach((item, key) => (uploadParams[key] = item));
+            let headers = xhr.request.headers;
+
+            cy.wrap(headers).its('author').should('equal', 'daniel')
             cy.wrap(uploadParams)
               .its('name')
               .should('equal', 'daniel');
