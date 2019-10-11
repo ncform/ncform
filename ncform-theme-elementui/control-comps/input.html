@@ -537,7 +537,10 @@ The resField is empty means the whole response data is the result of the display
                         maxSize: 0, // 最大图片大小，单位KB，0代表不限
                         minSize: 0 // 最小图片大小，单位KB，0代表不限
                       },
-                      uploadText: 'Upload' //  上传按钮的名称
+                      uploadText: 'Upload', //  上传按钮的名称
+                      headers: {
+                        author: 'daniel'
+                      }
                     }
                   }
                 }
@@ -560,6 +563,7 @@ upload各字段的描述如下：
   - maxSize：上传文件最大大小，默认值为0，代表不限，单位KB
   - minSize：上传文件最小大小，默认值为0，代表不限，单位KB
 - uploadText：上传按钮的名称，默认是"点击上传"
+- headers: 设置上传的请求头部
 `,
             en: `
 Note: When type="file", the "upload" attribute has the highest priority.
@@ -576,6 +580,7 @@ The description of each field of upload is as follows:
    - maxSize: The maximum size of the uploaded file. The default value is 0, which means no limit, the unit is KB.
    - minSize: the minimum size of the uploaded file. The default value is 0, which means no limit, the unit is KB.
 - uploadText: the name of the upload button, default is "click upload"
+- headers: set the request headers for the upload
 `
           }
         }
