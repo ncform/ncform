@@ -341,6 +341,35 @@ Prompt information can be configured via delConfirmText when requiredDelConfirm 
             }
           }
         },
+        {
+          title: {
+            cn: '[属性] colgroup: 列配置',
+            en:
+              '[ATTR] colgroup: Column settings'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-table',
+                  widgetConfig: {
+                    colgroup: [
+                      {},
+                      {
+                        width: '200px'
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
       ];
 
       // Bootstrap the app

@@ -8,6 +8,13 @@
     </legend>
 
     <table v-show="!collapsed" class="table table-bordered">
+      <colgroup v-if="mergeConfig.colgroup">
+        <col v-for="(item, idx) in mergeConfig.colgroup" :key="idx" :width="item.width" />
+      </colgroup>
+      <colgroup v-else>
+        <col v-for="(item, idx) in renderSchemas" :key="idx" />
+        <col v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder" width="130px"/>
+      </colgroup>
       <thead>
           <th v-for="(renderSchema, idx) in renderSchemas" :key="renderSchema.ui.label" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
 
@@ -34,7 +41,7 @@
             <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
           </td>
 
-          <td v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder" style="width: 130px;">
+          <td v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">
             <!-- 项控制按钮 -->
             <div class="el-button-group">
               <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>

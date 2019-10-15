@@ -5,6 +5,13 @@
     <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
 
     <table v-show="!collapsed" class="table table-bordered">
+      <colgroup v-if="mergeConfig.colgroup">
+        <col v-for="(item, idx) in mergeConfig.colgroup" :key="idx" :width="item.width" />
+      </colgroup>
+      <colgroup v-else>
+        <col v-for="(item, idx) in renderSchemas" :key="idx" />
+        <col v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder" width="130px"/>
+      </colgroup>
       <thead>
         <tr>
           <th v-for="(renderSchema, idx) in renderSchemas" :key="renderSchema.ui.label" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">

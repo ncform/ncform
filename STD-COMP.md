@@ -321,6 +321,11 @@ If you don't like the cold text description, click on the [interactive version](
     all: ''
   }, 
   showOneIfEmpty: false, // Show one item if empty
+  colgroup: [ // Column configuration
+    {
+      width: '', // Column width, pixels or %
+    }
+  ], 
 }
 ```
 

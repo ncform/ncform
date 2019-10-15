@@ -321,6 +321,11 @@
     all: ''
   },
   showOneIfEmpty: false, // 当空值时是否显示一项
+  colgroup: [ // 列配置
+    {
+      width: '', // 列宽度, pixels 或 %
+    }
+  ], 
 }
 ```
 

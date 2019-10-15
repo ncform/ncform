@@ -59,6 +59,13 @@ context('Table', () => {
                 item: 'Sure to delete item',
                 all: 'Sure to delete all'
               },
+              colgroup: [
+                {
+                },
+                {
+                  width: '80px'
+                }
+              ],
             }
           }
         }
@@ -93,6 +100,8 @@ context('Table', () => {
 
           cy.get('.el-icon-remove').eq(0).click();
           cy.get('input').its('length').should('equal', 1);
+
+          cy.get('thead>th:last-child').should('have.prop', 'offsetWidth', 130);
         });
 
       cy.get('legend')
@@ -125,6 +134,8 @@ context('Table', () => {
           cy.get('@body').find('.el-message-box__message').should('have.text', 'Sure to delete all');
           cy.get('@body').find('.el-message-box__btns .el-button--primary').click();
           cy.get('input').should('not.exist');
+
+          cy.get('thead>th:last-child').should('have.prop', 'offsetWidth', 80);
         });
       // common.submitForm();
     });
