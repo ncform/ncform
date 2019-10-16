@@ -1,4 +1,13 @@
 
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/ncform/ncform/compare/v1.6.1...v1.6.2) (2019-10-16)
+
+### Bug Fixes
+
+* **array widgets:** fixed bug for delExceptionRows implementation ([f76fd87](https://github.com/ncform/ncform/commit/f76fd87))
+* **array-table:** fixed the display problem of column width ([e8e079c](https://github.com/ncform/ncform/commit/e8e079c))
+* **ncform:** make sure the scrolling action is after the DOM update ([c3c72d3](https://github.com/ncform/ncform/commit/c3c72d3))
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/ncform/ncform/compare/v1.6.0...v1.6.1) (2019-10-16)
 
