@@ -78,6 +78,7 @@ export default {
           item: '',
           all: ''
         },
+        delExceptionRows: ''
       },
       i18n: {},
     };
@@ -97,6 +98,9 @@ export default {
           return this._analyzeVal(val);
         else return val;
       })
+    },
+    showActionColumn() {
+      return !this.mergeConfig.disableDel || !this.mergeConfig.disableReorder || this.mergeConfig.delExceptionRows;
     }
   },
 
@@ -174,22 +178,29 @@ export default {
           this.$confirm(confirmText, '', {
             type: 'warning'
           }).then(() => {
-            this.schema.value = [];
+            this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema.value)));
             this._addEmptyItem();
           })
         } else {
-          this.schema.value = [];
+          this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema.value)));
           this._addEmptyItem();
         }
       } else {
         if (requiredConfirm) {
-          window.confirm(confirmText) && (this.schema.value = []) && this._addEmptyItem();
+          if (window.confirm(confirmText)) {
+            this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema.value)));
+            this._addEmptyItem();
+          }
         } else {
-          this.schema.value = [];
+          this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema.value)));
           this._addEmptyItem();
         }
       }
 
+    },
+
+    isDelExceptionRow(rowData) {
+      return this.mergeConfig.delExceptionRows ? this.mergeConfig.delExceptionRows(rowData) : false;
     },
 
     itemUp(idx) {

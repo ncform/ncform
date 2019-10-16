@@ -53,7 +53,22 @@ context('Array', () => {
           },
           ui: {
             widgetConfig: {
-              requiredDelConfirm: true
+              requiredDelConfirm: true,
+            }
+          }
+        },
+        users4: {
+          type: 'array',
+          value: [
+            'daniel', 'sarah'
+          ],
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widgetConfig: {
+              "disableDel": true,
+              "delExceptionRows": 'dx: (function(item) { return item === "daniel"})'
             }
           }
         }
@@ -129,6 +144,14 @@ context('Array', () => {
           cy.get('@body').find('.el-message-box__message').should('have.text', 'Are you sure to delete all?');
           cy.get('@body').find('.el-message-box__btns .el-button--primary').click();
           cy.get('input').should('not.exist');
+        });
+
+      cy.get('legend')
+        .contains('users4')
+        .parent()
+        .within(() => {
+          cy.get('.list-item').eq(0).find('button.el-button--danger').should('exist');
+          cy.get('.list-item').eq(1).find('button.el-button--danger').should('not.exist');
         });
 
       // common.submitForm();

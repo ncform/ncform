@@ -10,7 +10,7 @@
       </colgroup>
       <colgroup v-else>
         <col v-for="(item, idx) in renderSchemas" :key="idx" />
-        <col v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder" width="130px"/>
+        <col v-if="showActionColumn" width="130px"/>
       </colgroup>
       <thead>
         <tr>
@@ -27,7 +27,7 @@
             </small>
           </th>
 
-          <th v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">{{$nclang('action')}}</th>
+          <th v-if="showActionColumn">{{$nclang('action')}}</th>
         </tr>
       </thead>
       <tbody>
@@ -36,10 +36,10 @@
             <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
           </td>
 
-          <td v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">
+          <td v-if="showActionColumn">
             <!-- 项控制按钮 -->
             <div class="btn-group btn-group-sm">
-              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="!mergeConfig.disableDel" type="button" class="btn btn-danger btn-secondary">Del</button>
+              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema.value)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema.value))" type="button" class="btn btn-danger btn-secondary">Del</button>
               <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" type="button" class="btn btn-secondary">Up</button>
               <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" type="button" class="btn btn-secondary">Down</button>
             </div>

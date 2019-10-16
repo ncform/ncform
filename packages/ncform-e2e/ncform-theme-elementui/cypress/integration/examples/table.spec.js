@@ -68,6 +68,22 @@ context('Table', () => {
               ],
             }
           }
+        },
+        users4: {
+          type: 'array',
+          value: [
+            'daniel', 'sarah'
+          ],
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widget: 'array-table',
+            widgetConfig: {
+              "disableDel": false,
+              "delExceptionRows": 'dx: (function(item) { return item === "daniel"})'
+            }
+          }
         }
       }
     };
@@ -136,6 +152,14 @@ context('Table', () => {
           cy.get('input').should('not.exist');
 
           cy.get('thead>th:last-child').should('have.prop', 'offsetWidth', 80);
+        });
+
+      cy.get('legend')
+        .contains('users4')
+        .parent()
+        .within(() => {
+          cy.get('tbody tr').eq(0).find('button.el-button--danger').should('not.exist');
+          cy.get('tbody tr').eq(1).find('button.el-button--danger').should('exist');
         });
       // common.submitForm();
     });

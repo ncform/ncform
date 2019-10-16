@@ -62,6 +62,16 @@ context('Layout widgets', () => {
     })
   })
 
+  it('array: some rows can not be deleted', () => {
+    let id = md5('array: some rows can not be deleted');
+    cy.get(`[data-cy=${id}]`).within(() => {
+      cy.get('legend').contains('user').as('userLegend');
+
+      cy.get('@userLegend').next().find('button.btn-danger').should('not.exist');
+      cy.get('@userLegend').next().next().find('button.btn-danger').should('exist');
+    })
+  })
+
   it('array: collapsed / itemCollapse true and txts change', () => {
     let id = md5('array: collapsed / itemCollapse true and txts change');
     cy.get(`[data-cy=${id}]`).within(() => {
@@ -104,6 +114,22 @@ context('Layout widgets', () => {
 
       cy.get('@userLegend').next().find('button').contains('Add Item').should('exist');
       cy.get('@userLegend').next().find('button').contains('Remove All').should('exist');
+    })
+  })
+
+  it('table: some rows can be deleted', () => {
+    let id = md5('table: some rows can be deleted');
+    cy.get(`[data-cy=${id}]`).within(() => {
+      cy.get('legend').contains('user').as('userLegend');
+
+      cy.get('@userLegend').next().find('button.btn-danger').should('have.length', 1);
+    })
+  })
+
+  it('table: set colums width', () => {
+    let id = md5('table: set colums width');
+    cy.get(`[data-cy=${id}]`).within(() => {
+      cy.get('thead th:last-child').should('have.prop', 'offsetWidth', 200);
     })
   })
 
