@@ -1,4 +1,17 @@
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/ncform/ncform/compare/v1.5.0...v1.6.0) (2019-10-16)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed bug that dropdown options do not show any more with configure filterLocal=false ([498ef06](https://github.com/ncform/ncform/commit/498ef06)), closes [#98](https://github.com/ncform/ncform/issues/98)
+
+
+### Features
+
+* **array layout widgets:** add delExceptionRows config for all layout widgets ([49bdbbf](https://github.com/ncform/ncform/commit/49bdbbf)), closes [#100](https://github.com/ncform/ncform/issues/100)
+* **array-table:** add column config (colgroup) for array-table widget ([aad46c4](https://github.com/ncform/ncform/commit/aad46c4)), closes [#99](https://github.com/ncform/ncform/issues/99)
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/ncform/ncform/compare/v1.4.0...v1.5.0) (2019-10-11)
 
