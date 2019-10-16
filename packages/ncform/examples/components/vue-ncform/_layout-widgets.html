@@ -359,20 +359,37 @@
                   users: {
                     type: 'array',
                     items: {
-                      type: 'string'
+                      type: 'object',
+                      properties: {
+                        id: {
+                          type: 'string',
+                          ui: {
+                            hidden: true
+                          }
+                        },
+                        name: {
+                          type: 'string'
+                        }
+                      }
                     },
                     ui: {
                       widget: 'array-table',
                       widgetConfig: {
                         disableDel: true,
-                        delExceptionRows: 'dx: (function(item) { return item === "daniel" })',
+                        delExceptionRows: 'dx: (function(item) { return !!item.id })'
                       }
                     }
                   }
                 },
                 value: {
                   users: [
-                    'daniel', 'sarah'
+                    {
+                      id: 1,
+                      name: 'daniel'
+                    },
+                    {
+                      name: 'sarah'
+                    }
                   ]
                 }
               }
