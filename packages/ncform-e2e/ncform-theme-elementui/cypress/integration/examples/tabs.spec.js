@@ -59,6 +59,22 @@ context('Tabs', () => {
               },
             }
           }
+        },
+        users4: {
+          type: 'array',
+          value: [
+            'daniel', 'sarah'
+          ],
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widget: 'array-tabs',
+            widgetConfig: {
+              "disableDel": true,
+              "delExceptionRows": 'dx: (function(item) { return item === "daniel"})'
+            }
+          }
         }
       }
     };
@@ -131,6 +147,16 @@ context('Tabs', () => {
           cy.get('@body').find('.el-message-box__message').should('have.text', 'Sure to delete item');
           cy.get('@body').find('.el-message-box__btns .el-button--primary').click();
           cy.get('.el-tabs__item').its('length').should('equal', 1);
+        });
+
+      cy.get('legend')
+        .contains('users4')
+        .parent()
+        .within(() => {
+          cy.get('.el-icon-close').should('be.visible');
+
+          cy.get('.el-tabs__item').eq(1).click();
+          cy.get('.el-icon-close').should('not.be.visible');
         });
       // common.submitForm();
     });

@@ -288,6 +288,7 @@ If you don't like the cold text description, click on the [interactive version](
 {
   disableAdd: true, // Whether to prohibit the addition of items
   disableDel: true, // whether to disable item deletion
+  delExceptionRows: 'dx: (function(item) { return false })' // The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false
   disableReorder: true, // Whether to prohibit sorting
   disableCollapse: false, // Whether to allow folding
   collapsed: false, // Whether to fold by default
@@ -310,6 +311,7 @@ If you don't like the cold text description, click on the [interactive version](
 {
   disableAdd: true, // Whether to prohibit the addition of items
   disableDel: true, // whether to disable item deletion
+  delExceptionRows: 'dx: (function(item) { return false })' // The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false
   disableReorder: true, // Whether to prohibit sorting
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
@@ -321,6 +323,11 @@ If you don't like the cold text description, click on the [interactive version](
     all: ''
   }, 
   showOneIfEmpty: false, // Show one item if empty
+  colgroup: [ // Column configuration
+    {
+      width: '', // Column width, pixels or %
+    }
+  ], 
 }
 ```
 
@@ -330,6 +337,7 @@ If you don't like the cold text description, click on the [interactive version](
 {
   disableAdd: true, // Whether to prohibit the addition of items
   disableDel: true, // whether to disable item deletion
+  delExceptionRows: 'dx: (function(item) { return false })' // The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false
   tabPosition: 'top', // Optional value：[left | top]
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding

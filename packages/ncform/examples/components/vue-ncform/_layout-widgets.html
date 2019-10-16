@@ -153,6 +153,34 @@
               }
             },
             {
+              id: md5('array: some rows can not be deleted'),
+              title: 'array: some rows can not be deleted',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widget: 'array',
+                      widgetConfig: {
+                        disableDel: false,
+                        delExceptionRows: 'dx: (function(item) { return item === "daniel" })',
+                      }
+                    }
+                  }
+                },
+                value: {
+                  users: [
+                    'daniel', 'sarah'
+                  ]
+                }
+              }
+            },
+            {
               id: md5('array: deletion requires confirmation'),
               title: 'array: deletion requires confirmation',
               formName: 'form_' + Math.random(),
@@ -278,6 +306,66 @@
                       widget: 'array-table',
                       widgetConfig: {
                         requiredDelConfirm: true,
+                      }
+                    }
+                  }
+                },
+                value: {
+                  users: [
+                    'daniel', 'sarah'
+                  ]
+                }
+              }
+            },
+            {
+              id: md5('table: set colums width'),
+              title: 'table: set colums width',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widget: 'array-table',
+                      widgetConfig: {
+                        colgroup: [
+                          {},
+                          {
+                            width: '200px',
+                          }
+                        ],
+                      }
+                    }
+                  }
+                },
+                value: {
+                  users: [
+                    'daniel', 'sarah'
+                  ]
+                }
+              }
+            },
+            {
+              id: md5('table: some rows can be deleted'),
+              title: 'table: some rows can be deleted',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widget: 'array-table',
+                      widgetConfig: {
+                        disableDel: true,
+                        delExceptionRows: 'dx: (function(item) { return item === "daniel" })',
                       }
                     }
                   }

@@ -11,6 +11,7 @@
     :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
     :loading="loading"
     @change="handleChange"
+    @visible-change="handleVisibleChange"
   >
     <el-option
       v-for="item in optionsData"
@@ -137,6 +138,12 @@ export default {
 
     handleChange() {
       this._keepSelectedItem();
+    },
+
+    handleVisibleChange(isVisible) {
+      if (!isVisible && !this.mergeConfig.filterLocal && this.optionsData.length === 0) { // 当输入搜索关键字从远程接口获取不到数据时，在隐藏时(UI上关键字被清空)需要重新call远程接口(关键字为空)，防止再次focus时不显示可选项
+        this.remoteMethod();
+      }
     },
 
     _keepSelectedItem() {
