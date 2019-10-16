@@ -44,7 +44,7 @@
           <td v-if="showActionColumn">
             <!-- 项控制按钮 -->
             <div class="el-button-group">
-              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema.value)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema.value))" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
+              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
               <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" type="button" class="el-button el-button--mini"><i class="el-icon-sort-up"></i></button>
               <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" type="button" class="el-button el-button--mini"><i class="el-icon-sort-down"></i></button>
             </div>
