@@ -1,4 +1,11 @@
 
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/ncform/ncform/compare/v1.6.0...v1.6.1) (2019-10-16)
+
+### Features
+
+* **ncform:** Add the globalConfig.scrollToFailField to support auto scroll to the first validation ([a78362f](https://github.com/ncform/ncform/commit/a78362f)), closes [#102](https://github.com/ncform/ncform/issues/102)
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/ncform/ncform/compare/v1.5.0...v1.6.0) (2019-10-16)
 
