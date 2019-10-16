@@ -9,7 +9,7 @@
         <col v-for="(item, idx) in mergeConfig.colgroup" :key="idx" :width="item.width" />
       </colgroup>
       <colgroup v-else>
-        <col v-for="(item, idx) in renderSchemas" :key="idx" />
+        <col v-for="(renderSchema, idx) in renderSchemas" :key="idx" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)"/>
         <col v-if="showActionColumn" width="130px"/>
       </colgroup>
       <thead>
