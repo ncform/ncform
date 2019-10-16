@@ -137,6 +137,12 @@
     },
     constants: { // 全局常量配置，可在dx表达中通过{{$const.}}来访问，如{{$const.userName}}
       userName: 'daniel'
+    },
+    scrollToFailField: { // 自动滚动到校验失败的字段
+      enabled: true, // 是否开启
+      container: 'body', // 滚动的容器。
+      duration: 500, // 滚动动画的持续时间(以毫秒为单位)
+      offset: -80, // 滚动时的偏移量
     }
   }
 }

@@ -136,6 +136,12 @@
     },
     constants: { // Global constant configuration, can be accessed by {{$const.userName}}
       userName: 'daniel'
+    },
+    scrollToFailField: { // Automatically scroll to fields that failed validation
+      enabled: true, // Enable this feature or not
+      container: 'body', // The container that has to be scrolled.
+      duration: 500, // The duration (in milliseconds) of the scrolling animation
+      offset: -80, // The offset that should be applied when scrolling. 
     }
   }
 }
