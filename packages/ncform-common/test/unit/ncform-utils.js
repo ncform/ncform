@@ -84,7 +84,13 @@ describe('/src/ncform-utils.js', () => {
         invalidFeedbackCls: ""
       },
       validationMsg: {},
-      constants: {}
+      constants: {},
+      scrollToFailField: { // Automatically scroll to fields that failed validation
+        enabled: true, // enable this feature or not
+        container: 'body',
+        duration: 500, // The duration (in milliseconds) of the scrolling animation
+        offset: -80, // The offset that should be applied when scrolling.
+      }
     })
     assert.equal(newFormSchema.properties.name.ui.label, 'name');
     assert.equal(newFormSchema.properties.name.ui.showLabel, true);

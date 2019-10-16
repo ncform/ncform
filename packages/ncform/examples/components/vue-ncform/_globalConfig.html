@@ -27,7 +27,7 @@
           <div v-if="item.validPass !== undefined">valid pass: {{ item.validPass }}</div>
 
           <button
-            v-if="['ignoreRulesWhenHidden is true', 'ignoreRulesWhenHidden is false'].indexOf(item.title) >= 0"
+            v-if="['ignoreRulesWhenHidden is true', 'ignoreRulesWhenHidden is false', 'auto scroll to first error'].indexOf(item.title) >= 0"
             class="btn btn-primary"
             @click="submit(item)"
           >
@@ -188,6 +188,39 @@
                   },
                   constants: {
                     userName: 'xiao'
+                  }
+                }
+              }
+            },
+            {
+              id: md5('auto scroll to first error'),
+              title: 'auto scroll to first error',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  name: {
+                    type: 'string',
+                    rules: {
+                      required: true
+                    }
+                  },
+                  a1: {
+                    type: 'string',
+                  },
+                  a2: {
+                    type: 'string',
+                  },
+                  a3: {
+                    type: 'string',
+                  }
+                },
+                globalConfig: {
+                  scrollToFailField: {
+                    enabled: true,
+                    container: 'body',
+                    duration: 1000,
+                    offset: -120,
                   }
                 }
               }
