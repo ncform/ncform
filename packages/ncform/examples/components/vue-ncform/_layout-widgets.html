@@ -394,6 +394,28 @@
                 }
               }
             },
+            {
+              id: md5('array: showOneIfEmpty is true - No extra blank row when there has initial value'),
+              title: 'array: showOneIfEmpty is true - No extra blank row when there has initial value',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    value: ['daniel'],
+                    items: {
+                      type: 'string'
+                    },
+                    ui: {
+                      widgetConfig: {
+                        showOneIfEmpty: true
+                      }
+                    }
+                  }
+                }
+              }
+            },
           ]
         }
       });

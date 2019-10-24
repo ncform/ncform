@@ -109,13 +109,10 @@ export default {
     'schema.value': {
       handler(newVal) {
         if (newVal && newVal.length > 0 && !_get(newVal, '[0].__dataSchema')) { // rebuild the array
-          this.schema.value = [];
-          this.$nextTick(() => {
-            this.schema.value = newVal;
-            this.schema.value.forEach((item, idx) => {
-              this.addItem(idx);
-            });
-          })
+          this.schema.value = newVal;
+          this.schema.value.forEach((item, idx) => {
+            this.addItem(idx);
+          });
         }
       },
       immediate: true

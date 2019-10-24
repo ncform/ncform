@@ -133,4 +133,11 @@ context('Layout widgets', () => {
     })
   })
 
+  it('array: showOneIfEmpty is true - No extra blank row when there has initial value', () => {
+    let id = md5('array: showOneIfEmpty is true - No extra blank row when there has initial value');
+    cy.get(`[data-cy=${id}]`).within(() => {
+      cy.get('input').should('have.length', 1);
+    })
+  })
+
 })
