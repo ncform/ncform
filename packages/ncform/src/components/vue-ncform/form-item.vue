@@ -172,15 +172,6 @@ export default {
         }
       });
 
-      if (this.$options._init4valueTemplate) { // Prevent init value from being overwritten
-        if (this.schema.value) result = this.schema.value;
-        // User nextTick will cause the init value to be incorrect when field item in list
-        // so here use setTimeout instead
-        setTimeout(() => {
-          this.$options._init4valueTemplate = false;
-        }, 100)
-      }
-
       return result;
     },
     htmlTypeVal() {
@@ -252,9 +243,23 @@ export default {
   },
 
   watch: {
-    valueTemplate(newVal) {
-      if (newVal !== undefined)
-        this.schema.value = newVal;
+    valueTemplate: {
+      handler: function(newVal, oldVal) {
+        if (newVal !== undefined) {
+          if (oldVal === undefined || JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+            if (this.$options._init4valueTemplate && this.schema.value) { // Prevent init value from being overwritten
+              // User nextTick will cause the init value to be incorrect when field item in list
+              // so here use setTimeout instead
+              setTimeout(() => {
+                this.$options._init4valueTemplate = false;
+              }, 10)
+            } else {
+              this.schema.value = newVal;
+            }
+          }
+        }
+      },
+      immediate: true
     },
     schema: {
       handler: function(newVal) {

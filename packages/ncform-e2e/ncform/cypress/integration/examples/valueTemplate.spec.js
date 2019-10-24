@@ -21,6 +21,8 @@ context('ValueTemplate', () => {
     let id = md5('Fullname has init value');
     cy.get(`[data-cy=${id}]`).within(() => {
       cy.get('label').contains('fullname').next().find('input').should('have.value', 'daniel.xiao');
+      cy.get('label').contains('fullname').next().find('input').type(' hi');
+      cy.get('label').contains('fullname').next().find('input').should('have.value', 'daniel.xiao hi');
       cy.get('label').contains('firstname').next().find('input').clear().type('daniel');
       cy.get('label').contains('fullname').next().find('input').should('have.value', 'daniel wang');
     })

@@ -40,6 +40,7 @@ export default {
     function handleSchema() {
       let dataFormSchema = ncformUtils.perfectFormSchema(vm.formSchema);
       vm.$data.dataFormSchema = dataFormSchema;
+      vm.$data.formData = ncformUtils.getModelFromSchema(dataFormSchema);
 
       // 初始赋值
       ncformUtils.setValueToSchema(
