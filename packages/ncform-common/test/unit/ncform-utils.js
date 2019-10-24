@@ -734,6 +734,17 @@ describe('/src/ncform-utils.js', () => {
     assert(result === true);
   });
 
+  it("smartAnalyzeVal - 函数值数组项", () => {
+    const rootData = { users: [ { name: 'daniel' }, { name: 'sarah' } ] };
+    const sayHi = 'hi';
+
+    const val = function(formData, constData, selfData, tempData, itemIdx) {
+      return `${sayHi} ${formData.users[itemIdx].name}` === 'hi sarah';
+    };
+    const result = ncformUtils.smartAnalyzeVal(val, { idxChain: 1, data: { rootData } });
+    assert(result === true);
+  });
+
   it("smartAnalyzeVal - 特殊字符串", () => {
     const rootData = { persons: [{ age: 18 }, { age: 20 }] };
     const constData = { max: 18 };

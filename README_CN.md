@@ -258,6 +258,36 @@ globalConfig: {
 }
 ```
 
+> dx表达式也可用 `函数` 代替：
+
+function(formData, constData, selfData, tempData, itemIdx) { ... }
+
+- formData：对应于 `{{$root}}`。表单的数据
+- constData: 对应于 `{{$const}}`。全局配置中的常量数据
+- selfData：对应于 `{{$self}}`。只用于 `ui.preview.value`，指代本身的值
+- tempData：对应于 `{{$temp}}`。临时存储的值
+- itemIdx：仅对数组项有用，指代当前所在的数组索引
+
+一些常见的例子如下：
+
+```
+// 一般对象属性
+disabled: function(formData) {
+  return formData.person.age < 18;
+}
+
+// 数组项
+disabled: function(formData, constData, selfData, tempData, itemIdx) {
+  return formData.persons[itemIdx].age < 18;
+}
+
+// 全局常量
+disabled: function(formData, constData) {
+  return formData.person.age < constData.max;
+}
+```
+
+
 ## 设计思想
 
 ncform = ncform容器 + ncform主题标准组件
