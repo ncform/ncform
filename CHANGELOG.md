@@ -1,4 +1,12 @@
 
+<a name="1.6.5"></a>
+## [1.6.5](https://github.com/ncform/ncform/compare/v1.6.4...v1.6.5) (2019-10-24)
+
+### Bug Fixes
+
+* When showOneIfEmpty is true, there has extra blank row when there has initial value. ([1a9a987](https://github.com/ncform/ncform/commit/1a9a987))
+
+
 <a name="1.6.4"></a>
 ## [1.6.4](https://github.com/ncform/ncform/compare/v1.6.3...v1.6.4) (2019-10-24)
 
