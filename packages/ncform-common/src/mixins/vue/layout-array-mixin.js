@@ -1,5 +1,6 @@
 import _cloneDeep from "lodash-es/cloneDeep";
 import _template from "lodash-es/template";
+import _get from "lodash-es/get";
 import extend from "extend";
 import ncformUtils from "../../ncform-utils";
 
@@ -101,6 +102,23 @@ export default {
     },
     showActionColumn() {
       return !this.mergeConfig.disableDel || !this.mergeConfig.disableReorder || this.mergeConfig.delExceptionRows;
+    }
+  },
+
+  watch: {
+    'schema.value': {
+      handler(newVal) {
+        if (newVal && newVal.length > 0 && !_get(newVal, '[0].__dataSchema')) { // rebuild the array
+          this.schema.value = [];
+          this.$nextTick(() => {
+            this.schema.value = newVal;
+            this.schema.value.forEach((item, idx) => {
+              this.addItem(idx);
+            });
+          })
+        }
+      },
+      immediate: true
     }
   },
 

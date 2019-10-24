@@ -258,6 +258,35 @@ globalConfig: {
 }
 ```
 
+> dx expressions can also be replaced with `function` :
+
+function(formData, constData, selfData, tempData, itemIdx) { ... }
+
+- formData: corresponds to `{{$root}}`. Form data
+- constData: corresponds to `{{$const}}`. Constant data in global configuration
+- selfData: corresponds to `{{$self}}`. Used only for `ui.preview.value`, which refers to its own value
+- tempData: corresponds to `{{$temp}}`. Temporarily stored value
+- itemIdx: useful only for array items, refers to the array index currently in the array
+
+Some common examples are as follows:
+
+```
+// form data
+disabled: function(formData) {
+  return formData.person.age < 18;
+}
+
+// array item
+disabled: function(formData, constData, selfData, tempData, itemIdx) {
+  return formData.persons[itemIdx].age < 18;
+}
+
+// global constants
+disabled: function(formData, constData) {
+  return formData.person.age < constData.max;
+}
+```
+
 ## Design Thinking
 
 ncform = ncform container + ncform theme standard component

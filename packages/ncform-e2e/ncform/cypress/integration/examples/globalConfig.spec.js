@@ -2,7 +2,7 @@
 
 const md5 = require('blueimp-md5');
 
-context('<context name>', () => {
+context('globalConfig', () => {
 
   before(() => {
     cy.visit('http://localhost:3000/examples/components/vue-ncform/_globalConfig.html')

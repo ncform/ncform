@@ -107,6 +107,7 @@ import "./layout-comps";
 import "./control-comps";
 import ncformCommon from '@ncform/ncform-common';
 import _get from "lodash-es/get";
+import _isArray from "lodash-es/isArray";
 
 const ncformUtils = ncformCommon.ncformUtils;
 
@@ -171,15 +172,6 @@ export default {
           constData: this.globalConfig.constants
         }
       });
-
-      if (this.$options._init4valueTemplate) { // Prevent init value from being overwritten
-        if (this.schema.value) result = this.schema.value;
-        // User nextTick will cause the init value to be incorrect when field item in list
-        // so here use setTimeout instead
-        setTimeout(() => {
-          this.$options._init4valueTemplate = false;
-        }, 100)
-      }
 
       return result;
     },
@@ -252,9 +244,24 @@ export default {
   },
 
   watch: {
-    valueTemplate(newVal) {
-      if (newVal !== undefined)
-        this.schema.value = newVal;
+    valueTemplate: {
+      handler: function(newVal, oldVal) {
+        if (newVal !== undefined) {
+          if (oldVal === undefined || JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+            if (!(this.$options._init4valueTemplate && (_isArray(this.schema.value) ? this.schema.value.length > 0 : this.schema.value))) { // Prevent init value from being overwritten
+              this.schema.value = newVal;
+            }
+            if (this.$options._init4valueTemplate) {
+              // User nextTick will cause the init value to be incorrect when field item in list
+              // so here use setTimeout instead
+              setTimeout(() => {
+                this.$options._init4valueTemplate = false;
+              }, 10)
+            }
+          }
+        }
+      },
+      immediate: true
     },
     schema: {
       handler: function(newVal) {

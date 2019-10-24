@@ -153,7 +153,66 @@
                   }
                 }
               }
-            }
+            },
+            {
+              id: md5('Array widgets support follow feature'),
+              title: 'Array widgets support follow feature',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  test1: {
+                    type: 'string',
+                    value: '["daniel", "sarah"]',
+                    ui: {
+                      columns: 6
+                    }
+                  },
+                  array1: {
+                    type: 'array',
+                    valueTemplate: function(formData) {
+                      try {
+                        return formData.test1 ? JSON.parse(formData.test1) : [];
+                      } catch(err) {
+                        return [];
+                      }
+                    },
+                    items: {
+                      type: 'string'
+                    }
+                  },
+                  test2: {
+                    type: 'string',
+                    value: '[{"text": "hi"}, {"text": "hello"}]',
+                    ui: {
+                      columns: 6
+                    }
+                  },
+                  array2: {
+                    type: 'array',
+                    value: [{text: 'init'}],
+                    valueTemplate: function(formData) {
+                      try {
+                        return formData.test2 ? JSON.parse(formData.test2) : [];
+                      } catch(err) {
+                        return [];
+                      }
+                    },
+                    items: {
+                      type: 'object',
+                      properties: {
+                        text: {
+                          type: 'string'
+                        }
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table'
+                    }
+                  }
+                }
+              }
+            },
           ]
         }
       });
