@@ -1,4 +1,14 @@
 
+<a name="1.6.4"></a>
+## [1.6.4](https://github.com/ncform/ncform/compare/v1.6.3...v1.6.4) (2019-10-24)
+
+
+### Bug Fixes
+
+* **ncform:** fixed valueTemplate bug ([da8ee5c](https://github.com/ncform/ncform/commit/da8ee5c)), closes [#106](https://github.com/ncform/ncform/issues/106)
+* Fixed the bug that valueTemplate don't work for array widgets ([1eafcc2](https://github.com/ncform/ncform/commit/1eafcc2)), closes [#107](https://github.com/ncform/ncform/issues/107)
+
+
 <a name="1.6.2"></a>
 ## [1.6.2](https://github.com/ncform/ncform/compare/v1.6.1...v1.6.2) (2019-10-16)
 
