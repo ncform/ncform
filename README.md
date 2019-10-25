@@ -17,7 +17,7 @@ Comes with **standard components** and **validation rules**, out of the box.
 
 Have powerful **control interaction** and **extension capabilities**, do what you want.
 
-> If you are hesitant, you can read this article: [How to choose](https://github.com/ncform/ncform/wiki/How-to-choose-a-open-source-project-that-generate-forms-from-a-JSON-schema)
+> If you are hesitant, you can read this article: [How to choose](https://github.com/ncform/ncform/wiki/How-to-choose-a-project-that-generate-forms-from-a-JSON-schema)
 
 [![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
 
