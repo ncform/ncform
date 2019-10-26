@@ -583,7 +583,26 @@ The description of each field of upload is as follows:
 - headers: set the request headers for the upload
 `
           }
-        }
+        },
+        {
+          title: {
+            cn: '[属性] updateOn: 触发值更新的时机，默认是输入变化即触发。可选值：["change", "blur"]',
+            en: '[ATTR] updateOn: timing of triggering value changes, the default is to trigger when value changed. Optional value: ["change", "blur"]'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                ui: {
+                  widgetConfig: {
+                    updateOn: 'blur'
+                  }
+                }
+              }
+            }
+          }
+        },
       ];
 
       // Bootstrap the app
