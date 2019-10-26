@@ -735,13 +735,22 @@ describe('/src/ncform-utils.js', () => {
   });
 
   it("smartAnalyzeVal - 函数值数组项", () => {
-    const rootData = { users: [ { name: 'daniel' }, { name: 'sarah' } ] };
-    const sayHi = 'hi';
+    let rootData = { users: [ { name: 'daniel' }, { name: 'sarah' } ] };
+    let sayHi = 'hi';
 
-    const val = function(formData, constData, selfData, tempData, itemIdx) {
-      return `${sayHi} ${formData.users[itemIdx].name}` === 'hi sarah';
+    let val = function(formData, constData, selfData, tempData, itemIdxChain) {
+      return `${sayHi} ${formData.users[itemIdxChain[0]].name}` === 'hi sarah';
     };
-    const result = ncformUtils.smartAnalyzeVal(val, { idxChain: 1, data: { rootData } });
+    let result = ncformUtils.smartAnalyzeVal(val, { idxChain: '1', data: { rootData } });
+    assert(result === true);
+
+    rootData = { users: [ { address: [ { name: 'beijing' }, { name: 'shanghai' } ] } ] };
+
+    val = function(formData, constData, selfData, tempData, itemIdxChain) {
+      const [ i, j ] = itemIdxChain;
+      return `${sayHi} ${formData.users[i].address[j].name}` === 'hi shanghai';
+    };
+    result = ncformUtils.smartAnalyzeVal(val, { idxChain: '0,1', data: { rootData } });
     assert(result === true);
   });
 
