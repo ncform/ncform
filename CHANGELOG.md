@@ -1,4 +1,15 @@
 
+<a name="1.6.6"></a>
+## [1.6.6](https://github.com/ncform/ncform/compare/v1.6.5...v1.6.6) (2019-10-26)
+
+### Bug Fixes
+
+* **ncform-common:** correct the parameter of dx expression function ([5bd3fb8](https://github.com/ncform/ncform/commit/5bd3fb8))
+
+### Features
+
+* **input and textarea:** add updateOn config for iput and textarea ([289c27b](https://github.com/ncform/ncform/commit/289c27b))
+
 <a name="1.6.5"></a>
 ## [1.6.5](https://github.com/ncform/ncform/compare/v1.6.4...v1.6.5) (2019-10-24)
 
