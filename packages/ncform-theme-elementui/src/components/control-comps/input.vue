@@ -11,6 +11,7 @@
       :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type"
       :prefix-icon="mergeConfig.prefixIcon"
       :suffix-icon="mergeConfig.suffixIcon"
+      @blur="onBlur"
       v-model="inputVal"
     >
       <template v-if="mergeConfig.type !== 'file' && mergeConfig.compound">
@@ -97,6 +98,8 @@
       :trigger-on-focus="!!mergeConfig.autocomplete.immediateShow"
       :value-key="mergeConfig.autocomplete.itemValueField || 'value'"
       v-model="inputVal"
+      @select="onSelectSuggectionItem"
+      @blur="onBlur"
     >
       <template
         slot-scope="props"
@@ -223,7 +226,7 @@ export default {
 
   created() {
     this.$watch("inputVal", (newVal, oldVal) => {
-      if (!newVal && !oldVal) return;
+      if ((!newVal && !oldVal) || this.mergeConfig.updateOn === 'blur') return;
       let val = this._processModelVal();
       this.$emit("input", val);
     });
@@ -333,6 +336,7 @@ export default {
         prefixIcon: "",
         suffixIcon: "",
         modelField: "",
+        updateOn: 'change', // change or blur
 
         // autocomplete: { // 自动补全
         //   itemLabelField: 'label', // 项数据表示label的字段
@@ -559,6 +563,20 @@ export default {
             this.$data.isUploading = false;
           });
       });
+    },
+
+    onBlur() {
+      if (this.mergeConfig.updateOn === 'blur') {
+        let val = this._processModelVal();
+        this.$emit("input", val);
+      }
+    },
+
+    onSelectSuggectionItem() {
+      if (this.mergeConfig.updateOn === 'blur') {
+        let val = this._processModelVal();
+        this.$emit("input", val);
+      }
     },
 
     _getFractionalExpression(value, threshold) {

@@ -441,7 +441,8 @@ const ncformUtils = {
         }
         break;
       case "function":
-        result = val(...data.map(item => item.value._value).concat([idxChain]));
+        const idxChains = idxChain.split(",").filter(item => item).map(item => parseInt(item));
+        result = val(...data.map(item => item.value._value).concat([idxChains]));
         break;
       default:
         result = val;

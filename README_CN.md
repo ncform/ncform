@@ -260,13 +260,13 @@ globalConfig: {
 
 > dx表达式也可用 `函数` 代替：
 
-function(formData, constData, selfData, tempData, itemIdx) { ... }
+function(formData, constData, selfData, tempData, itemIdxChain) { ... }
 
 - formData：对应于 `{{$root}}`。表单的数据
 - constData: 对应于 `{{$const}}`。全局配置中的常量数据
 - selfData：对应于 `{{$self}}`。只用于 `ui.preview.value`，指代本身的值
 - tempData：对应于 `{{$temp}}`。临时存储的值
-- itemIdx：仅对数组项有用，指代当前所在的数组索引
+- itemIdxChain：仅对数组项有用，指代当前所在的数组的索引路径，如[1, 0]
 
 一些常见的例子如下：
 
@@ -277,8 +277,9 @@ disabled: function(formData) {
 }
 
 // 数组项
-disabled: function(formData, constData, selfData, tempData, itemIdx) {
-  return formData.persons[itemIdx].age < 18;
+disabled: function(formData, constData, selfData, tempData, itemIdxChain) {
+  const [ i ] = itemIdxChain;
+  return formData.persons[i].age < 18;
 }
 
 // 全局常量
