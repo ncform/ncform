@@ -231,4 +231,49 @@ context('textarea', () => {
     });
   });
 
+  it('updateOn config', () => {
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        value1: {
+          type: 'string',
+          valueTemplate: 'dx: {{$root.name1}}'
+        },
+        name1: {
+          type: 'string',
+          ui: {
+            widget: 'textarea',
+            widgetConfig: {
+              updateOn: 'blur',
+            }
+          }
+        },
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+
+      cy.get('label').contains('value1').parent().find('input').as('value1Input');
+
+      // Declare action elements
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('textarea').type('daniel');
+          cy.get('@value1Input').should('have.value', '');
+          cy.get('textarea').blur();
+          cy.get('@value1Input').should('have.value', 'daniel');
+        });
+
+    });
+  });
+
 });

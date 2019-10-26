@@ -36,6 +36,7 @@ If you don't like the cold text description, click on the [interactive version](
   modelField: '', // Used when the value is an object (ie using compound.prependSelect or compound.appendSelect)
   trim: true, // Whether to automatically trim the front and rear spaces, the default is true
   clearable: false, // Whether it can be emptied, the default is false
+  updateOn: 'change', // Timing of triggering value changes, the default is to trigger when value changed. Optional value: ['change', 'blur']
 
   autocomplete: { // Automatic completion 
     itemValueField: 'value', // Item data represents the field of value
@@ -114,6 +115,7 @@ If you don't like the cold text description, click on the [interactive version](
 {
   rows: 2, // Rows
   autoSize: true, // Adaptive content height, optional: [boolean | { minRows: 2, maxRows: 6 }]
+  updateOn: 'change', // Timing of triggering value changes, the default is to trigger when value changed. Optional value: ['change', 'blur']
 }
 ```
 
