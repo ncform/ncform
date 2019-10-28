@@ -9,7 +9,7 @@
         <component :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
           v-for="opt in dataSource"
           :key="opt[mergeConfig.itemValueField]"
-          :label="opt[mergeConfig.itemValueField]"
+          :label="opt[mergeConfig.itemLabelField]"
           :class="mergeConfig.type === 'radio' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
         >{{opt[mergeConfig.itemLabelField]}}</component>
       </el-radio-group>
