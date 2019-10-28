@@ -164,25 +164,25 @@ export default {
       }
     },
 
-    delItem(idx, requiredConfirm, confirmText) {
+    delItem(idx, requiredConfirm, confirmText, keepEmpty) {
       if (this.$confirm) { // use element-ui
         if (requiredConfirm) {
           this.$confirm(confirmText, '', {
             type: 'warning'
           }).then(() => {
             this.schema.value.splice(idx, 1);
-            this._addEmptyItem();
+            !keepEmpty && this._addEmptyItem();
           })
         } else {
           this.schema.value.splice(idx, 1);
-          this._addEmptyItem();
+          !keepEmpty && this._addEmptyItem();
         }
       } else {
         if (requiredConfirm) {
-          window.confirm(confirmText) && this.schema.value.splice(idx, 1) && this._addEmptyItem();
+          window.confirm(confirmText) && this.schema.value.splice(idx, 1) && !keepEmpty && this._addEmptyItem();
         } else {
           this.schema.value.splice(idx, 1);
-          this._addEmptyItem();
+          !keepEmpty && this._addEmptyItem();
         }
       }
     },
@@ -194,21 +194,21 @@ export default {
             type: 'warning'
           }).then(() => {
             this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
-            this._addEmptyItem();
+            !keepEmpty && this._addEmptyItem();
           })
         } else {
           this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
-          this._addEmptyItem();
+          !keepEmpty && this._addEmptyItem();
         }
       } else {
         if (requiredConfirm) {
           if (window.confirm(confirmText)) {
             this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
-            this._addEmptyItem();
+            !keepEmpty && this._addEmptyItem();
           }
         } else {
           this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
-          this._addEmptyItem();
+          !keepEmpty && this._addEmptyItem();
         }
       }
 
