@@ -277,7 +277,7 @@ export default {
 
         // 对比控件改变前后的值，判断是否需要对其进行校验。
         if (changed) {
-          if (!ncformUtils.isNormalObjSchema(newVal) && !ncformUtils.isNormalArrSchema(newVal)) { // 叶子结点
+          if (!ncformUtils.isNormalObjSchema(newVal)) { // 叶子结点
             const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
             formVM.$emit('change', {
               paths: this.paths,
