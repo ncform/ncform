@@ -68,6 +68,7 @@ export default {
       collapsed: false,
       defaultConfig: {
         collapsed: false,
+        disabled: false,
         disableCollapse: false,
         disableReorder: false,
         disableAdd: false,
@@ -86,6 +87,9 @@ export default {
   },
 
   computed: {
+    disabled() {
+      return this.globalConst.disabled || this._analyzeVal(this.config.disabled);
+    },
     mergeConfig() {
       let newConfig = extend(
         true,

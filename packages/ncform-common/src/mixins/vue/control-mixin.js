@@ -68,7 +68,7 @@ export default {
 
   computed: {
     disabled() {
-      return this._analyzeVal(this.config.disabled);
+      return this.globalConst.disabled || this._analyzeVal(this.config.disabled);
     },
     readonly() {
       return this._analyzeVal(this.config.readonly);

@@ -44,9 +44,9 @@
           <td v-if="showActionColumn">
             <!-- 项控制按钮 -->
             <div class="el-button-group">
-              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
-              <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" type="button" class="el-button el-button--mini"><i class="el-icon-sort-up"></i></button>
-              <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" type="button" class="el-button el-button--mini"><i class="el-icon-sort-down"></i></button>
+              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :disabled="disabled" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
+              <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-sort-up"></i></button>
+              <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-sort-down"></i></button>
             </div>
           </td>
         </tr>
@@ -56,8 +56,8 @@
           <td :colspan="renderSchemas.length + 1">
             <!-- 列表控制按钮 -->
             <div class="el-button-group" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
-              <button @click="addItem()" v-if="!mergeConfig.disableAdd" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt || $nclang('add')}}</button>
-              <button @click="delAllItems(mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.all || $nclang('delAllTips'))" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt || $nclang('delAll')}}</button>
+              <button @click="addItem()" v-if="!mergeConfig.disableAdd" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt || $nclang('add')}}</button>
+              <button @click="delAllItems(mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.all || $nclang('delAllTips'))" v-if="!mergeConfig.disableDel" :disabled="disabled" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt || $nclang('delAll')}}</button>
             </div>
           </td>
         </tr>
