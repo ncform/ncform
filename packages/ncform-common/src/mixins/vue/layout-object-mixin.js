@@ -33,6 +33,10 @@ export default {
       type: Object
     },
 
+    globalStatus: {
+      type: String
+    },
+
     idxChain: {
       type: String,
       default: ""

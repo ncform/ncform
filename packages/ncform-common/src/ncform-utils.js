@@ -135,6 +135,7 @@ const ncformUtils = {
         // 根节点
         const defaultGlobalConfig = {
           // 全局配置
+          status: "edit",
           style: {
             formCls: "", // form class
             invalidFeedbackCls: "" // invalid feedback class

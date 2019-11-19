@@ -3,7 +3,7 @@
   <div :class="[(!!schema.__validationResult && !schema.__validationResult.result) ? 'invalid' : '', schema.ui.itemClass]">
 
     <!-- object 类型 -->
-    <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig">
+    <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" v-bind="commonAttrs">
 
       <template v-for="(fieldSchema, fieldName) in schema.properties" :slot="fieldName">
         <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :key="fieldName" :global-config="globalConfig" :idx-chain="idxChain" :complete-schema="completeSchema" :paths="paths ? paths + '.' + fieldName : fieldName" :form-name="formName"></form-item>
@@ -12,7 +12,7 @@
     </component>
 
     <!-- array 类型 -->
-    <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig" class="__ncform-control">
+    <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" v-bind="commonAttrs" class="__ncform-control">
 
       <template v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})" :slot="fieldName" slot-scope="props">
         <form-item :schema="props.schema" :key="fieldName" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths + '[' + props.idx + ']'" :form-name="formName"></form-item>
@@ -27,12 +27,12 @@
 
     <!-- 特殊类型 COMP -->
     <template v-else-if="schema.type === 'COMP'">
-      <component :is="schema.ui.widget" :config="schema.ui.widgetConfig" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain"></component>
+      <component :is="schema.ui.widget" v-bind="commonAttrs"></component>
     </template>
 
     <!-- string / number / integer / boolean 类型 -->
     <template v-else>
-      <component :is="'ncform-' + schema.ui.widget" :config="schema.ui.widgetConfig" v-model="schema.value" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" class="__ncform-control">
+      <component :is="'ncform-' + schema.ui.widget" v-model="schema.value" v-bind="commonAttrs" class="__ncform-control">
       </component>
       <div class="__ncform-item-preview" v-if="schema.ui.preview && schema.value"
         :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ?  schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}" >
@@ -159,6 +159,17 @@ export default {
   },
 
   computed: {
+    commonAttrs() {
+      return {
+        formData: this.formData,
+        tempData: this.tempData,
+        idxChain: this.idxChain,
+        config: this.schema.ui.widgetConfig,
+        globalConst: this.globalConfig.constants,
+        globalStatus: this.globalConfig.status
+      }
+    },
+
     valueTemplate() {
 
       if (!this.schema.valueTemplate) return undefined;

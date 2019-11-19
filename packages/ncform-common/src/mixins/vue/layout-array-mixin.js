@@ -57,6 +57,10 @@ export default {
       type: Object
     },
 
+    globalStatus: {
+      type: String
+    },
+
     idxChain: {
       type: String,
       default: ""
@@ -88,7 +92,7 @@ export default {
 
   computed: {
     disabled() {
-      return this._analyzeVal(this.globalConst.disabled) || this._analyzeVal(this.config.disabled);
+      return this._analyzeVal(this.config.disabled);
     },
     mergeConfig() {
       let newConfig = extend(
