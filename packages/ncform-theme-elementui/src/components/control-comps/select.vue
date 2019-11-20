@@ -1,8 +1,12 @@
 <template>
+<div v-show="!hidden" class="ncform-select">
+  <div v-if="globalStatus === 'preview'" class="ncform-select-preview">
+    {{modelVal}}
+  </div>
   <el-select
+    v-else
     v-model="modelVal"
     :placeholder="placeholder || $nclang('selectPls')"
-    v-show="!hidden"
     :disabled="disabled || readonly"
     :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
@@ -23,9 +27,20 @@
       <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
     </el-option>
   </el-select>
+</div>
 </template>
 
 <style lang="scss" scoped>
+  .ncform-select {
+    .el-select {
+      width: 100%;
+    }
+    .ncform-select-preview {
+      color: #606266;
+      font-size: 14px;
+      line-height: 40px;
+    }
+  }
 </style>
 
 <script>

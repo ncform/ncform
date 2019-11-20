@@ -1,15 +1,18 @@
 <template>
-    <div class="ncform-input-number">
-        <el-input-number
-          :disabled="disabled || readonly"
-          v-show="!hidden"
-          v-model="modelVal"
-          :min="mergeConfig.min"
-          :max="mergeConfig.max"
-          :step="mergeConfig.step"
-          :size="mergeConfig.size"
-        ></el-input-number>
+  <div v-show="!hidden" class="ncform-input-number">
+    <div v-if="globalStatus === 'preview'" class="ncform-input-number-preview">
+      {{modelVal}}
     </div>
+    <el-input-number
+      :disabled="disabled || readonly"
+      v-show="!hidden"
+      v-model="modelVal"
+      :min="mergeConfig.min"
+      :max="mergeConfig.max"
+      :step="mergeConfig.step"
+      :size="mergeConfig.size"
+    ></el-input-number>
+  </div>
 </template>
 
 <style lang="scss">
@@ -27,6 +30,12 @@
         clear: both;
       }
     }
+  }
+
+  .ncform-input-number-preview {
+    color: #606266;
+    font-size: 14px;
+    line-height: 40px;
   }
 </style>
 

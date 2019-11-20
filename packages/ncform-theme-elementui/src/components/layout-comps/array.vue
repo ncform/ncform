@@ -16,9 +16,11 @@
         <div class="el-button-group">
           <button @click="collapseItem(dataItem.__dataSchema)" v-show="dataItem.__dataSchema._expand" v-if="!mergeConfig.disableItemCollapse" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-arrow-down"></i></button>
           <button @click="collapseItem(dataItem.__dataSchema)" v-show="!dataItem.__dataSchema._expand" v-if="!mergeConfig.disableItemCollapse" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-arrow-up"></i></button>
-          <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :disabled="disabled" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
-          <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-sort-up"></i></button>
-          <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-sort-down"></i></button>
+          <template v-if="globalStatus !== 'preview'">
+            <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :disabled="disabled" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
+            <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-sort-up"></i></button>
+            <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-sort-down"></i></button>
+          </template>
         </div>
       </div>
 
@@ -43,7 +45,7 @@
     </div>
 
     <!-- 列表控制按钮 -->
-    <div v-show="!collapsed" class="el-button-group" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
+    <div v-show="!collapsed" class="el-button-group" v-if="globalStatus !== 'preview' && (!mergeConfig.disableAdd || !mergeConfig.disableDel)">
       <button @click="addItem()" v-if="!mergeConfig.disableAdd" :disabled="disabled" type="button" class="el-button el-button--mini"><i class="el-icon-circle-plus-outline"></i> {{mergeConfig.addTxt || $nclang('add')}}</button>
       <button @click="delAllItems(mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.all || $nclang('delAllTips'))" v-if="!mergeConfig.disableDel" :disabled="disabled" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i> {{mergeConfig.delAllTxt || $nclang('delAll')}}</button>
     </div>

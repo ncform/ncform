@@ -1,6 +1,10 @@
 <template>
+<div v-show="!hidden" class="ncform-switch">
+  <div v-if="globalStatus === 'preview'" class="ncform-switch-preview">
+    {{modelVal}}
+  </div>
   <el-switch
-    class="ncform-switch"
+    v-else
     v-model="modelVal"
     :disabled="disabled || readonly"
     :width="mergeConfig.width"
@@ -12,8 +16,8 @@
     :inactive-value="mergeConfig.inactiveValue"
     :active-color="mergeConfig.activeColor"
     :inactive-color="mergeConfig.inactiveColor"
-    v-show="!hidden"
   ></el-switch>
+</div>
 </template>
 
 <style lang="scss">
@@ -26,6 +30,11 @@
     .__ncform-control.ncform-switch {
       line-height: unset !important;
     }
+  }
+  .ncform-switch-preview {
+    color: #606266;
+    font-size: 14px;
+    line-height: 40px;
   }
 </style>
 

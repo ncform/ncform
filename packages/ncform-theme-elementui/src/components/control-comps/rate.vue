@@ -1,9 +1,13 @@
 <template>
-  <el-rate class="ncform-rate"
+<div v-show="!hidden" class="ncform-rate">
+  <div v-if="globalStatus === 'preview'" class="ncform-rate-preview">
+    {{modelVal}}
+  </div>
+  <el-rate
+    v-else
+    v-model="modelVal"
     :disabled="disabled || readonly"
     :placeholder="placeholder"
-    v-show="!hidden"
-    v-model="modelVal"
     :max="mergeConfig.max"
     :allow-half="mergeConfig.allowHalf"
     :low-threshold="mergeConfig.lowThreshold"
@@ -19,6 +23,7 @@
     :text-color="mergeConfig.textColor"
     :texts="mergeConfig.texts"
   ></el-rate>
+</div>
 </template>
 
 <style lang="scss">
@@ -38,6 +43,12 @@
         line-height: unset !important;
       }
     }
+  }
+
+  .ncform-rate-preview {
+    color: #606266;
+    font-size: 14px;
+    line-height: 40px;
   }
 </style>
 

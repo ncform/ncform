@@ -1,5 +1,10 @@
 <template>
-  <div class="ncform-input">
+<div v-show="!hidden" class="ncform-input">
+  <div v-if="globalStatus === 'preview'" class="ncform-input-preview">
+    {{mergeConfig.compound && mergeConfig.compound.prependLabel}}
+    {{inputVal}}
+  </div>
+  <template v-else>
     <!-- 没有自动补全 -->
     <el-input
       v-if="!mergeConfig.autocomplete"
@@ -7,7 +12,6 @@
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
-      v-show="!hidden"
       :clearable="mergeConfig.clearable"
       :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type"
       :prefix-icon="mergeConfig.prefixIcon"
@@ -90,7 +94,6 @@
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
-      v-show="!hidden"
       :clearable="mergeConfig.clearable"
       :size="mergeConfig.size"
       :type="mergeConfig.type"
@@ -160,7 +163,8 @@
         </el-select>
       </template>
     </el-autocomplete>
-  </div>
+  </template>
+</div>
 </template>
 
 <style lang="scss">
@@ -178,6 +182,11 @@
   }
   .el-autocomplete {
     width: 100%;
+  }
+  .ncform-input-preview {
+    color: #606266;
+    font-size: 14px;
+    line-height: 40px;
   }
 }
 </style>

@@ -1,21 +1,24 @@
 <template>
-    <div class="ncform-radio">
-      <el-radio-group
-        v-model="modelVal"
-        :disabled="disabled"
-        v-show="!hidden && !readonly"
-        size="mini"
-      >
-        <component :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
-          v-for="opt in dataSource"
-          :key="opt[mergeConfig.itemValueField]"
-          :label="opt[mergeConfig.itemValueField]"
-          :class="mergeConfig.type === 'radio' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
-        >{{opt[mergeConfig.itemLabelField]}}</component>
-      </el-radio-group>
+<div class="ncform-radio" v-show="!hidden && !readonly">
+  <div v-if="globalStatus === 'preview'" class="ncform-radio-preview">
+    {{modelVal}}
+  </div>
+  <el-radio-group
+    v-else
+    v-model="modelVal"
+    :disabled="disabled"
+    size="mini"
+  >
+    <component :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
+      v-for="opt in dataSource"
+      :key="opt[mergeConfig.itemValueField]"
+      :label="opt[mergeConfig.itemValueField]"
+      :class="mergeConfig.type === 'radio' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
+    >{{opt[mergeConfig.itemLabelField]}}</component>
+  </el-radio-group>
 
-      <label v-show="readonly" class="label-read">{{labelRead}}</label>
-    </div>
+  <label v-show="readonly" class="label-read">{{labelRead}}</label>
+</div>
 </template>
 
 <style lang="scss">
@@ -49,6 +52,12 @@
 
     .label-read {
       font-size: 14px;
+    }
+
+    .ncform-radio-preview {
+      color: #606266;
+      font-size: 14px;
+      line-height: 40px;
     }
   }
 

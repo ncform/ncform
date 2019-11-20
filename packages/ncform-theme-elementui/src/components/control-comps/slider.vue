@@ -1,18 +1,26 @@
 <template>
-  <div style="float:left;">
-      <el-slider
-        :disabled="disabled || readonly"
-        :placeholder="placeholder"
-        v-show="!hidden"
-        v-model="modelVal"
-        :min="mergeConfig.min"
-        :max="mergeConfig.max"
-        :step="mergeConfig.step"
-      ></el-slider>
+<div v-show="!hidden" class="ncform-slider" style="float: left;">
+  <div v-if="globalStatus === 'preview'" class="ncform-slider-preview">
+    {{modelVal}}
   </div>
+  <el-slider
+    v-else
+    v-model="modelVal"
+    :disabled="disabled || readonly"
+    :placeholder="placeholder"
+    :min="mergeConfig.min"
+    :max="mergeConfig.max"
+    :step="mergeConfig.step"
+  ></el-slider>
+</div>
 </template>
 
 <style lang="scss" scoped>
+  .ncform-slider-preview {
+    color: #606266;
+    font-size: 14px;
+    line-height: 40px;
+  }
 </style>
 
 <script>

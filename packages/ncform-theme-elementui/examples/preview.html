@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+  <title>preview demo</title>
+
+  <link rel="stylesheet" href="./demo.css" />
+
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?027aa17f0e14133f0b8aa5f1f0af3ca7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+
+<body>
+  <!--演示区域-->
+  <div id="demo" v-cloak>
+    <div v-for="(item, idx) in formSchemas">
+      <h4 class="demo_title">{{ item.title }}</h4>
+      <div class="demo_item-wrapper">
+        <div>
+          <ncform :form-schema="item.schema" v-model="item.schema.value"></ncform>
+        </div>
+        <div>
+          <pre>{{ JSON.stringify(originFormSchemas[idx].schema.properties, null, 2) }}</pre>
+        </div>
+        <div>
+          <pre>{{ item.schema.value }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="../node_modules/lodash/lodash.min.js"></script>
+  <script type="text/javascript" src="../node_modules/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://unpkg.com/mockjs"></script>
+  <script src="https://unpkg.com/js-url"></script>
+  <script type="text/javascript" src="../examples/dist/ncformCommon.min.js"></script>
+  <script type="text/javascript" src="../examples/dist/vueNcform.min.js"></script>
+  <script type="text/javascript" src="../dist/object.js"></script>
+  <script type="text/javascript" src="../dist/array.js"></script>
+  <script type="text/javascript" src="../dist/arrayTable.js"></script>
+  <script type="text/javascript" src="../dist/arrayTabs.js"></script>
+  <script type="text/javascript" src="../dist/checkbox.js"></script>
+  <script type="text/javascript" src="../dist/colorPicker.js"></script>
+  <script type="text/javascript" src="../dist/datePicker.js"></script>
+  <script type="text/javascript" src="../dist/input.js"></script>
+  <script type="text/javascript" src="../dist/inputNumber.js"></script>
+  <script type="text/javascript" src="../dist/label.js"></script>
+  <script type="text/javascript" src="../dist/radio.js"></script>
+  <script type="text/javascript" src="../dist/rate.js"></script>
+  <script type="text/javascript" src="../dist/select.js"></script>
+  <script type="text/javascript" src="../dist/slider.js"></script>
+  <script type="text/javascript" src="../dist/switch.js"></script>
+  <script type="text/javascript" src="../dist/textarea.js"></script>
+  <script type="text/javascript" src="../dist/upload.js"></script>
+
+  <script type="text/javascript">
+    let lang = 'en';
+
+    if (location.search.indexOf('lang=cn') >= 0) {
+      lang = 'cn';
+    }
+
+    Mock.mock(/getDomains/, function (options) {
+      return [{ id: 1, label: '.cn' }, { id: 2, label: '.com' }, { id: 3, label: '.net' }];
+    });
+    Mock.mock(/getKeywords/, function (options) {
+      let params = url('?', options.url) || {};
+      console.log('getKeywords:', params);
+      let result = [{ value: 'oppo' }, { value: 'xiaomi' }, { value: 'iphone' }, { value: 'iphone x' }, { value: 'iphone 6s' }];
+      return { data: result.filter(item => item.value.indexOf(params.keyword) >= 0) };
+    });
+
+    Vue.use(vueNcform, {
+      extComponents: {
+        object: object.default,
+        array: array.default,
+        arrayTable: arrayTable.default,
+        arrayTabs: arrayTabs.default,
+        checkbox: checkbox.default,
+        colorPicker: colorPicker.default,
+        datePicker: datePicker.default,
+        input: input.default,
+        inputNumber: inputNumber.default,
+        label: label.default,
+        radio: radio.default,
+        rate: rate.default,
+        select: select.default,
+        slider: slider.default,
+        switch: window.switch.default,
+        textarea: textarea.default,
+        upload: upload.default,
+      }, lang: lang === 'cn' ? 'zh_cn' : 'en'
+    });
+
+    let formSchemas = [
+      {
+        title: {
+          cn: '默认状态',
+          en: 'Default'
+        },
+        schema: {
+          "root": true,
+          "type": "object",
+          "properties": {
+            "input_1574213906497": {
+              "type": "string",
+              "ui": {
+                "widget": "input"
+              }
+            },
+            "input-number_1574213907169": {
+              "type": "number",
+              "ui": {
+                "widget": "input-number"
+              }
+            },
+            "textarea_1574213908025": {
+              "type": "string",
+              "ui": {
+                "widget": "textarea"
+              }
+            },
+            "select_1574213908817": {
+              "type": "string",
+              "ui": {
+                "widget": "select",
+                "widgetConfig": {
+                  "enumSource": [
+                    {
+                      "value": 1
+                    },
+                    {
+                      "value": 2
+                    }
+                  ]
+                },
+                "columns": 12,
+                "showLabel": true,
+                "noLabelSpace": false,
+                "showLegend": false,
+                "help": {
+                  "show": false,
+                  "text": "?"
+                },
+                "linkFields": []
+              },
+              "rules": {
+                "customRule": []
+              }
+            },
+            "color-picker_1574213909840": {
+              "type": "string",
+              "ui": {
+                "widget": "color-picker"
+              }
+            },
+            "date-picker_1574213910480": {
+              "type": "string",
+              "ui": {
+                "widget": "date-picker"
+              }
+            },
+            "slider_1574213911424": {
+              "type": "number",
+              "ui": {
+                "widget": "slider"
+              }
+            },
+            "rate_1574213912088": {
+              "type": "number",
+              "ui": {
+                "widget": "rate"
+              }
+            },
+            "radio_1574213912736": {
+              "type": "boolean",
+              "ui": {
+                "widget": "radio"
+              }
+            },
+            "checkbox_1574213913432": {
+              "type": "boolean",
+              "ui": {
+                "widget": "checkbox"
+              }
+            },
+            "upload_1574213914489": {
+              "type": "array",
+              "ui": {
+                "widget": "upload"
+              },
+              "items": {}
+            },
+            "label_1574213915336": {
+              "type": "string",
+              "default": "ccc",
+              "ui": {
+                "widget": "label"
+              }
+            },
+            "switch_1574213915936": {
+              "type": "boolean",
+              "ui": {
+                "widget": "switch"
+              }
+            },
+            "object_1574213917664": {
+              "type": "object",
+              "ui": {
+                "widget": "object",
+                "showLegend": false
+              },
+              "properties": {
+                "input_1574213923517": {
+                  "type": "string",
+                  "ui": {
+                    "widget": "input"
+                  }
+                },
+                "slider_1574213927660": {
+                  "type": "number",
+                  "ui": {
+                    "widget": "slider"
+                  }
+                }
+              }
+            },
+            "array_1574213918451": {
+              "type": "array",
+              "ui": {
+                "widget": "array",
+                "showLegend": false
+              },
+              "items": {
+                "type": "object",
+                "properties": {
+                  "color-picker_1574213937826": {
+                    "type": "string",
+                    "ui": {
+                      "widget": "color-picker"
+                    }
+                  },
+                  "input-number_1574213932330": {
+                    "type": "number",
+                    "ui": {
+                      "widget": "input-number"
+                    }
+                  }
+                }
+              }
+            },
+            "array-table_1574213919360": {
+              "type": "array",
+              "ui": {
+                "widget": "array-table",
+                "showLegend": false
+              },
+              "items": {
+                "type": "object",
+                "properties": {
+                  "radio_1574213946074": {
+                    "type": "boolean",
+                    "ui": {
+                      "widget": "radio"
+                    }
+                  },
+                  "rate_1574213943490": {
+                    "type": "number",
+                    "ui": {
+                      "widget": "rate"
+                    }
+                  }
+                }
+              }
+            },
+            "array-tabs_1574213920104": {
+              "type": "array",
+              "ui": {
+                "widget": "array-tabs",
+                "showLegend": false
+              },
+              "items": {
+                "type": "object",
+                "properties": {
+                  "select_1574213957686": {
+                    "type": "string",
+                    "ui": {
+                      "widget": "select",
+                      "widgetConfig": {
+                        "enumSource": [
+                          {
+                            "value": 1
+                          },
+                          {
+                            "value": 2
+                          }
+                        ]
+                      },
+                      "columns": 12,
+                      "showLabel": true,
+                      "noLabelSpace": false,
+                      "showLegend": false,
+                      "help": {
+                        "show": false,
+                        "text": "?"
+                      },
+                      "linkFields": []
+                    },
+                    "rules": {
+                      "customRule": []
+                    }
+                  },
+                  "switch_1574213950890": {
+                    "type": "boolean",
+                    "ui": {
+                      "widget": "switch"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "globalConfig": {
+            status: 'preview'
+          },
+          value: {
+            "input_1574213906497": "aaa",
+            "input-number_1574213907169": 3,
+            "textarea_1574213908025": "bbb",
+            "select_1574213908817": 2,
+            "color-picker_1574213909840": "#F10404",
+            "date-picker_1574213910480": "1573660800000",
+            "slider_1574213911424": 30,
+            "rate_1574213912088": 4,
+            "radio_1574213912736": true,
+            "checkbox_1574213913432": true,
+            "upload_1574213914489": [],
+            "label_1574213915336": "",
+            "switch_1574213915936": true,
+            "object_1574213917664": {
+              "input_1574213923517": "111",
+              "slider_1574213927660": 21
+            },
+            "array_1574213918451": [
+              {
+                "color-picker_1574213937826": "#57FF04",
+                "input-number_1574213932330": 5
+              }
+            ],
+            "array-table_1574213919360": [
+              {
+                "radio_1574213946074": true,
+                "rate_1574213943490": 2
+              },
+              {
+                "radio_1574213946074": false,
+                "rate_1574213943490": 4
+              }
+            ],
+            "array-tabs_1574213920104": [
+              {
+                "select_1574213957686": 1,
+                "switch_1574213950890": true
+              }
+            ]
+          }
+        }
+      }
+    ]
+    // Bootstrap the app
+    new Vue({
+      el: '#demo',
+      data: {
+        formSchemas: getFormSchemas(),
+        originFormSchemas: getFormSchemas()
+      }
+    });
+
+    function getFormSchemas() {
+      return formSchemas.map(item => ({
+        title: item.title[lang],
+        schema: item.schema,
+        detail: item.detail ? item.detail[lang] : ''
+      }));
+    }
+  </script>
+</body>
+
+</html>

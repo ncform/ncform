@@ -1,18 +1,22 @@
 <template>
-  <el-date-picker class="ncform-date-picker"
-    v-if="type && typeOptions[type]"
+<div v-show="!hidden" class="ncform-date-picker">
+  <div v-if="globalStatus === 'preview'" class="ncform-date-picker-preview">
+    {{formatter(modelVal, mergeConfig.format)}}
+  </div>
+  <el-date-picker
+    v-else-if="type && typeOptions[type]"
     :placeholder="placeholder || $nclang(typeOptions[type].placeholder)"
     :disabled="disabled"
     :readonly="readonly"
     :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
-    v-show="!hidden"
     v-model="modelVal"
     :type="type"
     :format="mergeConfig.format || $nclang(typeOptions[type].format)"
     :value-format="mergeConfig.valueFormat"
     >
   </el-date-picker>
+</div>
 </template>
 
 <style lang="scss">
@@ -33,14 +37,20 @@
   }
 
   .ncform-date-picker {
-    &.el-date-editor.el-input {
+    .el-date-editor.el-input {
       width: 100%;
+    }
+    .ncform-date-picker-preview {
+      color: #606266;
+      font-size: 14px;
+      line-height: 40px;
     }
   }
 </style>
 
 <script>
 import ncformCommon from '@ncform/ncform-common';
+import { formatDate } from 'element-ui/src/utils/date-util';
 
 const controlMixin = ncformCommon.mixins.vue.controlMixin;
 
@@ -130,6 +140,10 @@ export default {
     // 你可以通过该方法在modelVal传出去之前进行加工处理，即在this.$emit('input')之前
     _processModelVal(newVal){
       return `${newVal ? (this.mergeConfig.valueFormat ? newVal : +new Date(newVal)) : ''}`;
+    },
+    formatter(value, format) {
+      if (format === 'timestamp') return value.getTime();
+      return formatDate(value, format);
     }
   }
 };

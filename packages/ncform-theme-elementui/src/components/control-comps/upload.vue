@@ -1,9 +1,13 @@
 <template>
+<div v-show="!hidden" class="ncform-upload">
+  <div v-if="globalStatus === 'preview'" class="ncform-upload-preview">
+    {{fileList}}
+  </div>
   <el-upload
+    v-else
     ref="upload"
-    :class="['ncform-upload', readonly ? 'is-read-only' : '']"
+    :class="[readonly ? 'is-read-only' : '']"
     :disabled="readonly || disabled"
-    :style="{display: hidden ? 'none' : ''}"
     :action="mergeConfig.uploadUrl"
     :multiple="mergeConfig.multiple"
     :data="mergeConfig.data"
@@ -65,6 +69,7 @@
     </template>
 
   </el-upload>
+</div>
 </template>
 
 <style lang="scss">
@@ -106,6 +111,12 @@
       .el-upload {
         display: none;
       }
+    }
+
+    .ncform-upload-preview {
+      color: #606266;
+      font-size: 14px;
+      line-height: 40px;
     }
   }
 </style>

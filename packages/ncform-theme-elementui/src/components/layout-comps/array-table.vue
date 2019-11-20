@@ -13,7 +13,7 @@
       </colgroup>
       <colgroup v-else>
         <col v-for="(renderSchema, idx) in renderSchemas" :key="idx" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)"/>
-        <col v-if="showActionColumn" width="130px"/>
+        <col v-if="globalStatus !== 'preview' && showActionColumn" width="130px"/>
       </colgroup>
       <thead>
           <th v-for="(renderSchema, idx) in renderSchemas" :key="renderSchema.ui.label" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
@@ -33,7 +33,7 @@
             </small>
           </th>
 
-          <th v-if="showActionColumn">{{$nclang('action')}}</th>
+          <th v-if="globalStatus !== 'preview' && showActionColumn">{{$nclang('action')}}</th>
       </thead>
       <tbody>
         <tr v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id">
@@ -41,7 +41,7 @@
             <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
           </td>
 
-          <td v-if="showActionColumn">
+          <td v-if="globalStatus !== 'preview' && showActionColumn">
             <!-- 项控制按钮 -->
             <div class="el-button-group">
               <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :disabled="disabled" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
@@ -51,7 +51,7 @@
           </td>
         </tr>
       </tbody>
-      <tfoot v-if="!mergeConfig.disableDel || !mergeConfig.disableAdd">
+      <tfoot v-if="globalStatus !== 'preview' && (!mergeConfig.disableDel || !mergeConfig.disableAdd)">
         <tr>
           <td :colspan="renderSchemas.length + 1">
             <!-- 列表控制按钮 -->
