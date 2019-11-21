@@ -167,6 +167,48 @@
                   }
                 }
               }
+            },
+            {
+              id: md5('a[i].b.c: valueTemplate'),
+              title: 'a[i].b.c: valueTemplate',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  companies: {
+                    type: 'array',
+                    items: {
+                      type: 'object',
+                      properties: {
+                        enabled: {
+                          type: 'string'
+                        },
+                        user: {
+                          type: 'object',
+                          properties: {
+                            firstname: {
+                              type: 'string',
+                              rules: {
+                                required: 'dx: {{$root.companies[i].enabled}} === "1"'
+                              }
+                            },
+                            lastname: {
+                              type: 'string',
+                              valueTemplate: 'dx: {{$root.companies[i].user.firstname}} + " lastname"'
+                            }
+                          }
+                        }
+                      }
+                    },
+                    ui: {
+                      widget: 'array-table',
+                      widgetConfig: {
+                        showOneIfEmpty: true
+                      }
+                    }
+                  },
+                }
+              }
             }
           ]
         }
