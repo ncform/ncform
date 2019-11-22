@@ -1,4 +1,10 @@
 
+## [1.6.7](https://github.com/ncform/ncform/compare/v1.6.6...v1.6.7) (2019-11-22)
+
+### Bug Fixes
+
+* **ncform:** Fixed dx bug of 'a[i].b.c' situation ([6c674c2](https://github.com/ncform/ncform/commit/6c674c21e45d4daa71a25fe2556b19f44607c172))
+
 <a name="1.6.6"></a>
 ## [1.6.6](https://github.com/ncform/ncform/compare/v1.6.5...v1.6.6) (2019-10-26)
 
