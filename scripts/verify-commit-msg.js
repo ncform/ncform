@@ -7,7 +7,9 @@ const msg = require("fs")
 
 const commitRE = /^(revert: )?(feat|fix|polish|docs|style|refactor|perf|test|workflow|ci|chore|types|build)(\(.+\))?: .{1,50}/;
 
-if (!commitRE.test(msg)) {
+const lernoAutoCommitRE = /^v\d+\.\d+\.\d+$/;
+
+if (!commitRE.test(msg) && !lernoAutoCommitRE.test(msg)) {
   console.log();
   console.error(
     `  ${chalk.bgRed.white(" ERROR ")} ${chalk.red(
