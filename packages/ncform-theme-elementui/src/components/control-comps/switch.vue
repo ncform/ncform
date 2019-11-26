@@ -1,5 +1,6 @@
 <template>
   <el-switch
+    class="ncform-switch"
     v-model="modelVal"
     :disabled="disabled || readonly"
     :width="mergeConfig.width"
@@ -15,7 +16,22 @@
   ></el-switch>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
+  .h-layout {
+    .ncform-switch {
+      &.__ncform-control {
+        line-height: 2.4;
+      }
+    }
+  }
+
+  .v-layout {
+    .ncform-switch {
+      &.__ncform-control {
+        line-height: initial;
+      }
+    }
+  }
 </style>
 
 <script>
