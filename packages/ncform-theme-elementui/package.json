@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform-theme-elementui",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "ncform theme element-ui",
   "author": "daniel.xiao; kyle.lo;",
   "main": "dist/ncformStdComps.min.js",
