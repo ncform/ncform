@@ -136,8 +136,23 @@
       .el-form-item {
         margin-bottom: 22px;
         .el-form-item__content {
-          line-height: 1.5;
+          line-height: unset;
         }
+      }
+    }
+
+    // 解决对象水平布局的组件显示问题
+    .h-layout {
+      .__ncform-control {
+        line-height: 40px;
+        &.__array-form-item, &.__array-table-form-item, &.__array-tabs-form-item {
+          line-height: unset;
+        }
+      }
+    }
+    .v-layout {
+      .__ncform-control {
+        line-height: unset;
       }
     }
   }

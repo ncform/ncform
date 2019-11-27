@@ -22,11 +22,11 @@
 </template>
 
 <style lang="scss">
-    .h-layout {
+  .h-layout {
     .ncform-rate {
       &.__ncform-control {
         clear: none;
-        padding-top: 10px;
+        line-height: 50px !important;
       }
     }
   }
@@ -35,6 +35,7 @@
     .ncform-rate {
       &.__ncform-control {
         clear: both;
+        line-height: unset !important;
       }
     }
   }

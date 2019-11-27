@@ -18,18 +18,13 @@
 
 <style lang="scss">
   .h-layout {
-    .ncform-switch {
-      &.__ncform-control {
-        line-height: 2.4;
-      }
+    .__ncform-control.ncform-switch {
+      line-height: 35px !important;
     }
   }
-
   .v-layout {
-    .ncform-switch {
-      &.__ncform-control {
-        line-height: initial;
-      }
+    .__ncform-control.ncform-switch {
+      line-height: unset !important;
     }
   }
 </style>

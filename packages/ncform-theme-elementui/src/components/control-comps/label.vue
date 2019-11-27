@@ -1,7 +1,6 @@
 <template>
   <label :title="mergeConfig.multiLine ? '' : val"
     ref="label"
-    :style="{'margin-top': mergeConfig.inVLayout ? 0 : '9px'}"
     :class="['ncform-label', mergeConfig.multiLine ? 'multi-line' : '']"
   >{{val}}</label>
 </template>

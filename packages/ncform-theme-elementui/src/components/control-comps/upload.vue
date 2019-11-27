@@ -73,7 +73,6 @@
     .ncform-upload {
       &.__ncform-control {
         clear: none;
-        padding-top: 5px;
       }
     }
   }
@@ -100,7 +99,6 @@
 
     .upload-btn {
       margin-left: 10px;
-      vertical-align: top;
     }
 
     &.is-read-only{
