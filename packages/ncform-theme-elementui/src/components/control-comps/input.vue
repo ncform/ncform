@@ -3,6 +3,7 @@
     <!-- 没有自动补全 -->
     <el-input
       v-if="!mergeConfig.autocomplete"
+      :size="mergeConfig.size"
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
@@ -91,6 +92,7 @@
       :placeholder="placeholder"
       v-show="!hidden"
       :clearable="mergeConfig.clearable"
+      :size="mergeConfig.size"
       :type="mergeConfig.type"
       :prefix-icon="mergeConfig.prefixIcon"
       :suffix-icon="mergeConfig.suffixIcon"
@@ -337,6 +339,7 @@ export default {
         suffixIcon: "",
         modelField: "",
         updateOn: 'change', // change or blur
+        size: '',
 
         // autocomplete: { // 自动补全
         //   itemLabelField: 'label', // 项数据表示label的字段

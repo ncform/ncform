@@ -4,6 +4,7 @@
     :placeholder="placeholder || $nclang('selectPls')"
     v-show="!hidden"
     :disabled="disabled || readonly"
+    :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
     :multiple="mergeConfig.multiple"
     :filterable="mergeConfig.filterable"
@@ -73,6 +74,7 @@ export default {
         filterable: false, // 是否可搜索，即可输入关键字
         filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
         itemTemplate: "", // 显示项的模板
+        size: '',
 
         itemDataKey: "", // 选中项的数据字段，可通过 {{$temp.[key]}} 取得
 

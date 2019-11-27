@@ -37,6 +37,7 @@
   trim: true, // 是否自动将前后空格trim掉，默认为true 
   clearable: false, // 是否可清空，默认为false
   updateOn: 'change', // 触发值更新的时机，默认是输入变化即触发。可选值：['change', 'blur']
+  size: '', // 输入框尺寸，可选值：[medium | small | mini]
 
   autocomplete: { // 自动补全 
     itemValueField: 'value', // 项数据表示value的字段
@@ -106,6 +107,7 @@
   min: 0, // 最小值
   max: Infinity, // 最大值
   step: 1, // 步长
+  size: '', // 尺寸。可选值：[medium | small | mini]
 }
 ```
 
@@ -127,6 +129,7 @@
   clearable: true, // 是否出现清空选项
   filterable: false, // 是否可搜索，即可输入关键字
   filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
+  size: '', // 尺寸。可选值：[medium | small | mini]
 
   itemDataKey: "", // 选中项的数据的字段，可通过 {{$temp.[itemDataKey]}} 访问
 
@@ -245,6 +248,7 @@
   type: 'date', // year/month/date/week/datetime
   format: '', // 格式显示
   valueFormat: '', // 输出值的格式。空为毫秒数字符串
+  size: '', // 尺寸。可选值：[medium | small | mini]
 }
 ```
 
