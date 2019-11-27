@@ -37,6 +37,7 @@ If you don't like the cold text description, click on the [interactive version](
   trim: true, // Whether to automatically trim the front and rear spaces, the default is true
   clearable: false, // Whether it can be emptied, the default is false
   updateOn: 'change', // Timing of triggering value changes, the default is to trigger when value changed. Optional value: ['change', 'blur']
+  size: '', // Input box size, optional values: [medium | small | mini]
 
   autocomplete: { // Automatic completion 
     itemValueField: 'value', // Item data represents the field of value
@@ -105,7 +106,8 @@ If you don't like the cold text description, click on the [interactive version](
 {
   min: 0, // Minimum value
   max: Infinity, // Maximum
-  step: 1, // Step size
+  step: 1, // Step size，
+  size: '', // Size. Options：[medium | small | mini]
 }
 ```
 
@@ -127,6 +129,7 @@ If you don't like the cold text description, click on the [interactive version](
   clearable: true, // Whether the empty button appears
   filterable: false, // Whether searchable
   filterLocal: true, // Filter by local or remote data. if true, even with enumSourceRemote, data will only be retrieved once remotely.
+  size: '', // Size. Options：[medium | small | mini]
 
   itemDataKey: "", // The key of the selected item's data, can accessed by {{$temp[itemDataKey]}}
 
@@ -245,6 +248,7 @@ If you don't like the cold text description, click on the [interactive version](
   type: 'date', // year/month/date/week/datetime
   format: '', // Format display
   valueFormat: '', // The format of the output value. Empty means a millisecond string
+  size: '', // Size. Options：[medium | small | mini]
 }
 ```
 

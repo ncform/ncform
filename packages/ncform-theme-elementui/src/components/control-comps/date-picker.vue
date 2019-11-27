@@ -4,6 +4,7 @@
     :placeholder="placeholder || $nclang(typeOptions[type].placeholder)"
     :disabled="disabled"
     :readonly="readonly"
+    :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
     v-show="!hidden"
     v-model="modelVal"
@@ -107,7 +108,8 @@ export default {
         clearable: false,
         type: "date",  // year/month/date/week/datetime
         format: '',
-        valueFormat: ''
+        valueFormat: '',
+        size: ''
       }
       // modelVal：请使用该值来绑定实际的组件的model
     };

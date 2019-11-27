@@ -246,6 +246,31 @@
             }
           }
         },
+        {
+          title: {
+            cn: '[属性] Size: 尺寸. 可选值：[medium | small | mini]',
+            en: '[ATTR] Size: Options：[medium | small | mini]'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              count: {
+                type: 'string',
+                ui: {
+                  widget: 'date-picker',
+                  widgetConfig: {
+                    size: 'mini'
+                  }
+                }
+              }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
+            }
+          }
+        }
       ];
 
       // Bootstrap the app

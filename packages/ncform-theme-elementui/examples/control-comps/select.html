@@ -397,6 +397,31 @@
             cn: `可通过该 itemDataKey 去访问选中项的除了 value 和 label 之外的其它字段的值`,
             en: `ItemDataKey can be used to access the values of other fields except the "value" and "label" of the selected item.`
           }
+        },
+        {
+          title: {
+            cn: '[属性] Size: 尺寸. 可选值：[medium | small | mini]',
+            en: '[ATTR] Size: Options：[medium | small | mini]'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              count: {
+                type: 'boolean',
+                ui: {
+                  widget: 'select',
+                  widgetConfig: {
+                    size: 'mini'
+                  }
+                }
+              }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
+            }
+          }
         }
       ];
 

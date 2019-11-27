@@ -603,6 +603,30 @@ The description of each field of upload is as follows:
             }
           }
         },
+        {
+          title: {
+            cn: '[属性] Size: 尺寸. 可选值：[medium | small | mini]',
+            en: '[ATTR] Size: Options：[medium | small | mini]'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              name: {
+                type: 'string',
+                ui: {
+                  widgetConfig: {
+                    size: 'mini'
+                  }
+                }
+              }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
+            }
+          }
+        },
       ];
 
       // Bootstrap the app
