@@ -1,4 +1,14 @@
 
+## [1.6.8](https://github.com/ncform/ncform/compare/v1.6.7...v1.6.8) (2019-11-27)
+
+### Bug Fixes
+
+* Solve display problem of widgets in "h" layout ([b4a148d](https://github.com/ncform/ncform/commit/b4a148de168af36a7446f8158563560ac390904d))
+
+### Features
+
+* **ncform-theme-elementui:** Add size config for input/input-number/select/date-picker widgets ([781f031](https://github.com/ncform/ncform/commit/781f031eefba316474c6bf4997b83c44cc236566)), closes [#105](https://github.com/ncform/ncform/issues/105)
+
 ## [1.6.7](https://github.com/ncform/ncform/compare/v1.6.6...v1.6.7) (2019-11-22)
 
 ### Bug Fixes
