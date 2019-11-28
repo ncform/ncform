@@ -1,7 +1,39 @@
 <template>
 <div v-show="!hidden" class="ncform-upload">
   <div v-if="globalStatus === 'preview'" class="ncform-upload-preview">
-    {{fileList}}
+    <transition-group
+      tag="ul"
+      :class="[
+        'el-upload-list',
+        'el-upload-list--' + mergeConfig.listType,
+      ]"
+      name="el-list"
+    >
+      <li
+        v-for="(file, index) in modelVal"
+        :class="['el-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
+        :key="index"
+        tabindex="0"
+      >
+        <slot :file="file">
+          <img
+            class="el-upload-list__item-thumbnail"
+            v-if="file.status !== 'uploading' && ['picture-card', 'picture'].indexOf(mergeConfig.listType) > -1"
+            :src="file.url" alt=""
+          >
+          <a class="el-upload-list__item-name">
+            <i class="el-icon-document"></i>{{file.name}}
+          </a>
+          <label class="el-upload-list__item-status-label">
+            <i :class="{
+              'el-icon-upload-success': true,
+              'el-icon-circle-check': mergeConfig.listType === 'text',
+              'el-icon-check': ['picture-card', 'picture'].indexOf(mergeConfig.listType) > -1
+            }"></i>
+          </label>
+        </slot>
+      </li>
+    </transition-group>
   </div>
   <el-upload
     v-else
@@ -111,12 +143,6 @@
       .el-upload {
         display: none;
       }
-    }
-
-    .ncform-upload-preview {
-      color: #606266;
-      font-size: 14px;
-      line-height: 40px;
     }
   }
 </style>

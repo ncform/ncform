@@ -1,10 +1,6 @@
 <template>
 <div v-show="!hidden" class="ncform-rate">
-  <div v-if="globalStatus === 'preview'" class="ncform-rate-preview">
-    {{modelVal}}
-  </div>
   <el-rate
-    v-else
     v-model="modelVal"
     :disabled="disabled || readonly"
     :placeholder="placeholder"
@@ -43,12 +39,6 @@
         line-height: unset !important;
       }
     }
-  }
-
-  .ncform-rate-preview {
-    color: #606266;
-    font-size: 14px;
-    line-height: 40px;
   }
 </style>
 

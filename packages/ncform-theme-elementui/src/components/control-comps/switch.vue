@@ -1,10 +1,6 @@
 <template>
 <div v-show="!hidden" class="ncform-switch">
-  <div v-if="globalStatus === 'preview'" class="ncform-switch-preview">
-    {{modelVal}}
-  </div>
   <el-switch
-    v-else
     v-model="modelVal"
     :disabled="disabled || readonly"
     :width="mergeConfig.width"
@@ -30,11 +26,6 @@
     .__ncform-control.ncform-switch {
       line-height: unset !important;
     }
-  }
-  .ncform-switch-preview {
-    color: #606266;
-    font-size: 14px;
-    line-height: 40px;
   }
 </style>
 

@@ -1,10 +1,6 @@
 <template>
 <div class="ncform-radio" v-show="!hidden && !readonly">
-  <div v-if="globalStatus === 'preview'" class="ncform-radio-preview">
-    {{modelVal}}
-  </div>
   <el-radio-group
-    v-else
     v-model="modelVal"
     :disabled="disabled"
     size="mini"
@@ -52,12 +48,6 @@
 
     .label-read {
       font-size: 14px;
-    }
-
-    .ncform-radio-preview {
-      color: #606266;
-      font-size: 14px;
-      line-height: 40px;
     }
   }
 

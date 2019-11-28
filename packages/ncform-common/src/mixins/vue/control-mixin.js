@@ -72,7 +72,7 @@ export default {
 
   computed: {
     disabled() {
-      return this._analyzeVal(this.config.disabled);
+      return this.globalStatus === 'preview' || this._analyzeVal(this.config.disabled);
     },
     readonly() {
       return this._analyzeVal(this.config.readonly);

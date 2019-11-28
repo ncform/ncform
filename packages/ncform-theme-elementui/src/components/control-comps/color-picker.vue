@@ -3,7 +3,7 @@
   <div
     v-if="globalStatus === 'preview'"
     class="ncform-color-picker-preview"
-    :style="{ backgroundColor: modelVal }"
+    :style="{ borderColor: modelVal }"
   >
     {{modelVal}}
   </div>
@@ -17,12 +17,11 @@
 
 <style lang="scss" scoped>
   .ncform-color-picker-preview {
-    width: 6em;
-    border-radius: 4px;
-    color: #fff;
+    margin: 8px 0;
+    padding: 4px 8px;
     font-size: 14px;
-    line-height: 40px;
-    text-align: center;
+    color: #606266;
+    border-left: solid 2px;
   }
 </style>
 

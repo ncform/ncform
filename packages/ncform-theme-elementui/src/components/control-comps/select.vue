@@ -1,10 +1,6 @@
 <template>
 <div v-show="!hidden" class="ncform-select">
-  <div v-if="globalStatus === 'preview'" class="ncform-select-preview">
-    {{modelVal}}
-  </div>
   <el-select
-    v-else
     v-model="modelVal"
     :placeholder="placeholder || $nclang('selectPls')"
     :disabled="disabled || readonly"
@@ -34,11 +30,6 @@
   .ncform-select {
     .el-select {
       width: 100%;
-    }
-    .ncform-select-preview {
-      color: #606266;
-      font-size: 14px;
-      line-height: 40px;
     }
   }
 </style>
@@ -112,6 +103,7 @@ export default {
         template: '',
         props: ["item"]
       },
+      selectedLabel: '',
 
       loading: false
     };

@@ -4,9 +4,9 @@
       {{modelVal}}
     </div>
     <el-input-number
-      :disabled="disabled || readonly"
-      v-show="!hidden"
+      v-else
       v-model="modelVal"
+      :disabled="disabled || readonly"
       :min="mergeConfig.min"
       :max="mergeConfig.max"
       :step="mergeConfig.step"

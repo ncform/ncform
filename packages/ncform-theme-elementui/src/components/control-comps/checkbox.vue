@@ -3,41 +3,36 @@
   class="ncform-checkbox"
   v-show="!hidden"
 >
-  <div v-if="globalStatus === 'preview'" class="ncform-checkbox-preview">
-    {{modelVal}}
-  </div>
-  <template v-else>
-    <el-checkbox
-      v-if="mergeConfig.selectAll && !readonly"
-      :class="'check-all'"
-      :disabled="disabled"
-      :indeterminate="isIndeterminate"
-      v-model="isCheckAll"
-      @change="handleCheckAllChange"
-    >{{$nclang('all')}}</el-checkbox>
+  <el-checkbox
+    v-if="mergeConfig.selectAll && !readonly"
+    :class="'check-all'"
+    :disabled="disabled"
+    :indeterminate="isIndeterminate"
+    v-model="isCheckAll"
+    @change="handleCheckAllChange"
+  >{{$nclang('all')}}</el-checkbox>
 
-    <el-checkbox-group
-      v-if="!readonly"
-      size="mini"
-      :disabled="disabled"
-      v-model="modelVal"
-      @change="handleCheckedOptChange"
-    >
-      <component :is="'el-checkbox' + (mergeConfig.type === 'button' ? '-button' : '')"
-        v-for="opt in dataSource"
-        :key="opt[mergeConfig.itemValueField]"
-        :label="opt[mergeConfig.itemValueField]"
-        :class="mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
-      >{{opt[mergeConfig.itemLabelField]}}</component>
-    </el-checkbox-group>
+  <el-checkbox-group
+    v-if="!readonly"
+    size="mini"
+    :disabled="disabled"
+    v-model="modelVal"
+    @change="handleCheckedOptChange"
+  >
+    <component :is="'el-checkbox' + (mergeConfig.type === 'button' ? '-button' : '')"
+      v-for="opt in dataSource"
+      :key="opt[mergeConfig.itemValueField]"
+      :label="opt[mergeConfig.itemValueField]"
+      :class="mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
+    >{{opt[mergeConfig.itemLabelField]}}</component>
+  </el-checkbox-group>
 
-    <label
-      v-show="readonly"
-      v-for="(label, idx) in labelRead"
-      :key="idx"
-      :class="['label-read', mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'label-vertical' : '']"
-    >{{label}}</label>
-  </template>
+  <label
+    v-show="readonly"
+    v-for="(label, idx) in labelRead"
+    :key="idx"
+    :class="['label-read', mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'label-vertical' : '']"
+  >{{label}}</label>
 </div>
 </template>
 
@@ -87,12 +82,6 @@
       &.label-vertical {
         display: block;
       }
-    }
-
-    .ncform-checkbox-preview {
-      color: #606266;
-      font-size: 14px;
-      line-height: 40px;
     }
   }
 </style>
