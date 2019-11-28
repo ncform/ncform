@@ -1,29 +1,29 @@
 <template>
-<div v-show="!hidden" class="ncform-select">
-  <el-select
-    v-model="modelVal"
-    :placeholder="placeholder || $nclang('selectPls')"
-    :disabled="disabled || readonly"
-    :size="mergeConfig.size"
-    :clearable="mergeConfig.clearable"
-    :multiple="mergeConfig.multiple"
-    :filterable="mergeConfig.filterable"
-    :remote="!isLocalSource && !mergeConfig.filterLocal"
-    :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
-    :loading="loading"
-    @change="handleChange"
-    @visible-change="handleVisibleChange"
-  >
-    <el-option
-      v-for="item in optionsData"
-      :key="item[mergeConfig.itemValueField]"
-      :label="item[mergeConfig.itemLabelField]"
-      :value="item[mergeConfig.itemValueField]"
+  <div v-show="!hidden" class="ncform-select">
+    <el-select
+      v-model="modelVal"
+      :placeholder="placeholder || $nclang('selectPls')"
+      :disabled="disabled || readonly"
+      :size="mergeConfig.size"
+      :clearable="mergeConfig.clearable"
+      :multiple="mergeConfig.multiple"
+      :filterable="mergeConfig.filterable"
+      :remote="!isLocalSource && !mergeConfig.filterLocal"
+      :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
+      :loading="loading"
+      @change="handleChange"
+      @visible-change="handleVisibleChange"
     >
-      <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
-    </el-option>
-  </el-select>
-</div>
+      <el-option
+        v-for="item in optionsData"
+        :key="item[mergeConfig.itemValueField]"
+        :label="item[mergeConfig.itemLabelField]"
+        :value="item[mergeConfig.itemValueField]"
+      >
+        <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
+      </el-option>
+    </el-select>
+  </div>
 </template>
 
 <style lang="scss" scoped>

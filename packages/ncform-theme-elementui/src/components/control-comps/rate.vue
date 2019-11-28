@@ -1,25 +1,25 @@
 <template>
-<div v-show="!hidden" class="ncform-rate">
-  <el-rate
-    v-model="modelVal"
-    :disabled="disabled || readonly"
-    :placeholder="placeholder"
-    :max="mergeConfig.max"
-    :allow-half="mergeConfig.allowHalf"
-    :low-threshold="mergeConfig.lowThreshold"
-    :high-threshold="mergeConfig.highThreshold"
-    :colors="mergeConfig.colors"
-    :void-color="mergeConfig.voidColor"
-    :disabled-void-color="mergeConfig.disabledVoidColor"
-    :icon-classes="mergeConfig.iconClasses"
-    :void-icon-class="mergeConfig.voidIconClass"
-    :disabled-void-icon-class="mergeConfig.disabledVoidIconClass"
-    :show-text="mergeConfig.showText"
-    :show-score="mergeConfig.showScore"
-    :text-color="mergeConfig.textColor"
-    :texts="mergeConfig.texts"
-  ></el-rate>
-</div>
+  <div v-show="!hidden" class="ncform-rate">
+    <el-rate
+      v-model="modelVal"
+      :disabled="disabled || readonly"
+      :placeholder="placeholder"
+      :max="mergeConfig.max"
+      :allow-half="mergeConfig.allowHalf"
+      :low-threshold="mergeConfig.lowThreshold"
+      :high-threshold="mergeConfig.highThreshold"
+      :colors="mergeConfig.colors"
+      :void-color="mergeConfig.voidColor"
+      :disabled-void-color="mergeConfig.disabledVoidColor"
+      :icon-classes="mergeConfig.iconClasses"
+      :void-icon-class="mergeConfig.voidIconClass"
+      :disabled-void-icon-class="mergeConfig.disabledVoidIconClass"
+      :show-text="mergeConfig.showText"
+      :show-score="mergeConfig.showScore"
+      :text-color="mergeConfig.textColor"
+      :texts="mergeConfig.texts"
+    ></el-rate>
+  </div>
 </template>
 
 <style lang="scss">

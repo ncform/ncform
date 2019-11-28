@@ -1,19 +1,19 @@
 <template>
-<div v-show="!hidden" class="ncform-textarea">
-  <pre v-if="globalStatus === 'preview'" class="ncform-textarea-preview">{{inputVal}}</pre>
-  <el-input
-    v-else
-    v-show="!hidden"
-    v-model="inputVal"
-    type="textarea"
-    :disabled="disabled"
-    :readonly="readonly"
-    :placeholder="placeholder"
-    :rows="mergeConfig.rows"
-    :autosize="mergeConfig.autoSize"
-    @blur="onBlur"
-  ></el-input>
-</div>
+  <div v-show="!hidden" class="ncform-textarea">
+    <pre v-if="globalStatus === 'preview'" class="ncform-textarea-preview">{{inputVal}}</pre>
+    <el-input
+      v-else
+      v-show="!hidden"
+      v-model="inputVal"
+      type="textarea"
+      :disabled="disabled"
+      :readonly="readonly"
+      :placeholder="placeholder"
+      :rows="mergeConfig.rows"
+      :autosize="mergeConfig.autoSize"
+      @blur="onBlur"
+    ></el-input>
+  </div>
 </template>
 
 <style lang="scss" scoped>

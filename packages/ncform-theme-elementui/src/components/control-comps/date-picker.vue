@@ -1,22 +1,22 @@
 <template>
-<div v-show="!hidden" class="ncform-date-picker">
-  <div v-if="globalStatus === 'preview'" class="ncform-date-picker-preview">
-    {{formatter(modelVal, mergeConfig.format)}}
+  <div v-show="!hidden" class="ncform-date-picker">
+    <div v-if="globalStatus === 'preview'" class="ncform-date-picker-preview">
+      {{formatter(modelVal, mergeConfig.format)}}
+    </div>
+    <el-date-picker
+      v-else-if="type && typeOptions[type]"
+      :placeholder="placeholder || $nclang(typeOptions[type].placeholder)"
+      :disabled="disabled"
+      :readonly="readonly"
+      :size="mergeConfig.size"
+      :clearable="mergeConfig.clearable"
+      v-model="modelVal"
+      :type="type"
+      :format="mergeConfig.format || $nclang(typeOptions[type].format)"
+      :value-format="mergeConfig.valueFormat"
+      >
+    </el-date-picker>
   </div>
-  <el-date-picker
-    v-else-if="type && typeOptions[type]"
-    :placeholder="placeholder || $nclang(typeOptions[type].placeholder)"
-    :disabled="disabled"
-    :readonly="readonly"
-    :size="mergeConfig.size"
-    :clearable="mergeConfig.clearable"
-    v-model="modelVal"
-    :type="type"
-    :format="mergeConfig.format || $nclang(typeOptions[type].format)"
-    :value-format="mergeConfig.valueFormat"
-    >
-  </el-date-picker>
-</div>
 </template>
 
 <style lang="scss">

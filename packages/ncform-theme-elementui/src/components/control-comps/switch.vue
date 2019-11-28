@@ -1,19 +1,19 @@
 <template>
-<div v-show="!hidden" class="ncform-switch">
-  <el-switch
-    v-model="modelVal"
-    :disabled="disabled || readonly"
-    :width="mergeConfig.width"
-    :active-icon-class="mergeConfig.activeIconClass"
-    :inactive-icon-class="mergeConfig.inactiveIconClass"
-    :active-text="mergeConfig.activeText"
-    :inactive-text="mergeConfig.inactiveText"
-    :active-value="mergeConfig.activeValue"
-    :inactive-value="mergeConfig.inactiveValue"
-    :active-color="mergeConfig.activeColor"
-    :inactive-color="mergeConfig.inactiveColor"
-  ></el-switch>
-</div>
+  <div v-show="!hidden" class="ncform-switch">
+    <el-switch
+      v-model="modelVal"
+      :disabled="disabled || readonly"
+      :width="mergeConfig.width"
+      :active-icon-class="mergeConfig.activeIconClass"
+      :inactive-icon-class="mergeConfig.inactiveIconClass"
+      :active-text="mergeConfig.activeText"
+      :inactive-text="mergeConfig.inactiveText"
+      :active-value="mergeConfig.activeValue"
+      :inactive-value="mergeConfig.inactiveValue"
+      :active-color="mergeConfig.activeColor"
+      :inactive-color="mergeConfig.inactiveColor"
+    ></el-switch>
+  </div>
 </template>
 
 <style lang="scss">

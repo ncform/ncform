@@ -1,39 +1,39 @@
 <template>
-<div
-  class="ncform-checkbox"
-  v-show="!hidden"
->
-  <el-checkbox
-    v-if="mergeConfig.selectAll && !readonly"
-    :class="'check-all'"
-    :disabled="disabled"
-    :indeterminate="isIndeterminate"
-    v-model="isCheckAll"
-    @change="handleCheckAllChange"
-  >{{$nclang('all')}}</el-checkbox>
-
-  <el-checkbox-group
-    v-if="!readonly"
-    size="mini"
-    :disabled="disabled"
-    v-model="modelVal"
-    @change="handleCheckedOptChange"
+  <div
+    class="ncform-checkbox"
+    v-show="!hidden"
   >
-    <component :is="'el-checkbox' + (mergeConfig.type === 'button' ? '-button' : '')"
-      v-for="opt in dataSource"
-      :key="opt[mergeConfig.itemValueField]"
-      :label="opt[mergeConfig.itemValueField]"
-      :class="mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
-    >{{opt[mergeConfig.itemLabelField]}}</component>
-  </el-checkbox-group>
+    <el-checkbox
+      v-if="mergeConfig.selectAll && !readonly"
+      :class="'check-all'"
+      :disabled="disabled"
+      :indeterminate="isIndeterminate"
+      v-model="isCheckAll"
+      @change="handleCheckAllChange"
+    >{{$nclang('all')}}</el-checkbox>
 
-  <label
-    v-show="readonly"
-    v-for="(label, idx) in labelRead"
-    :key="idx"
-    :class="['label-read', mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'label-vertical' : '']"
-  >{{label}}</label>
-</div>
+    <el-checkbox-group
+      v-if="!readonly"
+      size="mini"
+      :disabled="disabled"
+      v-model="modelVal"
+      @change="handleCheckedOptChange"
+    >
+      <component :is="'el-checkbox' + (mergeConfig.type === 'button' ? '-button' : '')"
+        v-for="opt in dataSource"
+        :key="opt[mergeConfig.itemValueField]"
+        :label="opt[mergeConfig.itemValueField]"
+        :class="mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
+      >{{opt[mergeConfig.itemLabelField]}}</component>
+    </el-checkbox-group>
+
+    <label
+      v-show="readonly"
+      v-for="(label, idx) in labelRead"
+      :key="idx"
+      :class="['label-read', mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'label-vertical' : '']"
+    >{{label}}</label>
+  </div>
 </template>
 
 <style lang="scss">

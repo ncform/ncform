@@ -1,107 +1,107 @@
 <template>
-<div v-show="!hidden" class="ncform-upload">
-  <div v-if="globalStatus === 'preview'" class="ncform-upload-preview">
-    <transition-group
-      tag="ul"
-      :class="[
-        'el-upload-list',
-        'el-upload-list--' + mergeConfig.listType,
-      ]"
-      name="el-list"
-    >
-      <li
-        v-for="(file, index) in modelVal"
-        :class="['el-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
-        :key="index"
-        tabindex="0"
+  <div v-show="!hidden" class="ncform-upload">
+    <div v-if="globalStatus === 'preview'" class="ncform-upload-preview">
+      <transition-group
+        tag="ul"
+        :class="[
+          'el-upload-list',
+          'el-upload-list--' + mergeConfig.listType,
+        ]"
+        name="el-list"
       >
-        <slot :file="file">
-          <img
-            class="el-upload-list__item-thumbnail"
-            v-if="file.status !== 'uploading' && ['picture-card', 'picture'].indexOf(mergeConfig.listType) > -1"
-            :src="file.url" alt=""
-          >
-          <a class="el-upload-list__item-name">
-            <i class="el-icon-document"></i>{{file.name}}
-          </a>
-          <label class="el-upload-list__item-status-label">
-            <i :class="{
-              'el-icon-upload-success': true,
-              'el-icon-circle-check': mergeConfig.listType === 'text',
-              'el-icon-check': ['picture-card', 'picture'].indexOf(mergeConfig.listType) > -1
-            }"></i>
-          </label>
-        </slot>
-      </li>
-    </transition-group>
-  </div>
-  <el-upload
-    v-else
-    ref="upload"
-    :class="[readonly ? 'is-read-only' : '']"
-    :disabled="readonly || disabled"
-    :action="mergeConfig.uploadUrl"
-    :multiple="mergeConfig.multiple"
-    :data="mergeConfig.data"
-    :show-file-list="showFileList"
-    :drag="mergeConfig.drag"
-    :accept="mergeConfig.accept"
-    :list-type="mergeConfig.listType"
-    :auto-upload="mergeConfig.autoUpload"
-    :limit="mergeConfig.limit"
-    :on-change="handleUploadChange"
-    :on-success="handleUploadSucess"
-    :on-error="handleUploadError"
-    :on-exceed="handleUploadExceed"
-    :on-remove="handleUploadRemove"
-    :file-list="fileList"
-    :name="mergeConfig.fileField"
-    :headers="mergeConfig.headers"
-  >
-    <!-- 1. 可拖拽 -->
-    <template v-if="!readonly && mergeConfig.drag" slot="trigger">
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text" v-html="$nclang('uploadTips')"></div>
-    </template>
-    <div v-if="mergeConfig.drag && disabled" class="disabled-mask"></div>
+        <li
+          v-for="(file, index) in modelVal"
+          :class="['el-upload-list__item', 'is-' + file.status, focusing ? 'focusing' : '']"
+          :key="index"
+          tabindex="0"
+        >
+          <slot :file="file">
+            <img
+              class="el-upload-list__item-thumbnail"
+              v-if="file.status !== 'uploading' && ['picture-card', 'picture'].indexOf(mergeConfig.listType) > -1"
+              :src="file.url" alt=""
+            >
+            <a class="el-upload-list__item-name">
+              <i class="el-icon-document"></i>{{file.name}}
+            </a>
+            <label class="el-upload-list__item-status-label">
+              <i :class="{
+                'el-icon-upload-success': true,
+                'el-icon-circle-check': mergeConfig.listType === 'text',
+                'el-icon-check': ['picture-card', 'picture'].indexOf(mergeConfig.listType) > -1
+              }"></i>
+            </label>
+          </slot>
+        </li>
+      </transition-group>
+    </div>
+    <el-upload
+      v-else
+      ref="upload"
+      :class="[readonly ? 'is-read-only' : '']"
+      :disabled="readonly || disabled"
+      :action="mergeConfig.uploadUrl"
+      :multiple="mergeConfig.multiple"
+      :data="mergeConfig.data"
+      :show-file-list="showFileList"
+      :drag="mergeConfig.drag"
+      :accept="mergeConfig.accept"
+      :list-type="mergeConfig.listType"
+      :auto-upload="mergeConfig.autoUpload"
+      :limit="mergeConfig.limit"
+      :on-change="handleUploadChange"
+      :on-success="handleUploadSucess"
+      :on-error="handleUploadError"
+      :on-exceed="handleUploadExceed"
+      :on-remove="handleUploadRemove"
+      :file-list="fileList"
+      :name="mergeConfig.fileField"
+      :headers="mergeConfig.headers"
+    >
+      <!-- 1. 可拖拽 -->
+      <template v-if="!readonly && mergeConfig.drag" slot="trigger">
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text" v-html="$nclang('uploadTips')"></div>
+      </template>
+      <div v-if="mergeConfig.drag && disabled" class="disabled-mask"></div>
 
-    <!-- 2 可拖拽，非自动上传 -->
-    <el-button
-      v-if="!readonly && mergeConfig.drag && !mergeConfig.autoUpload"
-      :disabled="disabled"
-      class="upload-btn"
-      size="small"
-      type="success"
-      @click="submitUpload"
-    >{{$nclang('uploadServer')}}</el-button>
-
-    <!-- 3. 不可拖拽，自动上传-->
-    <el-button
-      v-if="!readonly && !mergeConfig.drag && mergeConfig.autoUpload"
-      :disabled="disabled"
-      size="small"
-      type="primary"
-    >{{$nclang('upload')}}</el-button>
-
-    <!-- 4. 不可拖拽，非自动上传 -->
-    <template v-if="!readonly && !mergeConfig.drag && !mergeConfig.autoUpload">
+      <!-- 2 可拖拽，非自动上传 -->
       <el-button
-        :disabled="disabled"
-        slot="trigger"
-        size="small"
-        type="primary"
-      >{{$nclang('chFile')}}</el-button>
-      <el-button
+        v-if="!readonly && mergeConfig.drag && !mergeConfig.autoUpload"
         :disabled="disabled"
         class="upload-btn"
         size="small"
         type="success"
         @click="submitUpload"
       >{{$nclang('uploadServer')}}</el-button>
-    </template>
 
-  </el-upload>
-</div>
+      <!-- 3. 不可拖拽，自动上传-->
+      <el-button
+        v-if="!readonly && !mergeConfig.drag && mergeConfig.autoUpload"
+        :disabled="disabled"
+        size="small"
+        type="primary"
+      >{{$nclang('upload')}}</el-button>
+
+      <!-- 4. 不可拖拽，非自动上传 -->
+      <template v-if="!readonly && !mergeConfig.drag && !mergeConfig.autoUpload">
+        <el-button
+          :disabled="disabled"
+          slot="trigger"
+          size="small"
+          type="primary"
+        >{{$nclang('chFile')}}</el-button>
+        <el-button
+          :disabled="disabled"
+          class="upload-btn"
+          size="small"
+          type="success"
+          @click="submitUpload"
+        >{{$nclang('uploadServer')}}</el-button>
+      </template>
+
+    </el-upload>
+  </div>
 </template>
 
 <style lang="scss">

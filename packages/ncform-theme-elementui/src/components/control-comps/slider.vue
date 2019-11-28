@@ -1,14 +1,14 @@
 <template>
-<div v-show="!hidden" class="ncform-slider" style="float: left;">
-  <el-slider
-    v-model="modelVal"
-    :disabled="disabled || readonly"
-    :placeholder="placeholder"
-    :min="mergeConfig.min"
-    :max="mergeConfig.max"
-    :step="mergeConfig.step"
-  ></el-slider>
-</div>
+  <div v-show="!hidden" class="ncform-slider" style="float: left;">
+    <el-slider
+      v-model="modelVal"
+      :disabled="disabled || readonly"
+      :placeholder="placeholder"
+      :min="mergeConfig.min"
+      :max="mergeConfig.max"
+      :step="mergeConfig.step"
+    ></el-slider>
+  </div>
 </template>
 
 <script>
