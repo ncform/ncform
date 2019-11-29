@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform",
-  "version": "1.6.7",
+  "version": "1.6.9",
   "description": "ncform, a very nice configuration generation way to develop form ( vue, json-schema, form, generator )",
   "author": "daniel.xiao",
   "main": "dist/vueNcform.min.js",
@@ -67,7 +67,7 @@
     "src"
   ],
   "dependencies": {
-    "@ncform/ncform-common": "^1.6.7",
+    "@ncform/ncform-common": "^1.6.9",
     "axios": "^0.18.0",
     "extend": "^3.0.1",
     "lodash-es": "^4.16.2",
