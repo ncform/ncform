@@ -1,3 +1,8 @@
+## [1.6.9](https://github.com/ncform/ncform/compare/v1.6.8...v1.6.9) (2019-11-29)
+
+### Bug Fixes
+
+* **ncform-common:** Fixed the bug that the promise type rule logic does not take effect when submiss ([694a4a5](https://github.com/ncform/ncform/commit/694a4a5148192be14b1ff5dc7353ec0c55297fb4))
 
 ## [1.6.8](https://github.com/ncform/ncform/compare/v1.6.7...v1.6.8) (2019-11-27)
 
