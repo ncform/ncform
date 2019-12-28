@@ -149,7 +149,7 @@ const ncformUtils = {
             duration: 500, // The duration (in milliseconds) of the scrolling animation
             offset: -80, // The offset that should be applied when scrolling.
           },
-          updateWait: 1000
+          updateWait: 0
         };
         newFieldVal.globalConfig = newFieldVal.globalConfig || {};
         newFieldVal.globalConfig = extend(
