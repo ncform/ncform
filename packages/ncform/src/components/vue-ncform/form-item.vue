@@ -246,10 +246,13 @@ export default {
   watch: {
     valueTemplate: {
       handler: function(newVal, oldVal) {
+        clearTimeout(this.timer)
         if (newVal !== undefined) {
           if (oldVal === undefined || JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
             if (!(this.$options._init4valueTemplate && (_isArray(this.schema.value) ? this.schema.value.length > 0 : this.schema.value))) { // Prevent init value from being overwritten
-              this.schema.value = newVal;
+              this.timer = setTimeout(() => {
+                this.schema.value = newVal;
+              }, this.globalConfig.updateWait)
             }
             if (this.$options._init4valueTemplate) {
               // User nextTick will cause the init value to be incorrect when field item in list
