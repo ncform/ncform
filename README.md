@@ -307,6 +307,8 @@ Thought: "Throw in" the standard components of various themes into the ncform co
 
 You can accelerate the speed of writing form schemas with [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)
 
+Also you can try the third-party generator: [ncform-maker](https://f-loat.github.io/ncform-maker/)
+
 ## References
 
 - [json-schema](http://json-schema.org/)
