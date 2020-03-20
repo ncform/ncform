@@ -10,7 +10,7 @@
 
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
-          :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
+          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
 
@@ -43,7 +43,7 @@
     <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="el-row h-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
-          :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
+          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>

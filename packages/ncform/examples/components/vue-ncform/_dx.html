@@ -209,7 +209,29 @@
                   },
                 }
               }
-            }
+            },
+            {
+              id: md5('columns dx value'),
+              title: 'columns dx value',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  a: {
+                    default: 6,
+                    type: 'number',
+                    ui: {
+                      columns: 6
+                    }
+                  },
+                  b: {
+                    ui: {
+                      columns: 'dx: {{$root.a}}'
+                    }
+                  }
+                }
+              }
+            },
           ]
         }
       });
