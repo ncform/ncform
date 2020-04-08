@@ -36,6 +36,11 @@ export default {
     idxChain: {
       type: String,
       default: ""
+    },
+
+    paths: {
+      type: String,
+      default: ""
     }
   },
 

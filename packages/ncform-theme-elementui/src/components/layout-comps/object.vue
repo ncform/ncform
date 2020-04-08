@@ -8,7 +8,7 @@
     <!-- 垂直布局，即label上，control下 -->
     <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="el-row v-layout" style="width: 100%">
 
-      <div v-for="(fieldSchema, field) in schema.properties"
+      <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
@@ -20,9 +20,9 @@
               <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
               {{_analyzeVal(fieldSchema.ui.label)}}
               <!-- 提示信息 -->
-              <el-tooltip class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
+              <el-tooltip v-if="fieldSchema.ui.help.show === true" class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
                 <div slot="content" v-html="fieldSchema.ui.help.content"></div>
-                <a class="help" v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+                <a class="help" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
               </el-tooltip>
             </label>
 
@@ -41,7 +41,7 @@
 
     <!-- 水平布局，即label左，control右 -->
     <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="el-row h-layout" style="width: 100%">
-      <div v-for="(fieldSchema, field) in schema.properties"
+      <div v-for="(fieldSchema, field) in filteredPropreties"
           :key="field"
           :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
@@ -161,6 +161,7 @@
 
 <script>
 import ncformCommon from '@ncform/ncform-common';
+import _set from "lodash-es/set";
 
 const ncformUtils = ncformCommon.ncformUtils;
 const layoutObjectMixin = ncformCommon.mixins.vue.layoutObjectMixin;
@@ -170,6 +171,25 @@ export default {
     showLegend: {
       type: Boolean,
       default: true
+    }
+  },
+  computed: {
+    filteredPropreties() {
+      const { paths } = this
+      const { properties } = this.schema
+      return Object.keys(properties).reduce((result, curkey) => {
+        const curval = properties[curkey]
+        const remove = this._analyzeVal(curval.ui.remove)
+
+        if (remove) {
+          const fullkey = paths ? paths + '.' + curkey : curkey
+          _set(this.formData, fullkey, undefined)
+        } else {
+          result[curkey] = curval
+        }
+
+        return result
+      }, {})
     }
   },
   methods: {
