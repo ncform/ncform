@@ -189,6 +189,17 @@ export default {
     checkValidation(schema, __path, __dataPath, __idxChain) {
       __idxChain = __idxChain === undefined ? '' : __idxChain; // 不在参数命名的时候给默认值是因为会传了undifine进来导致错误
 
+      // 如果移除字段，则忽略校验规则
+      const isRemove = ncformUtils.smartAnalyzeVal(schema.ui.remove, {
+        idxChain: __idxChain,
+        data: {
+          rootData: this.$data.formData,
+          constData: this.dataFormSchema.globalConfig.constants
+        }
+      });
+      if (isRemove)
+        return Promise.resolve({ result: true, __path, __dataPath });
+
       if (
         _get(this.dataFormSchema, 'globalConfig.ignoreRulesWhenHidden', true)
       ) {
