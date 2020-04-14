@@ -268,9 +268,9 @@ export default {
       this.$emit('submit');
     },
 
-    reset() {
+    reset(formVal) {
       this.$options.isValueUpdateFromInner = false; // 通过模拟外部赋值来达到重置的目的
-      this.$emit('input', this.$options.originFormVal);
+      this.$emit('input', formVal || this.$options.originFormVal);
     }
   },
 

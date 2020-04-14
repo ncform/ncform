@@ -20,7 +20,7 @@ module.exports = {
    *   { 'rule name': rule class }
    * ]
    */
-  install: (Vue, options = { extComponents: {}, extRules: [], lang: '' }) => {
+  install: (Vue, options = { extComponents: {}, extRules: [], lang: "" }) => {
     window.__$ncform = {}; // 属于ncform的全局变量
 
     window.__$ncform.__ncformComponents = {};
@@ -29,12 +29,22 @@ module.exports = {
 
     window.__$ncform.__ncformRegularValidation = new RegularValidation();
 
-    window.__$ncform.lang = (options.lang || window.__$ncform.lang || navigator.browserLanguage || navigator.language).replace(/-/, '_').toLowerCase();
+    window.__$ncform.lang = (
+      options.lang ||
+      window.__$ncform.lang ||
+      navigator.browserLanguage ||
+      navigator.language
+    )
+      .replace(/-/, "_")
+      .toLowerCase();
 
     // 注册组件
     _map(
       Object.assign(defLayouts, defControls, options.extComponents || {}),
-      (compItem, name) => { window.__$ncform.__ncformComponents[_kebabCase(name)] = 1; Vue.component(`ncform-${_kebabCase(name)}`, compItem) }
+      (compItem, name) => {
+        window.__$ncform.__ncformComponents[_kebabCase(name)] = 1;
+        Vue.component(`ncform-${_kebabCase(name)}`, compItem);
+      }
     );
 
     // 注册验证规则
@@ -42,7 +52,7 @@ module.exports = {
       window.__$ncform.__ncformRegularValidation.registerRule(ruleItem)
     );
 
-    Vue.prototype.$ncformValidate = function(formName) {
+    Vue.prototype.$ncformValidate = function ncformValidate(formName) {
       formName = formName || "_ncformDefaultName";
       const vm = window.__$ncform.__ncFormsGlobalList[formName];
 
@@ -54,7 +64,9 @@ module.exports = {
         const config = vm.dataFormSchema.globalConfig.scrollToFailField;
         if (!data.result && config.enabled) {
           vm.$nextTick(() => {
-            const firstErrorElem = Array.prototype.slice.call(vm.$el.querySelectorAll('.invalid-feedback')).find(elem => elem.style.display !== 'none');
+            const firstErrorElem = Array.prototype.slice
+              .call(vm.$el.querySelectorAll(".invalid-feedback"))
+              .find(elem => elem.style.display !== "none");
             if (firstErrorElem) {
               VueScrollTo.scrollTo(firstErrorElem, {
                 container: config.container,
@@ -62,13 +74,13 @@ module.exports = {
                 offset: config.offset
               });
             }
-          })
+          });
         }
         return data;
       });
     };
 
-    Vue.prototype.$ncformReset = function(formName) {
+    Vue.prototype.$ncformReset = function ncformReset(formName, formVal) {
       formName = formName || "_ncformDefaultName";
       const vm = window.__$ncform.__ncFormsGlobalList[formName];
 
@@ -76,27 +88,30 @@ module.exports = {
         return;
       }
 
-      return vm.reset();
+      vm.reset(formVal);
     };
 
-    Vue.prototype.$ncformAddWidget = function({name, widget}) {
+    Vue.prototype.$ncformAddWidget = function ncformAddWidget({
+      name,
+      widget
+    }) {
       window.__$ncform.__ncformComponents[_kebabCase(name)] = 1;
-      Vue.component(`ncform-${_kebabCase(name)}`, widget)
-    }
+      Vue.component(`ncform-${_kebabCase(name)}`, widget);
+    };
 
-    Vue.prototype.$ncformAddRule = function({name, rule}) {
-      let ruleItem = {};
+    Vue.prototype.$ncformAddRule = function ncformAddRule({ name, rule }) {
+      const ruleItem = {};
       ruleItem[name] = rule;
       window.__$ncform.__ncformRegularValidation.registerRule(ruleItem);
-    }
+    };
 
-    Vue.prototype.$ncformAllRules = function() {
+    Vue.prototype.$ncformAllRules = function ncformAllRules() {
       return Object.keys(window.__$ncform.__ncformRegularValidation.allRules);
-    }
+    };
 
-    Vue.prototype.$ncformAllWidgets = function() {
+    Vue.prototype.$ncformAllWidgets = function ncformAllWidgets() {
       return Object.keys(window.__$ncform.__ncformComponents);
-    }
+    };
 
     Vue.component("ncform", ncform);
   }
