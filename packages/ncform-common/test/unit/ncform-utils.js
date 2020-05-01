@@ -374,6 +374,35 @@ describe('/src/ncform-utils.js', () => {
     console.log(JSON.stringify(formSchema, null, 2));
     assert(formSchema.properties.name.value === value.name);
   });
+  it("setValueToSchema - 对象嵌套数组再嵌套对象", () => {
+    const value = {
+      user: [
+        {
+          name: "jorge"
+        },
+        {
+          name: "ping"
+        }
+      ]
+    };
+    const formSchema = {
+      type: 'object',
+      properties: {
+        user: {
+          type: 'array',
+          item: {
+            type: 'object',
+            properties: {
+              name: "string"
+            }
+          }
+        }
+      }
+    };
+    ncformUtils.setValueToSchema(value, formSchema);
+    console.log(JSON.stringify(formSchema, null, 2));
+    assert(JSON.stringify(formSchema.properties.user.value) === JSON.stringify(value.user));
+  });
   it("setValueToSchema - 普通数组", () => {
     const value = ['daniel', 'sarah'];
     const formSchema = {
