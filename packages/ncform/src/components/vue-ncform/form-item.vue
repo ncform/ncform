@@ -282,7 +282,8 @@ export default {
             formVM.$emit('change', {
               paths: this.paths,
               itemValue: this.schema.value,
-              formValue: this.formData
+              formValue: this.formData,
+              itemOldValue: this.$data.itemValue
             })
           }
 

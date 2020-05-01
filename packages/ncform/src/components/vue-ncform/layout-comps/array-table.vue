@@ -14,7 +14,7 @@
       </colgroup>
       <thead>
         <tr>
-          <th v-for="(renderSchema, idx) in renderSchemas" :key="renderSchema.ui.label" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
+          <th v-for="(renderSchema, idx) in renderSchemas" :key="idx" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
 
             <i v-if="showRequiredFlag(renderSchema.rules.required)" class="text-danger">*</i>
 

@@ -11,6 +11,8 @@ module.exports = {
     filename: "[name].min.js",
   },
 
+  devtool: 'source-map',
+
   optimization: {
     minimize: true
   }

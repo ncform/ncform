@@ -19,7 +19,7 @@
 
       <!-- array item 是 正常的 object 类型 -->
       <template v-if="isNormalObjSchema(dataItem.__dataSchema)">
-        <ncform-object v-show="mergeConfig.disableItemCollapse || dataItem.__dataSchema._expand" :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :config="dataItem.__dataSchema.ui.widgetConfig" :show-legend="false">
+        <ncform-object v-show="mergeConfig.disableItemCollapse || dataItem.__dataSchema._expand" :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :config="dataItem.__dataSchema.ui.widgetConfig" :global-const="globalConst" :show-legend="false">
 
           <!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
           <template v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})" :slot="fieldName">
