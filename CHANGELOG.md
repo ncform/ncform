@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/ncform/ncform/compare/v1.6.9...v1.7.0) (2020-05-01)
+
+### Bug Fixes
+
+* **array widgets:** Fixed bug that globalConst not work at object item in array ([9e37f3f](https://github.com/ncform/ncform/commit/9e37f3f6d23d7c1e9ce939a979e2d08b31c02aa3)), closes [#140](https://github.com/ncform/ncform/issues/140)
+* **array-table:** Fixed warning for key binding ([ce38dce](https://github.com/ncform/ncform/commit/ce38dce7c51c630b41a0971e8c075861148c4d0c)), closes [#145](https://github.com/ncform/ncform/issues/145)
+
+### Features
+
+* **object layout:** columns config support dx expression ([5654c60](https://github.com/ncform/ncform/commit/5654c6076aeb9d649955ea795c4035f65fe96601)), closes [#133](https://github.com/ncform/ncform/issues/133)
+* return itemOldValue on change event ([d229aa4](https://github.com/ncform/ncform/commit/d229aa4481f6b8516bcc43decf77e1aeb864e31b)), closes [#135](https://github.com/ncform/ncform/issues/135)
+
 ## [1.6.9](https://github.com/ncform/ncform/compare/v1.6.8...v1.6.9) (2019-11-29)
 
 ### Bug Fixes
