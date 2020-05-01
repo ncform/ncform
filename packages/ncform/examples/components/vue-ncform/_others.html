@@ -137,10 +137,11 @@
           changeModel(formSchema) {
             formSchema.value = { user: { name: 'daniel' } };
           },
-          onChange({paths, itemValue, formValue}) {
+          onChange({paths, itemValue, formValue, itemOldValue}) {
             console.log('paths:', paths);
             console.log('itemValue:', itemValue);
             console.log('formValue:', JSON.stringify(formValue, null, 2));
+            console.log('itemOldValue', itemOldValue);
           }
         }
       });
