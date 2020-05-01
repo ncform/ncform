@@ -7,7 +7,7 @@ module.exports = {
 
   mode: 'production',
 
-  devtool: false,
+  devtool: 'source-map',
 
   entry: {
     ncformStdComps: path.join(config.src, 'components', 'index.js'),
