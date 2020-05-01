@@ -27,7 +27,7 @@
       /* UI */
       ui: {
 
-        columns: 6, // 占用列数，共12列。
+        columns: 6, // 占用列数，共12列。【支持dx表达式】
         label: '', // 标签内容【支持dx表达式】
         showLabel: true, // 是否显示标签（注意：当为 false 时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高

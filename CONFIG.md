@@ -26,7 +26,7 @@
       /* UI */
       ui: {
 
-        columns: 6, // Total are 12 columns.
+        columns: 6, // Total are 12 columns. [support dx expression]
         label: '', // Label display [support dx expression]
         showLabel: true, // Whether to show the label (when it is false, it still takes up space)
         noLabelSpace: false, // Whether the label does not occupy space, the priority is higher than showLabel
