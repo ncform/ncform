@@ -296,9 +296,10 @@ Form item value change event
 // Demo code:
 <ncform @change="onChange"></ncform>
 
-onChange({paths, itemValue, formValue}) {
+onChange({paths, itemValue, formValue, oldItemValue}) {
   // paths: the path of the item whose value changes
   // itemValue: the latest value of the item whose value has changed
-  // formVallue: the latest value of the form
+  // formValue: the latest value of the form
+  // oldItemValue: ths old value of the item before value changed
 }
 ```
