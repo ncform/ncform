@@ -6,6 +6,12 @@ module.exports = {
 
   mode: 'development',
 
+  optimization: {
+    minimize: false
+  },
+
+  devtool: 'cheap-module-source-map',
+
   entry: {
     vueNcform: path.join(config.src, "components", "vue-ncform", "index.js")
   },

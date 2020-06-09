@@ -2,7 +2,7 @@
   "name": "@ncform/ncform-common",
   "version": "1.7.0",
   "description": "ncform common",
-  "main": "dist/ncformCommon.min.js",
+  "main": "dist/ncformCommon.js",
   "scripts": {
     "test": "mocha --recursive --require ./test/unit/testHelper.js -t 5000",
     "build": "gulp build",

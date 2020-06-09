@@ -7,6 +7,12 @@ module.exports = {
 
   mode: 'development',
 
+  optimization: {
+    minimize: false
+  },
+
+  devtool: 'cheap-module-source-map',
+
   entry: {
     playground: path.join(config.src, "components", "playground", "index.vue"),
     schemaGen: path.join(config.src, "components", "schema-gen", "index.vue")
