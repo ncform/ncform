@@ -308,7 +308,7 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 通过 [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)，可以加速你写form schema的速度
 
-你也可以尝试这个第三方的生成器: [ncform-maker](https://f-loat.github.io/ncform-maker/)
+你也可以尝试这个第三方的 VSCode 插件: [vscode-plugin-ncform-schema](https://github.com/F-loat/vscode-plugin-ncform-schema/)
 
 ## 参考项目
 
