@@ -17,7 +17,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 具备强大的 **控件交互** 和 **扩展能力**，做你所想。
 
-> 如果你犹豫不决，你可以阅读这篇文章：[如何选型](https://forum.vuejs.org/t/topic/57784)
+> 如果你犹豫不决，你可以阅读这篇文章：[如何选型](https://github.com/ncform/ncform/wiki/%E8%AE%A9%E5%89%8D%E7%AB%AF%E5%B0%8F%E5%A7%90%E5%A7%90%E6%84%89%E5%BF%AB%E5%9C%B0%E5%BC%80%E5%8F%91%E8%A1%A8%E5%8D%95)
 
 [![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
 
@@ -258,6 +258,37 @@ globalConfig: {
 }
 ```
 
+> dx表达式也可用 `函数` 代替：
+
+function(formData, constData, selfData, tempData, itemIdxChain) { ... }
+
+- formData：对应于 `{{$root}}`。表单的数据
+- constData: 对应于 `{{$const}}`。全局配置中的常量数据
+- selfData：对应于 `{{$self}}`。只用于 `ui.preview.value`，指代本身的值
+- tempData：对应于 `{{$temp}}`。临时存储的值
+- itemIdxChain：仅对数组项有用，指代当前所在的数组的索引路径，如[1, 0]
+
+一些常见的例子如下：
+
+```
+// 一般对象属性
+disabled: function(formData) {
+  return formData.person.age < 18;
+}
+
+// 数组项
+disabled: function(formData, constData, selfData, tempData, itemIdxChain) {
+  const [ i ] = itemIdxChain;
+  return formData.persons[i].age < 18;
+}
+
+// 全局常量
+disabled: function(formData, constData) {
+  return formData.person.age < constData.max;
+}
+```
+
+
 ## 设计思想
 
 ncform = ncform容器 + ncform主题标准组件
@@ -276,6 +307,8 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 ## Schema Generator
 
 通过 [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)，可以加速你写form schema的速度
+
+你也可以尝试这个第三方的生成器: [ncform-maker](https://f-loat.github.io/ncform-maker/)
 
 ## 参考项目
 

@@ -152,6 +152,11 @@
                   }
                 }
               }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
             }
           }
         },
@@ -273,7 +278,57 @@ Prompt information can be configured via delConfirmText when requiredDelConfirm 
 1. delConfirmText.item: delete item confirmation information
          `
           }
-        }
+        },
+        {
+          title: {
+            cn: '[属性] showOneIfEmpty: 当空值时是否显示一项',
+            en:
+              '[ATTR] showOneIfEmpty: Show one item at least if empty'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    showOneIfEmpty: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] delExceptionRows: 对于删除动作例外的行。这些行当disableDel为true时可被删除，当disableDel原来false时不可被删除',
+            en:
+              '[ATTR] delExceptionRows:  The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                value: ['daniel', 'sarah'],
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    disableDel: true,
+                    delExceptionRows: 'dx: (function(item) { return item === "daniel"})'
+                  }
+                }
+              }
+            }
+          }
+        },
       ];
 
       // Bootstrap the app

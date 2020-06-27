@@ -6,7 +6,7 @@
     <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="form-row v-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
-          :class="['col-md-' + (fieldSchema.ui.columns || 12)]"
+          :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="form-group">
         <template>
@@ -34,7 +34,7 @@
     <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="form-row h-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
-          :class="['col-md-' + (fieldSchema.ui.columns || 12)]"
+          :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="form-group row">
         <template>

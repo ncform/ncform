@@ -27,7 +27,7 @@
       /* UI */
       ui: {
 
-        columns: 6, // 占用列数，共12列。
+        columns: 6, // 占用列数，共12列。【支持dx表达式】
         label: '', // 标签内容【支持dx表达式】
         showLabel: true, // 是否显示标签（注意：当为 false 时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
@@ -137,6 +137,12 @@
     },
     constants: { // 全局常量配置，可在dx表达中通过{{$const.}}来访问，如{{$const.userName}}
       userName: 'daniel'
+    },
+    scrollToFailField: { // 自动滚动到校验失败的字段
+      enabled: true, // 是否开启
+      container: 'body', // 滚动的容器。
+      duration: 500, // 滚动动画的持续时间(以毫秒为单位)
+      offset: -80, // 滚动时的偏移量
     }
   }
 }
@@ -281,4 +287,19 @@ const allWidgets = this.$ncformAllWidgets();
 ```
 // Demo code:
 <ncform @submit="submit()"></ncform>
+```
+
+- change
+
+表单项值更改事件
+
+```
+// Demo code:
+<ncform @change="onChange"></ncform>
+
+onChange({paths, itemValue, formValue}) {
+  // paths: 发生值变化的项的路径
+  // itemValue：发生值变化的项的最新值
+  // formVallue: 表单的最新值
+}
 ```

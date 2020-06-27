@@ -84,7 +84,13 @@ describe('/src/ncform-utils.js', () => {
         invalidFeedbackCls: ""
       },
       validationMsg: {},
-      constants: {}
+      constants: {},
+      scrollToFailField: { // Automatically scroll to fields that failed validation
+        enabled: true, // enable this feature or not
+        container: 'body',
+        duration: 500, // The duration (in milliseconds) of the scrolling animation
+        offset: -80, // The offset that should be applied when scrolling.
+      }
     })
     assert.equal(newFormSchema.properties.name.ui.label, 'name');
     assert.equal(newFormSchema.properties.name.ui.showLabel, true);
@@ -367,6 +373,35 @@ describe('/src/ncform-utils.js', () => {
     ncformUtils.setValueToSchema(value, formSchema);
     console.log(JSON.stringify(formSchema, null, 2));
     assert(formSchema.properties.name.value === value.name);
+  });
+  it("setValueToSchema - 对象嵌套数组再嵌套对象", () => {
+    const value = {
+      user: [
+        {
+          name: "jorge"
+        },
+        {
+          name: "ping"
+        }
+      ]
+    };
+    const formSchema = {
+      type: 'object',
+      properties: {
+        user: {
+          type: 'array',
+          item: {
+            type: 'object',
+            properties: {
+              name: "string"
+            }
+          }
+        }
+      }
+    };
+    ncformUtils.setValueToSchema(value, formSchema);
+    console.log(JSON.stringify(formSchema, null, 2));
+    assert(JSON.stringify(formSchema.properties.user.value) === JSON.stringify(value.user));
   });
   it("setValueToSchema - 普通数组", () => {
     const value = ['daniel', 'sarah'];
@@ -725,6 +760,26 @@ describe('/src/ncform-utils.js', () => {
       return `${sayHi} ${formData.name}` === 'hi daniel';
     };
     const result = ncformUtils.smartAnalyzeVal(val, { data: { rootData } });
+    assert(result === true);
+  });
+
+  it("smartAnalyzeVal - 函数值数组项", () => {
+    let rootData = { users: [ { name: 'daniel' }, { name: 'sarah' } ] };
+    let sayHi = 'hi';
+
+    let val = function(formData, constData, selfData, tempData, itemIdxChain) {
+      return `${sayHi} ${formData.users[itemIdxChain[0]].name}` === 'hi sarah';
+    };
+    let result = ncformUtils.smartAnalyzeVal(val, { idxChain: '1', data: { rootData } });
+    assert(result === true);
+
+    rootData = { users: [ { address: [ { name: 'beijing' }, { name: 'shanghai' } ] } ] };
+
+    val = function(formData, constData, selfData, tempData, itemIdxChain) {
+      const [ i, j ] = itemIdxChain;
+      return `${sayHi} ${formData.users[i].address[j].name}` === 'hi shanghai';
+    };
+    result = ncformUtils.smartAnalyzeVal(val, { idxChain: '0,1', data: { rootData } });
     assert(result === true);
   });
 

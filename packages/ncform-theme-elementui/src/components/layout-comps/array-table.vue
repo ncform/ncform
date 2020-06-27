@@ -8,8 +8,15 @@
     </legend>
 
     <table v-show="!collapsed" class="table table-bordered">
+      <colgroup v-if="mergeConfig.colgroup">
+        <col v-for="(item, idx) in mergeConfig.colgroup" :key="idx" :width="item.width" />
+      </colgroup>
+      <colgroup v-else>
+        <col v-for="(renderSchema, idx) in renderSchemas" :key="idx" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)"/>
+        <col v-if="showActionColumn" width="130px"/>
+      </colgroup>
       <thead>
-          <th v-for="(renderSchema, idx) in renderSchemas" :key="renderSchema.ui.label" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
+          <th v-for="(renderSchema, idx) in renderSchemas" :key="idx" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
 
             <i v-if="showRequiredFlag(renderSchema.rules.required)" class="text-danger">*</i>
 
@@ -26,7 +33,7 @@
             </small>
           </th>
 
-          <th v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder">{{$nclang('action')}}</th>
+          <th v-if="showActionColumn">{{$nclang('action')}}</th>
       </thead>
       <tbody>
         <tr v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id">
@@ -34,10 +41,10 @@
             <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
           </td>
 
-          <td v-if="!mergeConfig.disableDel || !mergeConfig.disableReorder" style="width: 130px;">
+          <td v-if="showActionColumn">
             <!-- 项控制按钮 -->
             <div class="el-button-group">
-              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="!mergeConfig.disableDel" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
+              <button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" type="button" class="el-button el-button--danger el-button--mini"><i class="el-icon-remove"></i></button>
               <button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" type="button" class="el-button el-button--mini"><i class="el-icon-sort-up"></i></button>
               <button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" type="button" class="el-button el-button--mini"><i class="el-icon-sort-down"></i></button>
             </div>

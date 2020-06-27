@@ -59,6 +59,22 @@ context('Tabs', () => {
               },
             }
           }
+        },
+        users4: {
+          type: 'array',
+          value: [
+            'daniel', 'sarah'
+          ],
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widget: 'array-tabs',
+            widgetConfig: {
+              "disableDel": true,
+              "delExceptionRows": 'dx: (function(item) { return item === "daniel"})'
+            }
+          }
         }
       }
     };
@@ -79,6 +95,7 @@ context('Tabs', () => {
           cy.get('legend').click();
           cy.get('legend').next().should('be.visible');
 
+          cy.get('.el-icon-plus').click();
           cy.get('.el-icon-plus').click();
           cy.get('.el-tabs__item').its('length').should('equal', 2);
           cy.get('.el-tabs__item:last-child').should('have.class', 'is-active');
@@ -131,6 +148,62 @@ context('Tabs', () => {
           cy.get('@body').find('.el-message-box__btns .el-button--primary').click();
           cy.get('.el-tabs__item').its('length').should('equal', 1);
         });
+
+      cy.get('legend')
+        .contains('users4')
+        .parent()
+        .within(() => {
+          cy.get('.el-icon-close').should('be.visible');
+
+          cy.get('.el-tabs__item').eq(1).click();
+          cy.get('.el-icon-close').should('not.be.visible');
+        });
+      // common.submitForm();
+    });
+  });
+
+  it('showOneIfEmpty option', () => {
+    let formSchema = {
+      type: 'object',
+      properties: {
+        users1: {
+          type: 'array',
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widget: 'array-tabs',
+            widgetConfig: {
+              showOneIfEmpty: true
+            }
+          }
+        }
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+      // Declare action elements
+      cy.get('legend')
+        .contains('users1')
+        .parent()
+        .within(() => {
+          // 默认有一项
+          cy.get('.el-tabs__item').its('length').should('equal', 1);
+          cy.get('input').should('have.value', '');
+
+          // 填写值然后删除该项
+          cy.get('input').type('daniel');
+          cy.get('input').should('have.value', 'daniel');
+          cy.get('.el-icon-close').click();
+          cy.get('input').should('have.value', '');
+        });
+
       // common.submitForm();
     });
   });

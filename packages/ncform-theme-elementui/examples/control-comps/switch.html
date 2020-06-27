@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
-    <title>input-number widget</title>
+    <title>switch widget</title>
 
     <link rel="stylesheet" href="../demo.css" />
 
@@ -47,7 +47,7 @@
     <script type="text/javascript" src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script type="text/javascript" src="../../node_modules/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
     <script type="text/javascript" src="../../node_modules/@ncform/ncform/dist/vueNcform.js"></script>
-    <script type="text/javascript" src="../../dist/inputNumber.js"></script>
+    <script type="text/javascript" src="../../dist/switch.js"></script>
     <script type="text/javascript" src="../../dist/object.js"></script>
 
     <script type="text/javascript">
@@ -57,7 +57,7 @@
         lang = 'cn';
       }
 
-      Vue.use(vueNcform, { extComponents: { object: object.default, inputNumber: inputNumber.default }, lang: lang === 'cn' ? 'zh_cn' : 'en' });
+      Vue.use(vueNcform, { extComponents: { object: object.default, switch: window.switch.default }, lang: lang === 'cn' ? 'zh_cn' : 'en' });
 
       let formSchemas = [
         {
@@ -68,10 +68,10 @@
           schema: {
             type: 'object',
             properties: {
-              count: {
-                type: 'number',
+              isOpen: {
+                type: 'boolean',
                 ui: {
-                  widget: 'input-number'
+                  widget: 'switch'
                 }
               }
             }
@@ -85,11 +85,11 @@
           schema: {
             type: 'object',
             properties: {
-              count: {
-                type: 'number',
-                value: 20,
+              isOpen: {
+                type: 'boolean',
+                value: true,
                 ui: {
-                  widget: 'input-number'
+                  widget: 'switch'
                 }
               }
             },
@@ -108,10 +108,11 @@
           schema: {
             type: 'object',
             properties: {
-              count: {
-                type: 'number',
+              isOpen: {
+                type: 'boolean',
+                value: true,
                 ui: {
-                  widget: 'input-number',
+                  widget: 'switch',
                   readonly: true
                 }
               }
@@ -126,10 +127,11 @@
           schema: {
             type: 'object',
             properties: {
-              count: {
-                type: 'number',
+              isOpen: {
+                type: 'boolean',
+                value: true,
                 ui: {
-                  widget: 'input-number',
+                  widget: 'switch',
                   disabled: true
                 }
               }
@@ -138,18 +140,18 @@
         },
         {
           title: {
-            cn: '[属性] min: 最小值. 默认值: 0',
-            en: '[ATTR] min: minimum. Default is 0'
+            cn: '[属性] width: switch 的宽度（像素）。 默认值: 40',
+            en: '[ATTR] width: switch\'s width（pixel）. Default is 40'
           },
           schema: {
             type: 'object',
             properties: {
-              count: {
-                type: 'number',
+              isOpen: {
+                type: 'boolean',
                 ui: {
-                  widget: 'input-number',
+                  widget: 'switch',
                   widgetConfig: {
-                    min: -2
+                    width: 80
                   }
                 }
               }
@@ -158,18 +160,19 @@
         },
         {
           title: {
-            cn: '[属性] max: 最大值. 默认值: Infinity',
-            en: '[ATTR] max: maximum. Default is Infinity'
+            cn: '[属性] activeIconClass / inactiveIconClass: 打开/关闭时所显示图标的类名，设置此项会忽略 activeText/inactiveText',
+            en: '[ATTR] activeIconClass / inactiveIconClass: the class name of the icon displayed when the switch is turned on/off. Setting this item ignores activeText/inactiveText'
           },
           schema: {
             type: 'object',
             properties: {
-              count: {
-                type: 'number',
+              isOpen: {
+                type: 'boolean',
                 ui: {
-                  widget: 'input-number',
+                  widget: 'switch',
                   widgetConfig: {
-                    max: 2
+                    activeIconClass: 'el-icon-unlock',
+                    inactiveIconClass: 'el-icon-lock'
                   }
                 }
               }
@@ -178,18 +181,19 @@
         },
         {
           title: {
-            cn: '[属性] step: 步长. 默认值: 1',
-            en: '[ATTR] step: step. Default is 1'
+            cn: '[属性] activeText / inactiveText: switch 打开/关闭时的文字描述',
+            en: '[ATTR] activeText / inactiveText: text description when switch is turned on/off'
           },
           schema: {
             type: 'object',
             properties: {
-              count: {
-                type: 'number',
+              isOpen: {
+                type: 'boolean',
                 ui: {
-                  widget: 'input-number',
+                  widget: 'switch',
                   widgetConfig: {
-                    step: 2
+                    activeText: 'On',
+                    inactiveText: 'Off'
                   }
                 }
               }
@@ -198,29 +202,46 @@
         },
         {
           title: {
-            cn: '[属性] Size: 尺寸. 可选值：[medium | small | mini]',
-            en: '[ATTR] Size: Options：[medium | small | mini]'
+            cn: '[属性] activeValue / inactiveValue: switch 打开/关闭时的值。默认值是true/false。 boolean / string / number',
+            en: '[ATTR] activeValue / inactiveValue: the value of the switch when it is turned on/off. default is true/false [boolean / string / number]'
           },
           schema: {
             type: 'object',
             properties: {
-              count: {
-                type: 'number',
+              isOpen: {
+                type: 'string',
                 ui: {
-                  widget: 'input-number',
+                  widget: 'switch',
                   widgetConfig: {
-                    size: 'mini'
+                    activeValue: 'ON',
+                    inactiveValue: 'OFF'
                   }
                 }
               }
-            },
-            ui: {
-              widgetConfig: {
-                layout: 'h'
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] activeColor / inactiveColor: switch 打开/关闭时的背景色',
+            en: '[ATTR] activeColor / inactiveColor: background color when switch is on/off'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              isOpen: {
+                type: 'boolean',
+                ui: {
+                  widget: 'switch',
+                  widgetConfig: {
+                    activeColor: '#67C23A',
+                    inactiveColor: '#E6A23C'
+                  }
+                }
               }
             }
           }
-        }
+        },
       ];
 
       // Bootstrap the app

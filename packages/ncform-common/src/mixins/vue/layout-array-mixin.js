@@ -1,5 +1,6 @@
 import _cloneDeep from "lodash-es/cloneDeep";
 import _template from "lodash-es/template";
+import _get from "lodash-es/get";
 import extend from "extend";
 import ncformUtils from "../../ncform-utils";
 
@@ -17,13 +18,14 @@ export default {
     this.$options.lang = window.__$ncform.lang;
     this.$data.i18n = this.$options.i18nData[this.$options.lang] || this.$options.i18nData.en;
 
-    this.schema.value =
-      this.schema.value && this.schema.value.length > 0
-        ? this.schema.value
-        : [ncformUtils.getDefVal(this.schema.items.type)];
-    this.schema.value.forEach((item, idx) => {
-      this.addItem(idx);
-    });
+    this.schema.value = this.schema.value || [];
+    if (this.schema.value.length === 0) {
+      this._addEmptyItem();
+    } else {
+      this.schema.value.forEach((item, idx) => {
+        this.addItem(idx);
+      });
+    }
 
     this.$data.collapsed = this.mergeConfig.collapsed;
 
@@ -77,6 +79,7 @@ export default {
           item: '',
           all: ''
         },
+        delExceptionRows: ''
       },
       i18n: {},
     };
@@ -96,6 +99,23 @@ export default {
           return this._analyzeVal(val);
         else return val;
       })
+    },
+    showActionColumn() {
+      return !this.mergeConfig.disableDel || !this.mergeConfig.disableReorder || this.mergeConfig.delExceptionRows;
+    }
+  },
+
+  watch: {
+    'schema.value': {
+      handler(newVal) {
+        if (newVal && newVal.length > 0 && !_get(newVal, '[0].__dataSchema')) { // rebuild the array
+          this.schema.value = newVal;
+          this.schema.value.forEach((item, idx) => {
+            this.addItem(idx);
+          });
+        }
+      },
+      immediate: true
     }
   },
 
@@ -109,6 +129,12 @@ export default {
 
     _setTempData(key, value) {
       this.$set(this.tempData, key, value);
+    },
+
+    _addEmptyItem() {
+      if (this.schema.value.length === 0 && this.mergeConfig.showOneIfEmpty) {
+        this.$nextTick(() => this.addItem());
+      }
     },
 
     isNormalObjSchema: ncformUtils.isNormalObjSchema,
@@ -145,15 +171,18 @@ export default {
             type: 'warning'
           }).then(() => {
             this.schema.value.splice(idx, 1);
+            this._addEmptyItem();
           })
         } else {
           this.schema.value.splice(idx, 1);
+          this._addEmptyItem();
         }
       } else {
         if (requiredConfirm) {
-          window.confirm(confirmText) && this.schema.value.splice(idx, 1);
+          window.confirm(confirmText) && this.schema.value.splice(idx, 1) && this._addEmptyItem();
         } else {
           this.schema.value.splice(idx, 1);
+          this._addEmptyItem();
         }
       }
     },
@@ -164,19 +193,29 @@ export default {
           this.$confirm(confirmText, '', {
             type: 'warning'
           }).then(() => {
-            this.schema.value = [];
+            this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
+            this._addEmptyItem();
           })
         } else {
-          this.schema.value = [];
+          this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
+          this._addEmptyItem();
         }
       } else {
         if (requiredConfirm) {
-          window.confirm(confirmText) && (this.schema.value = []);
+          if (window.confirm(confirmText)) {
+            this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
+            this._addEmptyItem();
+          }
         } else {
-          this.schema.value = [];
+          this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
+          this._addEmptyItem();
         }
       }
 
+    },
+
+    isDelExceptionRow(schema) {
+      return this.mergeConfig.delExceptionRows ? this.mergeConfig.delExceptionRows(ncformUtils.getModelFromSchema(schema)) : false;
     },
 
     itemUp(idx) {

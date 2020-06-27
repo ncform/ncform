@@ -4,6 +4,7 @@
     :placeholder="placeholder || $nclang('selectPls')"
     v-show="!hidden"
     :disabled="disabled || readonly"
+    :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
     :multiple="mergeConfig.multiple"
     :filterable="mergeConfig.filterable"
@@ -11,6 +12,7 @@
     :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
     :loading="loading"
     @change="handleChange"
+    @visible-change="handleVisibleChange"
   >
     <el-option
       v-for="item in optionsData"
@@ -72,6 +74,7 @@ export default {
         filterable: false, // 是否可搜索，即可输入关键字
         filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
         itemTemplate: "", // 显示项的模板
+        size: '',
 
         itemDataKey: "", // 选中项的数据字段，可通过 {{$temp.[key]}} 取得
 
@@ -137,6 +140,12 @@ export default {
 
     handleChange() {
       this._keepSelectedItem();
+    },
+
+    handleVisibleChange(isVisible) {
+      if (!isVisible && !this.mergeConfig.filterLocal && this.optionsData.length === 0) { // 当输入搜索关键字从远程接口获取不到数据时，在隐藏时(UI上关键字被清空)需要重新call远程接口(关键字为空)，防止再次focus时不显示可选项
+        this.remoteMethod();
+      }
     },
 
     _keepSelectedItem() {

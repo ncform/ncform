@@ -29,7 +29,7 @@ class ValidationRule {
         case "promise":
           result.then(res => {
             resolve({
-              res,
+              result: res,
               errMsg: !res ? this.errMsg || this.defaultErrMsg : "",
               timeStamp
             });

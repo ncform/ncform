@@ -17,7 +17,7 @@ Comes with **standard components** and **validation rules**, out of the box.
 
 Have powerful **control interaction** and **extension capabilities**, do what you want.
 
-> If you are hesitant, you can read this article: [How to choose](https://forum.vuejs.org/t/ncform-let-you-happily-develop-forms/57795)
+> If you are hesitant, you can read this article: [How to choose](https://github.com/ncform/ncform/wiki/How-to-choose-a-project-that-generate-forms-from-a-JSON-schema)
 
 [![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
 
@@ -258,6 +258,36 @@ globalConfig: {
 }
 ```
 
+> dx expressions can also be replaced with `function` :
+
+function(formData, constData, selfData, tempData, itemIdxChain) { ... }
+
+- formData: corresponds to `{{$root}}`. Form data
+- constData: corresponds to `{{$const}}`. Constant data in global configuration
+- selfData: corresponds to `{{$self}}`. Used only for `ui.preview.value`, which refers to its own value
+- tempData: corresponds to `{{$temp}}`. Temporarily stored value
+- itemIdxChain: useful only for array items, refers to the index path of the current array, such as [1, 0]
+
+Some common examples are as follows:
+
+```
+// form data
+disabled: function(formData) {
+  return formData.person.age < 18;
+}
+
+// array item
+disabled: function(formData, constData, selfData, tempData, itemIdxChain) {
+  const [ i ] = itemIdxChain;
+  return formData.persons[i].age < 18;
+}
+
+// global constants
+disabled: function(formData, constData) {
+  return formData.person.age < constData.max;
+}
+```
+
 ## Design Thinking
 
 ncform = ncform container + ncform theme standard component
@@ -276,6 +306,8 @@ Thought: "Throw in" the standard components of various themes into the ncform co
 ## Schema Generator
 
 You can accelerate the speed of writing form schemas with [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)
+
+Also you can try the third-party generator: [ncform-maker](https://f-loat.github.io/ncform-maker/)
 
 ## References
 

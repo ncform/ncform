@@ -3,6 +3,7 @@
     <!-- 没有自动补全 -->
     <el-input
       v-if="!mergeConfig.autocomplete"
+      :size="mergeConfig.size"
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
@@ -11,6 +12,7 @@
       :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type"
       :prefix-icon="mergeConfig.prefixIcon"
       :suffix-icon="mergeConfig.suffixIcon"
+      @blur="onBlur"
       v-model="inputVal"
     >
       <template v-if="mergeConfig.type !== 'file' && mergeConfig.compound">
@@ -38,7 +40,7 @@
           v-if="mergeConfig.compound.prependSelect"
           v-model="prependSelectVal"
           slot="prepend"
-          :placeholder="$nclang('selectPls')"
+          :placeholder="mergeConfig.compound.prependSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in prependSelectOptions"
@@ -52,7 +54,7 @@
           v-if="mergeConfig.compound.appendSelect"
           v-model="appendSelectVal"
           slot="append"
-          :placeholder="$nclang('selectPls')"
+          :placeholder="mergeConfig.compound.appendSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in appendSelectOptions"
@@ -90,6 +92,7 @@
       :placeholder="placeholder"
       v-show="!hidden"
       :clearable="mergeConfig.clearable"
+      :size="mergeConfig.size"
       :type="mergeConfig.type"
       :prefix-icon="mergeConfig.prefixIcon"
       :suffix-icon="mergeConfig.suffixIcon"
@@ -97,6 +100,8 @@
       :trigger-on-focus="!!mergeConfig.autocomplete.immediateShow"
       :value-key="mergeConfig.autocomplete.itemValueField || 'value'"
       v-model="inputVal"
+      @select="onSelectSuggectionItem"
+      @blur="onBlur"
     >
       <template
         slot-scope="props"
@@ -130,7 +135,7 @@
           v-if="mergeConfig.compound.prependSelect"
           v-model="prependSelectVal"
           slot="prepend"
-          :placeholder="$nclang('selectPls')"
+          :placeholder="mergeConfig.compound.prependSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in prependSelectOptions"
@@ -144,7 +149,7 @@
           v-if="mergeConfig.compound.appendSelect"
           v-model="appendSelectVal"
           slot="append"
-          :placeholder="$nclang('selectPls')"
+          :placeholder="mergeConfig.compound.appendSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in appendSelectOptions"
@@ -223,7 +228,7 @@ export default {
 
   created() {
     this.$watch("inputVal", (newVal, oldVal) => {
-      if (!newVal && !oldVal) return;
+      if ((!newVal && !oldVal) || this.mergeConfig.updateOn === 'blur') return;
       let val = this._processModelVal();
       this.$emit("input", val);
     });
@@ -333,6 +338,8 @@ export default {
         prefixIcon: "",
         suffixIcon: "",
         modelField: "",
+        updateOn: 'change', // change or blur
+        size: '',
 
         // autocomplete: { // 自动补全
         //   itemLabelField: 'label', // 项数据表示label的字段
@@ -390,7 +397,8 @@ export default {
             minSize: 0 // 最小图片大小，单位KB，0代表不限
           },
           resField: "", // 获取返回结果的字段,
-          uploadText: "" //  上传按钮的名称
+          uploadText: "", //  上传按钮的名称
+          headers: {}
         }
       }
     };
@@ -442,7 +450,7 @@ export default {
     handleFileChange() {
       const vm = this;
       const fd = new FormData();
-      const { uploadUrl, data, resField, fileField } = vm.mergeConfig.upload;
+      const { uploadUrl, data, resField, fileField, headers = {} } = vm.mergeConfig.upload;
       const sendObj = Object.assign({}, data);
       sendObj[fileField] = this.$refs.upload.files[0];
 
@@ -546,7 +554,8 @@ export default {
         this.$http({
           method: "POST",
           url: uploadUrl,
-          data: fd
+          data: fd,
+          headers: headers
         })
           .then(res => {
             this.$data.inputVal = _get(res, resField || "");
@@ -557,6 +566,20 @@ export default {
             this.$data.isUploading = false;
           });
       });
+    },
+
+    onBlur() {
+      if (this.mergeConfig.updateOn === 'blur') {
+        let val = this._processModelVal();
+        this.$emit("input", val);
+      }
+    },
+
+    onSelectSuggectionItem() {
+      if (this.mergeConfig.updateOn === 'blur') {
+        let val = this._processModelVal();
+        this.$emit("input", val);
+      }
     },
 
     _getFractionalExpression(value, threshold) {

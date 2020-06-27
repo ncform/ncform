@@ -24,7 +24,6 @@
     .ncform-radio {
       &.__ncform-control {
         clear: none;
-        padding-top: 10px;
       }
     }
   }

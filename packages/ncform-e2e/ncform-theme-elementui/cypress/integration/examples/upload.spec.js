@@ -108,7 +108,10 @@ context('Upload', () => {
               },
               accept: '.png',
               listType: 'text',
-              showFileList: true
+              showFileList: true,
+              headers: {
+                author: 'sarah'
+              },
               // constraint: {
               //   width: 300,
               //   height: 300,
@@ -186,8 +189,10 @@ context('Upload', () => {
           cy.wait('@uploadSingle').then(xhr => {
             let uploadParams = {};
             xhr.request.body.forEach((item, key) => (uploadParams[key] = item));
+            let headers = xhr.request.headers;
 
             // data
+            cy.wrap(headers).its('author').should('equal', 'sarah');
             cy.wrap(uploadParams)
               .its('name')
               .should('equal', 'daniel');

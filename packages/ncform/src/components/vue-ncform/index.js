@@ -1,5 +1,6 @@
 import _map from "lodash-es/map";
 import _kebabCase from "lodash-es/kebabCase";
+import VueScrollTo from "vue-scrollto";
 import ncform from "./ncform.vue";
 import RegularValidation from "../../regular-validation";
 
@@ -49,7 +50,22 @@ module.exports = {
         return Promise.resolve(false);
       }
 
-      return vm.ncformValidate();
+      return vm.ncformValidate().then(data => {
+        const config = vm.dataFormSchema.globalConfig.scrollToFailField;
+        if (!data.result && config.enabled) {
+          vm.$nextTick(() => {
+            const firstErrorElem = Array.prototype.slice.call(vm.$el.querySelectorAll('.invalid-feedback')).find(elem => elem.style.display !== 'none');
+            if (firstErrorElem) {
+              VueScrollTo.scrollTo(firstErrorElem, {
+                container: config.container,
+                duration: config.duration,
+                offset: config.offset
+              });
+            }
+          })
+        }
+        return data;
+      });
     };
 
     Vue.prototype.$ncformReset = function(formName) {

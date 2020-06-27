@@ -26,7 +26,7 @@
       /* UI */
       ui: {
 
-        columns: 6, // Total are 12 columns.
+        columns: 6, // Total are 12 columns. [support dx expression]
         label: '', // Label display [support dx expression]
         showLabel: true, // Whether to show the label (when it is false, it still takes up space)
         noLabelSpace: false, // Whether the label does not occupy space, the priority is higher than showLabel
@@ -136,6 +136,12 @@
     },
     constants: { // Global constant configuration, can be accessed by {{$const.userName}}
       userName: 'daniel'
+    },
+    scrollToFailField: { // Automatically scroll to fields that failed validation
+      enabled: true, // Enable this feature or not
+      container: 'body', // The container that has to be scrolled.
+      duration: 500, // The duration (in milliseconds) of the scrolling animation
+      offset: -80, // The offset that should be applied when scrolling. 
     }
   }
 }
@@ -280,4 +286,20 @@ Submit a form.
 ```
 // Demo code:
 <ncform @submit="submit()"></ncform>
+```
+
+- change
+
+Form item value change event
+
+```
+// Demo code:
+<ncform @change="onChange"></ncform>
+
+onChange({paths, itemValue, formValue, oldItemValue}) {
+  // paths: the path of the item whose value changes
+  // itemValue: the latest value of the item whose value has changed
+  // formValue: the latest value of the form
+  // oldItemValue: ths old value of the item before value changed
+}
 ```

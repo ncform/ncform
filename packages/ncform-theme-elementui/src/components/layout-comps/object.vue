@@ -10,7 +10,7 @@
 
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
-          :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
+          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
 
@@ -43,7 +43,7 @@
     <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="el-row h-layout" style="width: 100%">
       <div v-for="(fieldSchema, field) in schema.properties"
           :key="field"
-          :class="['el-col-' + (fieldSchema.ui.columns * 2 || 24)]"
+          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="el-col el-form-item">
         <template>
@@ -136,8 +136,23 @@
       .el-form-item {
         margin-bottom: 22px;
         .el-form-item__content {
-          line-height: 1.5;
+          line-height: unset;
         }
+      }
+    }
+
+    // 解决对象水平布局的组件显示问题
+    .h-layout {
+      .__ncform-control {
+        line-height: 40px;
+        &.__array-form-item, &.__array-table-form-item, &.__array-tabs-form-item {
+          line-height: unset;
+        }
+      }
+    }
+    .v-layout {
+      .__ncform-control {
+        line-height: unset;
       }
     }
   }

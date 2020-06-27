@@ -42,4 +42,16 @@ context('dx', () => {
     })
   })
 
+  it('a[i].b.c: valueTemplate', () => {
+    let id = md5('a[i].b.c: valueTemplate');
+    cy.get(`[data-cy=${id}]`).within(() => {
+      cy.get('input').eq(1).type('daniel');
+      cy.get('input').eq(2).should('have.value', 'daniel lastname');
+
+      cy.get('input').eq(0).type('1');
+      cy.get('input').eq(1).clear();
+      cy.get('.invalid-feedback').eq(1).should('have.css', 'display', 'block');
+    })
+  })
+
 })

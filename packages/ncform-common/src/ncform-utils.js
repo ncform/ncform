@@ -142,6 +142,12 @@ const ncformUtils = {
           validationMsg: {},
           constants: {
             // 常量数据，可通过{{$const.}}访问
+          },
+          scrollToFailField: { // Automatically scroll to fields that failed validation
+            enabled: true, // enable this feature or not
+            container: 'body',
+            duration: 500, // The duration (in milliseconds) of the scrolling animation
+            offset: -80, // The offset that should be applied when scrolling.
           }
         };
         newFieldVal.globalConfig = newFieldVal.globalConfig || {};
@@ -435,7 +441,8 @@ const ncformUtils = {
         }
         break;
       case "function":
-        result = val(...data.map(item => item.value._value));
+        const idxChains = idxChain.split(",").filter(item => item).map(item => parseInt(item));
+        result = val(...data.map(item => item.value._value).concat([idxChains]));
         break;
       default:
         result = val;

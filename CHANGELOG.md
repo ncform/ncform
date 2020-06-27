@@ -1,3 +1,113 @@
+# [1.7.0](https://github.com/ncform/ncform/compare/v1.6.9...v1.7.0) (2020-05-01)
+
+### Bug Fixes
+
+* **array widgets:** Fixed bug that globalConst not work at object item in array ([9e37f3f](https://github.com/ncform/ncform/commit/9e37f3f6d23d7c1e9ce939a979e2d08b31c02aa3)), closes [#140](https://github.com/ncform/ncform/issues/140)
+* **array-table:** Fixed warning for key binding ([ce38dce](https://github.com/ncform/ncform/commit/ce38dce7c51c630b41a0971e8c075861148c4d0c)), closes [#145](https://github.com/ncform/ncform/issues/145)
+
+### Features
+
+* **object layout:** columns config support dx expression ([5654c60](https://github.com/ncform/ncform/commit/5654c6076aeb9d649955ea795c4035f65fe96601)), closes [#133](https://github.com/ncform/ncform/issues/133)
+* return itemOldValue on change event ([d229aa4](https://github.com/ncform/ncform/commit/d229aa4481f6b8516bcc43decf77e1aeb864e31b)), closes [#135](https://github.com/ncform/ncform/issues/135)
+
+## [1.6.9](https://github.com/ncform/ncform/compare/v1.6.8...v1.6.9) (2019-11-29)
+
+### Bug Fixes
+
+* **ncform-common:** Fixed the bug that the promise type rule logic does not take effect when submiss ([694a4a5](https://github.com/ncform/ncform/commit/694a4a5148192be14b1ff5dc7353ec0c55297fb4))
+
+## [1.6.8](https://github.com/ncform/ncform/compare/v1.6.7...v1.6.8) (2019-11-27)
+
+### Bug Fixes
+
+* Solve display problem of widgets in "h" layout ([b4a148d](https://github.com/ncform/ncform/commit/b4a148de168af36a7446f8158563560ac390904d))
+
+### Features
+
+* **ncform-theme-elementui:** Add size config for input/input-number/select/date-picker widgets ([781f031](https://github.com/ncform/ncform/commit/781f031eefba316474c6bf4997b83c44cc236566)), closes [#105](https://github.com/ncform/ncform/issues/105)
+
+## [1.6.7](https://github.com/ncform/ncform/compare/v1.6.6...v1.6.7) (2019-11-22)
+
+### Bug Fixes
+
+* **ncform:** Fixed dx bug of 'a[i].b.c' situation ([6c674c2](https://github.com/ncform/ncform/commit/6c674c21e45d4daa71a25fe2556b19f44607c172))
+
+<a name="1.6.6"></a>
+## [1.6.6](https://github.com/ncform/ncform/compare/v1.6.5...v1.6.6) (2019-10-26)
+
+### Bug Fixes
+
+* **ncform-common:** correct the parameter of dx expression function ([5bd3fb8](https://github.com/ncform/ncform/commit/5bd3fb8))
+
+### Features
+
+* **input and textarea:** add updateOn config for iput and textarea ([289c27b](https://github.com/ncform/ncform/commit/289c27b))
+
+<a name="1.6.5"></a>
+## [1.6.5](https://github.com/ncform/ncform/compare/v1.6.4...v1.6.5) (2019-10-24)
+
+### Bug Fixes
+
+* When showOneIfEmpty is true, there has extra blank row when there has initial value. ([1a9a987](https://github.com/ncform/ncform/commit/1a9a987))
+
+
+<a name="1.6.4"></a>
+## [1.6.4](https://github.com/ncform/ncform/compare/v1.6.3...v1.6.4) (2019-10-24)
+
+
+### Bug Fixes
+
+* **ncform:** fixed valueTemplate bug ([da8ee5c](https://github.com/ncform/ncform/commit/da8ee5c)), closes [#106](https://github.com/ncform/ncform/issues/106)
+* Fixed the bug that valueTemplate don't work for array widgets ([1eafcc2](https://github.com/ncform/ncform/commit/1eafcc2)), closes [#107](https://github.com/ncform/ncform/issues/107)
+
+
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/ncform/ncform/compare/v1.6.1...v1.6.2) (2019-10-16)
+
+### Bug Fixes
+
+* **array widgets:** fixed bug for delExceptionRows implementation ([f76fd87](https://github.com/ncform/ncform/commit/f76fd87))
+* **array-table:** fixed the display problem of column width ([e8e079c](https://github.com/ncform/ncform/commit/e8e079c))
+* **ncform:** make sure the scrolling action is after the DOM update ([c3c72d3](https://github.com/ncform/ncform/commit/c3c72d3))
+
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/ncform/ncform/compare/v1.6.0...v1.6.1) (2019-10-16)
+
+### Features
+
+* **ncform:** Add the globalConfig.scrollToFailField to support auto scroll to the first validation ([a78362f](https://github.com/ncform/ncform/commit/a78362f)), closes [#102](https://github.com/ncform/ncform/issues/102)
+
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/ncform/ncform/compare/v1.5.0...v1.6.0) (2019-10-16)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed bug that dropdown options do not show any more with configure filterLocal=false ([498ef06](https://github.com/ncform/ncform/commit/498ef06)), closes [#98](https://github.com/ncform/ncform/issues/98)
+
+
+### Features
+
+* **array layout widgets:** add delExceptionRows config for all layout widgets ([49bdbbf](https://github.com/ncform/ncform/commit/49bdbbf)), closes [#100](https://github.com/ncform/ncform/issues/100)
+* **array-table:** add column config (colgroup) for array-table widget ([aad46c4](https://github.com/ncform/ncform/commit/aad46c4)), closes [#99](https://github.com/ncform/ncform/issues/99)
+
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/ncform/ncform/compare/v1.4.0...v1.5.0) (2019-10-11)
+
+### Features
+
+* **ncform-theme-elementui:** add the switch widget to the standard components ([1180196](https://github.com/ncform/ncform/commit/1180196)), closes [#73](https://github.com/ncform/ncform/issues/73)
+* **ncform-theme-elementui:** upload and input.upload add headers config ([16c0511](https://github.com/ncform/ncform/commit/16c0511)), closes [#93](https://github.com/ncform/ncform/issues/93)
+
+
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/ncform/ncform/compare/v1.3.2...v1.4.0) (2019-08-05)
+
+### Features
+
+* **ncform:** add item change event ([49a9617](https://github.com/ncform/ncform/commit/49a9617)), closes [#86](https://github.com/ncform/ncform/issues/86)
+* **ncform-theme-elementui:** add compound.appendSelect.placeholder and compound.prependSelect.placeholder for input widget ([0ab6584](https://github.com/ncform/ncform/commit/0ab6584)), closes [#85](https://github.com/ncform/ncform/issues/85)
+* Add showOneIfEmpty option for array / array-table / array-tabs widgets ([5255597](https://github.com/ncform/ncform/commit/5255597)), closes [#87](https://github.com/ncform/ncform/issues/87)
+
 <a name="1.3.4"></a>
 ## [1.3.4](https://github.com/ncform/ncform/compare/v1.3.3...v1.3.4) (2019-07-24)
 

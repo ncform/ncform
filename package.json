@@ -56,7 +56,7 @@
     "eslint-plugin-html": "^4.0.5",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-prettier": "^2.6.2",
-    "lerna": "^2.11.0",
+    "lerna": "^3.19.0",
     "lint-staged": "^7.2.0",
     "prettier": "^1.13.7",
     "vue-loader": "^15.2.6",
@@ -67,11 +67,12 @@
     "yorkie": "^1.0.3"
   },
   "dependencies": {
-    "ora": "^2.1.0",
-    "gh-pages": "^1.2.0",
+    "chalk": "^2.4.1",
+    "conventional-changelog-cli": "^2.0.28",
     "fs-extra": "^6.0.1",
+    "gh-pages": "^1.2.0",
     "glob": "^7.1.2",
-    "chalk": "^2.4.1"
+    "ora": "^2.1.0"
   },
   "engines": {
     "node": ">= 6.9.0 <= 11.0.0-0",

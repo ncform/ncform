@@ -36,6 +36,8 @@ If you don't like the cold text description, click on the [interactive version](
   modelField: '', // Used when the value is an object (ie using compound.prependSelect or compound.appendSelect)
   trim: true, // Whether to automatically trim the front and rear spaces, the default is true
   clearable: false, // Whether it can be emptied, the default is false
+  updateOn: 'change', // Timing of triggering value changes, the default is to trigger when value changed. Optional value: ['change', 'blur']
+  size: '', // Input box size, optional values: [medium | small | mini]
 
   autocomplete: { // Automatic completion 
     itemValueField: 'value', // Item data represents the field of value
@@ -63,7 +65,8 @@ If you don't like the cold text description, click on the [interactive version](
         remoteUrl: '', // If it is remote call, fill in the url
         resField: '', // Response result field
       },
-      modelField: '' // An attribute used to bind the value of the input value
+      modelField: '', // An attribute used to bind the value of the input value
+      placeholder: '', // placeholder
     },
     appendSelect: { // Append select, The data used for this kind must be an object
       itemLabelField: 'label', // Item data represents the field of the label
@@ -73,7 +76,8 @@ If you don't like the cold text description, click on the [interactive version](
         remoteUrl: '', // If it is remote call, fill in the url
         resField: '', // Response result field
       },
-      modelField: '' // An attribute used to bind the value of the input value
+      modelField: '', // An attribute used to bind the value of the input value
+      placeholder: '', // placeholder
     }
   }，
 
@@ -91,6 +95,7 @@ If you don't like the cold text description, click on the [interactive version](
       minSize: 0 // Minimum file size in KB, 0 means no limit
     },
     uploadText: 'Click to upload', //  Upload button name
+    headers: {}, // Set the request headers for the upload
   }
 }
 ```
@@ -101,7 +106,8 @@ If you don't like the cold text description, click on the [interactive version](
 {
   min: 0, // Minimum value
   max: Infinity, // Maximum
-  step: 1, // Step size
+  step: 1, // Step size，
+  size: '', // Size. Options：[medium | small | mini]
 }
 ```
 
@@ -111,6 +117,7 @@ If you don't like the cold text description, click on the [interactive version](
 {
   rows: 2, // Rows
   autoSize: true, // Adaptive content height, optional: [boolean | { minRows: 2, maxRows: 6 }]
+  updateOn: 'change', // Timing of triggering value changes, the default is to trigger when value changed. Optional value: ['change', 'blur']
 }
 ```
 
@@ -122,6 +129,7 @@ If you don't like the cold text description, click on the [interactive version](
   clearable: true, // Whether the empty button appears
   filterable: false, // Whether searchable
   filterLocal: true, // Filter by local or remote data. if true, even with enumSourceRemote, data will only be retrieved once remotely.
+  size: '', // Size. Options：[medium | small | mini]
 
   itemDataKey: "", // The key of the selected item's data, can accessed by {{$temp[itemDataKey]}}
 
@@ -197,6 +205,7 @@ If you don't like the cold text description, click on the [interactive version](
   listType: 'text', // The type of file list. Optional value: [ text | picture | picture-card ]
   autoUpload: false, // Whether to upload immediately after selecting a file
   limit: 1, // Maximum number of uploads allowed
+  headers: {}, // Set the request headers for the upload
 }
 ```
 
@@ -239,6 +248,7 @@ If you don't like the cold text description, click on the [interactive version](
   type: 'date', // year/month/date/week/datetime
   format: '', // Format display
   valueFormat: '', // The format of the output value. Empty means a millisecond string
+  size: '', // Size. Options：[medium | small | mini]
 }
 ```
 
@@ -246,6 +256,22 @@ If you don't like the cold text description, click on the [interactive version](
 
 ```js
 {
+}
+```
+
+- switch
+
+```js
+{
+  width: 40, // Switch's width（pixel）
+  activeIconClass: '', // The class name of the icon displayed when the switch is turned on. Setting this item ignores activeText
+  inactiveIconClass: '', // The class name of the icon displayed when the switch is closed. Setting this item ignores inactiveText
+  activeText: '', // Text description when switch is turned on
+  inactiveText: '', // Text description when switch is off
+  activeValue: '', // The value of the switch when it is turned on. default is true [boolean / string / number]
+  inactiveValue: '', //  The value of the switch when it is turned off. default is false [ boolean / string / number ]
+  activeColor: '#409EFF', // Background color when switch is on
+  inactiveColor: '#C0CCDA', // Background color when switch is off
 }
 ```
 
@@ -268,6 +294,7 @@ If you don't like the cold text description, click on the [interactive version](
 {
   disableAdd: true, // Whether to prohibit the addition of items
   disableDel: true, // whether to disable item deletion
+  delExceptionRows: 'dx: (function(item) { return false })' // The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false
   disableReorder: true, // Whether to prohibit sorting
   disableCollapse: false, // Whether to allow folding
   collapsed: false, // Whether to fold by default
@@ -280,6 +307,7 @@ If you don't like the cold text description, click on the [interactive version](
     item: '',
     all: ''
   }, 
+  showOneIfEmpty: false, // Show one item if empty
 }
 ```
 
@@ -289,6 +317,7 @@ If you don't like the cold text description, click on the [interactive version](
 {
   disableAdd: true, // Whether to prohibit the addition of items
   disableDel: true, // whether to disable item deletion
+  delExceptionRows: 'dx: (function(item) { return false })' // The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false
   disableReorder: true, // Whether to prohibit sorting
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
@@ -299,6 +328,12 @@ If you don't like the cold text description, click on the [interactive version](
     item: '',
     all: ''
   }, 
+  showOneIfEmpty: false, // Show one item if empty
+  colgroup: [ // Column configuration
+    {
+      width: '', // Column width, pixels or %
+    }
+  ], 
 }
 ```
 
@@ -308,6 +343,7 @@ If you don't like the cold text description, click on the [interactive version](
 {
   disableAdd: true, // Whether to prohibit the addition of items
   disableDel: true, // whether to disable item deletion
+  delExceptionRows: 'dx: (function(item) { return false })' // The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false
   tabPosition: 'top', // Optional value：[left | top]
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
@@ -316,5 +352,6 @@ If you don't like the cold text description, click on the [interactive version](
     item: '',
     all: ''
   }, 
+  showOneIfEmpty: false, // Show one item if empty
 }
 ```

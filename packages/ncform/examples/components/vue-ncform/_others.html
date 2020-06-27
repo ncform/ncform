@@ -12,7 +12,7 @@
       <template v-for="item in formSchemas">
         <div :data-cy="item.id" v-if="mode !== 'only' || item.only" :key="item.formName">
           <h4>[CASE] {{ item.title }}</h4>
-          <ncform :form-schema="item.formSchema" v-model="item.formSchema.value" :form-name="item.formName" @submit="submit(item.formName)" :is-dirty.sync="item.isFormDirty"></ncform>
+          <ncform :form-schema="item.formSchema" v-model="item.formSchema.value" :form-name="item.formName" @submit="submit(item.formName)" @change="onChange" :is-dirty.sync="item.isFormDirty"></ncform>
 
           <button v-if="['v-model: external update', 'reset', 'is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary" @click="changeModel(item.formSchema)">
             Updated Model
@@ -136,6 +136,12 @@
           },
           changeModel(formSchema) {
             formSchema.value = { user: { name: 'daniel' } };
+          },
+          onChange({paths, itemValue, formValue, itemOldValue}) {
+            console.log('paths:', paths);
+            console.log('itemValue:', itemValue);
+            console.log('formValue:', JSON.stringify(formValue, null, 2));
+            console.log('itemOldValue', itemOldValue);
           }
         }
       });

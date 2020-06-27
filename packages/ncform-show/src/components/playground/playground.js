@@ -494,7 +494,10 @@ export default {
               },
               ui: {
                 showLegend: false,
-                noLabelSpace: true
+                noLabelSpace: true,
+                widgetConfig: {
+                  showOneIfEmpty: true
+                }
               }
             }
           }
@@ -552,7 +555,8 @@ export default {
                 noLabelSpace: true,
                 widget: "array-table",
                 widgetConfig: {
-                  disableCollapse: true
+                  disableCollapse: true,
+                  showOneIfEmpty: true
                 }
               }
             }
@@ -612,7 +616,10 @@ export default {
               ui: {
                 showLegend: false,
                 noLabelSpace: true,
-                widget: "array-tabs"
+                widget: "array-tabs",
+                widgetConfig: {
+                  showOneIfEmpty: true
+                }
               }
             }
           }
@@ -734,7 +741,10 @@ export default {
               ui: {
                 showLegend: false,
                 noLabelSpace: true,
-                widget: "array-table"
+                widget: "array-table",
+                widgetConfig: {
+                  showOneIfEmpty: true
+                }
               }
             }
           }
@@ -946,7 +956,8 @@ export default {
                 legend: "Array item",
                 widget: "array-table",
                 widgetConfig: {
-                  collapsed: true
+                  collapsed: false,
+                  showOneIfEmpty: true
                 }
               }
             }

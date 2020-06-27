@@ -47,6 +47,7 @@ typings/
 
 # Optional REPL history
 .node_repl_history
+.history
 
 # Output of 'npm pack'
 *.tgz
@@ -84,3 +85,5 @@ _book
 
 package-lock.json
 /.idea/
+/packages/ncform-e2e/yarn.lock
+/packages/ncform-common/yarn.lock
