@@ -76,7 +76,7 @@ typings/
 # IDE
 .DS_Store
 .vscode
-
+package-lock.json
 # build
 dist
 RELEASE_NOTE*.md
