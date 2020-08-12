@@ -23,7 +23,7 @@
     "build": "lerna run build",
     "commit": "git-cz",
     "release:log": "conventional-changelog -p angular -i CHANGELOG_TEMP.md -s -r 0",
-    "release": "npm run lint && lerna run release && lerna publish",
+    "release": "lerna run release && lerna publish",
     "test": "lerna run test"
   },
   "gitHooks": {
