@@ -462,7 +462,7 @@ const ncformUtils = {
         break;
       case "number":
       case "integer":
-        defVal = undefined; // 数字默认值不好给，所以这里给undefined
+        defVal = ""; // 数字默认值不好给，所以这里给undefined
         break;
       case "boolean":
         defVal = false;

@@ -140,4 +140,12 @@ context('Layout widgets', () => {
     })
   })
 
+  it('array: with number items', () => {
+    let id = md5('array: with number items');
+    cy.get(`[data-cy=${id}]`).within(() => {
+      cy.get('legend').contains('user').as('userLegend');
+      cy.get('@userLegend').parent().find('button').contains('Add').click();
+    })
+  })
+
 })
