@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/ncform/ncform/compare/v1.7.0...v1.7.1) (2020-08-12)
+
+### Bug Fixes
+
+* **ncform:** fixed error array paths value got by changed ([c806010](https://github.com/ncform/ncform/commit/c806010ea63164d4b0b2dfeed50f568411e157ed)), closes [#162](https://github.com/ncform/ncform/issues/162)
+* **ncform:** fixed crach when number type items in array ([b2a9dfc](https://github.com/ncform/ncform/commit/b2a9dfc600130fce8928e3994aff575d3478c72b)), closes [#150](https://github.com/ncform/ncform/issues/150)
+
 # [1.7.0](https://github.com/ncform/ncform/compare/v1.6.9...v1.7.0) (2020-05-01)
 
 ### Bug Fixes
