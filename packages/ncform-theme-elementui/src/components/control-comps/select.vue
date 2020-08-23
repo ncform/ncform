@@ -6,6 +6,7 @@
     :disabled="disabled || readonly"
     :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
+    :collapse-tags="mergeConfig.collapseTags"
     :multiple="mergeConfig.multiple"
     :filterable="mergeConfig.filterable"
     :remote="!isLocalSource && !mergeConfig.filterLocal"
@@ -71,6 +72,8 @@ export default {
       defaultConfig: {
         multiple: false, // 是否多选
         clearable: true, // 是否出现清空选项
+        collapseTags: false, // 多选时是否将选中值按文字的形式展示
+        headers: {},
         filterable: false, // 是否可搜索，即可输入关键字
         filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
         itemTemplate: "", // 显示项的模板
@@ -117,8 +120,10 @@ export default {
 
       const options = {
         url: this.mergeConfig.enumSourceRemote.remoteUrl,
-        params: _cloneDeep(_get(this.mergeConfig, "enumSourceRemote.otherParams", {}))
+        params: _cloneDeep(_get(this.mergeConfig, "enumSourceRemote.otherParams", {})),
+        headers: this.mergeConfig.headers
       };
+      console.log(options, 444)
       if (this.mergeConfig.enumSourceRemote.paramName)
         options.params[this.mergeConfig.enumSourceRemote.paramName] = query;
       this.$http(options).then(res => {

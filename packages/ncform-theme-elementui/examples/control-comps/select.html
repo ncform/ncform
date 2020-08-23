@@ -200,11 +200,16 @@
                   widget: 'select',
                   widgetConfig: {
                     multiple: true,
+                    collapseTags: true,
                     enumSource: [{ value: 1, label: 'option1' }, { value: 2, label: 'option2' }, { value: 3, label: 'option3' }]
                   }
                 }
               }
             }
+          },
+          detail: {
+            cn: `collapseTags: 多选时是否将选中值按文字的形式展示, 默认false`,
+            en: 'collapseTags: whether to collapse tags to a text when multiple selecting'
           }
         },
         {
