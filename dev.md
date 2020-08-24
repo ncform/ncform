@@ -15,6 +15,10 @@ cd packages/ncform-theme-elementui && npm install && npm run watch-build
 但是最新安装的依赖../../node_modules/@ncform/ncform/dist/vueNcform.js文件不存在只有.min.js文件,复制一份重命名为*.js即可
 
 复制*.js
-ncform/packages/ncform-show/node_modules/@ncform/ncform-theme-elementui/dist/ncformStdComps.js
-ncform/packages/ncform-show/node_modules/@ncform/ncform/dist/vueNcform.js
+```shell script
+cp ncform/packages/ncform-theme-elementui/node_modules/@ncform/ncform/dist/vueNcform.min.js ncform/packages/ncform-theme-elementui/node_modules/@ncform/ncform/dist/vueNcform.js 
+cp ncform/packages/ncform-show/node_modules/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js ncform/packages/ncform-show/node_modules/@ncform/ncform-theme-elementui/dist/ncformStdComps.js
+cp ncform/packages/ncform-show/node_modules/@ncform/ncform/dist/vueNcform.min.js ncform/packages/ncform-show/node_modules/@ncform/ncform/dist/vueNcform.js
+```
+
 
