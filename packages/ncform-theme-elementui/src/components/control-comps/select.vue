@@ -6,7 +6,9 @@
     :disabled="disabled || readonly"
     :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
+    :collapse-tags="mergeConfig.collapseTags"
     :multiple="mergeConfig.multiple"
+    :multiple-limit="mergeConfig.multipleLimit"
     :filterable="mergeConfig.filterable"
     :remote="!isLocalSource && !mergeConfig.filterLocal"
     :remote-method="(!isLocalSource && !mergeConfig.filterLocal) ? remoteMethod : null"
@@ -19,6 +21,7 @@
       :key="item[mergeConfig.itemValueField]"
       :label="item[mergeConfig.itemLabelField]"
       :value="item[mergeConfig.itemValueField]"
+      :disabled="item[mergeConfig.itemDisabledField]"
     >
       <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
     </el-option>
@@ -71,6 +74,8 @@ export default {
       defaultConfig: {
         multiple: false, // 是否多选
         clearable: true, // 是否出现清空选项
+        collapseTags: false, // 多选时是否将选中值按文字的形式展示
+        multipleLimit: 0, // 多选时用户最多可以选择的项目数，为 0 则不限制
         filterable: false, // 是否可搜索，即可输入关键字
         filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
         itemTemplate: "", // 显示项的模板
@@ -80,6 +85,7 @@ export default {
 
         itemLabelField: "label", // 项数据表示label的字段
         itemValueField: "value", // 项数据表示value的字段
+        itemDisabledField: "disabled", // 项数据表示disabled的字段
         enumSource: [], // 本地数据源
         enumSourceRemote: {
           // 远程数据源
@@ -87,6 +93,7 @@ export default {
           paramName: "keyword", // 请求参数名，默认是keyword
           otherParams: {}, // 其它请求的参数，支持字符串表达式
           resField: "", // 响应结果的字段
+          headers: {},
           selectFirstItem: false // 默认选中第一项
         }
       },
@@ -117,7 +124,8 @@ export default {
 
       const options = {
         url: this.mergeConfig.enumSourceRemote.remoteUrl,
-        params: _cloneDeep(_get(this.mergeConfig, "enumSourceRemote.otherParams", {}))
+        params: _cloneDeep(_get(this.mergeConfig, "enumSourceRemote.otherParams", {})),
+        headers: _cloneDeep(_get(this.mergeConfig, "enumSourceRemote.headers", {})),
       };
       if (this.mergeConfig.enumSourceRemote.paramName)
         options.params[this.mergeConfig.enumSourceRemote.paramName] = query;
