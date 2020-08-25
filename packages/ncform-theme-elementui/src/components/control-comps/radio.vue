@@ -4,12 +4,15 @@
         v-model="modelVal"
         :disabled="disabled"
         v-show="!hidden && !readonly"
-        size="mini"
+        :text-color="mergeConfig.textColor"
+        :fill="mergeConfig.fill"
+        :size="mergeConfig.size"
       >
         <component :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
           v-for="opt in dataSource"
           :key="opt[mergeConfig.itemValueField]"
           :label="opt[mergeConfig.itemValueField]"
+          :border="mergeConfig.border"
           :class="mergeConfig.type === 'radio' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
         >{{opt[mergeConfig.itemLabelField]}}</component>
       </el-radio-group>
@@ -59,6 +62,7 @@
 
   import ncformCommon from '@ncform/ncform-common';
   import _get from 'lodash-es/get';
+  import _cloneDeep from "lodash-es/cloneDeep";
 
   const controlMixin = ncformCommon.mixins.vue.controlMixin;
 
@@ -97,12 +101,17 @@
           checkAll: false,
           arrangement: 'h', // 排列 可选值 [v | h]
           type: 'radio', // 显示类型，可选值：[radio | button]
+          size: 'mini',
+          textColor: '#ffffff',
+          fill: '#409EFF',
+          border: false,
           itemValueField: 'value', // 值字段
           itemLabelField: 'label', // 显示字段
           enumSource: [], // 可选项，默认[{value: true, label: '是'}, {value: false, label: '否'}]
           enumSourceRemote: { // 远程数据源
             remoteUrl: '', // 如果是远程访问，则填写该url
             resField: '', // 响应结果的字段
+            headers: {} // 自定义头信息
           },
           itemDataKey: "", // 选中项的数据字段，可通过 {{$temp.[key]}} 取得
         },
@@ -147,14 +156,14 @@
         try {
           const vm = this;
           const enumSourceRemote = vm.mergeConfig.enumSourceRemote;
+          let headers = _cloneDeep(_get(this.mergeConfig, "enumSourceRemote.headers", {}))
+          headers['X-Requested-With'] = 'XMLHttpRequest'
 
           this.$http({
             method: 'GET',
             url: enumSourceRemote.remoteUrl,
             data: {},
-            headers: {
-              'X-Requested-With':'XMLHttpRequest'
-            },
+            headers: headers,
           }).then(res => {
             if (res.status === 200 ) {
               let data = res.data;
