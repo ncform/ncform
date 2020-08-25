@@ -82,3 +82,4 @@ dist
 RELEASE_NOTE*.md
 CHANGELOG_TEMP.md
 _book
+/.idea/
