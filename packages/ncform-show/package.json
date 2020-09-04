@@ -36,7 +36,7 @@
     "map-stream": "0.0.6",
     "mocha": "^4.0.1",
     "node-libs-browser": "^1.0.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "postcss-loader": "^0.8.0",
     "postcss-sprites": "^4.0.0",
     "power-assert": "^1.4.4",
