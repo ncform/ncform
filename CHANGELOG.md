@@ -1,3 +1,9 @@
+## [1.7.2](https://github.com/ncform/ncform/compare/v1.7.1...v1.7.2) (2020-11-19)
+
+### Features
+
+* Add title attribute to label ([70c5db1](https://github.com/ncform/ncform/commit/70c5db1bdc299a4f0e60f91c5ec78519f2e7485f))
+
 ## [1.7.1](https://github.com/ncform/ncform/compare/v1.7.0...v1.7.1) (2020-08-12)
 
 ### Bug Fixes
