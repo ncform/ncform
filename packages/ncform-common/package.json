@@ -40,7 +40,7 @@
     "gulp-livereload": "^4.0.1",
     "gulp-load-plugins": "^1.5.0",
     "gulp-mocha": "^6.0.0",
-    "gulp-plumber": "1.1.0",
+    "gulp-plumber": "^1.2.1",
     "gulp-rename": "1.2.2",
     "gulp-sourcemaps": "1.6.0",
     "gulp-uglify": "2.0.0",
@@ -61,8 +61,8 @@
   },
   "dependencies": {
     "assert": "^1.4.1",
-    "axios": "^0.18.0",
-    "extend": "^3.0.1",
+    "axios": "^0.18.1",
+    "extend": "^3.0.2",
     "lodash-es": "^4.17.4",
     "power-assert": "^1.4.4"
   },
