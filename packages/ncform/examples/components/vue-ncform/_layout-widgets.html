@@ -416,6 +416,27 @@
                 }
               }
             },
+            {
+              id: md5('array: with number items'),
+              title: 'array: with number items',
+              formName: 'form_' + Math.random(),
+              formSchema: {
+                type: 'object',
+                properties: {
+                  users: {
+                    type: 'array',
+                    items: {
+                      type: 'number'
+                    },
+                    ui: {
+                      widgetConfig: {
+                        showOneIfEmpty: true
+                      }
+                    }
+                  }
+                }
+              }
+            },
           ]
         }
       });
