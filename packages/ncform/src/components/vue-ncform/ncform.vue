@@ -165,7 +165,10 @@ export default {
 
       return new Promise((resolve, reject) => {
         Promise.all(this.$data.validateArray).then(data => {
-          data.forEach(item => {
+          data
+            .filter(item =>
+              false === _get(this.$data.dataFormSchema, [item.__path, 'removeFromFormData'], false)
+            ).forEach(item => {
             this.$set(
               _get(this.$data, item.__path),
               '__validationResult',
