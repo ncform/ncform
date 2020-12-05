@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "province": {
+      "type": "string",
+      "ui": {
+        "label": "Province",
+        "widget": "select",
+        "widgetConfig": {
+          "itemLabelField": "name",
+          "itemValueField": "id",
+          "enumSourceRemote": {
+            "remoteUrl": "/api/test/getProvinces",
+            "paramName": "keyword"
+          }
+        }
+      }
+    },
+    "city": {
+      "type": "string",
+      "ui": {
+        "label": "City",
+        "widget": "select",
+        "widgetConfig": {
+          "itemLabelField": "name",
+          "itemValueField": "id",
+          "enumSourceRemote": {
+            "remoteUrl": "/api/test/getCities",
+            "paramName": "keyword",
+            "otherParams": {
+              "provinceId": "dx: {{$root.province}}"
+            }
+          }
+        }
+      }
+    }
+  }
+}

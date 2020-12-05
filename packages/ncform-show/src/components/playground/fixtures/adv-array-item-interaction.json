@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "user": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "adult": {
+            "type": "boolean",
+            "ui": {
+              "label": "Adult",
+              "help": {
+                "show": true,
+                "text": "?"
+              }
+            }
+          },
+          "gameName": {
+            "type": "string",
+            "ui": {
+              "label": "Like games",
+              "disabled": "dx: !{{$root.user[i].adult}}"
+            }
+          },
+          "gameAge": {
+            "type": "integer",
+            "ui": {
+              "label": "Game age",
+              "disabled": "dx: !{{$root.user[i].adult}}"
+            }
+          }
+        }
+      },
+      "ui": {
+        "showLegend": false,
+        "noLabelSpace": true,
+        "widget": "array-table",
+        "widgetConfig": {
+          "showOneIfEmpty": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "ui": {
+        "label": "Name",
+        "description": "Please fill in your name",
+        "placeholder": "Name"
+      },
+      "rules": {
+        "required": true,
+        "minLength": 10
+      }
+    },
+    "email": {
+      "type": "string",
+      "ui": {
+        "label": "Email"
+      },
+      "rules": {
+        "required": true,
+        "email": {
+          "value": true,
+          "errMsg": "Please fill in a valid email address"
+        }
+      }
+    },
+    "age": {
+      "type": "integer",
+      "ui": {
+        "label": "Age"
+      }
+    },
+    "adult": {
+      "type": "boolean",
+      "ui": {
+        "label": "Adult",
+        "help": {
+          "show": true,
+          "text": "?",
+          "content": "Adults can play games"
+        }
+      }
+    }
+  }
+}

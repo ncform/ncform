@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "string",
+      "default": "https://upload-images.jianshu.io/upload_images/2195795-e3c500e4b7d17b2c.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240",
+      "ui": {
+        "label": "Image",
+        "columns": 6,
+        "preview": {
+          "type": "image",
+          "value": "dx: {{$self}}",
+          "clearable": true,
+          "outward": {
+            "width": 150,
+            "height": 150,
+            "shape": "circle"
+          }
+        }
+      }
+    },
+    "video": {
+      "type": "string",
+      "default": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "ui": {
+        "label": "Video",
+        "columns": 6,
+        "preview": {
+          "type": "video"
+        }
+      }
+    },
+    "audio": {
+      "type": "string",
+      "default": "https://www.w3schools.com/html/mov_bbb.mp4",
+      "ui": {
+        "label": "Audio",
+        "columns": 6,
+        "preview": {
+          "type": "audio"
+        }
+      }
+    },
+    "link": {
+      "type": "string",
+      "default": "https://www.baidu.com",
+      "ui": {
+        "label": "Link",
+        "columns": 6,
+        "preview": {
+          "type": "link"
+        }
+      }
+    }
+  }
+}
