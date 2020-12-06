@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "age": {
+      "type": "string",
+      "ui": {
+        "placeholder": "dx: \"Age must be greater than \" + {{$const.ageLimit}}"
+      },
+      "rules": {
+        "customRule": [
+          {
+            "script": "dx: {{$root.age}} > {{$const.ageLimit}}",
+            "errMsg": "Please fill in the correct age"
+          }
+        ]
+      }
+    }
+  },
+  "globalConfig": {
+    "constants": {
+      "ageLimit": 18
+    }
+  }
+}

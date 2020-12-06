@@ -1,0 +1,72 @@
+{
+  "type": "object",
+  "properties": {
+    "isRequired": {
+      "type": "boolean",
+      "ui": {
+        "label": "Required",
+        "linkFields": [
+          {
+            "fieldPath": "num_1",
+            "rules": [
+              "required"
+            ]
+          },
+          {
+            "fieldPath": "num_2",
+            "rules": [
+              "required"
+            ]
+          }
+        ]
+      }
+    },
+    "num_1": {
+      "type": "number",
+      "ui": {
+        "description": "num_1 >= num_2",
+        "columns": 6,
+        "linkFields": [
+          {
+            "fieldPath": "num_2",
+            "rules": [
+              "maximum"
+            ]
+          }
+        ]
+      },
+      "rules": {
+        "required": {
+          "value": "dx: {{$root.isRequired}}"
+        },
+        "minimum": {
+          "value": "dx: {{$root.num_2}} || 0",
+          "errMsg": "num_1 >= num_2"
+        }
+      }
+    },
+    "num_2": {
+      "type": "number",
+      "ui": {
+        "columns": 6,
+        "linkFields": [
+          {
+            "fieldPath": "num_1",
+            "rules": [
+              "minimum"
+            ]
+          }
+        ]
+      },
+      "rules": {
+        "required": {
+          "value": "dx: {{$root.isRequired}}"
+        },
+        "maximum": {
+          "value": "dx: {{$root.num_1}} || 0",
+          "errMsg": "num_2 <= num_1"
+        }
+      }
+    }
+  }
+}

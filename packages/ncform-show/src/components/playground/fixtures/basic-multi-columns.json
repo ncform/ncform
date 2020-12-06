@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "firstname": {
+      "type": "string",
+      "ui": {
+        "columns": 3,
+        "label": "Name",
+        "placeholder": "First name"
+      }
+    },
+    "lastname": {
+      "type": "string",
+      "ui": {
+        "columns": 3,
+        "showLabel": false,
+        "placeholder": "Last name"
+      }
+    },
+    "email": {
+      "type": "string",
+      "ui": {
+        "columns": 6,
+        "label": "Email"
+      }
+    },
+    "age": {
+      "type": "integer",
+      "ui": {
+        "columns": 6,
+        "label": "Age"
+      }
+    },
+    "adult": {
+      "type": "boolean",
+      "ui": {
+        "columns": 6,
+        "label": "adult",
+        "help": {
+          "show": true,
+          "text": "?",
+          "content": "Adults can play games"
+        }
+      }
+    }
+  }
+}
