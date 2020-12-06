@@ -194,6 +194,17 @@
 
 ncform API 都是Vue实例级别的方法。
 
+- $ncformGetValue(formName, options)
+
+手动获取表单的值。
+
+options.ignoreHiddenField: 是否忽略掉隐藏字段。默认为false
+
+```
+// Demo code:
+this.$ncformGetValue('demoForm', {ignoreHiddenField: true});
+```
+
 - $ncformReset(formName)
 
 重置表单。重置的值为最后一次外部更新 `ncform v-model` 的值
