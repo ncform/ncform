@@ -24,7 +24,7 @@
           @click="reset(item.formName)">Reset</button>
         <button v-if="['is-dirty.sync'].indexOf(item.title) >= 0" class="btn btn-primary"
           :disabled="!item.isFormDirty">Submit</button>
-
+        <button v-if="['$ncformGetValue api'].indexOf(item.title) >= 0" @click="getValue(item.formName)" class="btn btn-primary">Get Value</button>
         <hr />
       </div>
     </template>
@@ -180,6 +180,59 @@
               }
             }
           },
+          {
+            id: md5('$ncformGetValue api'),
+            title: '$ncformGetValue api',
+            formName: 'form_' + Math.random(),
+            formSchema: {
+              type: 'object',
+              properties: {
+                showField: {
+                  type: 'string',
+                },
+                hiddenField: {
+                  type: 'string',
+                  ui: {
+                    hidden: 'dx: !!{{$root.showField}}'
+                  },
+                },
+                obj: {
+                  type: 'object',
+                  properties: {
+                    show: {
+                      type: 'string'
+                    },
+                    hide: {
+                      type: 'string',
+                      ui: {
+                        hidden: 'dx: !!{{$root.obj.show}}'
+                      },
+                    }
+                  }
+                },
+                arr: {
+                  type: "array",
+                  items: {
+                    type: 'object',
+                    properties: {
+                      show: {
+                        type: 'string'
+                      },
+                      hide: {
+                        type: 'string',
+                        ui: {
+                          hidden: 'dx: !!{{$root.arr[i].show}}'
+                        },
+                      }
+                    }
+                  }
+                }
+              },
+              globalConfig: {
+                ignoreFieldValueWhenHidden: true
+              }
+            }
+          },
         ]
       },
       methods: {
@@ -197,6 +250,10 @@
           console.log('itemValue:', itemValue);
           console.log('formValue:', JSON.stringify(formValue, null, 2));
           console.log('itemOldValue', itemOldValue);
+        },
+        getValue(formName) {
+          const value = this.$ncformGetValue(formName);
+          console.log('form value:', value)
         }
       }
     });

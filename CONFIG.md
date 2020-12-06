@@ -130,6 +130,7 @@
   },
   globalConfig: { // Global configuration
     ignoreRulesWhenHidden: true, // When the controls are hidden, its validation rules are automatically ignored. Default is true
+    ignoreFieldValueWhenHidden: false, // When calling $ncformGetValue to get the form value, if this value is true, hidden fields will be ignored
     style: { // Global style configuration
       formCls: '', // Form class
       invalidFeedbackCls: '', // Invalid feedback class 
@@ -192,6 +193,17 @@ The common use case is to determine if the submit button is available.
 ## ncform API
 
 The ncform API is a Vue instance level method.
+
+- $ncformGetValue(formName)
+
+Get the value of the form manually.
+
+With the global configuration of `globalConfig.ignoreFieldValueWhenHidden: true`, hidden fields will be filtered out when obtaining values
+
+```
+// Demo code:
+this.$ncformGetValue('demoForm');
+```
 
 - $ncformReset(formName)
 

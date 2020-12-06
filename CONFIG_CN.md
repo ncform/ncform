@@ -131,6 +131,7 @@
   },
   globalConfig: { // 全局配置
     ignoreRulesWhenHidden: true, // 当控件隐藏时自动忽略掉其验证规则，即隐藏的控件验证规则不生效。默认为true
+    ignoreFieldValueWhenHidden: false, // 当调用 $ncformGetValue 获取表单时，如果该值为 true，则会忽略掉隐藏字段
     style: { // 全局样式配置
       formCls: '', // 添加到 form 的样式
       invalidFeedbackCls: '', // 错误提示消息的样式 
@@ -193,6 +194,17 @@
 ## ncform API
 
 ncform API 都是Vue实例级别的方法。
+
+- $ncformGetValue(formName)
+
+手动获取表单的值。
+
+配合 `globalConfig.ignoreFieldValueWhenHidden: true` 的全局配置，在获取值时会过滤掉隐藏字段
+
+```
+// Demo code:
+this.$ncformGetValue('demoForm');
+```
 
 - $ncformReset(formName)
 
