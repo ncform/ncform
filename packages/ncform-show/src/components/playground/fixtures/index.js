@@ -133,7 +133,11 @@ const fixtures = [
     value: "ext-array-import",
     label: {
       cn: "外部扩展-数组导入",
-      en: "Extentions Array Import"
+      en: "Ext-Array Import"
+    },
+    desc: {
+      cn: "该示例使用扩展组件nc-array-import(非标准组件): https://github.com/ncform/nc-array-import",
+      en: "This example uses the extension component nc-array-import (non-standard component): https://github.com/ncform/nc-array-import"
     }
   }
 ];

@@ -32,8 +32,8 @@ export default {
 
       // Get template from hash
       const hash = getUrlHash();
-      const tpl = hash['tpl'] || fixtures[0].value;
-      this.selectVal = fixtures.filter(item => item.value === tpl)[0] || fixtures[0];
+      const tpl = hash['tpl'] || this.listOptions[0].value;
+      this.selectVal = this.listOptions.filter(item => item.value === tpl)[0] || this.listOptions[0];
 
       this.templateChange(this.selectVal);
     }, 0);
@@ -76,7 +76,7 @@ export default {
         }
       },
       ncformValue: {},
-      selectVal: fixtures[0],
+      selectVal: null,
       fixtures: fixtures,
     };
   },
@@ -86,6 +86,7 @@ export default {
       return this.fixtures.map(item => ({
         value: item.value,
         label: item.label[this.lang],
+        desc: item.desc ? item.desc[this.lang] : '',
         schema: item.schema,
       }));
     },

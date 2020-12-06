@@ -24,6 +24,13 @@
   </el-row>
   <el-row>
     <el-col :span="12">
+      <el-alert v-if="selectVal && selectVal.desc"
+        style="margin-top: 6px;"
+        show-icon
+        :closable="false"
+        :title="selectVal.desc"
+        type="info">
+      </el-alert>
       <div class="editorArea">
         <div ref="editor" class="editor">{{jsonValue}}</div>
       </div>
