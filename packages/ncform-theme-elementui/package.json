@@ -1,6 +1,6 @@
 {
   "name": "@ncform/ncform-theme-elementui",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "ncform theme element-ui",
   "author": "daniel.xiao; kyle.lo;",
   "main": "dist/ncformStdComps.min.js",
@@ -10,7 +10,7 @@
     "element-ui"
   ],
   "devDependencies": {
-    "@ncform/ncform": "^1.7.3",
+    "@ncform/ncform": "^1.7.4",
     "autoprefixer": "^6.0.2",
     "axios": "^0.21.0",
     "babel-core": "^6.26.3",
