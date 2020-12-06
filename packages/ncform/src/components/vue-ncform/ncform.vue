@@ -162,7 +162,7 @@ export default {
     ncformValidate() {
       // 清空验证数组，数组内为promise对象。
       this.$data.validateArray = [];
-      this.checkValidation(this.$data.dataFormSchema, 'dataFormSchema', '');
+      this.checkValidation(this.$data.dataFormSchema, 'dataFormSchema', 'data');
 
       return new Promise((resolve, reject) => {
         Promise.all(this.$data.validateArray).then(data => {
