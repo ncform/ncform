@@ -265,10 +265,8 @@ export default {
       }
     },
 
-    getValue() {
-      if (
-        _get(this.dataFormSchema, 'globalConfig.ignoreFieldValueWhenHidden', false)
-      ) {
+    getValue(ignoreHiddenField) {
+      if ( ignoreHiddenField ) {
         // 开启了忽略隐藏字段值，需要递归忽略掉隐藏的字段值
         const ignoreFieldPaths = this._getValueIgnoreHiddenFields(this.$data.dataFormSchema, 'data')
         const tempData = _omit({data: _cloneDeep(this.$data.formData)}, ignoreFieldPaths)

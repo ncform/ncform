@@ -231,9 +231,6 @@
                   },
                   value: [{show: '1', hidden: ''}]
                 }
-              },
-              globalConfig: {
-                ignoreFieldValueWhenHidden: true
               }
             }
           },
@@ -256,7 +253,7 @@
           console.log('itemOldValue', itemOldValue);
         },
         getValue(formName) {
-          const value = this.$ncformGetValue(formName);
+          const value = this.$ncformGetValue(formName, {ignoreHiddenField: true});
           console.log('form value:', value, JSON.stringify(value))
         }
       }

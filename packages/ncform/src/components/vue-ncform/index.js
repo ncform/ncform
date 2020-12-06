@@ -98,7 +98,7 @@ module.exports = {
       return Object.keys(window.__$ncform.__ncformComponents);
     }
 
-    Vue.prototype.$ncformGetValue = function(formName) {
+    Vue.prototype.$ncformGetValue = function(formName, {ignoreHiddenField = false} = {}) {
       formName = formName || "_ncformDefaultName";
       const vm = window.__$ncform.__ncFormsGlobalList[formName];
 
@@ -106,7 +106,7 @@ module.exports = {
         return {};
       }
 
-      return vm.getValue();
+      return vm.getValue(ignoreHiddenField);
     }
 
     Vue.component("ncform", ncform);
