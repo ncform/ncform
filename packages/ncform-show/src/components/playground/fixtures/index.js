@@ -128,6 +128,13 @@ const fixtures = [
       cn: "高级玩法-临时变量 dx表达式",
       en: "Adv-Temp Value [dx expression]"
     }
+  },
+  {
+    value: "ext-array-import",
+    label: {
+      cn: "外部扩展-数组导入",
+      en: "Extentions Array Import"
+    }
   }
 ];
 
