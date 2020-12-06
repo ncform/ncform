@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "qq": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "ui": {}
+      },
+      "ui": {
+        "columns": 6,
+        "showLegend": false,
+        "label": "QQ号",
+        "widget": "nc-array-import",
+        "widgetConfig": {
+          "disableCollapse": true
+        }
+      },
+      "defaultValue": [ 1234567, 892310 ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "ui": {}
+      },
+      "ui": {
+        "columns": 6,
+        "showLegend": false,
+        "label": "标签",
+        "widget": "nc-array-import",
+        "widgetConfig": {
+          "disableCollapse": true
+        }
+      }
+    }
+  },
+  "value": {}
+}
