@@ -32,8 +32,10 @@
   <script type="text/javascript" src="../assets/ace.js"></script>
   <script type="text/javascript" src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
   <script type="text/javascript" src="../assets/axios.min.js"></script>
+
   <script type="text/javascript" src="../assets/ncformCommon.min.js"></script>
   <script type="text/javascript" src="../assets/vueNcform.min.js"></script>
+  <script type="text/javascript" src="../assets/NcArrayImport.umd.js"></script>
   <script type="text/javascript" src="../assets/ncformStdComps.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script src="https://unpkg.com/mockjs"></script>
@@ -55,7 +57,7 @@
     })
 
     let lang = location.search.indexOf('lang=cn') >= 0 ? 'zh-cn' : 'en';
-    Vue.use(vueNcform, { extComponents: ncformStdComps, lang });
+    Vue.use(vueNcform, { extComponents: { ...ncformStdComps, NcArrayImport }, lang });
     // Bootstrap the app
     new Vue({
       el: '#demo',
