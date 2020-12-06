@@ -193,6 +193,17 @@ The common use case is to determine if the submit button is available.
 
 The ncform API is a Vue instance level method.
 
+- $ncformGetValue(formName, options)
+
+Get the value of the form manually.
+
+options.ignoreHiddenField: Whether to ignore hidden fields. The default is false
+
+```
+// Demo code:
+this.$ncformGetValue('demoForm', {ignoreHiddenField: true});
+```
+
 - $ncformReset(formName)
 
 Reset the form. The value after resetting is the value of the last external update `ncform v-model`
