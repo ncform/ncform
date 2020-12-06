@@ -1,3 +1,15 @@
+## [1.7.4](https://github.com/ncform/ncform/compare/v1.7.2...v1.7.4) (2020-12-06)
+
+### Bug Fixes
+
+* **input:** Fixes base ncform input _processModelVal with type number or integer and 0 value. ([a34a5bb](https://github.com/ncform/ncform/commit/a34a5bbb82c2dd096d2a56d47a996e1a96631af3))
+* **ncform:** wrong code ([2e6b420](https://github.com/ncform/ncform/commit/2e6b42030940249d248f3da54e361aa1bda81851))
+
+### Features
+
+* **ncform:** Add $ncformGetValue api ([c2b3fd7](https://github.com/ncform/ncform/commit/c2b3fd768e28d2b47c0f5dd39f2d02084508b8e5)), closes [#55](https://github.com/ncform/ncform/issues/55)
+* **ncform:** change $ncformGetValue api params; rm globalConfig.ignoreFieldValueWhenHidden config ([2c2f6c0](https://github.com/ncform/ncform/commit/2c2f6c09edac7ce2e4bcc21b81d438333dfa9355)), closes [#55](https://github.com/ncform/ncform/issues/55)
+
 ## [1.7.2](https://github.com/ncform/ncform/compare/v1.7.1...v1.7.2) (2020-11-19)
 
 ### Features
