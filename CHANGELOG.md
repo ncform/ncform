@@ -1,3 +1,16 @@
+
+## [1.7.5](https://github.com/ncform/ncform/compare/v1.7.4...v1.7.5) (2020-12-15)
+
+### Bug Fixes
+
+* **ncform-show:** fixed the problem of incorrect json on the array-tab demo ([34540e0](https://github.com/ncform/ncform/commit/34540e0f7027ac3cd35f33ed48635350bb1ed05d))
+
+### Features
+
+* **ncform-show:** add ext components demo ([32f8e84](https://github.com/ncform/ncform/commit/32f8e84200c5d2cd4eb9335ac97ec356b5abf639))
+* **ncform-theme-elementui:** array-tabs support draggable switch array position ([6777dff](https://github.com/ncform/ncform/commit/6777dff84be6c485f169d4d9c58c5b669e831233))
+* **playground:** added nc-array-import demo ([725edf4](https://github.com/ncform/ncform/commit/725edf4786ef8c6fab18cb159b11fe058fe8bfe0))
+
 ## [1.7.4](https://github.com/ncform/ncform/compare/v1.7.2...v1.7.4) (2020-12-06)
 
 ### Bug Fixes
