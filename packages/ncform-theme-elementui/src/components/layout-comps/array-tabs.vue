@@ -117,21 +117,23 @@
     mounted() {
       const vm = this;
       const el = this.$el.querySelector(".el-tabs__nav");
-      const sortTabs = Sortable.create(el, {
-        animation: 200,
-        filter: ".el-icon-close",
-        dragClass: 'dragging',
-        onEnd(evt) {
-          const list = vm.schema.value;
-          const item = list.splice(evt.oldIndex, 1)[0];
-          list.splice(evt.newIndex, 0, item);
-          vm.schema.value = [];
-          vm.$nextTick(() => {
-            vm.schema.value = list;
-            vm.activeName = String(evt.newIndex);
-          });
-        }
-      });
+      if (!this.mergeConfig.disableReorder) {
+        const sortTabs = Sortable.create(el, {
+          animation: 200,
+          filter: ".el-icon-close",
+          dragClass: 'dragging',
+          onEnd(evt) {
+            const list = vm.schema.value;
+            const item = list.splice(evt.oldIndex, 1)[0];
+            list.splice(evt.newIndex, 0, item);
+            vm.schema.value = [];
+            vm.$nextTick(() => {
+              vm.schema.value = list;
+              vm.activeName = String(evt.newIndex);
+            });
+          }
+        });
+      }
     },
 
     methods: {
