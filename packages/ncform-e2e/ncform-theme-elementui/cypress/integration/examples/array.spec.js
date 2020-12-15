@@ -63,10 +63,14 @@ context('Array', () => {
             'daniel', 'sarah'
           ],
           items: {
-            type: 'string'
+            type: 'string',
+            ui: {
+              label: 'dx: {{$root.users4[i]}}'
+            }
           },
           ui: {
             widgetConfig: {
+              autoIdxToLabel: false,
               "disableDel": true,
               "delExceptionRows": 'dx: (function(item) { return item === "daniel"})'
             }
@@ -151,7 +155,9 @@ context('Array', () => {
         .parent()
         .within(() => {
           cy.get('.list-item').eq(0).find('button.el-button--danger').should('exist');
+          cy.get('.list-item').eq(0).find('label').should('have.text', 'daniel ');
           cy.get('.list-item').eq(1).find('button.el-button--danger').should('not.exist');
+          cy.get('.list-item').eq(1).find('label').should('have.text', 'sarah ');
         });
 
       // common.submitForm();

@@ -7,7 +7,7 @@ context('Tabs', () => {
     cy.visit('http://localhost:3004/examples/components/playground/index.html');
   });
 
-  it('Simple Props', () => {
+  it.only('Simple Props', () => {
     let formSchema = {
       type: 'object',
       properties: {
@@ -66,11 +66,15 @@ context('Tabs', () => {
             'daniel', 'sarah'
           ],
           items: {
-            type: 'string'
+            type: 'string',
+            ui: {
+              label: 'dx: {{$root.users4[i]}}'
+            }
           },
           ui: {
             widget: 'array-tabs',
             widgetConfig: {
+              autoIdxToLabel: false,
               "disableDel": true,
               "delExceptionRows": 'dx: (function(item) { return item === "daniel"})'
             }
@@ -154,7 +158,6 @@ context('Tabs', () => {
         .parent()
         .within(() => {
           cy.get('.el-icon-close').should('be.visible');
-
           cy.get('.el-tabs__item').eq(1).click();
           cy.get('.el-icon-close').should('not.be.visible');
         });

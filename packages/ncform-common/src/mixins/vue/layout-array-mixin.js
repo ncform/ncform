@@ -79,7 +79,8 @@ export default {
           item: '',
           all: ''
         },
-        delExceptionRows: ''
+        delExceptionRows: '',
+        autoIdxToLabel: true
       },
       i18n: {},
     };
@@ -120,9 +121,9 @@ export default {
   },
 
   methods: {
-    _analyzeVal(val) {
+    _analyzeVal(val, extraIndex) {
       return ncformUtils.smartAnalyzeVal(val, {
-        idxChain: this.idxChain,
+        idxChain: this.idxChain + (isNaN(extraIndex) ? '' : (this.idxChain ? ',' : '') + extraIndex),
         data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
       });
     },

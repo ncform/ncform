@@ -10,7 +10,7 @@
     <div v-show="!collapsed" v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" class="list-item">
 
       <div class="list-item-label">
-        <label>{{_analyzeVal(dataItem.__dataSchema.ui.label)}} {{idx + 1}}</label>
+        <label>{{_analyzeVal(dataItem.__dataSchema.ui.label, idx)}} {{(mergeConfig.autoIdxToLabel ? (idx + 1) : '')}}</label>
 
         <!-- 项控制按钮 -->
         <div class="el-button-group">
