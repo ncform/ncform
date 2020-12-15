@@ -7,7 +7,7 @@ context('Tabs', () => {
     cy.visit('http://localhost:3004/examples/components/playground/index.html');
   });
 
-  it.only('Simple Props', () => {
+  it('Simple Props', () => {
     let formSchema = {
       type: 'object',
       properties: {
