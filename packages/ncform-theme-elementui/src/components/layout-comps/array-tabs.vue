@@ -6,7 +6,6 @@
       {{_analyzeVal(schema.ui.legend)}}
       <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
     </legend>
-
     <el-tabs v-show="!collapsed" :addable="!mergeConfig.disableAdd" type="card" :tab-position="mergeConfig.tabPosition" @edit="handleTabsEdit" v-model="activeName">
       <el-tab-pane v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" :closable="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :name="'' + idx">
 
@@ -71,6 +70,9 @@
           }
         }
       }
+      .dragging {
+        background-color: #f7f4f4;
+      }
     }
 
     .el-tab-pane > .__object-form-item > .el-row {
@@ -86,6 +88,7 @@
 <script>
 
   import ncformCommon from '@ncform/ncform-common';
+  import Sortable from "sortablejs";
 
   const layoutArrayMixin = ncformCommon.mixins.vue.layoutArrayMixin;
 
@@ -109,6 +112,26 @@
           tabPosition: 'top',
         },
       }
+    },
+
+    mounted() {
+      const vm = this;
+      const el = this.$el.querySelector(".el-tabs__nav");
+      const sortTabs = Sortable.create(el, {
+        animation: 200,
+        filter: ".el-icon-close",
+        dragClass: 'dragging',
+        onEnd(evt) {
+          const list = vm.schema.value;
+          const item = list.splice(evt.oldIndex, 1)[0];
+          list.splice(evt.newIndex, 0, item);
+          vm.schema.value = [];
+          vm.$nextTick(() => {
+            vm.schema.value = list;
+            vm.activeName = String(evt.newIndex);
+          });
+        }
+      });
     },
 
     methods: {
