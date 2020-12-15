@@ -404,6 +404,33 @@ Prompt information can be configured via delConfirmText when requiredDelConfirm 
             }
           }
         },
+        {
+          title: {
+            cn: '[属性] autoIdxToLabel: 标题自动加索引文本。默认为true',
+            en:
+              '[ATTR] autoIdxToLabel:  Label automatically adds index text. default is true'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                value: ['daniel', 'sarah'],
+                items: {
+                  type: 'string',
+                  ui: {
+                    label: 'dx: {{$root.user[i]}}'
+                  }
+                },
+                ui: {
+                  widgetConfig: {
+                    autoIdxToLabel: false,
+                  }
+                }
+              }
+            }
+          }
+        },
       ];
 
       // Bootstrap the app
