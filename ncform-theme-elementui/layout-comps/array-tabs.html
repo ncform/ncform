@@ -162,6 +162,29 @@
         },
         {
           title: {
+            cn: '[属性] disableReorder: 是否禁止排序',
+            en: '[ATTR] disableReorder: whether to disable sorting'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-tabs',
+                  widgetConfig: {
+                    disableReorder: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
             cn: '[属性] disableCollapse: 是否禁止折叠',
             en: '[ATTR] disableCollapse: whether to disable collapse'
           },
