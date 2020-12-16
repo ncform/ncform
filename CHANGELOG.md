@@ -1,4 +1,11 @@
 
+## [1.7.7](https://github.com/ncform/ncform/compare/v1.7.5...v1.7.7) (2020-12-16)
+
+### Features
+
+* 1. Add autoIdxToLabel config to array and array-tabs widgets; 2. array-tabs support using field value ([8ff5a1a](https://github.com/ncform/ncform/commit/8ff5a1a24d579e6141d6f962051f979b0f6a2909))
+
+
 ## [1.7.5](https://github.com/ncform/ncform/compare/v1.7.4...v1.7.5) (2020-12-15)
 
 ### Bug Fixes
