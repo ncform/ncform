@@ -308,6 +308,7 @@ If you don't like the cold text description, click on the [interactive version](
     all: ''
   }, 
   showOneIfEmpty: false, // Show one item if empty
+  autoIdxToLabel: true, // Label automatically adds index text
 }
 ```
 
@@ -344,6 +345,7 @@ If you don't like the cold text description, click on the [interactive version](
   disableAdd: true, // Whether to prohibit the addition of items
   disableDel: true, // whether to disable item deletion
   delExceptionRows: 'dx: (function(item) { return false })' // The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false
+  disableReorder: true, // Whether to prohibit sorting
   tabPosition: 'top', // Optional value：[left | top]
   collapsed: false, // Whether to fold by default
   disableCollapse: false, // Whether to allow folding
@@ -353,5 +355,6 @@ If you don't like the cold text description, click on the [interactive version](
     all: ''
   }, 
   showOneIfEmpty: false, // Show one item if empty
+  autoIdxToLabel: true, // Label automatically adds index text
 }
 ```

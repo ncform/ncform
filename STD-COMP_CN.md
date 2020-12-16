@@ -308,6 +308,7 @@
     all: ''
   }, 
   showOneIfEmpty: false, // 当空值时是否显示一项
+  autoIdxToLabel: true, // 标题自动加索引文本
 }
 ```
 
@@ -344,6 +345,7 @@
   disableAdd: true, // 是否禁止添加项
   disableDel: true, // 是否禁止删除项
   delExceptionRows: 'dx: (function(item) { return false })' // 对于删除动作例外的行。这些行当disableDel为true时可被删除，当disableDel原来false时不可被删除
+  disableReorder: true, // 是否禁止排序
   tabPosition: 'top', // 可选值：left / top
   collapsed: false, // 是否默认折叠
   disableCollapse: false, // 是否允许折叠
@@ -353,5 +355,6 @@
     all: ''
   },
   showOneIfEmpty: false, // 当空值时是否显示一项
+  autoIdxToLabel: true, // 标题自动加索引文本
 }
 ```
