@@ -9,7 +9,7 @@
     <el-tabs v-show="!collapsed" :addable="!mergeConfig.disableAdd" type="card" :tab-position="mergeConfig.tabPosition" @edit="handleTabsEdit" v-model="activeName">
       <el-tab-pane v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" :closable="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :name="'' + idx">
 
-        <span slot="label">
+        <span slot="label" class="__array-tabs-tab-label">
           {{_analyzeVal(dataItem.__dataSchema.ui.label, idx) + (mergeConfig.autoIdxToLabel ? ' ' + (idx + 1) : '')}}
           <!-- 提示信息 -->
           <el-tooltip class="item" effect="dark" placement="right-start">
@@ -72,6 +72,18 @@
       }
       .dragging {
         background-color: #f7f4f4;
+      }
+      .el-tabs__item {
+        display: inline-flex;
+        justify-content: left;
+        align-items: center;
+        .__array-tabs-tab-label {
+          display: inline-block;
+          max-width: 200px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 14px;
+        }
       }
     }
 
