@@ -402,7 +402,11 @@ const ncformUtils = {
           const matchs = val.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
           matchs.forEach(mItem => {
             // mItem值："{{$root.persons[i].age}}"
-            let tempVal = mItem;
+            let tempVal = mItem
+              // trim
+              .replace(/{{\s*/, '{{')
+              .replace(/\s*}}/, '}}');
+
             data.forEach((dataItem, idx) => {
               if (tempVal.indexOf("[e]") >= 0) {
                 tempVal = tempVal.replace(
