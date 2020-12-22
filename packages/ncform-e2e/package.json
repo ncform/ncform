@@ -1,7 +1,7 @@
 {
   "name": "ncform-e2e",
   "private": true,
-  "version": "1.7.7",
+  "version": "1.7.8",
   "description": "ncform e2e test",
   "main": "index.js",
   "scripts": {
