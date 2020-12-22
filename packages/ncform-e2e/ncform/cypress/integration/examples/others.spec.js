@@ -90,7 +90,7 @@ context('Others', () => {
   it('$ncformGetValue api', () => {
     cy.window().then(win => {
       let formName = 'form_' + md5('$ncformGetValue api');
-      expect(win.Vue.prototype.$ncformGetValue(formName)).to.deep.equal({"showField":"1","obj":{"show":"1"},"arr":[{"show":"1"}]});
+      expect(win.Vue.prototype.$ncformGetValue(formName, {ignoreHiddenField: true})).to.deep.equal({"showField":"1","obj":{"show":"1"},"arr":[{"show":"1"}]});
     })
   })
 
