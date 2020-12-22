@@ -1,3 +1,9 @@
+## [1.7.8](https://github.com/ncform/ncform/compare/v1.7.7...v1.7.8) (2020-12-22)
+
+### Bug Fixes
+
+* **ncform-common:** fix dx expression trim issue ([e6c801c](https://github.com/ncform/ncform/commit/e6c801c70fdc8ac4a0f3c67652588555aa7840df))
+* **ncform-theme-elementui:** fixed when tab name is too long ([4732aa3](https://github.com/ncform/ncform/commit/4732aa3cfc6411cc2c9120d18f87109936125646))
 
 ## [1.7.7](https://github.com/ncform/ncform/compare/v1.7.5...v1.7.7) (2020-12-16)
 
