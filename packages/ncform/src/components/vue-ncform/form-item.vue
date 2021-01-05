@@ -54,7 +54,7 @@
 
     <!-- 验证错误信息 -->
     <div v-show="!!schema.__validationResult && !schema.__validationResult.result" class="invalid-feedback" :class="globalConfig.style.invalidFeedbackCls" style="display:block;">
-        {{!!schema.__validationResult && schema.__validationResult.errMsg}}
+      {{!!schema.__validationResult && getPreviewVal(schema.__validationResult.errMsg,schema.value)}}
     </div>
 
   </div>
@@ -191,6 +191,15 @@ export default {
     isNormalObjSchema: ncformUtils.isNormalObjSchema,
 
     isNormalArrSchema: ncformUtils.isNormalArrSchema,
+
+/*
+    _analyzeVal(val) {
+      return ncformUtils.smartAnalyzeVal(val, {
+        idxChain: this.idxChain,
+        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
+      });
+    },
+*/    
 
     getPreviewVal(configVal, modelVal) {
       if (!configVal) return modelVal;

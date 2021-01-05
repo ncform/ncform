@@ -77,10 +77,10 @@
         // for Any Instance Type
         required: {
           value: true, // 规则配置值
-          errMsg: 'it is required!', // 错误提示信息
+          errMsg: 'it is required!', // 错误提示信息【支持dx表达式】
           options: { // 可选项
             delay: 300, // 延迟验证的时间（毫秒）
-            delayMsg: '异步验证中..' // 延迟验证时的提示
+            delayMsg: '异步验证中..' // 延迟验证时的提示【支持dx表达式】
           }
         },
         number, // value:boolean
