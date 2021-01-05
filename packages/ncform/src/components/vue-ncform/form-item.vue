@@ -191,16 +191,7 @@ export default {
     isNormalObjSchema: ncformUtils.isNormalObjSchema,
 
     isNormalArrSchema: ncformUtils.isNormalArrSchema,
-
-/*
-    _analyzeVal(val) {
-      return ncformUtils.smartAnalyzeVal(val, {
-        idxChain: this.idxChain,
-        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
-      });
-    },
-*/    
-
+ 
     getPreviewVal(configVal, modelVal) {
       if (!configVal) return modelVal;
       return ncformUtils.smartAnalyzeVal(configVal, {
