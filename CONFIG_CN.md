@@ -40,9 +40,9 @@
         hidden: false, // 是否隐藏【支持dx表达式】
         help: { // 帮助信息
           show: true, // 是否显示。默认不显示
-          content: '', // 帮助具体内容
+          content: '', // 帮助具体内容【支持dx表达式】 
           iconCls: '', // 帮助图标样式名
-          text: '' // 帮助文本
+          text: '' // 帮助文本【支持dx表达式】
         },
         itemClass: '', // 表单项样式名
         preview: { // 预览

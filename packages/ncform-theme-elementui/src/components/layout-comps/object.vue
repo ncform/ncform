@@ -20,9 +20,9 @@
               <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
               {{_analyzeVal(fieldSchema.ui.label)}}
               <!-- 提示信息 -->
-              <el-tooltip class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
-                <div slot="content" v-html="fieldSchema.ui.help.content"></div>
-                <a class="help" v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+              <el-tooltip class="item" effect="dark" :content="_analyzeVal(fieldSchema.ui.help.content)" placement="right-start">
+                <div slot="content" v-html="_analyzeVal(fieldSchema.ui.help.content)"></div>
+                <a class="help" v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{_analyzeVal(fieldSchema.ui.help.text)}}</span></a>
               </el-tooltip>
             </label>
 
@@ -53,8 +53,8 @@
             {{_analyzeVal(fieldSchema.ui.label)}}
             <!-- 提示信息 -->
             <el-tooltip class="item" effect="dark" placement="right-start">
-              <div slot="content" v-html="fieldSchema.ui.help.content"></div>
-              <a class="help" v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+              <div slot="content" v-html="_analyzeVal(fieldSchema.ui.help.content)"></div>
+              <a class="help" v-if="fieldSchema.ui.help.show === true" href="#"><span :class="fieldSchema.ui.help.iconCls">{{_analyzeVal(fieldSchema.ui.help.text)}}</span></a>
             </el-tooltip>
             :
           </label>

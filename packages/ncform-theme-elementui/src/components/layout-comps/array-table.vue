@@ -24,8 +24,8 @@
 
             <!-- 提示信息 -->
             <el-tooltip class="item" effect="dark" placement="right-start">
-              <div slot="content" v-html="renderSchema.ui.help.content"></div>
-              <a class="help" v-if="renderSchema.ui.help.show === true" href="#"><span :class="renderSchema.ui.help.iconCls">{{renderSchema.ui.help.text}}</span></a>
+              <div slot="content" v-html="_analyzeVal(renderSchema.ui.help.content)"></div>
+              <a class="help" v-if="renderSchema.ui.help.show === true" href="#"><span :class="renderSchema.ui.help.iconCls">{{_analyzeVal(renderSchema.ui.help.text)}}</span></a>
             </el-tooltip>
 
             <!-- 说明信息 -->

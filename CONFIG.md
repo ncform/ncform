@@ -39,8 +39,8 @@
         hidden: false, // Whether to hide [support dx expression]
         help: { // Help information
           show: true, // Whether to display, default is false
-          content: '', // Help detail information
-          iconCls: '', // Help icon class name
+          content: '', // Help detail information [support dx expression]
+          iconCls: '', // Help icon class name [support dx expression]
           text: '' // Help text
         },
         itemClass: '', // The form item class name
