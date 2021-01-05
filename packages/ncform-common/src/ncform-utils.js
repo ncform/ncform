@@ -361,7 +361,11 @@ const ncformUtils = {
         {
           symbol: "$temp",
           value: data.tempData
-        }
+        },
+        ...(typeof window.__$ncform.lang === 'object' && window.__$ncform.lang !== null && typeof window.__$ncform.lang.t === 'function') ? [{
+            symbol: "$i18n",
+            value: window.__$ncform.lang.t('ncform'),
+        }] : []
       ]
     });
   },
