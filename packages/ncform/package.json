@@ -68,7 +68,7 @@
   ],
   "dependencies": {
     "@ncform/ncform-common": "^1.7.8",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "extend": "^3.0.2",
     "lodash-es": "^4.16.2",
     "vue": "^2.1.8",
