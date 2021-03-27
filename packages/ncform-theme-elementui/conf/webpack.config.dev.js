@@ -8,7 +8,7 @@ const webpackConfig = {
 
   mode: 'development',
 
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
 
   entry: {
     input: path.join(config.src, "components", "control-comps", "input.vue"),
