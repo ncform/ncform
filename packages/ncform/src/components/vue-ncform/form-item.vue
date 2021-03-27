@@ -285,6 +285,14 @@ export default {
               formValue: this.formData,
               itemOldValue: this.$data.itemValue
             })
+          } else if (ncformUtils.isNormalArrSchema(newVal)) {
+            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
+            formVM.$emit('change', {
+              paths: this.paths,
+              itemValue: ncformUtils.getModelFromSchema(this.schema),
+              formValue: this.formData,
+              itemOldValue: this.$data.itemValue // FIXME: 数组的旧值不正确
+            })
           }
 
           if (ncformUtils.isNormalArrSchema(newVal)) {
