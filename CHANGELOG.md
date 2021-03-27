@@ -1,3 +1,12 @@
+
+## [1.7.9](https://github.com/ncform/ncform/compare/v1.7.8...v1.7.9) (2021-03-27)
+
+### Bug Fixes
+
+* **ncform:** Add no minimize version output for release ([ef6abcf](https://github.com/ncform/ncform/commit/ef6abcf56d983e9c66f282ae99520226daea1025))
+* **ncform:** Fix change event not fire when adding / removing items ([4bc0678](https://github.com/ncform/ncform/commit/4bc0678a6580abf7f1de87c0f3aa1f5c3c223911)), closes [#241](https://github.com/ncform/ncform/issues/241)
+* **ncform:** improve performance ([60a436d](https://github.com/ncform/ncform/commit/60a436d940be13fb680e9f3f8d9257f4df9fee59)), closes [#136](https://github.com/ncform/ncform/issues/136)
+
 ## [1.7.8](https://github.com/ncform/ncform/compare/v1.7.7...v1.7.8) (2020-12-22)
 
 ### Bug Fixes
