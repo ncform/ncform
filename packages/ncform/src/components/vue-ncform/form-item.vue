@@ -263,8 +263,9 @@ export default {
       },
       immediate: true
     },
-    schema: {
-      handler: function(newVal) {
+    'schema.value': {
+      handler: function() {
+        const newVal = this.schema
         let changed = false;
         if (ncformUtils.isNormalArrSchema(newVal)) {
           this.$data.itemValue = this.$data.itemValue || [];
@@ -284,6 +285,14 @@ export default {
               itemValue: this.schema.value,
               formValue: this.formData,
               itemOldValue: this.$data.itemValue
+            })
+          } else if (ncformUtils.isNormalArrSchema(newVal)) {
+            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
+            formVM.$emit('change', {
+              paths: this.paths,
+              itemValue: ncformUtils.getModelFromSchema(this.schema),
+              formValue: this.formData,
+              itemOldValue: this.$data.itemValue // FIXME: 数组的旧值不正确
             })
           }
 

@@ -4,7 +4,7 @@ const prdConfig = require("./webpack.config.prd");
 
 const env = process.env.NODE_ENV;
 if (env === "production") {
-  module.exports = merge(devConfig[1], prdConfig);
+  module.exports = prdConfig;
 } else {
   module.exports = devConfig;
 }
