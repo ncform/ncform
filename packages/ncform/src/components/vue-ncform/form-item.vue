@@ -263,8 +263,9 @@ export default {
       },
       immediate: true
     },
-    schema: {
-      handler: function(newVal) {
+    'schema.value': {
+      handler: function() {
+        const newVal = this.schema
         let changed = false;
         if (ncformUtils.isNormalArrSchema(newVal)) {
           this.$data.itemValue = this.$data.itemValue || [];
