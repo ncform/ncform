@@ -37,6 +37,7 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
   - [Design Thinking](#Design-Thinking)
   - [Schema Generator](#Schema-Generator)
   - [❤️Sponsor](#Sponsor)
+  - [Contribution](#Contribution)
 
 ## Playground
 
@@ -341,3 +342,6 @@ ncform is an MIT licensed open source project and completely free to use. If it 
 ### Monthly support
 
 [Become a backer or sponsor via Patreon](https://www.patreon.com/ncform)
+
+## Contribution
+See [Contributing](contributing.md) Guide.

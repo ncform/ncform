@@ -37,6 +37,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
   - [设计思想](#设计思想)
   - [Schema Generator](#Schema-Generator)
   - [❤️赞助支持](#赞助支持)
+  - [贡献](#贡献)
 
 ## Playground
 
@@ -342,3 +343,6 @@ ncform 是MIT许可的开源项目，完全免费使用。 如果它对你有用
 ### 每月支持
 
 [通过 Patreon 成为支持者或赞助者](https://www.patreon.com/ncform)
+
+## 贡献
+请阅读 [贡献](contributing.md) 指南.
