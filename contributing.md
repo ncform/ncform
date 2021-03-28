@@ -51,8 +51,8 @@ $ npm run test-ncform:ui
 First, start ncform-show dev server
 
 ```
-$ cd packages/ncform-e2e
-$ npm run test-ncform:ui
+$ cd packages/ncform-show
+$ npm run dev
 ```
 
 Then run the e2e server
