@@ -8,7 +8,7 @@ const webpackConfig = {
 
   mode: 'development',
 
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
 
   entry: {
     input: path.join(config.src, "components", "control-comps", "input.vue"),
@@ -48,6 +48,7 @@ const webpackConfig = {
     slider: path.join(config.src, "components", "control-comps", "slider.vue"),
     rate: path.join(config.src, "components", "control-comps", "rate.vue"),
     label: path.join(config.src, "components", "control-comps", "label.vue"),
+    switch: path.join(config.src, "components", "control-comps", "switch.vue"),
     // Don't touch me - controls
 
     object: path.join(config.src, "components", "layout-comps", "object.vue"),

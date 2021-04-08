@@ -16,6 +16,7 @@
 <script>
 import _get from 'lodash-es/get';
 import _cloneDeep from 'lodash-es/cloneDeep';
+import _omit from 'lodash-es/omit';
 import ncformCommon from '@ncform/ncform-common';
 import formItem from './form-item.vue';
 
@@ -40,6 +41,7 @@ export default {
     function handleSchema() {
       let dataFormSchema = ncformUtils.perfectFormSchema(vm.formSchema);
       vm.$data.dataFormSchema = dataFormSchema;
+      vm.$data.formData = ncformUtils.getModelFromSchema(dataFormSchema);
 
       // 初始赋值
       ncformUtils.setValueToSchema(
@@ -261,6 +263,65 @@ export default {
         default:
           break;
       }
+    },
+
+    getValue(ignoreHiddenField) {
+      if ( ignoreHiddenField ) {
+        // 开启了忽略隐藏字段值，需要递归忽略掉隐藏的字段值
+        const ignoreFieldPaths = this._getValueIgnoreHiddenFields(this.$data.dataFormSchema, 'data')
+        const tempData = _omit({data: _cloneDeep(this.$data.formData)}, ignoreFieldPaths)
+        return tempData.data
+      } else {
+        return _cloneDeep(this.$data.formData)
+      }
+    },
+    _getValueIgnoreHiddenFields(schema, __dataPath, __idxChain = '', allIgnoreFieldPaths = []) {
+      const isHidden = ncformUtils.smartAnalyzeVal(schema.ui.hidden, {
+        idxChain: __idxChain,
+        data: {
+          rootData: this.$data.formData,
+          constData: this.dataFormSchema.globalConfig.constants
+        }
+      });
+      // 如果是隐藏，则忽略校验规则
+      if (isHidden) {
+        allIgnoreFieldPaths.push(__dataPath)
+      } else {
+        // 递归
+        switch (schema.type) {
+          case 'object':
+            for (let key in schema.properties) {
+              if (schema.properties[key]) {
+                this._getValueIgnoreHiddenFields(
+                  schema.properties[key],
+                  `${__dataPath}.${key}`,
+                  __idxChain,
+                  allIgnoreFieldPaths
+                );
+              }
+            }
+            break;
+          case 'array':
+            if (schema.items) {
+              schema.value.forEach((item, index) => {
+                if (item.__dataSchema) {
+                  this._getValueIgnoreHiddenFields(
+                    item.__dataSchema,
+                    `${__dataPath}[${index}]`,
+                    !__idxChain && __idxChain !== 0
+                      ? [index].join(',')
+                      : [__idxChain, index].join(','),
+                    allIgnoreFieldPaths
+                  );
+                }
+              });
+            }
+            break;
+          default:
+            break;
+        }
+      }
+      return allIgnoreFieldPaths
     },
 
     submit() {

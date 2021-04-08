@@ -6,12 +6,11 @@
       {{_analyzeVal(schema.ui.legend)}}
       <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
     </legend>
+    <el-tabs v-show="!collapsed" :addable="!mergeConfig.disableAdd" type="card" :tab-position="mergeConfig.tabPosition" @edit="handleTabsEdit" v-model="activeName">
+      <el-tab-pane v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" :closable="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :name="'' + idx">
 
-    <el-tabs v-show="!collapsed" :closable="!mergeConfig.disableDel" :addable="!mergeConfig.disableAdd" type="card" :tab-position="mergeConfig.tabPosition" @edit="handleTabsEdit" v-model="activeName">
-      <el-tab-pane v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" :name="'' + idx">
-
-        <span slot="label">
-          {{_analyzeVal(dataItem.__dataSchema.ui.label) + ' ' + (idx + 1)}}
+        <span slot="label" class="__array-tabs-tab-label">
+          {{_analyzeVal(dataItem.__dataSchema.ui.label, idx) + (mergeConfig.autoIdxToLabel ? ' ' + (idx + 1) : '')}}
           <!-- 提示信息 -->
           <el-tooltip class="item" effect="dark" placement="right-start">
             <div slot="content" v-html="dataItem.__dataSchema.ui.help.content"></div>
@@ -21,7 +20,7 @@
 
         <!-- array item 是 正常的 object 类型 -->
         <template v-if="isNormalObjSchema(dataItem.__dataSchema)">
-          <ncform-object :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :config="dataItem.__dataSchema.ui.widgetConfig" :show-legend="false">
+          <ncform-object :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :config="dataItem.__dataSchema.ui.widgetConfig" :global-const="globalConst" :show-legend="false">
 
             <template v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})" :slot="fieldName"><!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
               <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
@@ -71,6 +70,21 @@
           }
         }
       }
+      .dragging {
+        background-color: #f7f4f4;
+      }
+      .el-tabs__item {
+        display: inline-flex;
+        justify-content: left;
+        align-items: center;
+        .__array-tabs-tab-label {
+          display: inline-block;
+          max-width: 200px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 14px;
+        }
+      }
     }
 
     .el-tab-pane > .__object-form-item > .el-row {
@@ -86,6 +100,7 @@
 <script>
 
   import ncformCommon from '@ncform/ncform-common';
+  import Sortable from "sortablejs";
 
   const layoutArrayMixin = ncformCommon.mixins.vue.layoutArrayMixin;
 
@@ -108,6 +123,28 @@
         defaultConfig: {
           tabPosition: 'top',
         },
+      }
+    },
+
+    mounted() {
+      const vm = this;
+      const el = this.$el.querySelector(".el-tabs__nav");
+      if (!this.mergeConfig.disableReorder) {
+        const sortTabs = Sortable.create(el, {
+          animation: 200,
+          filter: ".el-icon-close",
+          dragClass: 'dragging',
+          onEnd(evt) {
+            const list = vm.schema.value;
+            const item = list.splice(evt.oldIndex, 1)[0];
+            list.splice(evt.newIndex, 0, item);
+            vm.schema.value = [];
+            vm.$nextTick(() => {
+              vm.schema.value = list;
+              vm.activeName = String(evt.newIndex);
+            });
+          }
+        });
       }
     },
 

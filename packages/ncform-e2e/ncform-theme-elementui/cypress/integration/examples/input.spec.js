@@ -237,7 +237,10 @@ context('input', () => {
                 },
                 fileField: 'photo',
                 accept: '.png',
-                uploadText: 'Upload Now'
+                uploadText: 'Upload Now',
+                headers: {
+                  author: 'daniel'
+                }
               }
             },
             preview: {
@@ -356,6 +359,9 @@ context('input', () => {
           cy.wait('@upload').then(xhr => {
             let uploadParams = {};
             xhr.request.body.forEach((item, key) => (uploadParams[key] = item));
+            let headers = xhr.request.headers;
+
+            cy.wrap(headers).its('author').should('equal', 'daniel')
             cy.wrap(uploadParams)
               .its('name')
               .should('equal', 'daniel');
@@ -837,6 +843,82 @@ context('input', () => {
         cy.get('.el-input-group__append').contains('daniel')
       });
       // common.submitForm();
+    });
+  });
+
+  it('updateOn config', () => {
+
+    let formSchema = {
+      type: 'object',
+      properties: {
+        value1: {
+          type: 'string',
+          valueTemplate: 'dx: {{$root.name1}}'
+        },
+        name1: {
+          type: 'string',
+          ui: {
+            widgetConfig: {
+              updateOn: 'blur',
+              autocomplete: {
+                itemValueField: 'name',
+                enumSource: [{ name: 'daniel' }, { name: 'sarah' }],
+              }
+            }
+          }
+        },
+        value2: {
+          type: 'string',
+          valueTemplate: 'dx: {{$root.name2}}'
+        },
+        name2: {
+          type: 'string',
+          ui: {
+            widgetConfig: {
+              updateOn: 'blur',
+            }
+          }
+        },
+      }
+    };
+    cy.window()
+      .its('editor')
+      .invoke('setValue', JSON.stringify(formSchema, null, 2));
+    common.startRun();
+
+    cy.get('body').as('body');
+
+    cy.get('.previewArea').within(() => {
+
+      cy.get('label').contains('value1').parent().find('input').as('value1Input');
+      cy.get('label').contains('value2').parent().find('input').as('value2Input');
+
+      // Declare action elements
+      cy.get('label')
+        .contains('name1')
+        .parent()
+        .within(() => {
+          cy.get('input').type('da');
+          cy.get('@body')
+            .find('li:contains("daniel")')
+            .click();
+          cy.get('input').should('have.value', 'daniel');
+          cy.get('@value1Input').should('have.value', 'daniel');
+          cy.get('input').type('hi');
+          cy.get('@value1Input').should('have.value', 'daniel');
+          cy.get('input').blur();
+          cy.get('@value1Input').should('have.value', 'danielhi');
+        });
+
+      cy.get('label')
+        .contains('name2')
+        .parent()
+        .within(() => {
+          cy.get('input').type('daniel');
+          cy.get('@value2Input').should('have.value', '');
+          cy.get('input').blur();
+          cy.get('@value2Input').should('have.value', 'daniel');
+        });
     });
   });
 

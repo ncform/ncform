@@ -17,7 +17,7 @@ Comes with **standard components** and **validation rules**, out of the box.
 
 Have powerful **control interaction** and **extension capabilities**, do what you want.
 
-> If you are hesitant, you can read this article: [How to choose](https://forum.vuejs.org/t/ncform-let-you-happily-develop-forms/57795)
+> If you are hesitant, you can read this article: [How to choose](https://github.com/ncform/ncform/wiki/How-to-choose-a-project-that-generate-forms-from-a-JSON-schema)
 
 [![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
 
@@ -37,6 +37,7 @@ Have powerful **control interaction** and **extension capabilities**, do what yo
   - [Design Thinking](#Design-Thinking)
   - [Schema Generator](#Schema-Generator)
   - [❤️Sponsor](#Sponsor)
+  - [Contribution](#Contribution)
 
 ## Playground
 
@@ -258,6 +259,36 @@ globalConfig: {
 }
 ```
 
+> dx expressions can also be replaced with `function` :
+
+function(formData, constData, selfData, tempData, itemIdxChain) { ... }
+
+- formData: corresponds to `{{$root}}`. Form data
+- constData: corresponds to `{{$const}}`. Constant data in global configuration
+- selfData: corresponds to `{{$self}}`. Used only for `ui.preview.value`, which refers to its own value
+- tempData: corresponds to `{{$temp}}`. Temporarily stored value
+- itemIdxChain: useful only for array items, refers to the index path of the current array, such as [1, 0]
+
+Some common examples are as follows:
+
+```
+// form data
+disabled: function(formData) {
+  return formData.person.age < 18;
+}
+
+// array item
+disabled: function(formData, constData, selfData, tempData, itemIdxChain) {
+  const [ i ] = itemIdxChain;
+  return formData.persons[i].age < 18;
+}
+
+// global constants
+disabled: function(formData, constData) {
+  return formData.person.age < constData.max;
+}
+```
+
 ## Design Thinking
 
 ncform = ncform container + ncform theme standard component
@@ -277,6 +308,8 @@ Thought: "Throw in" the standard components of various themes into the ncform co
 
 You can accelerate the speed of writing form schemas with [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)
 
+Also you can try the third-party vscode extension: [vscode-plugin-ncform-schema](https://github.com/F-loat/vscode-plugin-ncform-schema/)
+
 ## References
 
 - [json-schema](http://json-schema.org/)
@@ -292,7 +325,7 @@ You can accelerate the speed of writing form schemas with [Schema Generator](htt
 
 ## Contributors
 
-<table><tr><td align="center"><a href="https://github.com/daniel-dx"><img src="https://avatars3.githubusercontent.com/u/22042268?s=460&v=4"width="100px;"alt="daniel.xiao"/><br/><sub><b>daniel.xiao</b></sub></a><br/><a href="https://github.com/daniel-dx"title="Author">☺️</a></td><td align="center"><a href="https://github.com/Kyleloh"><img src="https://avatars3.githubusercontent.com/u/5841513?s=460&v=4"width="100px;"alt="Kyleloh"/><br/><sub><b>Kyleloh</b></sub></a><br/><a href="https://github.com/Kyleloh"title="Developer">💻</a></td><td align="center"><a href="https://github.com/liuxuewei"><img src="https://avatars3.githubusercontent.com/u/1960603?s=460&v=4"width="100px;"alt="liuxuewei"/><br/><sub><b>liuxuewei</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td></tr></table>
+<table><tr><td align="center"><a href="https://github.com/daniel-dx"><img src="https://avatars3.githubusercontent.com/u/22042268?s=460&v=4"width="100px;"alt="daniel.xiao"/><br/><sub><b>daniel.xiao</b></sub></a><br/><a href="https://github.com/daniel-dx"title="Author">☺️</a></td><td align="center"><a href="https://github.com/Kyleloh"><img src="https://avatars3.githubusercontent.com/u/5841513?s=460&v=4"width="100px;"alt="Kyleloh"/><br/><sub><b>Kyleloh</b></sub></a><br/><a href="https://github.com/Kyleloh"title="Developer">💻</a></td><td align="center"><a href="https://github.com/liuxuewei"><img src="https://avatars3.githubusercontent.com/u/1960603?s=460&v=4"width="100px;"alt="liuxuewei"/><br/><sub><b>liuxuewei</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td><td align="center"><a href="https://github.com/woodytechnology"><img src="https://avatars.githubusercontent.com/u/47734092?s=200&v=4"width="100px;"alt="woodytechnology"/><br/><sub><b>woodytechnology</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td></tr></table>
 
 ## Sponsor
 
@@ -309,3 +342,6 @@ ncform is an MIT licensed open source project and completely free to use. If it 
 ### Monthly support
 
 [Become a backer or sponsor via Patreon](https://www.patreon.com/ncform)
+
+## Contribution
+See [Contributing](contributing.md) Guide.

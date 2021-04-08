@@ -8,7 +8,7 @@
 
       {{i18n.template}}：
       <el-select v-model="selectVal" placeholder="请选择" @change="templateChange">
-        <el-option v-for="item in listOptions" :key="item.value" :label="item.label" :value="item.value">
+        <el-option v-for="item in listOptions" :key="item.value" :label="item.label" :value="item">
         </el-option>
       </el-select>
       <el-button type="primary" @click="createForm">{{i18n.genForm}}</el-button>
@@ -24,6 +24,13 @@
   </el-row>
   <el-row>
     <el-col :span="12">
+      <el-alert v-if="selectVal && selectVal.desc"
+        style="margin-top: 6px;"
+        show-icon
+        :closable="false"
+        :title="selectVal.desc"
+        type="info">
+      </el-alert>
       <div class="editorArea">
         <div ref="editor" class="editor">{{jsonValue}}</div>
       </div>

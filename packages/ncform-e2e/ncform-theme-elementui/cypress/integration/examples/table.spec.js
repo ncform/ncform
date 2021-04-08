@@ -59,6 +59,29 @@ context('Table', () => {
                 item: 'Sure to delete item',
                 all: 'Sure to delete all'
               },
+              colgroup: [
+                {
+                },
+                {
+                  width: '80px'
+                }
+              ],
+            }
+          }
+        },
+        users4: {
+          type: 'array',
+          value: [
+            'daniel', 'sarah'
+          ],
+          items: {
+            type: 'string'
+          },
+          ui: {
+            widget: 'array-table',
+            widgetConfig: {
+              "disableDel": false,
+              "delExceptionRows": 'dx: (function(item) { return item === "daniel"})'
             }
           }
         }
@@ -93,6 +116,8 @@ context('Table', () => {
 
           cy.get('.el-icon-remove').eq(0).click();
           cy.get('input').its('length').should('equal', 1);
+
+          cy.get('thead>th:last-child').should('have.prop', 'offsetWidth', 130);
         });
 
       cy.get('legend')
@@ -125,6 +150,16 @@ context('Table', () => {
           cy.get('@body').find('.el-message-box__message').should('have.text', 'Sure to delete all');
           cy.get('@body').find('.el-message-box__btns .el-button--primary').click();
           cy.get('input').should('not.exist');
+
+          cy.get('thead>th:last-child').should('have.prop', 'offsetWidth', 80);
+        });
+
+      cy.get('legend')
+        .contains('users4')
+        .parent()
+        .within(() => {
+          cy.get('tbody tr').eq(0).find('button.el-button--danger').should('not.exist');
+          cy.get('tbody tr').eq(1).find('button.el-button--danger').should('exist');
         });
       // common.submitForm();
     });

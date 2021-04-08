@@ -152,6 +152,11 @@
                   }
                 }
               }
+            },
+            ui: {
+              widgetConfig: {
+                layout: 'h'
+              }
             }
           }
         },
@@ -335,6 +340,61 @@ Prompt information can be configured via delConfirmText when requiredDelConfirm 
                   widget: 'array-table',
                   widgetConfig: {
                     showOneIfEmpty: true
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] colgroup: 列配置',
+            en:
+              '[ATTR] colgroup: Column settings'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-table',
+                  widgetConfig: {
+                    colgroup: [
+                      {},
+                      {
+                        width: '200px'
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          title: {
+            cn: '[属性] delExceptionRows: 对于删除动作例外的行。这些行当disableDel为true时可被删除，当disableDel原来false时不可被删除',
+            en:
+              '[ATTR] delExceptionRows:  The exception rows for delete action. These rows can be deleted when disableDel is true and cannot be deleted when disableDel is false'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              user: {
+                type: 'array',
+                value: ['daniel', 'sarah'],
+                items: {
+                  type: 'string'
+                },
+                ui: {
+                  widget: 'array-table',
+                  widgetConfig: {
+                    disableDel: false,
+                    delExceptionRows: 'dx: (function(item) { return item === "daniel"})'
                   }
                 }
               }

@@ -1,3 +1,164 @@
+
+## [1.7.9](https://github.com/ncform/ncform/compare/v1.7.8...v1.7.9) (2021-03-27)
+
+### Bug Fixes
+
+* **ncform:** Add no minimize version output for release ([ef6abcf](https://github.com/ncform/ncform/commit/ef6abcf56d983e9c66f282ae99520226daea1025))
+* **ncform:** Fix change event not fire when adding / removing items ([4bc0678](https://github.com/ncform/ncform/commit/4bc0678a6580abf7f1de87c0f3aa1f5c3c223911)), closes [#241](https://github.com/ncform/ncform/issues/241)
+* **ncform:** improve performance ([60a436d](https://github.com/ncform/ncform/commit/60a436d940be13fb680e9f3f8d9257f4df9fee59)), closes [#136](https://github.com/ncform/ncform/issues/136)
+
+## [1.7.8](https://github.com/ncform/ncform/compare/v1.7.7...v1.7.8) (2020-12-22)
+
+### Bug Fixes
+
+* **ncform-common:** fix dx expression trim issue ([e6c801c](https://github.com/ncform/ncform/commit/e6c801c70fdc8ac4a0f3c67652588555aa7840df))
+* **ncform-theme-elementui:** fixed when tab name is too long ([4732aa3](https://github.com/ncform/ncform/commit/4732aa3cfc6411cc2c9120d18f87109936125646))
+
+## [1.7.7](https://github.com/ncform/ncform/compare/v1.7.5...v1.7.7) (2020-12-16)
+
+### Features
+
+* 1. Add autoIdxToLabel config to array and array-tabs widgets; 2. array-tabs support using field value ([8ff5a1a](https://github.com/ncform/ncform/commit/8ff5a1a24d579e6141d6f962051f979b0f6a2909))
+
+
+## [1.7.5](https://github.com/ncform/ncform/compare/v1.7.4...v1.7.5) (2020-12-15)
+
+### Bug Fixes
+
+* **ncform-show:** fixed the problem of incorrect json on the array-tab demo ([34540e0](https://github.com/ncform/ncform/commit/34540e0f7027ac3cd35f33ed48635350bb1ed05d))
+
+### Features
+
+* **ncform-show:** add ext components demo ([32f8e84](https://github.com/ncform/ncform/commit/32f8e84200c5d2cd4eb9335ac97ec356b5abf639))
+* **ncform-theme-elementui:** array-tabs support draggable switch array position ([6777dff](https://github.com/ncform/ncform/commit/6777dff84be6c485f169d4d9c58c5b669e831233))
+* **playground:** added nc-array-import demo ([725edf4](https://github.com/ncform/ncform/commit/725edf4786ef8c6fab18cb159b11fe058fe8bfe0))
+
+## [1.7.4](https://github.com/ncform/ncform/compare/v1.7.2...v1.7.4) (2020-12-06)
+
+### Bug Fixes
+
+* **input:** Fixes base ncform input _processModelVal with type number or integer and 0 value. ([a34a5bb](https://github.com/ncform/ncform/commit/a34a5bbb82c2dd096d2a56d47a996e1a96631af3))
+* **ncform:** wrong code ([2e6b420](https://github.com/ncform/ncform/commit/2e6b42030940249d248f3da54e361aa1bda81851))
+
+### Features
+
+* **ncform:** Add $ncformGetValue api ([c2b3fd7](https://github.com/ncform/ncform/commit/c2b3fd768e28d2b47c0f5dd39f2d02084508b8e5)), closes [#55](https://github.com/ncform/ncform/issues/55)
+* **ncform:** change $ncformGetValue api params; rm globalConfig.ignoreFieldValueWhenHidden config ([2c2f6c0](https://github.com/ncform/ncform/commit/2c2f6c09edac7ce2e4bcc21b81d438333dfa9355)), closes [#55](https://github.com/ncform/ncform/issues/55)
+
+## [1.7.2](https://github.com/ncform/ncform/compare/v1.7.1...v1.7.2) (2020-11-19)
+
+### Features
+
+* Add title attribute to label ([70c5db1](https://github.com/ncform/ncform/commit/70c5db1bdc299a4f0e60f91c5ec78519f2e7485f))
+
+## [1.7.1](https://github.com/ncform/ncform/compare/v1.7.0...v1.7.1) (2020-08-12)
+
+### Bug Fixes
+
+* **ncform:** fixed error array paths value got by changed ([c806010](https://github.com/ncform/ncform/commit/c806010ea63164d4b0b2dfeed50f568411e157ed)), closes [#162](https://github.com/ncform/ncform/issues/162)
+* **ncform:** fixed crach when number type items in array ([b2a9dfc](https://github.com/ncform/ncform/commit/b2a9dfc600130fce8928e3994aff575d3478c72b)), closes [#150](https://github.com/ncform/ncform/issues/150)
+
+# [1.7.0](https://github.com/ncform/ncform/compare/v1.6.9...v1.7.0) (2020-05-01)
+
+### Bug Fixes
+
+* **array widgets:** Fixed bug that globalConst not work at object item in array ([9e37f3f](https://github.com/ncform/ncform/commit/9e37f3f6d23d7c1e9ce939a979e2d08b31c02aa3)), closes [#140](https://github.com/ncform/ncform/issues/140)
+* **array-table:** Fixed warning for key binding ([ce38dce](https://github.com/ncform/ncform/commit/ce38dce7c51c630b41a0971e8c075861148c4d0c)), closes [#145](https://github.com/ncform/ncform/issues/145)
+
+### Features
+
+* **object layout:** columns config support dx expression ([5654c60](https://github.com/ncform/ncform/commit/5654c6076aeb9d649955ea795c4035f65fe96601)), closes [#133](https://github.com/ncform/ncform/issues/133)
+* return itemOldValue on change event ([d229aa4](https://github.com/ncform/ncform/commit/d229aa4481f6b8516bcc43decf77e1aeb864e31b)), closes [#135](https://github.com/ncform/ncform/issues/135)
+
+## [1.6.9](https://github.com/ncform/ncform/compare/v1.6.8...v1.6.9) (2019-11-29)
+
+### Bug Fixes
+
+* **ncform-common:** Fixed the bug that the promise type rule logic does not take effect when submiss ([694a4a5](https://github.com/ncform/ncform/commit/694a4a5148192be14b1ff5dc7353ec0c55297fb4))
+
+## [1.6.8](https://github.com/ncform/ncform/compare/v1.6.7...v1.6.8) (2019-11-27)
+
+### Bug Fixes
+
+* Solve display problem of widgets in "h" layout ([b4a148d](https://github.com/ncform/ncform/commit/b4a148de168af36a7446f8158563560ac390904d))
+
+### Features
+
+* **ncform-theme-elementui:** Add size config for input/input-number/select/date-picker widgets ([781f031](https://github.com/ncform/ncform/commit/781f031eefba316474c6bf4997b83c44cc236566)), closes [#105](https://github.com/ncform/ncform/issues/105)
+
+## [1.6.7](https://github.com/ncform/ncform/compare/v1.6.6...v1.6.7) (2019-11-22)
+
+### Bug Fixes
+
+* **ncform:** Fixed dx bug of 'a[i].b.c' situation ([6c674c2](https://github.com/ncform/ncform/commit/6c674c21e45d4daa71a25fe2556b19f44607c172))
+
+<a name="1.6.6"></a>
+## [1.6.6](https://github.com/ncform/ncform/compare/v1.6.5...v1.6.6) (2019-10-26)
+
+### Bug Fixes
+
+* **ncform-common:** correct the parameter of dx expression function ([5bd3fb8](https://github.com/ncform/ncform/commit/5bd3fb8))
+
+### Features
+
+* **input and textarea:** add updateOn config for iput and textarea ([289c27b](https://github.com/ncform/ncform/commit/289c27b))
+
+<a name="1.6.5"></a>
+## [1.6.5](https://github.com/ncform/ncform/compare/v1.6.4...v1.6.5) (2019-10-24)
+
+### Bug Fixes
+
+* When showOneIfEmpty is true, there has extra blank row when there has initial value. ([1a9a987](https://github.com/ncform/ncform/commit/1a9a987))
+
+
+<a name="1.6.4"></a>
+## [1.6.4](https://github.com/ncform/ncform/compare/v1.6.3...v1.6.4) (2019-10-24)
+
+
+### Bug Fixes
+
+* **ncform:** fixed valueTemplate bug ([da8ee5c](https://github.com/ncform/ncform/commit/da8ee5c)), closes [#106](https://github.com/ncform/ncform/issues/106)
+* Fixed the bug that valueTemplate don't work for array widgets ([1eafcc2](https://github.com/ncform/ncform/commit/1eafcc2)), closes [#107](https://github.com/ncform/ncform/issues/107)
+
+
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/ncform/ncform/compare/v1.6.1...v1.6.2) (2019-10-16)
+
+### Bug Fixes
+
+* **array widgets:** fixed bug for delExceptionRows implementation ([f76fd87](https://github.com/ncform/ncform/commit/f76fd87))
+* **array-table:** fixed the display problem of column width ([e8e079c](https://github.com/ncform/ncform/commit/e8e079c))
+* **ncform:** make sure the scrolling action is after the DOM update ([c3c72d3](https://github.com/ncform/ncform/commit/c3c72d3))
+
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/ncform/ncform/compare/v1.6.0...v1.6.1) (2019-10-16)
+
+### Features
+
+* **ncform:** Add the globalConfig.scrollToFailField to support auto scroll to the first validation ([a78362f](https://github.com/ncform/ncform/commit/a78362f)), closes [#102](https://github.com/ncform/ncform/issues/102)
+
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/ncform/ncform/compare/v1.5.0...v1.6.0) (2019-10-16)
+
+### Bug Fixes
+
+* **ncform-theme-elementui:** fixed bug that dropdown options do not show any more with configure filterLocal=false ([498ef06](https://github.com/ncform/ncform/commit/498ef06)), closes [#98](https://github.com/ncform/ncform/issues/98)
+
+
+### Features
+
+* **array layout widgets:** add delExceptionRows config for all layout widgets ([49bdbbf](https://github.com/ncform/ncform/commit/49bdbbf)), closes [#100](https://github.com/ncform/ncform/issues/100)
+* **array-table:** add column config (colgroup) for array-table widget ([aad46c4](https://github.com/ncform/ncform/commit/aad46c4)), closes [#99](https://github.com/ncform/ncform/issues/99)
+
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/ncform/ncform/compare/v1.4.0...v1.5.0) (2019-10-11)
+
+### Features
+
+* **ncform-theme-elementui:** add the switch widget to the standard components ([1180196](https://github.com/ncform/ncform/commit/1180196)), closes [#73](https://github.com/ncform/ncform/issues/73)
+* **ncform-theme-elementui:** upload and input.upload add headers config ([16c0511](https://github.com/ncform/ncform/commit/16c0511)), closes [#93](https://github.com/ncform/ncform/issues/93)
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/ncform/ncform/compare/v1.3.2...v1.4.0) (2019-08-05)
 

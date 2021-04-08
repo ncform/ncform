@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "properties": {
+    "age": {
+      "type": "integer",
+      "ui": {
+        "label": "Age",
+        "description": "More than 18 years old to continue filling"
+      }
+    },
+    "gameInfo": {
+      "type": "object",
+      "properties": {
+        "game": {
+          "type": "string",
+          "ui": {
+            "label": "Like games",
+            "description": "Fill in and unlock"
+          }
+        },
+        "gameAge": {
+          "type": "integer",
+          "ui": {
+            "label": "Game age",
+            "disabled": "dx: !{{$root.gameInfo.game}}"
+          }
+        }
+      },
+      "ui": {
+        "legend": "Game info",
+        "hidden": "dx: !{{$root.age}} || {{$root.age}} < 18"
+      }
+    }
+  }
+}

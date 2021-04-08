@@ -7,6 +7,7 @@
           :min="mergeConfig.min"
           :max="mergeConfig.max"
           :step="mergeConfig.step"
+          :size="mergeConfig.size"
         ></el-input-number>
     </div>
 </template>
@@ -52,7 +53,8 @@
         defaultConfig: {
           min:0,
           max: Infinity,
-          step: 1
+          step: 1,
+          size: ''
         }
         // modelVal：请使用该值来绑定实际的组件的model
       }

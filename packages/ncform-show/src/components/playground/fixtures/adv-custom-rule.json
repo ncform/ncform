@@ -1,0 +1,102 @@
+{
+  "type": "object",
+  "properties": {
+    "startTime": {
+      "type": "string",
+      "ui": {
+        "widget": "date-picker"
+      },
+      "rules": {
+        "customRule": [
+          {
+            "script": "dx: !{{$root.endTime}} || {{$root.endTime}} >= {{$root.startTime}}",
+            "errMsg": "Start date must be less than or equal to the end date",
+            "linkItems": [
+              {
+                "fieldPath": "endTime",
+                "customRuleIdx": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "endTime": {
+      "type": "string",
+      "ui": {
+        "widget": "date-picker"
+      },
+      "rules": {
+        "customRule": [
+          {
+            "script": "dx: !{{$root.startTime}} || {{$root.endTime}} >= {{$root.startTime}}",
+            "errMsg": "End date must be greater than or equal to the start date",
+            "linkItems": [
+              {
+                "fieldPath": "startTime",
+                "customRuleIdx": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "arrayItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "ui": {
+              "widget": "date-picker"
+            },
+            "rules": {
+              "customRule": [
+                {
+                  "script": "dx: !{{$root.arrayItems[i].endTime}} || {{$root.arrayItems[i].endTime}} >= {{$root.arrayItems[i].startTime}}",
+                  "errMsg": "Start date must be less than or equal to the end date",
+                  "linkItems": [
+                    {
+                      "fieldPath": "arrayItems[i].endTime",
+                      "customRuleIdx": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "endTime": {
+            "type": "string",
+            "ui": {
+              "widget": "date-picker"
+            },
+            "rules": {
+              "customRule": [
+                {
+                  "script": "dx: !{{$root.arrayItems[i].startTime}} || {{$root.arrayItems[i].endTime}} >= {{$root.arrayItems[i].startTime}}",
+                  "errMsg": "End date must be greater than or equal to the start date",
+                  "linkItems": [
+                    {
+                      "fieldPath": "arrayItems[i].startTime",
+                      "customRuleIdx": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "ui": {
+        "showLabel": false,
+        "legend": "Array item",
+        "widget": "array-table",
+        "widgetConfig": {
+          "collapsed": false,
+          "showOneIfEmpty": true
+        }
+      }
+    }
+  }
+}

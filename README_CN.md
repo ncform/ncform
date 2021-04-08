@@ -17,7 +17,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
 
 具备强大的 **控件交互** 和 **扩展能力**，做你所想。
 
-> 如果你犹豫不决，你可以阅读这篇文章：[如何选型](https://forum.vuejs.org/t/topic/57784)
+> 如果你犹豫不决，你可以阅读这篇文章：[如何选型](https://github.com/ncform/ncform/wiki/%E8%AE%A9%E5%89%8D%E7%AB%AF%E5%B0%8F%E5%A7%90%E5%A7%90%E6%84%89%E5%BF%AB%E5%9C%B0%E5%BC%80%E5%8F%91%E8%A1%A8%E5%8D%95)
 
 [![Playground](docs/images/playground-1.jpg)](https://ncform.github.io/ncform/ncform-show/playground/index.html)
 
@@ -37,6 +37,7 @@ ncform，一种令人愉悦的表单开发方式，仅需配置即可生成表�
   - [设计思想](#设计思想)
   - [Schema Generator](#Schema-Generator)
   - [❤️赞助支持](#赞助支持)
+  - [贡献](#贡献)
 
 ## Playground
 
@@ -258,6 +259,37 @@ globalConfig: {
 }
 ```
 
+> dx表达式也可用 `函数` 代替：
+
+function(formData, constData, selfData, tempData, itemIdxChain) { ... }
+
+- formData：对应于 `{{$root}}`。表单的数据
+- constData: 对应于 `{{$const}}`。全局配置中的常量数据
+- selfData：对应于 `{{$self}}`。只用于 `ui.preview.value`，指代本身的值
+- tempData：对应于 `{{$temp}}`。临时存储的值
+- itemIdxChain：仅对数组项有用，指代当前所在的数组的索引路径，如[1, 0]
+
+一些常见的例子如下：
+
+```
+// 一般对象属性
+disabled: function(formData) {
+  return formData.person.age < 18;
+}
+
+// 数组项
+disabled: function(formData, constData, selfData, tempData, itemIdxChain) {
+  const [ i ] = itemIdxChain;
+  return formData.persons[i].age < 18;
+}
+
+// 全局常量
+disabled: function(formData, constData) {
+  return formData.person.age < constData.max;
+}
+```
+
+
 ## 设计思想
 
 ncform = ncform容器 + ncform主题标准组件
@@ -277,6 +309,8 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 通过 [Schema Generator](https://ncform.github.io/ncform/ncform-show/schema-gen/index.html)，可以加速你写form schema的速度
 
+你也可以尝试这个第三方的 VSCode 插件: [vscode-plugin-ncform-schema](https://github.com/F-loat/vscode-plugin-ncform-schema/)
+
 ## 参考项目
 
 - [json-schema](http://json-schema.org/)
@@ -292,7 +326,7 @@ ncform Vue版默认提供了elementui主题的标准组件[【点击查看】](h
 
 ## 贡献者
 
-<table><tr><td align="center"><a href="https://github.com/daniel-dx"><img src="https://avatars3.githubusercontent.com/u/22042268?s=460&v=4"width="100px;"alt="daniel.xiao"/><br/><sub><b>daniel.xiao</b></sub></a><br/><a href="https://github.com/daniel-dx"title="Author">☺️</a></td><td align="center"><a href="https://github.com/Kyleloh"><img src="https://avatars3.githubusercontent.com/u/5841513?s=460&v=4"width="100px;"alt="Kyleloh"/><br/><sub><b>Kyleloh</b></sub></a><br/><a href="https://github.com/Kyleloh"title="Developer">💻</a></td><td align="center"><a href="https://github.com/liuxuewei"><img src="https://avatars3.githubusercontent.com/u/1960603?s=460&v=4"width="100px;"alt="liuxuewei"/><br/><sub><b>liuxuewei</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td></tr></table>
+<table><tr><td align="center"><a href="https://github.com/daniel-dx"><img src="https://avatars3.githubusercontent.com/u/22042268?s=460&v=4"width="100px;"alt="daniel.xiao"/><br/><sub><b>daniel.xiao</b></sub></a><br/><a href="https://github.com/daniel-dx"title="Author">☺️</a></td><td align="center"><a href="https://github.com/Kyleloh"><img src="https://avatars3.githubusercontent.com/u/5841513?s=460&v=4"width="100px;"alt="Kyleloh"/><br/><sub><b>Kyleloh</b></sub></a><br/><a href="https://github.com/Kyleloh"title="Developer">💻</a></td><td align="center"><a href="https://github.com/liuxuewei"><img src="https://avatars3.githubusercontent.com/u/1960603?s=460&v=4"width="100px;"alt="liuxuewei"/><br/><sub><b>liuxuewei</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td><td align="center"><a href="https://github.com/woodytechnology"><img src="https://avatars.githubusercontent.com/u/47734092?s=200&v=4"width="100px;"alt="woodytechnology"/><br/><sub><b>woodytechnology</b></sub></a><br/><a href="#financial"title="Financial supporter">💵</a></td></tr></table>
 
 ## 赞助支持
 
@@ -309,3 +343,6 @@ ncform 是MIT许可的开源项目，完全免费使用。 如果它对你有用
 ### 每月支持
 
 [通过 Patreon 成为支持者或赞助者](https://www.patreon.com/ncform)
+
+## 贡献
+请阅读 [贡献](contributing.md) 指南.

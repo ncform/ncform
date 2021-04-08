@@ -36,6 +36,8 @@
   modelField: '', // 当值为对象时使用（即使用compound.prependSelect或compound.appendSelect）
   trim: true, // 是否自动将前后空格trim掉，默认为true 
   clearable: false, // 是否可清空，默认为false
+  updateOn: 'change', // 触发值更新的时机，默认是输入变化即触发。可选值：['change', 'blur']
+  size: '', // 输入框尺寸，可选值：[medium | small | mini]
 
   autocomplete: { // 自动补全 
     itemValueField: 'value', // 项数据表示value的字段
@@ -93,6 +95,7 @@
       minSize: 0 // 最小文件大小，单位KB，0代表不限
     },
     uploadText: '点击上传', //  上传按钮的名称
+    headers: {}, // 设置上传的请求头部
   }
 }
 ```
@@ -104,6 +107,7 @@
   min: 0, // 最小值
   max: Infinity, // 最大值
   step: 1, // 步长
+  size: '', // 尺寸。可选值：[medium | small | mini]
 }
 ```
 
@@ -113,6 +117,7 @@
 {
   rows: 2, // 行数
   autoSize: true, // 自适应内容高度，可选值：[boolean | { minRows: 2, maxRows: 6 }]
+  updateOn: 'change', // 触发值更新的时机，默认是输入变化即触发。可选值：['change', 'blur']
 }
 ```
 
@@ -124,6 +129,7 @@
   clearable: true, // 是否出现清空选项
   filterable: false, // 是否可搜索，即可输入关键字
   filterLocal: true, // 搜索本地的还是远程的数据，当为true时，就算配了enumSourceRemote，也只会从远程取一次数据
+  size: '', // 尺寸。可选值：[medium | small | mini]
 
   itemDataKey: "", // 选中项的数据的字段，可通过 {{$temp.[itemDataKey]}} 访问
 
@@ -199,6 +205,7 @@
   listType: 'text', // 文件列表的类型。 可选值：text/picture/picture-card
   autoUpload: false, // 是否在选取文件后立即进行上传
   limit: 1, // 最大允许上传个数
+  headers: {}, // 设置上传的请求头部
 }
 ```
 
@@ -241,6 +248,7 @@
   type: 'date', // year/month/date/week/datetime
   format: '', // 格式显示
   valueFormat: '', // 输出值的格式。空为毫秒数字符串
+  size: '', // 尺寸。可选值：[medium | small | mini]
 }
 ```
 
@@ -248,6 +256,22 @@
 
 ```js
 {
+}
+```
+
+- switch
+
+```js
+{
+  width: 40, // switch 的宽度（像素）
+  activeIconClass: '', // switch 打开时所显示图标的类名，设置此项会忽略 activeText
+  inactiveIconClass: '', // switch 关闭时所显示图标的类名，设置此项会忽略 inactiveText
+  activeText: '', // switch 打开时的文字描述
+  inactiveText: '', // switch 关闭时的文字描述 
+  activeValue: '', // switch 打开时的值。默认值是true。 boolean / string / number
+  inactiveValue: '', //  switch 关闭时的值。默认值是false。 boolean / string / number
+  activeColor: '#409EFF', // switch 打开时的背景色
+  inactiveColor: '#C0CCDA', // switch 关闭时的背景色
 }
 ```
 
@@ -270,6 +294,7 @@
 {
   disableAdd: true, // 是否禁止添加项
   disableDel: true, // 是否禁止删除项
+  delExceptionRows: 'dx: (function(item) { return false })' // 对于删除动作例外的行。这些行当disableDel为true时可被删除，当disableDel原来false时不可被删除
   disableReorder: true, // 是否禁止排序
   disableCollapse: false, // 是否允许折叠
   collapsed: false, // 是否默认折叠
@@ -283,6 +308,7 @@
     all: ''
   }, 
   showOneIfEmpty: false, // 当空值时是否显示一项
+  autoIdxToLabel: true, // 标题自动加索引文本
 }
 ```
 
@@ -292,6 +318,7 @@
 {
   disableAdd: true, // 是否禁止添加项
   disableDel: true, // 是否禁止删除项
+  delExceptionRows: 'dx: (function(item) { return false })' // 对于删除动作例外的行。这些行当disableDel为true时可被删除，当disableDel原来false时不可被删除
   disableReorder: true, // 是否禁止排序
   collapsed: false, // 是否默认折叠
   disableCollapse: false, // 是否允许折叠
@@ -303,6 +330,11 @@
     all: ''
   },
   showOneIfEmpty: false, // 当空值时是否显示一项
+  colgroup: [ // 列配置
+    {
+      width: '', // 列宽度, pixels 或 %
+    }
+  ], 
 }
 ```
 
@@ -312,6 +344,8 @@
 {
   disableAdd: true, // 是否禁止添加项
   disableDel: true, // 是否禁止删除项
+  delExceptionRows: 'dx: (function(item) { return false })' // 对于删除动作例外的行。这些行当disableDel为true时可被删除，当disableDel原来false时不可被删除
+  disableReorder: true, // 是否禁止排序
   tabPosition: 'top', // 可选值：left / top
   collapsed: false, // 是否默认折叠
   disableCollapse: false, // 是否允许折叠
@@ -321,5 +355,6 @@
     all: ''
   },
   showOneIfEmpty: false, // 当空值时是否显示一项
+  autoIdxToLabel: true, // 标题自动加索引文本
 }
 ```

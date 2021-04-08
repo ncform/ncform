@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "item": {
+      "type": "string",
+      "ui": {
+        "description": "Currently only select, radio, checkbox supports this feature.",
+        "widget": "select",
+        "widgetConfig": {
+          "itemDataKey": "selectedItem",
+          "enumSource": [
+            {
+              "value": "1",
+              "label": "ncform",
+              "desc": "ncform is a very nice configuration generation way to develop forms"
+            },
+            {
+              "value": "2",
+              "label": "daniel",
+              "desc": "Daniel is the author of ncform"
+            }
+          ]
+        }
+      }
+    },
+    "desc": {
+      "valueTemplate": "dx: {{$temp.selectedItem.desc}} || \"\""
+    }
+  }
+}

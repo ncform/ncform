@@ -20,6 +20,7 @@
     :on-remove="handleUploadRemove"
     :file-list="fileList"
     :name="mergeConfig.fileField"
+    :headers="mergeConfig.headers"
   >
     <!-- 1. 可拖拽 -->
     <template v-if="!readonly && mergeConfig.drag" slot="trigger">
@@ -72,7 +73,6 @@
     .ncform-upload {
       &.__ncform-control {
         clear: none;
-        padding-top: 5px;
       }
     }
   }
@@ -99,7 +99,6 @@
 
     .upload-btn {
       margin-left: 10px;
-      vertical-align: top;
     }
 
     &.is-read-only{
@@ -179,7 +178,8 @@
           resField: '', // 获取返回结果的字段,
           fileNameField: 'name',
           fileUrlField: 'url',
-          fileField: 'file'
+          fileField: 'file',
+          headers: {}
         },
         uploadInfo: {
           numUploaded: 0,

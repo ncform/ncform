@@ -473,6 +473,29 @@ url: file url
             cn: `thumbnail-mode 模式下此参数无效`,
             en: `This parameter is invalid in thumbnail-mode mode`
           }
+        },
+        {
+          title: {
+            cn: '[属性] headers: 设置上传的请求头部.',
+            en: '[ATTR] headers: set the request headers for the upload.'
+          },
+          schema: {
+            type: 'object',
+            properties: {
+              files: {
+                type: 'array',
+                ui: {
+                  widget: 'upload',
+                  widgetConfig: {
+                    uploadUrl: '/api/upload/getFileInfo', // 上传的地址
+                    headers: {
+                      author: 'daniel'
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       ];
 

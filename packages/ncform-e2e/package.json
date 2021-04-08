@@ -1,7 +1,7 @@
 {
   "name": "ncform-e2e",
   "private": true,
-  "version": "1.4.0",
+  "version": "1.7.9",
   "description": "ncform e2e test",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "devDependencies": {
     "cross-var": "^1.1.0",
     "cypress": "^3.1.5",
-    "http-server": "^0.11.1"
+    "http-server": "^0.12.3"
   },
   "dependencies": {
     "blueimp-md5": "^2.10.0"

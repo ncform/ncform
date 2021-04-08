@@ -1,5 +1,6 @@
 import _cloneDeep from "lodash-es/cloneDeep";
 import _template from "lodash-es/template";
+import _get from "lodash-es/get";
 import extend from "extend";
 import ncformUtils from "../../ncform-utils";
 
@@ -78,6 +79,8 @@ export default {
           item: '',
           all: ''
         },
+        delExceptionRows: '',
+        autoIdxToLabel: true
       },
       i18n: {},
     };
@@ -97,13 +100,30 @@ export default {
           return this._analyzeVal(val);
         else return val;
       })
+    },
+    showActionColumn() {
+      return !this.mergeConfig.disableDel || !this.mergeConfig.disableReorder || this.mergeConfig.delExceptionRows;
+    }
+  },
+
+  watch: {
+    'schema.value': {
+      handler(newVal) {
+        if (newVal && newVal.length > 0 && !_get(newVal, '[0].__dataSchema')) { // rebuild the array
+          this.schema.value = newVal;
+          this.schema.value.forEach((item, idx) => {
+            this.addItem(idx);
+          });
+        }
+      },
+      immediate: true
     }
   },
 
   methods: {
-    _analyzeVal(val) {
+    _analyzeVal(val, extraIndex) {
       return ncformUtils.smartAnalyzeVal(val, {
-        idxChain: this.idxChain,
+        idxChain: this.idxChain + (isNaN(extraIndex) ? '' : (this.idxChain ? ',' : '') + extraIndex),
         data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
       });
     },
@@ -174,22 +194,29 @@ export default {
           this.$confirm(confirmText, '', {
             type: 'warning'
           }).then(() => {
-            this.schema.value = [];
+            this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
             this._addEmptyItem();
           })
         } else {
-          this.schema.value = [];
+          this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
           this._addEmptyItem();
         }
       } else {
         if (requiredConfirm) {
-          window.confirm(confirmText) && (this.schema.value = []) && this._addEmptyItem();
+          if (window.confirm(confirmText)) {
+            this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
+            this._addEmptyItem();
+          }
         } else {
-          this.schema.value = [];
+          this.schema.value = [].concat(this.schema.value.filter(item => this.isDelExceptionRow(item.__dataSchema)));
           this._addEmptyItem();
         }
       }
 
+    },
+
+    isDelExceptionRow(schema) {
+      return this.mergeConfig.delExceptionRows ? this.mergeConfig.delExceptionRows(ncformUtils.getModelFromSchema(schema)) : false;
     },
 
     itemUp(idx) {

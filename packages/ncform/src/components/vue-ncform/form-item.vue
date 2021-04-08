@@ -6,7 +6,7 @@
     <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig">
 
       <template v-for="(fieldSchema, fieldName) in schema.properties" :slot="fieldName">
-        <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :key="fieldName" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths ? paths + '.' + fieldName : fieldName" :form-name="formName"></form-item>
+        <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :key="fieldName" :global-config="globalConfig" :idx-chain="idxChain" :complete-schema="completeSchema" :paths="paths ? paths + '.' + fieldName : fieldName" :form-name="formName"></form-item>
       </template>
 
     </component>
@@ -15,7 +15,7 @@
     <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig" class="__ncform-control">
 
       <template v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})" :slot="fieldName" slot-scope="props">
-        <form-item :schema="props.schema" :key="fieldName" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths + '[' + props.idx + ']'" :form-name="formName"></form-item>
+        <form-item :schema="props.schema" :key="fieldName" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths + '[' + props.idx + ']' + (fieldName === '__notObjItem' ? '' : `.${fieldName}`)" :form-name="formName"></form-item>
       </template>
 
     </component>
@@ -107,6 +107,7 @@ import "./layout-comps";
 import "./control-comps";
 import ncformCommon from '@ncform/ncform-common';
 import _get from "lodash-es/get";
+import _isArray from "lodash-es/isArray";
 
 const ncformUtils = ncformCommon.ncformUtils;
 
@@ -171,15 +172,6 @@ export default {
           constData: this.globalConfig.constants
         }
       });
-
-      if (this.$options._init4valueTemplate) { // Prevent init value from being overwritten
-        if (this.schema.value) result = this.schema.value;
-        // User nextTick will cause the init value to be incorrect when field item in list
-        // so here use setTimeout instead
-        setTimeout(() => {
-          this.$options._init4valueTemplate = false;
-        }, 100)
-      }
 
       return result;
     },
@@ -252,12 +244,28 @@ export default {
   },
 
   watch: {
-    valueTemplate(newVal) {
-      if (newVal !== undefined)
-        this.schema.value = newVal;
+    valueTemplate: {
+      handler: function(newVal, oldVal) {
+        if (newVal !== undefined) {
+          if (oldVal === undefined || JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+            if (!(this.$options._init4valueTemplate && (_isArray(this.schema.value) ? this.schema.value.length > 0 : this.schema.value))) { // Prevent init value from being overwritten
+              this.schema.value = newVal;
+            }
+            if (this.$options._init4valueTemplate) {
+              // User nextTick will cause the init value to be incorrect when field item in list
+              // so here use setTimeout instead
+              setTimeout(() => {
+                this.$options._init4valueTemplate = false;
+              }, 10)
+            }
+          }
+        }
+      },
+      immediate: true
     },
-    schema: {
-      handler: function(newVal) {
+    'schema.value': {
+      handler: function() {
+        const newVal = this.schema
         let changed = false;
         if (ncformUtils.isNormalArrSchema(newVal)) {
           this.$data.itemValue = this.$data.itemValue || [];
@@ -275,7 +283,16 @@ export default {
             formVM.$emit('change', {
               paths: this.paths,
               itemValue: this.schema.value,
-              formValue: this.formData
+              formValue: this.formData,
+              itemOldValue: this.$data.itemValue
+            })
+          } else if (ncformUtils.isNormalArrSchema(newVal)) {
+            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
+            formVM.$emit('change', {
+              paths: this.paths,
+              itemValue: ncformUtils.getModelFromSchema(this.schema),
+              formValue: this.formData,
+              itemOldValue: this.$data.itemValue // FIXME: 数组的旧值不正确
             })
           }
 

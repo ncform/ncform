@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "firstname": {
+      "type": "string",
+      "ui": {
+        "columns": 6
+      }
+    },
+    "lastname": {
+      "type": "string",
+      "ui": {
+        "columns": 6
+      }
+    },
+    "fullname": {
+      "type": "string",
+      "valueTemplate": "dx: {{$root.firstname}} + \" \" +　{{$root.lastname}}",
+      "ui": {
+        "columns": 12
+      }
+    }
+  }
+}

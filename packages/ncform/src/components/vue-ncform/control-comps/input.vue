@@ -44,12 +44,16 @@
       // 你可以通过该方法在modelVal传出去之前进行加工处理，即在this.$emit('input')之前
       _processModelVal(modelVal) {
         let val = modelVal;
-        switch(this.mergeConfig.type) {
+        switch (this.mergeConfig.type) {
           case 'number':
-            val = parseFloat(val) || '';
+            val = parseFloat(val);
+            val = isNaN(val) ? '' : val;
             break;
           case 'integer':
-            val = parseInt(val) || '';
+            val = parseInt(val);
+            val = isNaN(val) ? '' : val;
+            break;
+          default:
             break;
         }
         return val;

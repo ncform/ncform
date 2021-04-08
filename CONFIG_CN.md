@@ -27,7 +27,7 @@
       /* UI */
       ui: {
 
-        columns: 6, // 占用列数，共12列。
+        columns: 6, // 占用列数，共12列。【支持dx表达式】
         label: '', // 标签内容【支持dx表达式】
         showLabel: true, // 是否显示标签（注意：当为 false 时，依然占着空间）
         noLabelSpace: false, // 标签是否不占空间，优先级比showLabel高
@@ -137,6 +137,12 @@
     },
     constants: { // 全局常量配置，可在dx表达中通过{{$const.}}来访问，如{{$const.userName}}
       userName: 'daniel'
+    },
+    scrollToFailField: { // 自动滚动到校验失败的字段
+      enabled: true, // 是否开启
+      container: 'body', // 滚动的容器。
+      duration: 500, // 滚动动画的持续时间(以毫秒为单位)
+      offset: -80, // 滚动时的偏移量
     }
   }
 }
@@ -187,6 +193,17 @@
 ## ncform API
 
 ncform API 都是Vue实例级别的方法。
+
+- $ncformGetValue(formName, options)
+
+手动获取表单的值。
+
+options.ignoreHiddenField: 是否忽略掉隐藏字段。默认为false
+
+```
+// Demo code:
+this.$ncformGetValue('demoForm', {ignoreHiddenField: true});
+```
 
 - $ncformReset(formName)
 

@@ -142,6 +142,12 @@ const ncformUtils = {
           validationMsg: {},
           constants: {
             // 常量数据，可通过{{$const.}}访问
+          },
+          scrollToFailField: { // Automatically scroll to fields that failed validation
+            enabled: true, // enable this feature or not
+            container: 'body',
+            duration: 500, // The duration (in milliseconds) of the scrolling animation
+            offset: -80, // The offset that should be applied when scrolling.
           }
         };
         newFieldVal.globalConfig = newFieldVal.globalConfig || {};
@@ -396,7 +402,11 @@ const ncformUtils = {
           const matchs = val.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
           matchs.forEach(mItem => {
             // mItem值："{{$root.persons[i].age}}"
-            let tempVal = mItem;
+            let tempVal = mItem
+              // trim
+              .replace(/{{\s*/, '{{')
+              .replace(/\s*}}/, '}}');
+
             data.forEach((dataItem, idx) => {
               if (tempVal.indexOf("[e]") >= 0) {
                 tempVal = tempVal.replace(
@@ -435,7 +445,8 @@ const ncformUtils = {
         }
         break;
       case "function":
-        result = val(...data.map(item => item.value._value));
+        const idxChains = idxChain.split(",").filter(item => item).map(item => parseInt(item));
+        result = val(...data.map(item => item.value._value).concat([idxChains]));
         break;
       default:
         result = val;
@@ -455,7 +466,7 @@ const ncformUtils = {
         break;
       case "number":
       case "integer":
-        defVal = undefined; // 数字默认值不好给，所以这里给undefined
+        defVal = ""; // 数字默认值不好给，所以这里给undefined
         break;
       case "boolean":
         defVal = false;
