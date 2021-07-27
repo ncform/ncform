@@ -162,11 +162,37 @@
                 ui: {
                   widget: 'checkbox',
                   widgetConfig: {
+                    type: 'button',
+                    size: 'medium',
+                    textColor: '#409EFF',
+                    fill: '#E6A23C',
+                    border: true,
+                    size: 'small',
+                    min: 1,
+                    max: 2,
                     enumSource: [{ value: 1, label: 'red' }, { value: 2, label: 'green' }, { value: 3, label: 'blue' }]
                   }
                 }
               }
             }
+          },
+          detail: {
+            cn: `
+type: 按钮形式, 可选值checkbox | button
+textColor: 按钮形式的 Checkbox 激活时的文本颜色
+fill: 按钮形式的 Checkbox 激活时的填充色和边框色
+border: 是否显示边框
+size: 多选框组尺寸，仅对按钮形式的 Checkbox 或带有边框的 Checkbox 有效
+min: 可被勾选的 checkbox 的最小数量
+max: 可被勾选的 checkbox 的最大数量`,
+            en: `
+type: checkbox or button
+textColor: font color when button is active
+fill: border and background color when button is active
+border: whether to add a border around Checkbox
+size: size of checkbox buttons or bordered checkboxes
+min: minimum number of checkbox checked
+max: maximum number of checkbox checked`
           }
         },
         {

@@ -9,6 +9,8 @@
       :disabled="disabled"
       :indeterminate="isIndeterminate"
       v-model="isCheckAll"
+      :size="mergeConfig.size"
+      :border="mergeConfig.border"
       @change="handleCheckAllChange"
     >{{$nclang('all')}}</el-checkbox>
 
@@ -17,12 +19,19 @@
       size="mini"
       :disabled="disabled"
       v-model="modelVal"
+      :text-color="mergeConfig.textColor"
+      :fill="mergeConfig.fill"
+      :size="mergeConfig.size"
+      :max="mergeConfig.max"
+      :min="mergeConfig.min"
       @change="handleCheckedOptChange"
     >
       <component :is="'el-checkbox' + (mergeConfig.type === 'button' ? '-button' : '')"
         v-for="opt in dataSource"
         :key="opt[mergeConfig.itemValueField]"
         :label="opt[mergeConfig.itemValueField]"
+        :border="mergeConfig.border"
+        :size="mergeConfig.size"
         :class="mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
       >{{opt[mergeConfig.itemLabelField]}}</component>
     </el-checkbox-group>
@@ -135,6 +144,12 @@
           checkAll: false,
           arrangement: 'h', // 排列 可选值 [v | h]
           type: 'checkbox', // 显示类型，可选值：[checkbox | button]
+          size: 'mini',
+          textColor: '#ffffff',
+          fill: '#409EFF',
+          border: false,
+          max: undefined,
+          min: undefined,
           itemValueField: 'value', // 值字段
           itemLabelField: 'label', // 显示字段
           enumSource: [], // 可选项，默认值[{label: '是'}]

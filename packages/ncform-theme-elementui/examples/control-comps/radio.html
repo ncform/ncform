@@ -60,6 +60,7 @@
       }
 
       Mock.mock(/getItems/, function(options) {
+        console.log('getItems', options)
         return { result: [{ id: 1, label: 'iphone' }, { id: 2, label: 'xiaomi' }, { id: 3, label: 'oppo' }] };
       });
 
@@ -170,7 +171,10 @@
                 type: 'boolean',
                 ui: {
                   widgetConfig: {
-                    type: 'button'
+                    type: 'button',
+                    size: 'medium',
+                    textColor: '#409EFF',
+                    fill: '#E6A23C'
                   }
                 }
               }
@@ -180,6 +184,17 @@
                 layout: 'h'
               }
             }
+          },
+          detail: {
+            cn: `
+size: 单选框组尺寸，仅对按钮形式的 Radio 或带有边框的 Radio 有效
+textColor: 按钮形式的 Radio 激活时的文本颜色
+fill: 按钮形式的 Radio 激活时的填充色和边框色
+            `,
+            en: `
+size: the size of radio buttons or bordered radios
+textColor: font color when button is active
+fill: border and background color when button is active`
           }
         },
         {
@@ -195,11 +210,18 @@
                 ui: {
                   widget: 'radio',
                   widgetConfig: {
-                    enumSource: [{ value: 1, label: 'orange' }, { value: 2, label: 'red' }, { value: 3, label: 'blue' }]
+                    enumSource: [{ value: 1, label: 'orange' }, { value: 2, label: 'red' }, { value: 3, label: 'blue' }],
+                    border: true
                   }
                 }
               }
             }
+          },
+          detail: {
+            cn: `
+border: 是否显示边框`,
+            en: `
+border: whether to add a border around Radio`
           }
         },
         {
@@ -219,7 +241,8 @@
                     itemLabelField: 'label', // 显示字段
                     enumSourceRemote: {
                       remoteUrl: '/api/radio/getItems', // 如果是远程访问，则填写该url
-                      resField: 'result'
+                      resField: 'result',
+                      headers: { token: 'token-xxx'}  // 自定义添加头信息
                     }
                   }
                 }
@@ -235,6 +258,8 @@ itemLabelField: 数据源的每一项显示的标签的字段，例子中就是l
 remoteUrl: 远程接口url
 
 resField: 数据源读取返回数据的哪个字段，如例子返回{result: [{ id: 1, label: "iphone" }, ...]}，则填写result
+
+headers: 自定义头信息,比如token
         `,
             en: `
 itemValueField: The field of the value displayed by each item of the data source, in the example is "id"
@@ -244,6 +269,8 @@ itemLabelField: The field of the label displayed for each item of the data sourc
 remoteUrl: remote api url
 
 resField: Which field of the response data as the data source, as the example returns {result: [{ id: 1, label: "iphone" }, ...]}, then fill in "result"
+
+headers: Custom header information
          `
           }
         },

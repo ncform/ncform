@@ -61,7 +61,14 @@
 
       Mock.mock(/getMoney/, function(options) {
         let params = url('?', options.url) || {};
-        let result = [{ id: 1, name: '1 yuan' }, { id: 2, name: '2 yuan' }];
+        let result = [{ id: 1, name: '1 yuan' },
+          { id: 2, name: '2 yuan', disabled: true },
+          { id: 3, name: '3 yuan' },
+          { id: 4, name: '4 yuan' },
+          { id: 5, name: '5 yuan' },
+          { id: 6, name: '6 yuan' },
+          { id: 7, name: '7 yuan' },
+          { id: 8, name: '8 yuan' }];
         return result.filter(item => !params.keyword || item.name.indexOf(params.keyword) >= 0);
       });
 
@@ -200,11 +207,16 @@
                   widget: 'select',
                   widgetConfig: {
                     multiple: true,
+                    collapseTags: true,
                     enumSource: [{ value: 1, label: 'option1' }, { value: 2, label: 'option2' }, { value: 3, label: 'option3' }]
                   }
                 }
               }
             }
+          },
+          detail: {
+            cn: `collapseTags: 多选时是否将选中值按文字的形式展示, 默认false`,
+            en: 'collapseTags: whether to collapse tags to a text when multiple selecting'
           }
         },
         {
@@ -284,12 +296,17 @@
                   widgetConfig: {
                     itemLabelField: 'name', // 项数据表示label的字段
                     itemValueField: 'id', // 项数据表示value的字段
+                    filterLocal: false,
+                    filterable: true,
+                    multiple: true,
+                    multipleLimit: 3,
                     enumSourceRemote: {
                       // 远程数据源
                       remoteUrl: '/api/test/getMoney', // 如果是远程访问，则填写该url
                       paramName: 'keyword', // 请求参数名，默认是keyword
                       otherParams: {}, // 其它请求的参数，支持字符串表达式
                       resField: '', // 响应结果的字段
+                      headers: {token: 'token-xxx'},
                       selectFirstItem: true
                     }
                   }
@@ -310,6 +327,10 @@
       otherParams: 其它请求参数，值支持 dx表达式 。如{countryId: 'dx: {{$root.countryId}}'}
 
       resField: 数据源读取返回数据的哪个字段，如例子返回[{ id: 1, name: '1元' }, ...]，则填写空字符串
+      
+      headers: 根据需要添加自定义header
+      
+      multipleLimit: 多选时用户最多可以选择的项目数，为 0 则不限制
 
       selectFirstItem: 默认选中第一项， 默认值是false
               `,
