@@ -29,7 +29,7 @@ module.exports = {
 
     window.__$ncform.__ncformRegularValidation = new RegularValidation();
 
-    window.__$ncform.lang = (options.lang || window.__$ncform.lang || navigator.browserLanguage || navigator.language).replace(/-/, '_').toLowerCase();
+    window.__$ncform.lang = (typeof options.lang === 'object' && options.lang !== null && typeof options.lang.t === 'function') ? options.lang : (options.lang || window.__$ncform.lang || navigator.browserLanguage || navigator.language).replace(/-/, '_').toLowerCase();
 
     // 注册组件
     _map(

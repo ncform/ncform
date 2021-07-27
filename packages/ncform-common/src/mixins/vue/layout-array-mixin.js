@@ -245,7 +245,12 @@ export default {
     },
 
     $nclang(key, data) {
-      return Object.prototype.toString.call(data) !== "[object Object]" ? this.$data.i18n[key] : _template(this.$data.i18n[key])(data);
+        if (typeof this.$options.lang === 'object' && this.$options.lang !== null && typeof this.$options.lang.t === 'function') {
+            // Lang is a vue18n compatible object
+            return Object.prototype.toString.call(data) !== "[object Object]" ? this.$options.lang.t('ncform.' + key) : _template(this.$options.lang.t('ncform.' + key))(data);
+        } else {
+            return Object.prototype.toString.call(data) !== "[object Object]" ? this.$data.i18n[key] : _template(this.$data.i18n[key])(data);
+        }   
     }
   }
 };

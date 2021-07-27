@@ -17,7 +17,7 @@
               {{_analyzeVal(fieldSchema.ui.label)}}
 
               <!--  提示信息 -->
-              <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+              <a v-if="fieldSchema.ui.help.show === true" :title="_analyzeVal(fieldSchema.ui.help.content)" href="#"><span :class="fieldSchema.ui.help.iconCls">{{_analyzeVal(fieldSchema.ui.help.text)}}</span></a>
             </label>
 
             <slot :name="field"></slot>
@@ -44,7 +44,7 @@
             {{_analyzeVal(fieldSchema.ui.label)}}
 
             <!--  提示信息 -->
-            <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+            <a v-if="fieldSchema.ui.help.show === true" :title="_analyzeVal(fieldSchema.ui.help.content)" href="#"><span :class="fieldSchema.ui.help.iconCls">{{_analyzeVal(fieldSchema.ui.help.text)}}</span></a>
             :
           </label>
           <div :style="{'margin-left': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}" :class="{'col-md-9': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace)}">

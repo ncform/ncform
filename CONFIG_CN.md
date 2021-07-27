@@ -40,9 +40,9 @@
         hidden: false, // 是否隐藏【支持dx表达式】
         help: { // 帮助信息
           show: true, // 是否显示。默认不显示
-          content: '', // 帮助具体内容
+          content: '', // 帮助具体内容【支持dx表达式】 
           iconCls: '', // 帮助图标样式名
-          text: '' // 帮助文本
+          text: '' // 帮助文本【支持dx表达式】
         },
         itemClass: '', // 表单项样式名
         preview: { // 预览
@@ -77,10 +77,10 @@
         // for Any Instance Type
         required: {
           value: true, // 规则配置值
-          errMsg: 'it is required!', // 错误提示信息
+          errMsg: 'it is required!', // 错误提示信息【支持dx表达式】
           options: { // 可选项
             delay: 300, // 延迟验证的时间（毫秒）
-            delayMsg: '异步验证中..' // 延迟验证时的提示
+            delayMsg: '异步验证中..' // 延迟验证时的提示【支持dx表达式】
           }
         },
         number, // value:boolean

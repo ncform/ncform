@@ -20,7 +20,7 @@
 
             {{_analyzeVal(renderSchema.ui.label)}}<!--  标签信息 -->
 
-            <a v-if="renderSchema.ui.help.show === true" :title="renderSchema.ui.help.content" href="#"><span :class="renderSchema.ui.help.iconCls">{{renderSchema.ui.help.text}}</span></a>
+            <a v-if="renderSchema.ui.help.show === true" :title="_analyzeVal(renderSchema.ui.help.content)" href="#"><span :class="renderSchema.ui.help.iconCls">{{_analyzeVal(renderSchema.ui.help.text)}}</span></a>
 
             <!-- 说明信息 -->
             <small v-if="renderSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(renderSchema.ui.description)">

@@ -13,8 +13,8 @@
           {{_analyzeVal(dataItem.__dataSchema.ui.label, idx) + (mergeConfig.autoIdxToLabel ? ' ' + (idx + 1) : '')}}
           <!-- 提示信息 -->
           <el-tooltip class="item" effect="dark" placement="right-start">
-            <div slot="content" v-html="dataItem.__dataSchema.ui.help.content"></div>
-            <a class="help" v-if="dataItem.__dataSchema.ui.help.show === true" href="#"><span :class="dataItem.__dataSchema.ui.help.iconCls">{{dataItem.__dataSchema.ui.help.text}}</span></a>
+            <div slot="content" v-html="_analyzeVal(dataItem.__dataSchema.ui.help.content)"></div>
+            <a class="help" v-if="dataItem.__dataSchema.ui.help.show === true" href="#"><span :class="dataItem.__dataSchema.ui.help.iconCls">{{_analyzeVal(dataItem.__dataSchema.ui.help.text)}}</span></a>
           </el-tooltip>
         </span>
 

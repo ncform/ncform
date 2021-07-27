@@ -177,6 +177,8 @@ You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) pro
 
 - Extended friendliness: Form components and validation rules can be flexible extended and provide tools to simplify extension work
 
+- vueI18n compatible: ncform can use a Vue18N compatible object to resolve strings. 
+
 ## Documents
 
 - [ncform config / props / api / event](./CONFIG.md)
@@ -184,6 +186,8 @@ You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) pro
 - Standard Components [Preview Version](https://ncform.github.io/ncform/ncform-theme-elementui/index.html) | [Text Version](./STD-COMP.md)
 
 - [Custom Form Controls And Validation Rules](./EXT-DOC.md)
+
+- [I18N](./I18N.md)
 
 ## Solve Pain Points
 

@@ -39,8 +39,8 @@
         hidden: false, // Whether to hide [support dx expression]
         help: { // Help information
           show: true, // Whether to display, default is false
-          content: '', // Help detail information
-          iconCls: '', // Help icon class name
+          content: '', // Help detail information [support dx expression]
+          iconCls: '', // Help icon class name [support dx expression]
           text: '' // Help text
         },
         itemClass: '', // The form item class name
@@ -76,10 +76,10 @@
         // for Any Instance Type
         required: {
           value: true, // The value passed to the validation rule
-          errMsg: 'it is required!', // Error message
+          errMsg: 'it is required!', // Error message [support dx expression]
           options: { // Rule options
             delay: 300, // Delayed verification time (ms)
-            delayMsg: 'Checking...' // Prompt for delayed verification
+            delayMsg: 'Checking...' // Prompt for delayed verification [support dx expression]
           }
         },
         number, // value:boolean
