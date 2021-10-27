@@ -157,7 +157,8 @@ export default {
           __dataSchema,
           true
         );
-        this.$set(this.schema.value, idx, { __dataSchema });
+        // this.$set(this.schema.value, idx, { __dataSchema });
+        this.$set(this.schema.value[idx], '__dataSchema', __dataSchema);
       }
 
       if (!this.schema.value[idx].__dataSchema.__id) {
