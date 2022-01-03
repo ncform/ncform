@@ -1,25 +1,23 @@
-import ncformCommon from "@ncform/ncform-common";
+import { ncformUtils, ValidationRule} from '@ncform/ncform-common'
 
-const { notEmptyVal, getValType } = ncformCommon.ncformUtils;
-const { ValidationRule } = ncformCommon;
+const { notEmptyVal, getValType } = ncformUtils
 
 class MaxItemsRule extends ValidationRule {
-  constructor(props) {
-    super(props);
-    this.name = "maxItems";
-    this.defaultErrMsg = "maxItems validate error";
+  constructor (props) {
+    super(props)
+    this.name = 'maxItems'
+    this.defaultErrMsg = 'maxItems validate error'
   }
 
-  validateLogic(val, ruleVal) {
-    if (!notEmptyVal(ruleVal)) return true;
+  validateLogic (val, ruleVal) {
+    if (!notEmptyVal(ruleVal)) return true
     if (
-      getValType(val) !== "array" ||
-      getValType(ruleVal) !== "number" ||
+      getValType(val) !== 'array' ||
+      getValType(ruleVal) !== 'number' ||
       ruleVal < 0
-    )
-      return true;
-    return val.length <= ruleVal;
+    ) { return true }
+    return val.length <= ruleVal
   }
 }
 
-module.exports = MaxItemsRule;
+export default MaxItemsRule

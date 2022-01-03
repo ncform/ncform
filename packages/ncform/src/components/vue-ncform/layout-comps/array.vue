@@ -22,7 +22,7 @@
         <ncform-object v-show="mergeConfig.disableItemCollapse || dataItem.__dataSchema._expand" :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :config="dataItem.__dataSchema.ui.widgetConfig" :global-const="globalConst" :show-legend="false">
 
           <!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
-          <template v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})" :slot="fieldName">
+          <template v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})" v-slot:[fieldName]>
               <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
           </template>
 
@@ -59,58 +59,56 @@
 </style>
 
 <script>
+import { ncformMixins } from '@ncform/ncform-common'
 
-  import ncformCommon from '@ncform/ncform-common';
+const { layoutArrayMixin } = ncformMixins.vue
 
-  const layoutArrayMixin = ncformCommon.mixins.vue.layoutArrayMixin;
+export default {
 
-  export default {
+  mixins: [layoutArrayMixin],
 
-    mixins: [layoutArrayMixin],
+  i18nData: {
+    en: {
+      add: 'Add',
+      delAll: 'Delete All',
+      delItemTips: 'Are you sure to delete this item?',
+      delAllTips: 'Are you sure to delete all?'
+    },
+    zh_cn: {
+      add: '增加',
+      delAll: '删除全部',
+      delItemTips: '确定要删除该项吗？',
+      delAllTips: '确定要删除全部吗？'
+    }
+  },
 
-    i18nData: {
-      en: {
-        add: 'Add',
-        delAll: 'Delete All',
-        delItemTips: 'Are you sure to delete this item?',
-        delAllTips: 'Are you sure to delete all?'
-      },
-      zh_cn: {
-        add: '增加',
-        delAll: '删除全部',
-        delItemTips: '确定要删除该项吗？',
-        delAllTips: '确定要删除全部吗？'
+  created () {
+    this._supportItemsCollapse()
+  },
+
+  methods: {
+    collapseItem (dataSchema) {
+      dataSchema._expand = !dataSchema._expand
+    },
+
+    _supportItemsCollapse () {
+      if (!this.mergeConfig.disableItemCollapse) {
+        this.schema.value.forEach(dataItem => {
+          if (dataItem.__dataSchema && dataItem.__dataSchema._expand === undefined) { dataItem.__dataSchema._expand = !this.mergeConfig.itemCollapse }
+        })
       }
-    },
+    }
+  },
 
-    created() {
-      this._supportItemsCollapse();
-    },
-
-    methods: {
-      collapseItem(dataSchema) {
-        dataSchema._expand = !dataSchema._expand;
-      },
-
-      _supportItemsCollapse() {
-        if (!this.mergeConfig.disableItemCollapse) {
-          this.schema.value.forEach(dataItem => {
-            if (dataItem.__dataSchema && dataItem.__dataSchema._expand === undefined)
-              this.$set(dataItem.__dataSchema, '_expand', !this.mergeConfig.itemCollapse);
-          })
-        }
-      }
-    },
-
-    watch: {
-      'schema.value.length': {
-        handler(newVal, oldVal) {
-          if (newVal > oldVal) { // add item
-            this._supportItemsCollapse();
-          }
+  watch: {
+    'schema.value.length': {
+      handler (newVal, oldVal) {
+        if (newVal > oldVal) { // add item
+          this._supportItemsCollapse()
         }
       }
     }
-
   }
+
+}
 </script>

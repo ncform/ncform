@@ -1,7 +1,7 @@
-import input from "./input.vue";
+import input from './input.vue'
 // Don't touch me - import
 
-module.exports = {
+export default {
   input
   // Don't touch me - exports
-};
+}

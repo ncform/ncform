@@ -4,18 +4,16 @@
 
     <!-- object 类型 -->
     <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig">
-
-      <template v-for="(fieldSchema, fieldName) in schema.properties" :slot="fieldName">
-        <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :key="fieldName" :global-config="globalConfig" :idx-chain="idxChain" :complete-schema="completeSchema" :paths="paths ? paths + '.' + fieldName : fieldName" :form-name="formName"></form-item>
+      <template v-for="(fieldSchema, fieldName) in schema.properties" :key="fieldName" v-slot:[fieldName]>
+        <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :global-config="globalConfig" :idx-chain="idxChain" :complete-schema="completeSchema" :paths="paths ? paths + '.' + fieldName : fieldName" :form-name="formName"></form-item>
       </template>
-
     </component>
 
     <!-- array 类型 -->
     <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig" class="__ncform-control">
 
-      <template v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})" :slot="fieldName" slot-scope="props">
-        <form-item :schema="props.schema" :key="fieldName" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths + '[' + props.idx + ']' + (fieldName === '__notObjItem' ? '' : `.${fieldName}`)" :form-name="formName"></form-item>
+      <template v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})" :key="fieldName" v-slot:[fieldName]="props">
+        <form-item :schema="props.schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths + '[' + props.idx + ']' + (fieldName === '__notObjItem' ? '' : `.${fieldName}`)" :form-name="formName"></form-item>
       </template>
 
     </component>
@@ -103,24 +101,22 @@
 </style>
 
 <script>
-import "./layout-comps";
-import "./control-comps";
-import ncformCommon from '@ncform/ncform-common';
-import _get from "lodash-es/get";
-import _isArray from "lodash-es/isArray";
-
-const ncformUtils = ncformCommon.ncformUtils;
+import './layout-comps'
+import './control-comps'
+import { ncformUtils } from '@ncform/ncform-common'
+import _get from 'lodash-es/get'
+import _isArray from 'lodash-es/isArray'
 
 export default {
-  name: "form-item", // 声明name可以嵌套自身
+  name: 'form-item', // 声明name可以嵌套自身
 
   _init4valueTemplate: true,
 
   props: {
     schema: {
       type: Object,
-      default() {
-        return {};
+      default () {
+        return {}
       }
     },
     globalConfig: {
@@ -148,34 +144,33 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       _id: Math.random()
         .toString(36)
         .substring(2),
       // 用于保存控件旧值
-      itemValue: null //this.schema.value
-    };
+      itemValue: null // this.schema.value
+    }
   },
 
   computed: {
-    valueTemplate() {
-
-      if (!this.schema.valueTemplate) return undefined;
+    valueTemplate () {
+      if (!this.schema.valueTemplate) return undefined
 
       // Put it here to let the dx expression in valueTemplate being watched
-      let result = ncformUtils.smartAnalyzeVal(this.schema.valueTemplate, {
+      const result = ncformUtils.smartAnalyzeVal(this.schema.valueTemplate, {
         idxChain: this.idxChain,
         data: {
           rootData: this.formData,
           tempData: this.tempData,
           constData: this.globalConfig.constants
         }
-      });
+      })
 
-      return result;
+      return result
     },
-    htmlTypeVal() {
+    htmlTypeVal () {
       return ncformUtils.smartAnalyzeVal(this.schema.value, {
         idxChain: this.idxChain,
         data: {
@@ -183,7 +178,7 @@ export default {
           tempData: this.tempData,
           constData: this.globalConfig.constants
         }
-      });
+      })
     }
   },
 
@@ -192,8 +187,8 @@ export default {
 
     isNormalArrSchema: ncformUtils.isNormalArrSchema,
 
-    getPreviewVal(configVal, modelVal) {
-      if (!configVal) return modelVal;
+    getPreviewVal (configVal, modelVal) {
+      if (!configVal) return modelVal
       return ncformUtils.smartAnalyzeVal(configVal, {
         idxChain: this.idxChain,
         data: {
@@ -202,33 +197,33 @@ export default {
           constData: this.globalConfig.constants,
           selfData: modelVal
         }
-      });
+      })
     },
 
-    clearComponentValue() {
-      this.schema.value = "";
+    clearComponentValue () {
+      this.schema.value = ''
     },
 
     // 校验其它指定字段的值
-    _validOtherField(fieldPath, idxChain, ruleNames) {
-      let val = _get(this.formData, fieldPath.replace("[i]", `[${idxChain}]`));
-      let schema = ncformUtils.getSchemaByPath(this.completeSchema, fieldPath, idxChain);
+    _validOtherField (fieldPath, idxChain, ruleNames) {
+      const val = _get(this.formData, fieldPath.replace('[i]', `[${idxChain}]`))
+      const schema = ncformUtils.getSchemaByPath(this.completeSchema, fieldPath, idxChain)
       if (schema === undefined) {
         // 取不到schema说明传入的fieldPath或idxChain无效
-        return null;
+        return null
       }
       if (!schema.__validationResult) {
         // 如果之前没有进行过校验行为，则跳过
-        return true;
+        return true
       }
 
-      let rules = {};
+      const rules = {}
 
       Object.keys(schema.rules).forEach(ruleKey => {
         if (ruleNames.indexOf(ruleKey) >= 0) {
-          rules[ruleKey] = schema.rules[ruleKey];
+          rules[ruleKey] = schema.rules[ruleKey]
         }
-      });
+      })
 
       window.__$ncform.__ncformRegularValidation
         .validate(val, rules, {
@@ -238,24 +233,24 @@ export default {
           globalConfig: this.globalConfig
         })
         .then(result => {
-          this.$set(schema, "__validationResult", result);
-        });
+          schema.__validationResult = result
+        })
     }
   },
 
   watch: {
     valueTemplate: {
-      handler: function(newVal, oldVal) {
+      handler: function (newVal, oldVal) {
         if (newVal !== undefined) {
           if (oldVal === undefined || JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
             if (!(this.$options._init4valueTemplate && (_isArray(this.schema.value) ? this.schema.value.length > 0 : this.schema.value))) { // Prevent init value from being overwritten
-              this.schema.value = newVal;
+              this.schema.value = newVal
             }
             if (this.$options._init4valueTemplate) {
               // User nextTick will cause the init value to be incorrect when field item in list
               // so here use setTimeout instead
               setTimeout(() => {
-                this.$options._init4valueTemplate = false;
+                this.$options._init4valueTemplate = false
               }, 10)
             }
           }
@@ -264,22 +259,22 @@ export default {
       immediate: true
     },
     'schema.value': {
-      handler: function() {
+      handler: function () {
         const newVal = this.schema
-        let changed = false;
+        let changed = false
         if (ncformUtils.isNormalArrSchema(newVal)) {
-          this.$data.itemValue = this.$data.itemValue || [];
+          this.$data.itemValue = this.$data.itemValue || []
           if (newVal.value.length !== this.$data.itemValue.length) {
-            changed = true;
+            changed = true
           }
         } else if (newVal.value !== this.$data.itemValue) {
-          changed = true;
+          changed = true
         }
 
         // 对比控件改变前后的值，判断是否需要对其进行校验。
         if (changed) {
           if (!ncformUtils.isNormalObjSchema(newVal) && !ncformUtils.isNormalArrSchema(newVal)) { // 叶子结点
-            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
+            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName]
             formVM.$emit('change', {
               paths: this.paths,
               itemValue: this.schema.value,
@@ -287,7 +282,7 @@ export default {
               itemOldValue: this.$data.itemValue
             })
           } else if (ncformUtils.isNormalArrSchema(newVal)) {
-            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName];
+            const formVM = window.__$ncform.__ncFormsGlobalList[this.formName]
             formVM.$emit('change', {
               paths: this.paths,
               itemValue: ncformUtils.getModelFromSchema(this.schema),
@@ -297,9 +292,9 @@ export default {
           }
 
           if (ncformUtils.isNormalArrSchema(newVal)) {
-            this.$data.itemValue = ncformUtils.getModelFromSchema(newVal);
+            this.$data.itemValue = ncformUtils.getModelFromSchema(newVal)
           } else {
-            this.$data.itemValue = newVal.value;
+            this.$data.itemValue = newVal.value
           }
 
           window.__$ncform.__ncformRegularValidation
@@ -315,14 +310,14 @@ export default {
               this.$data._id
             )
             .then(result => {
-              const oldValidationResult = this.schema.__validationResult;
-              if (oldValidationResult && oldValidationResult.timeStamp && result.timeStamp < oldValidationResult.timeStamp) return;
-              this.$set(this.schema, "__validationResult", result);
+              const oldValidationResult = this.schema.__validationResult
+              if (oldValidationResult && oldValidationResult.timeStamp && result.timeStamp < oldValidationResult.timeStamp) return
+              this.schema.__validationResult = result
 
               if (result.result && result.linkItems) {
                 // 如果校验成功，并且有linkItems，则校验关联item的指定规则
                 result.linkItems.forEach(item => {
-                  let val = _get(
+                  const val = _get(
                     this.formData,
                     ncformUtils.smartAnalyzeVal(item.fieldPath, {
                       idxChain: this.idxChain,
@@ -332,14 +327,14 @@ export default {
                         constData: this.globalConfig.constants
                       }
                     })
-                  );
-                  let schema = ncformUtils.getSchemaByPath(this.completeSchema, item.fieldPath, this.idxChain);
-                  let rules = {
+                  )
+                  const schema = ncformUtils.getSchemaByPath(this.completeSchema, item.fieldPath, this.idxChain)
+                  const rules = {
                     customRule: [schema.rules.customRule[item.customRuleIdx]]
-                  };
+                  }
 
                   // 跟关联项当前的验证结果做比较，如果相同才进行验证操作，不要冲了原有的验证结果
-                  if (_get(schema, "__validationResult.errMsg") && _get(schema, "__validationResult.errMsg") === _get(rules, "customRule[0].errMsg")) {
+                  if (_get(schema, '__validationResult.errMsg') && _get(schema, '__validationResult.errMsg') === _get(rules, 'customRule[0].errMsg')) {
                     window.__$ncform.__ncformRegularValidation
                       .validate(val, rules, {
                         formData: this.formData,
@@ -348,36 +343,36 @@ export default {
                         globalConfig: this.globalConfig
                       })
                       .then(result => {
-                        this.$set(schema, "__validationResult", result);
-                      });
+                        schema.__validationResult = result
+                      })
                   }
-                });
+                })
               }
-            });
+            })
 
           // 触发关联字段的校验
-          let linkFields = this.schema.ui.linkFields;
+          const linkFields = this.schema.ui.linkFields
           if (linkFields && linkFields.length > 0) {
             linkFields.forEach(item => {
-              let returnRes = this._validOtherField(item.fieldPath, this.idxChain, item.rules);
+              const returnRes = this._validOtherField(item.fieldPath, this.idxChain, item.rules)
               if (returnRes === null) {
-                if (item.fieldPath.indexOf("[i]") >= 0) {
+                if (item.fieldPath.indexOf('[i]') >= 0) {
                   // TODO: 这里暂时仅支持一层的[i]
-                  let arrField = item.fieldPath.match(/(.*?)\[i\]/)[1];
-                  let arrSchema = ncformUtils.getSchemaByPath(this.completeSchema, arrField);
-                  let arrItemTotal = arrSchema.value.length;
+                  const arrField = item.fieldPath.match(/(.*?)\[i\]/)[1]
+                  const arrSchema = ncformUtils.getSchemaByPath(this.completeSchema, arrField)
+                  const arrItemTotal = arrSchema.value.length
                   // 校验它所有子项指定的字段
                   for (let i = 0; i < arrItemTotal; i++) {
-                    this._validOtherField(item.fieldPath, i + "", item.rules);
+                    this._validOtherField(item.fieldPath, i + '', item.rules)
                   }
                 }
               }
-            });
+            })
           }
         }
       },
       deep: true
     }
   }
-};
+}
 </script>

@@ -379,11 +379,9 @@ const ncformUtils = {
    * 3. 字符串且以dx:开头的，则会进行处理成可执行的脚本并执行返回结果
    *    支持的规则：$root.age / $root.person[0].age / $root.person[i].age (i表示取某数组中的某一项，由idxChain来指定具体项) / $root.person[e].age (e表示取该数组的每一项，返回是个数组值。注意：当使用e时，只能使用一次，并且不能与i搭配)
    */
-  smartAnalyze(val, { idxChain = "", data = [], expPrefix = "dx:" } = {}) {
+  smartAnalyze(val, { idxChain = "", data = [], expPrefix = "dx:" } = {}, __get = _get, __map = _map) {
     const valType = typeof val;
     let result;
-    const __get = _get;
-    const __map = _map;
 
     data = data.map((
       dataItem // 套多一层是为了支持原始类型，如string, number
@@ -593,4 +591,3 @@ const ncformUtils = {
 };
 
 export default ncformUtils;
-module.exports = ncformUtils;

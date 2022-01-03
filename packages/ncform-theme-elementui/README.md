@@ -1,35 +1,19 @@
-# ncform theme element-ui
+# ncform
 
-![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
-![element-ui 2.x](https://img.shields.io/badge/element-2.x-blue.svg)
-
-ncform theme widgets -> element-ui
-
-# How to dev
-
-Step 1: prepare the dependency nc libraries
-```sh
-cd ../../ && npm run build
+## Project setup
+```
+yarn install
 ```
 
-Step 2: start development
-```sh
-npm run dev
+### Compiles and hot-reloads for development
+```
+yarn serve
 ```
 
-[Optional] Use the following command to watch and depend on the latest code for `ncform-common`
+### Compiles and minifies for production
 ```
-cd ../ncform-common
-npm run watch-build
-```
-
-[Optional] Use the following command to watch and depend on the latest code for `ncform`
-```
-cd ../ncform
-npm run watch-build
+yarn build
 ```
 
-
-
-
-
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

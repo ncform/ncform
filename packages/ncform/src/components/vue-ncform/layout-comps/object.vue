@@ -9,7 +9,6 @@
           :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
           :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
           class="form-group">
-        <template>
             <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}">
               <!-- 必填标识 -->
               <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
@@ -26,7 +25,6 @@
             <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description)">
             </small>
 
-        </template>
       </div>
     </div>
 
@@ -94,24 +92,22 @@
 </style>
 
 <script>
+import { ncformMixins } from '@ncform/ncform-common'
 
-  import ncformCommon from '@ncform/ncform-common';
+const { layoutObjectMixin } = ncformMixins.vue
 
-  const layoutObjectMixin = ncformCommon.mixins.vue.layoutObjectMixin;
-
-
-  export default {
-    props: {
-      showLegend: {
-        type: Boolean,
-        default: true
-      },
-    },
-    methods: {
-      legendEnable(fieldSchema) {
-        return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
-      }
-    },
-    mixins: [layoutObjectMixin]
-  }
+export default {
+  props: {
+    showLegend: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    legendEnable (fieldSchema) {
+      return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend
+    }
+  },
+  mixins: [layoutObjectMixin]
+}
 </script>

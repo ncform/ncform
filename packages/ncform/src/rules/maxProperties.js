@@ -1,25 +1,23 @@
-import ncformCommon from "@ncform/ncform-common";
+import { ncformUtils, ValidationRule } from '@ncform/ncform-common'
 
-const { notEmptyVal, getValType } = ncformCommon.ncformUtils;
-const { ValidationRule } = ncformCommon;
+const { notEmptyVal } = ncformUtils
 
 class MaxPropertiesRule extends ValidationRule {
-  constructor(props) {
-    super(props);
-    this.name = "maxProperties";
-    this.defaultErrMsg = "maxProperties validate error";
+  constructor (props) {
+    super(props)
+    this.name = 'maxProperties'
+    this.defaultErrMsg = 'maxProperties validate error'
   }
 
-  validateLogic(val, ruleVal) {
-    if (!notEmptyVal(ruleVal)) return true;
+  validateLogic (val, ruleVal) {
+    if (!notEmptyVal(ruleVal)) return true
     if (
-      getValType(val) !== "object" ||
-      getValType(ruleVal) !== "number" ||
+      getValType(val) !== 'object' ||
+      getValType(ruleVal) !== 'number' ||
       ruleVal < 0
-    )
-      return true;
-    return Object.keys(val).length <= ruleVal;
+    ) { return true }
+    return Object.keys(val).length <= ruleVal
   }
 }
 
-module.exports = MaxPropertiesRule;
+export default MaxPropertiesRule

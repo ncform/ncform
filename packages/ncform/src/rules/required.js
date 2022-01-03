@@ -1,19 +1,18 @@
-import ncformCommon from "@ncform/ncform-common";
+import { ncformUtils, ValidationRule } from '@ncform/ncform-common'
 
-const { notEmptyVal } = ncformCommon.ncformUtils;
-const { ValidationRule } = ncformCommon;
+const { notEmptyVal } = ncformUtils
 
 class RequiredRule extends ValidationRule {
-  constructor(props) {
-    super(props);
-    this.name = "required";
-    this.defaultErrMsg = "is required";
+  constructor (props) {
+    super(props)
+    this.name = 'required'
+    this.defaultErrMsg = 'is required'
   }
 
-  validateLogic(val, ruleVal) {
-    if (!ruleVal) return true;
-    return notEmptyVal(val);
+  validateLogic (val, ruleVal) {
+    if (!ruleVal) return true
+    return notEmptyVal(val)
   }
 }
 
-module.exports = RequiredRule;
+export default RequiredRule

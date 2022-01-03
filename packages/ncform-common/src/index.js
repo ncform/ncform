@@ -1,21 +1,28 @@
 import ncformUtils from "./ncform-utils";
 import ValidationRule from "./validation-rule";
 
-import vueControlMixin from "./mixins/vue/control-mixin";
-import vueLayoutObjectMixin from "./mixins/vue/layout-object-mixin";
-import vueLayoutArrayMixin from "./mixins/vue/layout-array-mixin";
+import controlMixin from "./vue/control-mixin";
+import layoutObjectMixin from "./vue/layout-object-mixin";
+import layoutArrayMixin from "./vue/layout-array-mixin";
 
-const exportObj = {
+const ncformMixins = {
+  vue: {
+    controlMixin,
+    layoutObjectMixin,
+    layoutArrayMixin
+  }
+}
+
+const ncformCommon = {
   ncformUtils,
   ValidationRule,
-  mixins: {
-    vue: {
-      controlMixin: vueControlMixin,
-      layoutObjectMixin: vueLayoutObjectMixin,
-      layoutArrayMixin: vueLayoutArrayMixin
-    }
-  }
-};
+  mixins: ncformMixins,
+}
 
-export default exportObj;
-module.exports = exportObj;
+export {
+  ncformUtils,
+  ValidationRule,
+  ncformMixins
+}
+
+export default ncformCommon

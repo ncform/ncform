@@ -76,75 +76,72 @@
 
 <script>
 
-  import _map from 'lodash-es/map';
-  import ncformCommon from '@ncform/ncform-common';
+import _map from 'lodash-es/map'
+import { ncformUtils, ncformMixins } from '@ncform/ncform-common'
 
-  const ncformUtils = ncformCommon.ncformUtils;
-  const layoutArrayMixin = ncformCommon.mixins.vue.layoutArrayMixin;
+const { layoutArrayMixin } = ncformMixins.vue
 
-  export default {
+export default {
 
-    mixins: [layoutArrayMixin],
+  mixins: [layoutArrayMixin],
 
-    i18nData: {
-      en: {
-        action: 'Action',
-        add: 'Add',
-        delAll: 'Delete All',
-        delItemTips: 'Are you sure to delete this item?',
-        delAllTips: 'Are you sure to delete all?'
-      },
-      zh_cn: {
-        action: '操作',
-        add: '增加',
-        delAll: '删除全部',
-        delItemTips: '确定要删除该项吗？',
-        delAllTips: '确定要删除全部吗？'
-      }
+  i18nData: {
+    en: {
+      action: 'Action',
+      add: 'Add',
+      delAll: 'Delete All',
+      delItemTips: 'Are you sure to delete this item?',
+      delAllTips: 'Are you sure to delete all?'
     },
-
-    created() {
-
-      // 取得表头数据
-      if (ncformUtils.isNormalObjSchema(this.schema.items)) {
-        this.$data.renderSchemas = _map(this.schema.items.properties, (fieldSchema, fieldName) => {
-          return fieldSchema;
-        });
-      } else {
-        this.$data.renderSchemas = [this.schema.items];
-      }
-
-    },
-
-    data() {
-      return {
-        renderSchemas: []
-      }
-    },
-
-    methods: {
-      analyzeItemVal(val, idxChain) {
-        return ncformUtils.smartAnalyzeVal(val, { idxChain: idxChain + '', data: { rootData: this.formData, constData: this.globalConst } });
-      },
-
-      showRequiredFlag(requiredConfig) {
-        if (!requiredConfig) return false;
-
-        let requiredVal = requiredConfig;
-        if (requiredVal.value !== undefined) requiredVal = requiredConfig.value;
-
-        if (typeof requiredVal !== 'boolean') {
-          requiredVal = requiredVal.toString();
-          if (requiredVal.search(/^dx:.*\[i.*/) >= 0) { // Do not show when depending on the same line item
-            requiredVal = false;
-          } else {
-            requiredVal = this._analyzeVal(requiredVal);
-          }
-        }
-
-        return requiredVal;
-      }
+    zh_cn: {
+      action: '操作',
+      add: '增加',
+      delAll: '删除全部',
+      delItemTips: '确定要删除该项吗？',
+      delAllTips: '确定要删除全部吗？'
     }
+  },
 
+  created () {
+    // 取得表头数据
+    if (ncformUtils.isNormalObjSchema(this.schema.items)) {
+      this.$data.renderSchemas = _map(this.schema.items.properties, (fieldSchema, fieldName) => {
+        return fieldSchema
+      })
+    } else {
+      this.$data.renderSchemas = [this.schema.items]
+    }
+  },
+
+  data () {
+    return {
+      renderSchemas: []
+    }
+  },
+
+  methods: {
+    analyzeItemVal (val, idxChain) {
+      return ncformUtils.smartAnalyzeVal(val, { idxChain: idxChain + '', data: { rootData: this.formData, constData: this.globalConst } })
+    },
+
+    showRequiredFlag (requiredConfig) {
+      if (!requiredConfig) return false
+
+      let requiredVal = requiredConfig
+      if (requiredVal.value !== undefined) requiredVal = requiredConfig.value
+
+      if (typeof requiredVal !== 'boolean') {
+        requiredVal = requiredVal.toString()
+        if (requiredVal.search(/^dx:.*\[i.*/) >= 0) { // Do not show when depending on the same line item
+          requiredVal = false
+        } else {
+          requiredVal = this._analyzeVal(requiredVal)
+        }
+      }
+
+      return requiredVal
+    }
   }
+
+}
 </script>

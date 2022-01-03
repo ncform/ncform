@@ -63,4 +63,3 @@ class ValidationRule {
 }
 
 export default ValidationRule;
-module.exports = ValidationRule;

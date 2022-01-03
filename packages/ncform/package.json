@@ -1,80 +1,24 @@
 {
   "name": "@ncform/ncform",
-  "version": "1.7.9",
-  "description": "ncform, a very nice configuration generation way to develop form ( vue, json-schema, form, generator )",
-  "author": "daniel.xiao",
-  "main": "dist/vueNcform.min.js",
-  "keywords": [
-    "vue",
-    "json",
-    "form",
-    "automatic",
-    "json-schema",
-    "ncform",
-    "generator",
-    "configuration"
-  ],
+  "version": "2.0.0",
+  "private": true,
+  "main": "dist/vueNcform.umd.js",
+  "module": "dist/vueNcform.es.js",
+  "style": "dist/index.css",
   "scripts": {
-    "dev": "gulp dev",
-    "build": "gulp build",
-    "release": "cross-env NODE_ENV=production gulp build",
-    "test": "mocha --recursive --require ./test/testHelper.js -t 5000",
-    "watch-build": "gulp watch-build"
+    "dev": "vite build --watch",
+    "build": "vite build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ncform/ncform.git"
+  "dependencies": {
+    "@ncform/ncform-common": "^2.0.0",
+    "lodash-es": "^4.17.21",
+    "vue": "^3.0.0",
+    "vue-scrollto": "^2.20.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.0.2",
-    "bootstrap": "^4.5.3",
-    "browser-sync": "^2.26.13",
-    "concat": "^1.0.0",
-    "cross-env": "^5.2.0",
-    "css-loader": "^0.23.1",
-    "csswring": "^4.0.0",
-    "eslint": "^5.15.2",
-    "eslint-loader": "^1.0.0",
-    "eslint-plugin-html": "^1.5.3",
-    "file-loader": "^0.8.5",
-    "gulp": "^4.0.0",
-    "gulp-jshint": "^2.1.0",
-    "gulp-notify": "^3.2.0",
-    "gulp-sequence": "^0.4.6",
-    "html-loader": "^0.5.1",
-    "jsdom": "^14.0.0",
-    "jsdom-global": "3.0.2",
-    "map-stream": "0.0.6",
-    "mocha": "^4.0.1",
-    "nock": "^10.0.1",
-    "node-libs-browser": "^1.0.0",
-    "node-sass": "^4.14.1",
-    "postcss-loader": "^0.8.0",
-    "postcss-sprites": "^4.0.0",
-    "power-assert": "^1.4.4",
-    "rimraf": "~2.5.0",
-    "sass-loader": "^6.0.6",
-    "source-map-loader": "^0.1.5",
-    "style-loader": "^0.13.0",
-    "url-loader": "^1.1.2",
-    "vue-hot-reload-api": "^2.0.6",
-    "vue-html-loader": "^1.1.0",
-    "vue-style-loader": "^1.0.0"
-  },
-  "license": "MIT",
-  "files": [
-    "dist",
-    "src"
-  ],
-  "dependencies": {
-    "@ncform/ncform-common": "^1.7.9",
-    "axios": "^0.21.1",
-    "extend": "^3.0.2",
-    "lodash-es": "^4.16.2",
-    "vue": "^2.1.8",
-    "vue-scrollto": "^2.17.1"
-  },
-  "publishConfig": {
-    "access": "public"
+    "@vitejs/plugin-vue": "^2.0.0",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "vite": "^2.7.2"
   }
 }
