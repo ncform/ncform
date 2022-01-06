@@ -1,7 +1,7 @@
 import extend from "extend";
 import axios from "axios";
 import _template from "lodash-es/template";
-import ncformUtils from "../ncform-utils";
+import ncformUtils from "../../ncform-utils";
 
 export default {
 

@@ -2,7 +2,7 @@ import _cloneDeep from "lodash-es/cloneDeep";
 import _template from "lodash-es/template";
 import _get from "lodash-es/get";
 import extend from "extend";
-import ncformUtils from "../ncform-utils";
+import ncformUtils from "../../ncform-utils";
 
 export default {
 

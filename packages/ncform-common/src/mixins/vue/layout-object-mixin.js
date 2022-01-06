@@ -1,5 +1,5 @@
 import extend from "extend";
-import ncformUtils from "../ncform-utils";
+import ncformUtils from "../../ncform-utils";
 
 export default {
 
