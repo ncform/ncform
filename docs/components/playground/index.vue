@@ -19,14 +19,16 @@
       </div>
     </el-col>
     <el-col :span="12">
-      <el-button type="success" @click="submit()">获取表单数据</el-button>
-      <ncform
-        v-if="formSchema"
-        :form-schema="formSchema"
-        form-name="playground-ncform"
-        v-model="formData"
-        @submit="submit()"
-      />
+      <el-button @click="submit()">获取表单数据</el-button>
+      <client-only>
+        <ncform
+          v-if="formSchema"
+          :form-schema="formSchema"
+          form-name="ncform-playground"
+          v-model="formData"
+          @submit="submit()"
+        />
+      </client-only>
     </el-col>
   </el-row>
 </template>
@@ -58,7 +60,7 @@ const handleSchemaSelect = (type) => {
 }
 
 const submit = () => {
-  ncformValidate('playground-ncform').then((data) => {
+  ncformValidate('ncform-playground').then((data) => {
     if (data.result) alert(JSON.stringify(formData.value, null, 2))
   })
 }

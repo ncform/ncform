@@ -22,7 +22,9 @@
     "start": "npm run docs:dev",
     "build": "lerna run build",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs"
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs",
+    "docs:deploy": "sh deploy.sh"
   },
   "devDependencies": {
     "element-plus": "^1.3.0-beta.1",
