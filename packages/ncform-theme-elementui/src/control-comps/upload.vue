@@ -23,11 +23,20 @@
     :headers="mergeConfig.headers"
   >
     <!-- 1. 可拖拽 -->
-    <template v-if="!readonly && mergeConfig.drag" slot="trigger">
-      <i class="el-icon-upload"></i>
-      <div class="el-upload__text" v-html="$nclang('uploadTips')"></div>
+    <template
+      v-if="!readonly && mergeConfig.drag"
+      #trigger
+    >
+      <i class="el-icon-upload" />
+      <div
+        class="el-upload__text"
+        v-html="$nclang('uploadTips')"
+      />
     </template>
-    <div v-if="mergeConfig.drag && disabled" class="disabled-mask"></div>
+    <div
+      v-if="mergeConfig.drag && disabled"
+      class="disabled-mask"
+    />
 
     <!-- 2 可拖拽，非自动上传 -->
     <el-button
@@ -37,7 +46,9 @@
       size="small"
       type="success"
       @click="submitUpload"
-    >{{$nclang('uploadServer')}}</el-button>
+    >
+      {{ $nclang('uploadServer') }}
+    </el-button>
 
     <!-- 3. 不可拖拽，自动上传-->
     <el-button
@@ -45,25 +56,30 @@
       :disabled="disabled"
       size="small"
       type="primary"
-    >{{$nclang('upload')}}</el-button>
+    >
+      {{ $nclang('upload') }}
+    </el-button>
 
     <!-- 4. 不可拖拽，非自动上传 -->
     <template v-if="!readonly && !mergeConfig.drag && !mergeConfig.autoUpload">
       <el-button
+        v-slot:trigger
         :disabled="disabled"
-        slot="trigger"
         size="small"
         type="primary"
-      >{{$nclang('chFile')}}</el-button>
+      >
+        {{ $nclang('chFile') }}
+      </el-button>
       <el-button
         :disabled="disabled"
         class="upload-btn"
         size="small"
         type="success"
         @click="submitUpload"
-      >{{$nclang('uploadServer')}}</el-button>
+      >
+        {{ $nclang('uploadServer') }}
+      </el-button>
     </template>
-
   </el-upload>
 </template>
 

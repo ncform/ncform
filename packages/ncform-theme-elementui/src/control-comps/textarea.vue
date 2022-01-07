@@ -1,15 +1,15 @@
 <template>
   <el-input
+    v-show="!hidden"
+    v-model="inputVal"
     :disabled="disabled"
     :readonly="readonly"
-    v-show="!hidden"
     :placeholder="placeholder"
     type="textarea"
-    v-model="inputVal"
     :rows="mergeConfig.rows"
     :autosize="mergeConfig.autoSize"
     @blur="onBlur"
-  ></el-input>
+  />
 </template>
 
 <style lang="scss" scoped>
@@ -24,10 +24,6 @@
   export default {
 
     mixins: [controlMixin],
-
-    created() {
-      this.$data.inputVal = this.$data.modelVal;
-    },
 
     props: {
       modelValue: {
@@ -49,6 +45,10 @@
       }
     },
 
+    computed: {
+      // disabled / readonly / hidden / placeholder 你可以直接使用这些变量来控制组件的行为
+    },
+
     watch: {
       inputVal(newVal, oldVal) {
         if ((!newVal && !oldVal) || this.mergeConfig.updateOn === 'blur') return;
@@ -56,8 +56,8 @@
       }
     },
 
-    computed: {
-      // disabled / readonly / hidden / placeholder 你可以直接使用这些变量来控制组件的行为
+    created() {
+      this.$data.inputVal = this.$data.modelVal;
     },
 
     methods: {

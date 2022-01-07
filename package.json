@@ -21,6 +21,7 @@
     "link": "lerna link",
     "start": "npm run docs:dev",
     "build": "lerna run build",
+    "lint": "eslint --ext .js,.vue packages/** --fix",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
@@ -28,6 +29,8 @@
   },
   "devDependencies": {
     "element-plus": "^1.3.0-beta.1",
+    "eslint": "^8.6.0",
+    "eslint-plugin-vue": "^8.2.0",
     "lerna": "^4.0.0",
     "sass": "^1.45.2",
     "vitepress": "^0.20.10"

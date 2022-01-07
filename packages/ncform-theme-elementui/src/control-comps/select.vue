@@ -1,8 +1,8 @@
 <template>
   <el-select
+    v-show="!hidden"
     v-model="modelVal"
     :placeholder="placeholder || $nclang('selectPls')"
-    v-show="!hidden"
     :disabled="disabled || readonly"
     :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
@@ -20,7 +20,11 @@
       :label="item[mergeConfig.itemLabelField]"
       :value="item[mergeConfig.itemValueField]"
     >
-      <component v-if="itemTemplate.template" :item="item" :is="itemTemplate"></component>
+      <component
+        :is="itemTemplate"
+        v-if="itemTemplate.template"
+        :item="item"
+      />
     </el-option>
   </el-select>
 </template>
@@ -52,14 +56,6 @@ export default {
       type: [String, Number, Boolean, Object, Array],
       default: ""
     }
-  },
-  created() {
-    if (typeof this.value === "boolean") {
-      this.$data.valueType = "boolean";
-      this.$data.modelVal = this.$data.modelVal ? 1 : 0;
-    }
-    this.$data.itemTemplate.template = this.mergeConfig.itemTemplate;
-    this._getDataSource();
   },
 
   data() {
@@ -106,6 +102,33 @@ export default {
     optionsData() {
       return (this.$data.isLocalSource && this.mergeConfig.enumSource.length > 0) ? this.mergeConfig.enumSource : this.$data.options;
     }
+  },
+
+  watch: {
+    //【使config支持字符串表达式】(2) watch在computed声明的属性，当发生变化时，执行相关的动作
+    "mergeConfig.enumSourceRemote.otherParams": {
+      handler: function(newVal, oldVal) {
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+          if (oldVal !== undefined) {
+            // 非第一次
+            if (Array.isArray(this.modelVal)) {
+              this.modelVal = [];
+            } else {
+              this.modelVal = null;
+            }
+          }
+          this.remoteMethod();
+        }
+      }
+    }
+  },
+  created() {
+    if (typeof this.value === "boolean") {
+      this.$data.valueType = "boolean";
+      this.$data.modelVal = this.$data.modelVal ? 1 : 0;
+    }
+    this.$data.itemTemplate.template = this.mergeConfig.itemTemplate;
+    this._getDataSource();
   },
 
   methods: {
@@ -185,25 +208,6 @@ export default {
         return newVal ? true : false;
       }
       return newVal;
-    }
-  },
-
-  watch: {
-    //【使config支持字符串表达式】(2) watch在computed声明的属性，当发生变化时，执行相关的动作
-    "mergeConfig.enumSourceRemote.otherParams": {
-      handler: function(newVal, oldVal) {
-        if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
-          if (oldVal !== undefined) {
-            // 非第一次
-            if (Array.isArray(this.modelVal)) {
-              this.modelVal = [];
-            } else {
-              this.modelVal = null;
-            }
-          }
-          this.remoteMethod();
-        }
-      }
     }
   }
 };

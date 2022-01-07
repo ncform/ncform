@@ -1,11 +1,26 @@
 <template>
-<div class="ncform">
-  <form v-if="!isSchemaChanging" novalidate :class="dataFormSchema.globalConfig.style.formCls">
-    <form-item :schema="dataFormSchema" :form-data="formData" :temp-data="tempData" :global-config="dataFormSchema.globalConfig" :complete-schema="dataFormSchema" :form-name="name"></form-item>
-    <!-- button这样处理是为了在Mac下的Safari能否正常使用回车键触发表单的submit事件 -->
-    <button @click.prevent="submit()" type="submit" style="position: absolute; left: -100px; visibility: hidden"></button>
-  </form>
-</div>
+  <div class="ncform">
+    <form
+      v-if="!isSchemaChanging"
+      novalidate
+      :class="dataFormSchema.globalConfig.style.formCls"
+    >
+      <form-item
+        :schema="dataFormSchema"
+        :form-data="formData"
+        :temp-data="tempData"
+        :global-config="dataFormSchema.globalConfig"
+        :complete-schema="dataFormSchema"
+        :form-name="name"
+      />
+      <!-- button这样处理是为了在Mac下的Safari能否正常使用回车键触发表单的submit事件 -->
+      <button
+        type="submit"
+        style="position: absolute; left: -100px; visibility: hidden"
+        @click.prevent="submit()"
+      />
+    </form>
+  </div>
 </template>
 
 <script>
@@ -16,6 +31,55 @@ import { ncformUtils } from '@ncform/ncform-common'
 import formItem from './form-item.vue'
 
 export default {
+
+  /* ====================== 引用组件 ====================== */
+
+  components: {
+    formItem
+  },
+
+  /* ====================== 数据绑定 ====================== */
+
+  props: {
+    formSchema: {
+      type: Object
+    },
+
+    formName: {
+      type: String,
+      default: '_ncformDefaultName'
+    },
+
+    modelValue: {
+      type: Object
+    },
+
+    isDirty: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  data () {
+    return {
+      name: this.formName,
+      dataFormSchema: {},
+      formData: {},
+      tempData: {},
+      isSchemaChanging: false // 利用该属性，当schema变化时，整个form表单重建，这样确保组件的生命周期跟预想的一致
+    }
+  },
+
+  watch: {
+    dataFormSchema: {
+      handler (newVal) {
+        this.$data.formData = ncformUtils.getModelFromSchema(newVal)
+        this.$options.isValueUpdateFromInner = true
+        this.$emit('update:modelValue', this.$data.formData)
+      },
+      deep: true
+    }
+  },
   /* ====================== 生命周期 ====================== */
   created () {
     // 在这里做一些跟DOM无关的初始化, 比如获取初始化数据
@@ -109,44 +173,6 @@ export default {
   unmounted () {
     // 在这里销毁无用的资源，比如setTimeout返回的值
     delete window.__$ncform.__ncFormsGlobalList[this.$data.name]
-  },
-
-  /* ====================== 引用组件 ====================== */
-
-  components: {
-    formItem
-  },
-
-  /* ====================== 数据绑定 ====================== */
-
-  props: {
-    formSchema: {
-      type: Object
-    },
-
-    formName: {
-      type: String,
-      default: '_ncformDefaultName'
-    },
-
-    modelValue: {
-      type: Object
-    },
-
-    isDirty: {
-      type: Boolean,
-      default: false
-    }
-  },
-
-  data () {
-    return {
-      name: this.formName,
-      dataFormSchema: {},
-      formData: {},
-      tempData: {},
-      isSchemaChanging: false // 利用该属性，当schema变化时，整个form表单重建，这样确保组件的生命周期跟预想的一致
-    }
   },
 
   /* ====================== 事件处理 ====================== */
@@ -319,17 +345,6 @@ export default {
     reset () {
       this.$options.isValueUpdateFromInner = false // 通过模拟外部赋值来达到重置的目的
       this.$emit('update:modelValue', this.$options.originFormVal)
-    }
-  },
-
-  watch: {
-    dataFormSchema: {
-      handler (newVal) {
-        this.$data.formData = ncformUtils.getModelFromSchema(newVal)
-        this.$options.isValueUpdateFromInner = true
-        this.$emit('update:modelValue', this.$data.formData)
-      },
-      deep: true
     }
   }
 }

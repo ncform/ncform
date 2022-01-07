@@ -3,80 +3,84 @@
     <!-- 没有自动补全 -->
     <el-input
       v-if="!mergeConfig.autocomplete"
+      v-show="!hidden"
+      v-model="inputVal"
       :size="mergeConfig.size"
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
-      v-show="!hidden"
       :clearable="mergeConfig.clearable"
       :type="mergeConfig.type === 'file' ? 'text' : mergeConfig.type"
       :prefix-icon="mergeConfig.prefixIcon"
       :suffix-icon="mergeConfig.suffixIcon"
       @blur="onBlur"
-      v-model="inputVal"
     >
       <template v-if="mergeConfig.type !== 'file' && mergeConfig.compound">
         <template
-          slot="prepend"
           v-if="mergeConfig.compound.prependLabel"
-        >{{mergeConfig.compound.prependLabel}}</template>
+          slot="prepend"
+        >
+          {{ mergeConfig.compound.prependLabel }}
+        </template>
         <template
-          slot="append"
           v-if="mergeConfig.compound.appendLabel"
-        >{{mergeConfig.compound.appendLabel}}</template>
+          slot="append"
+        >
+          {{ mergeConfig.compound.appendLabel }}
+        </template>
 
         <el-button
-          slot="prepend"
           v-if="mergeConfig.compound.prependIcon"
+          slot="prepend"
           :icon="mergeConfig.compound.prependIcon"
-        ></el-button>
+        />
         <el-button
-          slot="append"
           v-if="mergeConfig.compound.appendIcon"
+          slot="append"
           :icon="mergeConfig.compound.appendIcon"
-        ></el-button>
+        />
 
         <el-select
           v-if="mergeConfig.compound.prependSelect"
-          v-model="prependSelectVal"
           slot="prepend"
+          v-model="prependSelectVal"
           :placeholder="mergeConfig.compound.prependSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in prependSelectOptions"
+            :key="item[mergeConfig.compound.prependSelect.itemValueField]"
             :label="item[mergeConfig.compound.prependSelect.itemLabelField]"
             :value="item[mergeConfig.compound.prependSelect.itemValueField]"
-            :key="item[mergeConfig.compound.prependSelect.itemValueField]"
-          ></el-option>
+          />
         </el-select>
 
         <el-select
           v-if="mergeConfig.compound.appendSelect"
-          v-model="appendSelectVal"
           slot="append"
+          v-model="appendSelectVal"
           :placeholder="mergeConfig.compound.appendSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in appendSelectOptions"
+            :key="item[mergeConfig.compound.appendSelect.itemValueField]"
             :label="item[mergeConfig.compound.appendSelect.itemLabelField]"
             :value="item[mergeConfig.compound.appendSelect.itemValueField]"
-            :key="item[mergeConfig.compound.appendSelect.itemValueField]"
-          ></el-option>
+          />
         </el-select>
       </template>
 
       <!--上传类型-->
       <template v-else-if="mergeConfig.type === 'file' && mergeConfig.upload">
         <el-button
-          slot="append"
           v-if="mergeConfig.upload.uploadUrl"
+          slot="append"
           class="ncform-input-upload"
           @click="handleClickUpload"
         >
-          {{isUploading ? $nclang('uploading') : mergeConfig.upload.uploadText || $nclang('upload')}}
+          {{ isUploading ? $nclang('uploading') : mergeConfig.upload.uploadText || $nclang('upload') }}
           <input
-            type="file"
             ref="upload"
+            type="file"
             :accept="mergeConfig.upload.accept || ''"
             @change="handleFileChange"
           >
@@ -87,10 +91,11 @@
     <!-- 自动补全 -->
     <el-autocomplete
       v-else
+      v-show="!hidden"
+      v-model="inputVal"
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
-      v-show="!hidden"
       :clearable="mergeConfig.clearable"
       :size="mergeConfig.size"
       :type="mergeConfig.type"
@@ -99,64 +104,70 @@
       :fetch-suggestions="querySearch"
       :trigger-on-focus="!!mergeConfig.autocomplete.immediateShow"
       :value-key="mergeConfig.autocomplete.itemValueField || 'value'"
-      v-model="inputVal"
       @select="onSelectSuggectionItem"
       @blur="onBlur"
     >
       <template
-        v-slot:default="props"
         v-if="mergeConfig.autocomplete && mergeConfig.autocomplete.itemTemplate"
+        #default="props"
       >
-        <component :is="itemTemplate" :item="props.item"></component>
+        <component
+          :is="itemTemplate"
+          :item="props.item"
+        />
       </template>
 
       <template v-if="mergeConfig.compound">
         <template
-          slot="prepend"
           v-if="mergeConfig.compound.prependLabel"
-        >{{mergeConfig.compound.prependLabel}}</template>
+          slot="prepend"
+        >
+          {{ mergeConfig.compound.prependLabel }}
+        </template>
         <template
-          slot="append"
           v-if="mergeConfig.compound.appendLabel"
-        >{{mergeConfig.compound.appendLabel}}</template>
+          slot="append"
+        >
+          {{ mergeConfig.compound.appendLabel }}
+        </template>
 
         <el-button
-          slot="prepend"
           v-if="mergeConfig.compound.prependIcon"
+          slot="prepend"
           :icon="mergeConfig.compound.prependIcon"
-        ></el-button>
+        />
         <el-button
-          slot="append"
           v-if="mergeConfig.compound.appendIcon"
+          slot="append"
           :icon="mergeConfig.compound.appendIcon"
-        ></el-button>
+        />
 
         <el-select
           v-if="mergeConfig.compound.prependSelect"
-          v-model="prependSelectVal"
           slot="prepend"
+          v-model="prependSelectVal"
           :placeholder="mergeConfig.compound.prependSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in prependSelectOptions"
+            :key="item[mergeConfig.compound.prependSelect.itemValueField]"
             :label="item[mergeConfig.compound.prependSelect.itemLabelField]"
             :value="item[mergeConfig.compound.prependSelect.itemValueField]"
-            :key="item[mergeConfig.compound.prependSelect.itemValueField]"
-          ></el-option>
+          />
         </el-select>
 
         <el-select
           v-if="mergeConfig.compound.appendSelect"
-          v-model="appendSelectVal"
           slot="append"
+          v-model="appendSelectVal"
           :placeholder="mergeConfig.compound.appendSelect.placeholder || $nclang('selectPls')"
         >
           <el-option
             v-for="item in appendSelectOptions"
+            :key="item[mergeConfig.compound.appendSelectVal.itemValueField]"
             :label="item[mergeConfig.compound.appendSelect.itemLabelField]"
             :value="item[mergeConfig.compound.appendSelect.itemValueField]"
-            :key="item[mergeConfig.compound.appendSelectVal.itemValueField]"
-          ></el-option>
+          />
         </el-select>
       </template>
     </el-autocomplete>
@@ -223,95 +234,6 @@ export default {
   props: {
     modelValue: {
       type: [String, Number, Object]
-    }
-  },
-
-  created() {
-    this.$watch("inputVal", (newVal, oldVal) => {
-      if ((!newVal && !oldVal) || this.mergeConfig.updateOn === 'blur') return;
-      let val = this._processModelVal();
-      this.$emit("update:modelValue", val);
-    });
-
-    if (this.$data.modelVal !== undefined) {
-      this.$data.inputVal =
-        ["string", "number"].indexOf(typeof this.$data.modelVal) >= 0
-          ? this.$data.modelVal
-          : this.$data.modelVal[this.mergeConfig.modelField];
-    }
-
-    if (_get(this.mergeConfig, "autocomplete.itemTemplate")) {
-      this.$data.itemTemplate.template = _get(
-        this.mergeConfig,
-        "autocomplete.itemTemplate"
-      );
-    }
-
-    if (_get(this.mergeConfig, "compound.prependSelect")) {
-      if (_get(this.mergeConfig, "compound.prependSelect.enumSource")) {
-        this.$data.prependSelectOptions = _get(
-          this.mergeConfig,
-          "compound.prependSelect.enumSource"
-        );
-      } else {
-        this.$http({
-          url: _get(
-            this.mergeConfig,
-            "compound.prependSelect.enumSourceRemote.remoteUrl"
-          )
-        }).then(res => {
-          this.$data.prependSelectOptions = this.mergeConfig.compound
-            .prependSelect.enumSourceRemote.resField
-            ? _get(
-                res.data,
-                this.mergeConfig.compound.prependSelect.enumSourceRemote
-                  .resField
-              )
-            : res.data;
-        });
-      }
-      this.$data.prependSelectVal = _get(
-        this.modelValue,
-        _get(this.mergeConfig, "compound.prependSelect.modelField")
-      );
-      this.$watch("prependSelectVal", function() {
-        let val = this._processModelVal();
-        this.$emit("update:modelValue", val);
-      });
-    }
-
-    if (_get(this.mergeConfig, "compound.appendSelect")) {
-      if (_get(this.mergeConfig, "compound.appendSelect.enumSource")) {
-        this.$data.appendSelectOptions = _get(
-          this.mergeConfig,
-          "compound.appendSelect.enumSource"
-        );
-      } else {
-        this.$http({
-          url: _get(
-            this.mergeConfig,
-            "compound.appendSelect.enumSourceRemote.remoteUrl"
-          )
-        }).then(res => {
-          this.$data.appendSelectOptions = this.mergeConfig.compound
-            .appendSelect.enumSourceRemote.resField
-            ? _get(
-                res.data,
-                this.mergeConfig.compound.appendSelect.enumSourceRemote
-                  .resField
-              )
-            : res.data;
-        });
-      }
-      this.$data.appendSelectVal = _get(
-        this.modelValue,
-        _get(this.mergeConfig, "compound.appendSelect.modelField")
-      );
-
-      this.$watch("appendSelectVal", function() {
-        let val = this._processModelVal();
-        this.$emit("update:modelValue", val);
-      });
     }
   },
 
@@ -402,6 +324,95 @@ export default {
         }
       }
     };
+  },
+
+  created() {
+    this.$watch("inputVal", (newVal, oldVal) => {
+      if ((!newVal && !oldVal) || this.mergeConfig.updateOn === 'blur') return;
+      let val = this._processModelVal();
+      this.$emit("update:modelValue", val);
+    });
+
+    if (this.$data.modelVal !== undefined) {
+      this.$data.inputVal =
+        ["string", "number"].indexOf(typeof this.$data.modelVal) >= 0
+          ? this.$data.modelVal
+          : this.$data.modelVal[this.mergeConfig.modelField];
+    }
+
+    if (_get(this.mergeConfig, "autocomplete.itemTemplate")) {
+      this.$data.itemTemplate.template = _get(
+        this.mergeConfig,
+        "autocomplete.itemTemplate"
+      );
+    }
+
+    if (_get(this.mergeConfig, "compound.prependSelect")) {
+      if (_get(this.mergeConfig, "compound.prependSelect.enumSource")) {
+        this.$data.prependSelectOptions = _get(
+          this.mergeConfig,
+          "compound.prependSelect.enumSource"
+        );
+      } else {
+        this.$http({
+          url: _get(
+            this.mergeConfig,
+            "compound.prependSelect.enumSourceRemote.remoteUrl"
+          )
+        }).then(res => {
+          this.$data.prependSelectOptions = this.mergeConfig.compound
+            .prependSelect.enumSourceRemote.resField
+            ? _get(
+                res.data,
+                this.mergeConfig.compound.prependSelect.enumSourceRemote
+                  .resField
+              )
+            : res.data;
+        });
+      }
+      this.$data.prependSelectVal = _get(
+        this.modelValue,
+        _get(this.mergeConfig, "compound.prependSelect.modelField")
+      );
+      this.$watch("prependSelectVal", function() {
+        let val = this._processModelVal();
+        this.$emit("update:modelValue", val);
+      });
+    }
+
+    if (_get(this.mergeConfig, "compound.appendSelect")) {
+      if (_get(this.mergeConfig, "compound.appendSelect.enumSource")) {
+        this.$data.appendSelectOptions = _get(
+          this.mergeConfig,
+          "compound.appendSelect.enumSource"
+        );
+      } else {
+        this.$http({
+          url: _get(
+            this.mergeConfig,
+            "compound.appendSelect.enumSourceRemote.remoteUrl"
+          )
+        }).then(res => {
+          this.$data.appendSelectOptions = this.mergeConfig.compound
+            .appendSelect.enumSourceRemote.resField
+            ? _get(
+                res.data,
+                this.mergeConfig.compound.appendSelect.enumSourceRemote
+                  .resField
+              )
+            : res.data;
+        });
+      }
+      this.$data.appendSelectVal = _get(
+        this.modelValue,
+        _get(this.mergeConfig, "compound.appendSelect.modelField")
+      );
+
+      this.$watch("appendSelectVal", function() {
+        let val = this._processModelVal();
+        this.$emit("update:modelValue", val);
+      });
+    }
   },
 
   methods: {

@@ -1,14 +1,14 @@
 <template>
   <div style="float:left;">
-      <el-slider
-        :disabled="disabled || readonly"
-        :placeholder="placeholder"
-        v-show="!hidden"
-        v-model="modelVal"
-        :min="mergeConfig.min"
-        :max="mergeConfig.max"
-        :step="mergeConfig.step"
-      ></el-slider>
+    <el-slider
+      v-show="!hidden"
+      v-model="modelVal"
+      :disabled="disabled || readonly"
+      :placeholder="placeholder"
+      :min="mergeConfig.min"
+      :max="mergeConfig.max"
+      :step="mergeConfig.step"
+    />
   </div>
 </template>
 

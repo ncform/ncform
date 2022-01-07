@@ -1,62 +1,148 @@
 <template>
-
   <div :class="[(!!schema.__validationResult && !schema.__validationResult.result) ? 'invalid' : '', schema.ui.itemClass]">
-
     <!-- object 类型 -->
-    <component v-if="isNormalObjSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig">
-      <template v-for="(fieldSchema, fieldName) in schema.properties" :key="fieldName" v-slot:[fieldName]>
-        <form-item :schema="fieldSchema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :global-config="globalConfig" :idx-chain="idxChain" :complete-schema="completeSchema" :paths="paths ? paths + '.' + fieldName : fieldName" :form-name="formName"></form-item>
+    <component
+      :is="'ncform-' + schema.ui.widget"
+      v-if="isNormalObjSchema(schema)"
+      :schema="schema"
+      :form-data="formData"
+      :temp-data="tempData"
+      :global-const="globalConfig.constants"
+      :idx-chain="idxChain"
+      :config="schema.ui.widgetConfig"
+    >
+      <template
+        v-for="(fieldSchema, fieldName) in schema.properties"
+        :key="fieldName"
+        #[fieldName]
+      >
+        <form-item
+          :schema="fieldSchema"
+          :form-data="formData"
+          :temp-data="tempData"
+          :global-const="globalConfig.constants"
+          :global-config="globalConfig"
+          :idx-chain="idxChain"
+          :complete-schema="completeSchema"
+          :paths="paths ? paths + '.' + fieldName : fieldName"
+          :form-name="formName"
+        />
       </template>
     </component>
 
     <!-- array 类型 -->
-    <component v-else-if="isNormalArrSchema(schema)" :is="'ncform-' + schema.ui.widget" :schema="schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" :config="schema.ui.widgetConfig" class="__ncform-control">
-
-      <template v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})" :key="fieldName" v-slot:[fieldName]="props">
-        <form-item :schema="props.schema" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx" :global-config="globalConfig" :complete-schema="completeSchema" :paths="paths + '[' + props.idx + ']' + (fieldName === '__notObjItem' ? '' : `.${fieldName}`)" :form-name="formName"></form-item>
+    <component
+      :is="'ncform-' + schema.ui.widget"
+      v-else-if="isNormalArrSchema(schema)"
+      :schema="schema"
+      :form-data="formData"
+      :temp-data="tempData"
+      :global-const="globalConfig.constants"
+      :idx-chain="idxChain"
+      :config="schema.ui.widgetConfig"
+      class="__ncform-control"
+    >
+      <template
+        v-for="(fieldSchema, fieldName) in (schema.items.properties || {__notObjItem: schema.items})"
+        :key="fieldName"
+        #[fieldName]="props"
+      >
+        <form-item
+          :schema="props.schema"
+          :form-data="formData"
+          :temp-data="tempData"
+          :global-const="globalConfig.constants"
+          :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx"
+          :global-config="globalConfig"
+          :complete-schema="completeSchema"
+          :paths="paths + '[' + props.idx + ']' + (fieldName === '__notObjItem' ? '' : `.${fieldName}`)"
+          :form-name="formName"
+        />
       </template>
-
     </component>
 
     <!-- 特殊类型 HTML -->
     <template v-else-if="schema.type === 'HTML'">
-      <div v-html="htmlTypeVal"></div>
+      <div v-html="htmlTypeVal" />
     </template>
 
     <!-- 特殊类型 COMP -->
     <template v-else-if="schema.type === 'COMP'">
-      <component :is="schema.ui.widget" :config="schema.ui.widgetConfig" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain"></component>
+      <component
+        :is="schema.ui.widget"
+        :config="schema.ui.widgetConfig"
+        :form-data="formData"
+        :temp-data="tempData"
+        :global-const="globalConfig.constants"
+        :idx-chain="idxChain"
+      />
     </template>
 
     <!-- string / number / integer / boolean 类型 -->
     <template v-else>
-      <component :is="'ncform-' + schema.ui.widget" :config="schema.ui.widgetConfig" v-model="schema.value" :form-data="formData" :temp-data="tempData" :global-const="globalConfig.constants" :idx-chain="idxChain" class="__ncform-control">
-      </component>
-      <div class="__ncform-item-preview" v-if="schema.ui.preview && schema.value"
-        :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ?  schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}" >
-        <span class="clear" v-if="schema.ui.preview.clearable" @click="clearComponentValue()">x</span>
-        <div class="wrapper" :class="[schema.ui.preview.outward ? schema.ui.preview.outward.shape : '']">
+      <component
+        :is="'ncform-' + schema.ui.widget"
+        v-model="schema.value"
+        :config="schema.ui.widgetConfig"
+        :form-data="formData"
+        :temp-data="tempData"
+        :global-const="globalConfig.constants"
+        :idx-chain="idxChain"
+        class="__ncform-control"
+      />
+      <div
+        v-if="schema.ui.preview && schema.value"
+        class="__ncform-item-preview"
+        :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ? schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}"
+      >
+        <span
+          v-if="schema.ui.preview.clearable"
+          class="clear"
+          @click="clearComponentValue()"
+        >x</span>
+        <div
+          class="wrapper"
+          :class="[schema.ui.preview.outward ? schema.ui.preview.outward.shape : '']"
+        >
           <!-- 图片 -->
-          <img v-if="schema.ui.preview.type === 'image'"
-            :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ?  schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}"
-            :src="getPreviewVal(schema.ui.preview.value, schema.value)" alt="预览区域">
+          <img
+            v-if="schema.ui.preview.type === 'image'"
+            :style="{width: schema.ui.preview.outward && schema.ui.preview.outward.width ? schema.ui.preview.outward.width + 'px' : 'auto', height: schema.ui.preview.outward && schema.ui.preview.outward.height ? schema.ui.preview.outward.height + 'px' : 'auto'}"
+            :src="getPreviewVal(schema.ui.preview.value, schema.value)"
+            alt="预览区域"
+          >
           <!-- 视频 -->
-          <video v-if="schema.ui.preview.type === 'video'" :src="getPreviewVal(schema.ui.preview.value, schema.value)" controls="controls"></video>
+          <video
+            v-if="schema.ui.preview.type === 'video'"
+            :src="getPreviewVal(schema.ui.preview.value, schema.value)"
+            controls="controls"
+          />
           <!-- 音频 -->
-          <audio v-if="schema.ui.preview.type === 'audio'" :src="getPreviewVal(schema.ui.preview.value, schema.value)" controls="controls"></audio>
+          <audio
+            v-if="schema.ui.preview.type === 'audio'"
+            :src="getPreviewVal(schema.ui.preview.value, schema.value)"
+            controls="controls"
+          />
           <!-- 链接 -->
-          <a v-if="schema.ui.preview.type === 'link'" :href="getPreviewVal(schema.ui.preview.value, schema.value)" target="_blank">{{schema.value}}</a>
+          <a
+            v-if="schema.ui.preview.type === 'link'"
+            :href="getPreviewVal(schema.ui.preview.value, schema.value)"
+            target="_blank"
+          >{{ schema.value }}</a>
         </div>
       </div>
     </template>
 
     <!-- 验证错误信息 -->
-    <div v-show="!!schema.__validationResult && !schema.__validationResult.result" class="invalid-feedback" :class="globalConfig.style.invalidFeedbackCls" style="display:block;">
-        {{!!schema.__validationResult && schema.__validationResult.errMsg}}
+    <div
+      v-show="!!schema.__validationResult && !schema.__validationResult.result"
+      class="invalid-feedback"
+      :class="globalConfig.style.invalidFeedbackCls"
+      style="display:block;"
+    >
+      {{ !!schema.__validationResult && schema.__validationResult.errMsg }}
     </div>
-
   </div>
-
 </template>
 
 <style lang="scss">
@@ -108,7 +194,7 @@ import _get from 'lodash-es/get'
 import _isArray from 'lodash-es/isArray'
 
 export default {
-  name: 'form-item', // 声明name可以嵌套自身
+  name: 'FormItem', // 声明name可以嵌套自身
 
   _init4valueTemplate: true,
 
@@ -179,62 +265,6 @@ export default {
           constData: this.globalConfig.constants
         }
       })
-    }
-  },
-
-  methods: {
-    isNormalObjSchema: ncformUtils.isNormalObjSchema,
-
-    isNormalArrSchema: ncformUtils.isNormalArrSchema,
-
-    getPreviewVal (configVal, modelVal) {
-      if (!configVal) return modelVal
-      return ncformUtils.smartAnalyzeVal(configVal, {
-        idxChain: this.idxChain,
-        data: {
-          rootData: this.formData,
-          tempData: this.tempData,
-          constData: this.globalConfig.constants,
-          selfData: modelVal
-        }
-      })
-    },
-
-    clearComponentValue () {
-      this.schema.value = ''
-    },
-
-    // 校验其它指定字段的值
-    _validOtherField (fieldPath, idxChain, ruleNames) {
-      const val = _get(this.formData, fieldPath.replace('[i]', `[${idxChain}]`))
-      const schema = ncformUtils.getSchemaByPath(this.completeSchema, fieldPath, idxChain)
-      if (schema === undefined) {
-        // 取不到schema说明传入的fieldPath或idxChain无效
-        return null
-      }
-      if (!schema.__validationResult) {
-        // 如果之前没有进行过校验行为，则跳过
-        return true
-      }
-
-      const rules = {}
-
-      Object.keys(schema.rules).forEach(ruleKey => {
-        if (ruleNames.indexOf(ruleKey) >= 0) {
-          rules[ruleKey] = schema.rules[ruleKey]
-        }
-      })
-
-      window.__$ncform.__ncformRegularValidation
-        .validate(val, rules, {
-          formData: this.formData,
-          tempData: this.tempData,
-          idxChain: idxChain,
-          globalConfig: this.globalConfig
-        })
-        .then(result => {
-          schema.__validationResult = result
-        })
     }
   },
 
@@ -372,6 +402,62 @@ export default {
         }
       },
       deep: true
+    }
+  },
+
+  methods: {
+    isNormalObjSchema: ncformUtils.isNormalObjSchema,
+
+    isNormalArrSchema: ncformUtils.isNormalArrSchema,
+
+    getPreviewVal (configVal, modelVal) {
+      if (!configVal) return modelVal
+      return ncformUtils.smartAnalyzeVal(configVal, {
+        idxChain: this.idxChain,
+        data: {
+          rootData: this.formData,
+          tempData: this.tempData,
+          constData: this.globalConfig.constants,
+          selfData: modelVal
+        }
+      })
+    },
+
+    clearComponentValue () {
+      this.schema.value = ''
+    },
+
+    // 校验其它指定字段的值
+    _validOtherField (fieldPath, idxChain, ruleNames) {
+      const val = _get(this.formData, fieldPath.replace('[i]', `[${idxChain}]`))
+      const schema = ncformUtils.getSchemaByPath(this.completeSchema, fieldPath, idxChain)
+      if (schema === undefined) {
+        // 取不到schema说明传入的fieldPath或idxChain无效
+        return null
+      }
+      if (!schema.__validationResult) {
+        // 如果之前没有进行过校验行为，则跳过
+        return true
+      }
+
+      const rules = {}
+
+      Object.keys(schema.rules).forEach(ruleKey => {
+        if (ruleNames.indexOf(ruleKey) >= 0) {
+          rules[ruleKey] = schema.rules[ruleKey]
+        }
+      })
+
+      window.__$ncform.__ncformRegularValidation
+        .validate(val, rules, {
+          formData: this.formData,
+          tempData: this.tempData,
+          idxChain: idxChain,
+          globalConfig: this.globalConfig
+        })
+        .then(result => {
+          schema.__validationResult = result
+        })
     }
   }
 }

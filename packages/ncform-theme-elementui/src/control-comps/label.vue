@@ -1,8 +1,9 @@
 <template>
-  <label :title="mergeConfig.multiLine ? '' : val"
+  <label
     ref="label"
+    :title="mergeConfig.multiLine ? '' : val"
     :class="['ncform-label', mergeConfig.multiLine ? 'multi-line' : '']"
-  >{{val}}</label>
+  >{{ val }}</label>
 </template>
 
 <style lang="scss">

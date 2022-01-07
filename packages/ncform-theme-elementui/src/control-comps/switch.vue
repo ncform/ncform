@@ -1,7 +1,8 @@
 <template>
   <el-switch
-    class="ncform-switch"
+    v-show="!hidden"
     v-model="modelVal"
+    class="ncform-switch"
     :disabled="disabled || readonly"
     :width="mergeConfig.width"
     :active-icon-class="mergeConfig.activeIconClass"
@@ -12,8 +13,7 @@
     :inactive-value="mergeConfig.inactiveValue"
     :active-color="mergeConfig.activeColor"
     :inactive-color="mergeConfig.inactiveColor"
-    v-show="!hidden"
-  ></el-switch>
+  />
 </template>
 
 <style lang="scss">

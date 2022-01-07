@@ -1,15 +1,15 @@
 <template>
-    <div class="ncform-input-number">
-        <el-input-number
-          :disabled="disabled || readonly"
-          v-show="!hidden"
-          v-model="modelVal"
-          :min="mergeConfig.min"
-          :max="mergeConfig.max"
-          :step="mergeConfig.step"
-          :size="mergeConfig.size"
-        ></el-input-number>
-    </div>
+  <div class="ncform-input-number">
+    <el-input-number
+      v-show="!hidden"
+      v-model="modelVal"
+      :disabled="disabled || readonly"
+      :min="mergeConfig.min"
+      :max="mergeConfig.max"
+      :step="mergeConfig.step"
+      :size="mergeConfig.size"
+    />
+  </div>
 </template>
 
 <style lang="scss">

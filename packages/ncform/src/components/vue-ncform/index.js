@@ -131,6 +131,6 @@ export default {
     app.config.globalProperties.$ncformAllWidgets = ncformAllWidgets
     app.config.globalProperties.$ncformGetValue = ncformGetValue
 
-    app.component('ncform', ncform)
+    app.component('Ncform', ncform)
   }
 }

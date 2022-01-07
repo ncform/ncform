@@ -1,71 +1,127 @@
 <template>
   <div class="el-form __object-form-item">
-    <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">
-      {{_analyzeVal(schema.ui.legend)}}
-      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
+    <legend
+      v-if="legendEnable(schema) && showLegend"
+      @click="collapse()"
+    >
+      {{ _analyzeVal(schema.ui.legend) }}
+      <i
+        v-if="!mergeConfig.disableCollapse"
+        class="el-collapse-item__arrow"
+        :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"
+      />
     </legend>
 
     <!-- 垂直布局，即label上，control下 -->
-    <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="el-row v-layout el-form--label-top" style="width: 100%">
+    <div
+      v-if="mergeConfig.layout === 'v'"
+      v-show="!collapsed"
+      class="el-row v-layout el-form--label-top"
+      style="width: 100%"
+    >
+      <div
+        v-for="(fieldSchema, field) in schema.properties"
+        :key="field"
+        :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
+        :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
+        class="el-col el-form-item"
+      >
+        <label
+          v-if="!fieldSchema.ui.noLabelSpace"
+          :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}"
+          class="el-form-item__label"
+          :title="_analyzeVal(fieldSchema.ui.label)"
+        >
+          <!-- 必填标识 -->
+          <i
+            v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)"
+            class="text-danger"
+          >*</i>
+          {{ _analyzeVal(fieldSchema.ui.label) }}
+          <!-- 提示信息 -->
+          <el-tooltip
+            v-if="fieldSchema.ui.help.show === true"
+            class="item"
+            effect="dark"
+            :content="fieldSchema.ui.help.content"
+            placement="right-start"
+          >
+            <template #content>
+              <div v-html="fieldSchema.ui.help.content" />
+            </template>
+            <a
+              class="help"
+              href="#"
+            ><span :class="fieldSchema.ui.help.iconCls">{{ fieldSchema.ui.help.text }}</span></a>
+          </el-tooltip>
+        </label>
 
-      <div v-for="(fieldSchema, field) in schema.properties"
-          :key="field"
-          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
-          class="el-col el-form-item">
+        <div style="clear: both">
+          <slot :name="field" />
+        </div>
 
-            <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}" class="el-form-item__label" :title="_analyzeVal(fieldSchema.ui.label)">
-              <!-- 必填标识 -->
-              <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-              {{_analyzeVal(fieldSchema.ui.label)}}
-              <!-- 提示信息 -->
-              <el-tooltip v-if="fieldSchema.ui.help.show === true" class="item" effect="dark" :content="fieldSchema.ui.help.content" placement="right-start">
-                <template v-slot:content>
-                  <div v-html="fieldSchema.ui.help.content"></div>
-                </template>
-                <a class="help" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
-              </el-tooltip>
-            </label>
-
-            <div style="clear: both">
-              <slot :name="field"></slot>
-            </div>
-
-            <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">
-            </small>
-
+        <!-- 说明信息 -->
+        <small
+          v-if="fieldSchema.ui.description"
+          class="form-desc"
+          v-html="_analyzeVal(fieldSchema.ui.description)"
+        />
       </div>
     </div>
 
     <!-- 水平布局，即label左，control右 -->
-    <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="el-row h-layout el-form--label-right" style="width: 100%">
-      <div v-for="(fieldSchema, field) in schema.properties"
-          :key="field"
-          :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
-          class="el-col el-form-item">
-          <label v-if="!fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"  class="el-form-item__label" :title="_analyzeVal(fieldSchema.ui.label)">
-            <!-- 必填标识 -->
-            <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-            {{_analyzeVal(fieldSchema.ui.label)}}
-            <!-- 提示信息 -->
-            <el-tooltip v-if="fieldSchema.ui.help.show === true"  class="item" effect="dark" placement="right-start">
-              <template v-slot:content>
-                <div v-html="fieldSchema.ui.help.content"></div>
-              </template>
-              <a class="help" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
-            </el-tooltip>
-          </label>
-          <div class="el-form-item__content">
-            <slot :name="field"></slot>
-            <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-desc" v-html="_analyzeVal(fieldSchema.ui.description)">
-            </small>
-          </div>
+    <div
+      v-if="mergeConfig.layout === 'h'"
+      v-show="!collapsed"
+      class="el-row h-layout el-form--label-right"
+      style="width: 100%"
+    >
+      <div
+        v-for="(fieldSchema, field) in schema.properties"
+        :key="field"
+        :class="['el-col-' + ((_analyzeVal(fieldSchema.ui.columns) || 12) * 2 || 24)]"
+        :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
+        class="el-col el-form-item"
+      >
+        <label
+          v-if="!fieldSchema.ui.noLabelSpace"
+          :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"
+          class="el-form-item__label"
+          :title="_analyzeVal(fieldSchema.ui.label)"
+        >
+          <!-- 必填标识 -->
+          <i
+            v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)"
+            class="text-danger"
+          >*</i>
+          {{ _analyzeVal(fieldSchema.ui.label) }}
+          <!-- 提示信息 -->
+          <el-tooltip
+            v-if="fieldSchema.ui.help.show === true"
+            class="item"
+            effect="dark"
+            placement="right-start"
+          >
+            <template #content>
+              <div v-html="fieldSchema.ui.help.content" />
+            </template>
+            <a
+              class="help"
+              href="#"
+            ><span :class="fieldSchema.ui.help.iconCls">{{ fieldSchema.ui.help.text }}</span></a>
+          </el-tooltip>
+        </label>
+        <div class="el-form-item__content">
+          <slot :name="field" />
+          <!-- 说明信息 -->
+          <small
+            v-if="fieldSchema.ui.description"
+            class="form-desc"
+            v-html="_analyzeVal(fieldSchema.ui.description)"
+          />
+        </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -163,6 +219,7 @@ import { ncformMixins } from '@ncform/ncform-common';
 const { layoutObjectMixin } = ncformMixins.vue;
 
 export default {
+  mixins: [layoutObjectMixin],
   props: {
     showLegend: {
       type: Boolean,
@@ -173,7 +230,6 @@ export default {
     legendEnable(fieldSchema) {
       return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
     }
-  },
-  mixins: [layoutObjectMixin]
+  }
 };
 </script>

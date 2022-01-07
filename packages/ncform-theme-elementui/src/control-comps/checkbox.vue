@@ -5,34 +5,39 @@
   >
     <el-checkbox
       v-if="mergeConfig.selectAll && !readonly"
+      v-model="isCheckAll"
       :class="'check-all'"
       :disabled="disabled"
       :indeterminate="isIndeterminate"
-      v-model="isCheckAll"
       @change="handleCheckAllChange"
-    >{{$nclang('all')}}</el-checkbox>
+    >
+      {{ $nclang('all') }}
+    </el-checkbox>
 
     <el-checkbox-group
       v-if="!readonly"
+      v-model="modelVal"
       size="small"
       :disabled="disabled"
-      v-model="modelVal"
       @change="handleCheckedOptChange"
     >
-      <component :is="'el-checkbox' + (mergeConfig.type === 'button' ? '-button' : '')"
+      <component
+        :is="'el-checkbox' + (mergeConfig.type === 'button' ? '-button' : '')"
         v-for="opt in dataSource"
         :key="opt[mergeConfig.itemValueField]"
         :label="opt[mergeConfig.itemValueField]"
         :class="mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
-      >{{opt[mergeConfig.itemLabelField]}}</component>
+      >
+        {{ opt[mergeConfig.itemLabelField] }}
+      </component>
     </el-checkbox-group>
 
     <label
-      v-show="readonly"
       v-for="(label, idx) in labelRead"
+      v-show="readonly"
       :key="idx"
       :class="['label-read', mergeConfig.type === 'checkbox' && mergeConfig.arrangement === 'v' ? 'label-vertical' : '']"
-    >{{label}}</label>
+    >{{ label }}</label>
   </div>
 </template>
 
@@ -110,10 +115,6 @@
       }
     },
 
-    created() {
-      this._getDataSource();
-    },
-
     props: {
       modelValue: {
         // type: [String, Number, Boolean, Array],
@@ -186,6 +187,10 @@
         },
         deep: true
       }
+    },
+
+    created() {
+      this._getDataSource();
     },
 
     methods: {

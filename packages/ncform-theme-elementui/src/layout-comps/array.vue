@@ -1,55 +1,124 @@
 <template>
-
   <div class="__array-form-item">
-
-    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">
-      {{_analyzeVal(schema.ui.legend)}}
-      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
+    <legend
+      v-if="schema.ui.legend && schema.ui.showLegend"
+      @click="collapse()"
+    >
+      {{ _analyzeVal(schema.ui.legend) }}
+      <i
+        v-if="!mergeConfig.disableCollapse"
+        class="el-collapse-item__arrow"
+        :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"
+      />
     </legend>
 
-    <div v-show="!collapsed" v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" class="list-item">
-
+    <div
+      v-for="(dataItem, idx) in schema.value"
+      v-show="!collapsed"
+      :key="dataItem.__dataSchema.__id"
+      class="list-item"
+    >
       <el-space class="list-item-label">
-        <label>{{_analyzeVal(dataItem.__dataSchema.ui.label, idx)}} {{(mergeConfig.autoIdxToLabel ? (idx + 1) : '')}}</label>
+        <label>{{ _analyzeVal(dataItem.__dataSchema.ui.label, idx) }} {{ (mergeConfig.autoIdxToLabel ? (idx + 1) : '') }}</label>
 
         <!-- 项控制按钮 -->
         <el-button-group size="small">
-          <el-button @click="collapseItem(dataItem.__dataSchema)" v-show="dataItem.__dataSchema._expand" v-if="!mergeConfig.disableItemCollapse" :icon="ArrowDown" />
-          <el-button @click="collapseItem(dataItem.__dataSchema)" v-show="!dataItem.__dataSchema._expand" v-if="!mergeConfig.disableItemCollapse" :icon="ArrowUp" />
-          <el-button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" type="danger" :icon="RemoveFilled" />
-          <el-button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" :icon="SortUp"></el-button>
-          <el-button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" :icon="SortDown" />
+          <el-button
+            v-show="dataItem.__dataSchema._expand"
+            v-if="!mergeConfig.disableItemCollapse"
+            :icon="ArrowDown"
+            @click="collapseItem(dataItem.__dataSchema)"
+          />
+          <el-button
+            v-show="!dataItem.__dataSchema._expand"
+            v-if="!mergeConfig.disableItemCollapse"
+            :icon="ArrowUp"
+            @click="collapseItem(dataItem.__dataSchema)"
+          />
+          <el-button
+            v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))"
+            type="danger"
+            :icon="RemoveFilled"
+            @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))"
+          />
+          <el-button
+            v-show="idx !== 0"
+            v-if="!mergeConfig.disableReorder"
+            :icon="SortUp"
+            @click="itemUp(idx)"
+          />
+          <el-button
+            v-show="idx !== schema.value.length - 1"
+            v-if="!mergeConfig.disableReorder"
+            :icon="SortDown"
+            @click="itemDown(idx)"
+          />
         </el-button-group>
       </el-space>
 
       <!-- array item 是 正常的 object 类型 -->
       <template v-if="isNormalObjSchema(dataItem.__dataSchema)">
-        <ncform-object v-show="mergeConfig.disableItemCollapse || dataItem.__dataSchema._expand" :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :global-const="globalConst" :config="dataItem.__dataSchema.ui.widgetConfig" :show-legend="false">
-
-          <template v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})" v-slot:[fieldName]><!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
-            <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
+        <ncform-object
+          v-show="mergeConfig.disableItemCollapse || dataItem.__dataSchema._expand"
+          :schema="dataItem.__dataSchema"
+          :form-data="formData"
+          :idx-chain="(idxChain ? idxChain + ',' : '') + idx"
+          :global-const="globalConst"
+          :config="dataItem.__dataSchema.ui.widgetConfig"
+          :show-legend="false"
+        >
+          <template
+            v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})"
+            #[fieldName]
+          >
+            <!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
+            <slot
+              :name="fieldName"
+              :schema="fieldSchema"
+              :idx="idx"
+            />
           </template>
-
         </ncform-object>
       </template>
 
       <!-- array item 是 非正常的 object 类型 以及 其它类型 -->
-      <div v-else class="normal-item">
+      <div
+        v-else
+        class="normal-item"
+      >
         <div v-show="mergeConfig.disableItemCollapse || dataItem.__dataSchema._expand">
-          <slot name="__notObjItem" :schema="dataItem.__dataSchema" :idx="idx"></slot> <!-- 注意：__notObjItem 和 __dataSchema 都是约定好的值，其它名字不生效 -->
+          <slot
+            name="__notObjItem"
+            :schema="dataItem.__dataSchema"
+            :idx="idx"
+          /> <!-- 注意：__notObjItem 和 __dataSchema 都是约定好的值，其它名字不生效 -->
         </div>
       </div>
-
     </div>
 
     <!-- 列表控制按钮 -->
-    <el-button-group size="small" v-show="!collapsed" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
-      <el-button @click="addItem()" v-if="!mergeConfig.disableAdd" :icon="CirclePlusFilled">{{mergeConfig.addTxt || $nclang('add')}}</el-button>
-      <el-button @click="delAllItems(mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.all || $nclang('delAllTips'))" v-if="!mergeConfig.disableDel" type="danger" :icon="RemoveFilled">{{mergeConfig.delAllTxt || $nclang('delAll')}}</el-button>
+    <el-button-group
+      v-show="!collapsed"
+      v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel"
+      size="small"
+    >
+      <el-button
+        v-if="!mergeConfig.disableAdd"
+        :icon="CirclePlusFilled"
+        @click="addItem()"
+      >
+        {{ mergeConfig.addTxt || $nclang('add') }}
+      </el-button>
+      <el-button
+        v-if="!mergeConfig.disableDel"
+        type="danger"
+        :icon="RemoveFilled"
+        @click="delAllItems(mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.all || $nclang('delAllTips'))"
+      >
+        {{ mergeConfig.delAllTxt || $nclang('delAll') }}
+      </el-button>
     </el-button-group>
-
   </div>
-
 </template>
 
 <style lang="scss">
@@ -115,6 +184,16 @@
       }
     },
 
+    watch: {
+      'schema.value.length': {
+        handler(newVal, oldVal) {
+          if (newVal > oldVal) { // add item
+            this._supportItemsCollapse();
+          }
+        }
+      }
+    },
+
     created() {
       this._supportItemsCollapse();
     },
@@ -130,16 +209,6 @@
             if (dataItem.__dataSchema && dataItem.__dataSchema._expand === undefined)
               dataItem.__dataSchema._expand = !this.mergeConfig.itemCollapse;
           })
-        }
-      }
-    },
-
-    watch: {
-      'schema.value.length': {
-        handler(newVal, oldVal) {
-          if (newVal > oldVal) { // add item
-            this._supportItemsCollapse();
-          }
         }
       }
     }

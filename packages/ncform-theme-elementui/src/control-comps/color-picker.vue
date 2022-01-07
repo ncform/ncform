@@ -1,9 +1,9 @@
 <template>
   <el-color-picker
+    v-show="!hidden"
     v-model="modelVal"
     :disabled="disabled || readonly"
-    v-show="!hidden"
-  ></el-color-picker>
+  />
 </template>
 
 <style lang="scss" scoped>

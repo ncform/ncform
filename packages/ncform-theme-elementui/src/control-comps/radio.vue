@@ -1,21 +1,27 @@
 <template>
-    <div class="ncform-radio">
-      <el-radio-group
-        v-model="modelVal"
-        :disabled="disabled"
-        v-show="!hidden && !readonly"
-        size="small"
+  <div class="ncform-radio">
+    <el-radio-group
+      v-show="!hidden && !readonly"
+      v-model="modelVal"
+      :disabled="disabled"
+      size="small"
+    >
+      <component
+        :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
+        v-for="opt in dataSource"
+        :key="opt[mergeConfig.itemValueField]"
+        :label="opt[mergeConfig.itemValueField]"
+        :class="mergeConfig.type === 'radio' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
       >
-        <component :is="'el-radio' + (mergeConfig.type === 'button' ? '-button' : '')"
-          v-for="opt in dataSource"
-          :key="opt[mergeConfig.itemValueField]"
-          :label="opt[mergeConfig.itemValueField]"
-          :class="mergeConfig.type === 'radio' && mergeConfig.arrangement === 'v' ? 'is-vertical' : ''"
-        >{{opt[mergeConfig.itemLabelField]}}</component>
-      </el-radio-group>
+        {{ opt[mergeConfig.itemLabelField] }}
+      </component>
+    </el-radio-group>
 
-      <label v-show="readonly" class="label-read">{{labelRead}}</label>
-    </div>
+    <label
+      v-show="readonly"
+      class="label-read"
+    >{{ labelRead }}</label>
+  </div>
 </template>
 
 <style lang="scss">
@@ -77,10 +83,6 @@
       }
     },
 
-    created() {
-      this._getDataSource();
-    },
-
     props: {
       modelValue: {
         type: [String, Number, Boolean]
@@ -140,6 +142,10 @@
         },
         deep: true
       }
+    },
+
+    created() {
+      this._getDataSource();
     },
 
     methods: {

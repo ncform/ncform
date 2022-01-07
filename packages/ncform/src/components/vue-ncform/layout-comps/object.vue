@@ -1,61 +1,108 @@
 <template>
   <div class="__object-form-item">
-    <legend v-if="legendEnable(schema) && showLegend" @click="collapse()">{{_analyzeVal(schema.ui.legend)}}</legend>
+    <legend
+      v-if="legendEnable(schema) && showLegend"
+      @click="collapse()"
+    >
+      {{ _analyzeVal(schema.ui.legend) }}
+    </legend>
 
     <!-- 垂直布局，即label上，control下 -->
-    <div v-if="mergeConfig.layout === 'v'" v-show="!collapsed" class="form-row v-layout" style="width: 100%">
-      <div v-for="(fieldSchema, field) in schema.properties"
-          :key="field"
-          :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
-          class="form-group">
-            <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}">
-              <!-- 必填标识 -->
-              <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
+    <div
+      v-if="mergeConfig.layout === 'v'"
+      v-show="!collapsed"
+      class="form-row v-layout"
+      style="width: 100%"
+    >
+      <div
+        v-for="(fieldSchema, field) in schema.properties"
+        :key="field"
+        :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
+        :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
+        class="form-group"
+      >
+        <label
+          v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace"
+          :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden'}"
+        >
+          <!-- 必填标识 -->
+          <i
+            v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)"
+            class="text-danger"
+          >*</i>
 
-              {{_analyzeVal(fieldSchema.ui.label)}}
+          {{ _analyzeVal(fieldSchema.ui.label) }}
 
-              <!--  提示信息 -->
-              <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
-            </label>
+          <!--  提示信息 -->
+          <a
+            v-if="fieldSchema.ui.help.show === true"
+            :title="fieldSchema.ui.help.content"
+            href="#"
+          ><span :class="fieldSchema.ui.help.iconCls">{{ fieldSchema.ui.help.text }}</span></a>
+        </label>
 
-            <slot :name="field"></slot>
+        <slot :name="field" />
 
-            <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description)">
-            </small>
-
+        <!-- 说明信息 -->
+        <small
+          v-if="fieldSchema.ui.description"
+          class="form-text text-muted"
+          v-html="_analyzeVal(fieldSchema.ui.description)"
+        />
       </div>
     </div>
 
     <!-- 水平布局，即label左，control右 -->
-    <div v-if="mergeConfig.layout === 'h'" v-show="!collapsed" class="form-row h-layout" style="width: 100%">
-      <div v-for="(fieldSchema, field) in schema.properties"
-          :key="field"
-          :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
-          :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
-          class="form-group row">
+    <div
+      v-if="mergeConfig.layout === 'h'"
+      v-show="!collapsed"
+      class="form-row h-layout"
+      style="width: 100%"
+    >
+      <div
+        v-for="(fieldSchema, field) in schema.properties"
+        :key="field"
+        :class="['col-md-' + (_analyzeVal(fieldSchema.ui.columns) || 12)]"
+        :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
+        class="form-group row"
+      >
         <template>
-          <label v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace" :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}" class="col-form-label">
+          <label
+            v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace"
+            :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"
+            class="col-form-label"
+          >
             <!-- 必填标识 -->
-            <i v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)" class="text-danger">*</i>
-            {{_analyzeVal(fieldSchema.ui.label)}}
+            <i
+              v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)"
+              class="text-danger"
+            >*</i>
+            {{ _analyzeVal(fieldSchema.ui.label) }}
 
             <!--  提示信息 -->
-            <a v-if="fieldSchema.ui.help.show === true" :title="fieldSchema.ui.help.content" href="#"><span :class="fieldSchema.ui.help.iconCls">{{fieldSchema.ui.help.text}}</span></a>
+            <a
+              v-if="fieldSchema.ui.help.show === true"
+              :title="fieldSchema.ui.help.content"
+              href="#"
+            ><span :class="fieldSchema.ui.help.iconCls">{{ fieldSchema.ui.help.text }}</span></a>
             :
           </label>
-          <div :style="{'margin-left': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}" :class="{'col-md-9': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace)}">
-            <slot :name="field"></slot>
+          <div
+            :style="{'margin-left': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}"
+            :class="{'col-md-9': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace)}"
+          >
+            <slot :name="field" />
 
             <!-- 说明信息 -->
-            <small v-if="fieldSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(fieldSchema.ui.description)">
-            </small>
+            <small
+              v-if="fieldSchema.ui.description"
+              class="form-text text-muted"
+              v-html="_analyzeVal(fieldSchema.ui.description)"
+            />
           </div>
         </template>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -97,6 +144,7 @@ import { ncformMixins } from '@ncform/ncform-common'
 const { layoutObjectMixin } = ncformMixins.vue
 
 export default {
+  mixins: [layoutObjectMixin],
   props: {
     showLegend: {
       type: Boolean,
@@ -107,7 +155,6 @@ export default {
     legendEnable (fieldSchema) {
       return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend
     }
-  },
-  mixins: [layoutObjectMixin]
+  }
 }
 </script>

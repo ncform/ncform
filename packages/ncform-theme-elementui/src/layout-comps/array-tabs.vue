@@ -1,47 +1,86 @@
 <template>
-
   <div class="__array-tabs-form-item">
-
-    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">
-      {{_analyzeVal(schema.ui.legend)}}
-      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
+    <legend
+      v-if="schema.ui.legend && schema.ui.showLegend"
+      @click="collapse()"
+    >
+      {{ _analyzeVal(schema.ui.legend) }}
+      <i
+        v-if="!mergeConfig.disableCollapse"
+        class="el-collapse-item__arrow"
+        :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"
+      />
     </legend>
-    <el-tabs v-show="!collapsed" :addable="!mergeConfig.disableAdd" type="card" :tab-position="mergeConfig.tabPosition" @edit="handleTabsEdit" v-model="activeName">
-      <el-tab-pane v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id" :closable="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" :name="'' + idx">
-
-        <template v-slot:label>
+    <el-tabs
+      v-show="!collapsed"
+      v-model="activeName"
+      :addable="!mergeConfig.disableAdd"
+      type="card"
+      :tab-position="mergeConfig.tabPosition"
+      @edit="handleTabsEdit"
+    >
+      <el-tab-pane
+        v-for="(dataItem, idx) in schema.value"
+        :key="dataItem.__dataSchema.__id"
+        :closable="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))"
+        :name="'' + idx"
+      >
+        <template #label>
           <span class="__array-tabs-tab-label">
-            {{_analyzeVal(dataItem.__dataSchema.ui.label, idx) + (mergeConfig.autoIdxToLabel ? ' ' + (idx + 1) : '')}}
+            {{ _analyzeVal(dataItem.__dataSchema.ui.label, idx) + (mergeConfig.autoIdxToLabel ? ' ' + (idx + 1) : '') }}
             <!-- 提示信息 -->
-            <el-tooltip v-if="dataItem.__dataSchema.ui.help.show === true" class="item" effect="dark" placement="right-start">
-              <template v-slot:content>
-                <div v-html="dataItem.__dataSchema.ui.help.content"></div>
+            <el-tooltip
+              v-if="dataItem.__dataSchema.ui.help.show === true"
+              class="item"
+              effect="dark"
+              placement="right-start"
+            >
+              <template #content>
+                <div v-html="dataItem.__dataSchema.ui.help.content" />
               </template>
-              <a class="help" href="#"><span :class="dataItem.__dataSchema.ui.help.iconCls">{{dataItem.__dataSchema.ui.help.text}}</span></a>
+              <a
+                class="help"
+                href="#"
+              ><span :class="dataItem.__dataSchema.ui.help.iconCls">{{ dataItem.__dataSchema.ui.help.text }}</span></a>
             </el-tooltip>
           </span>
         </template>
 
         <!-- array item 是 正常的 object 类型 -->
         <template v-if="isNormalObjSchema(dataItem.__dataSchema)">
-          <ncform-object :schema="dataItem.__dataSchema" :form-data="formData" :idx-chain="(idxChain ? idxChain + ',' : '') + idx" :config="dataItem.__dataSchema.ui.widgetConfig" :global-const="globalConst" :show-legend="false">
-
-            <template v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})" v-slot:[fieldName]><!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
-              <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
+          <ncform-object
+            :schema="dataItem.__dataSchema"
+            :form-data="formData"
+            :idx-chain="(idxChain ? idxChain + ',' : '') + idx"
+            :config="dataItem.__dataSchema.ui.widgetConfig"
+            :global-const="globalConst"
+            :show-legend="false"
+          >
+            <template
+              v-for="(fieldSchema, fieldName) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})"
+              #[fieldName]
+            >
+              <!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
+              <slot
+                :name="fieldName"
+                :schema="fieldSchema"
+                :idx="idx"
+              />
             </template>
-
           </ncform-object>
         </template>
 
         <!-- array item 是 非正常的 object 类型 以及 其它类型 -->
         <template v-else>
-          <slot name="__notObjItem" :schema="dataItem.__dataSchema" :idx="idx"></slot> <!-- 注意：__notObjItem 和 __dataSchema 都是约定好的值，其它名字不生效 -->
+          <slot
+            name="__notObjItem"
+            :schema="dataItem.__dataSchema"
+            :idx="idx"
+          /> <!-- 注意：__notObjItem 和 __dataSchema 都是约定好的值，其它名字不生效 -->
         </template>
       </el-tab-pane>
     </el-tabs>
-
   </div>
-
 </template>
 
 <style lang="scss">

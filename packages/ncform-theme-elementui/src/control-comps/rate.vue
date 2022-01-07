@@ -1,9 +1,10 @@
 <template>
-  <el-rate class="ncform-rate"
-    :disabled="disabled || readonly"
-    :placeholder="placeholder"
+  <el-rate
     v-show="!hidden"
     v-model="modelVal"
+    class="ncform-rate"
+    :disabled="disabled || readonly"
+    :placeholder="placeholder"
     :max="mergeConfig.max"
     :allow-half="mergeConfig.allowHalf"
     :low-threshold="mergeConfig.lowThreshold"
@@ -18,7 +19,7 @@
     :show-score="mergeConfig.showScore"
     :text-color="mergeConfig.textColor"
     :texts="mergeConfig.texts"
-  ></el-rate>
+  />
 </template>
 
 <style lang="scss">

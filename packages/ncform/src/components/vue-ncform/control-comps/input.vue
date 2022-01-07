@@ -1,9 +1,13 @@
 <template>
-  <input :disabled="disabled"
-         :readonly="readonly"
-         :placeholder="placeholder"
-         v-show="!hidden"
-         :type="mergeConfig.type" class="form-control" v-model="modelVal">
+  <input
+    v-show="!hidden"
+    v-model="modelVal"
+    :disabled="disabled"
+    :readonly="readonly"
+    :placeholder="placeholder"
+    :type="mergeConfig.type"
+    class="form-control"
+  >
 </template>
 
 <style lang="scss" scoped>

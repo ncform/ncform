@@ -1,54 +1,119 @@
 <template>
-
   <div class="__array-table-form-item">
-
-    <legend v-if="schema.ui.legend && schema.ui.showLegend" @click="collapse()">
-      {{_analyzeVal(schema.ui.legend)}}
-      <i v-if="!mergeConfig.disableCollapse" class="el-collapse-item__arrow" :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"></i>
+    <legend
+      v-if="schema.ui.legend && schema.ui.showLegend"
+      @click="collapse()"
+    >
+      {{ _analyzeVal(schema.ui.legend) }}
+      <i
+        v-if="!mergeConfig.disableCollapse"
+        class="el-collapse-item__arrow"
+        :class="{'el-icon-arrow-up': !collapsed, 'el-icon-arrow-down': collapsed}"
+      />
     </legend>
 
-    <table v-show="!collapsed" class="table table-bordered">
+    <table
+      v-show="!collapsed"
+      class="table table-bordered"
+    >
       <colgroup v-if="mergeConfig.colgroup">
-        <col v-for="(item, idx) in mergeConfig.colgroup" :key="idx" :width="item.width" />
+        <col
+          v-for="(item, idx) in mergeConfig.colgroup"
+          :key="idx"
+          :width="item.width"
+        >
       </colgroup>
       <colgroup v-else>
-        <col v-for="(renderSchema, idx) in renderSchemas" :key="idx" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)"/>
-        <col v-if="showActionColumn" width="130px"/>
+        <col
+          v-for="(renderSchema, idx) in renderSchemas"
+          v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)"
+          :key="idx"
+        >
+        <col
+          v-if="showActionColumn"
+          width="130px"
+        >
       </colgroup>
       <thead>
-          <th v-for="(renderSchema, idx) in renderSchemas" :key="idx" v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)">
+        <th
+          v-for="(renderSchema, idx) in renderSchemas"
+          v-show="!analyzeItemVal(renderSchema.ui.hidden, idx)"
+          :key="idx"
+        >
+          <i
+            v-if="showRequiredFlag(renderSchema.rules.required)"
+            class="text-danger"
+          >*</i>
 
-            <i v-if="showRequiredFlag(renderSchema.rules.required)" class="text-danger">*</i>
+          {{ _analyzeVal(renderSchema.ui.label) }}<!--  标签信息 -->
 
-            {{_analyzeVal(renderSchema.ui.label)}}<!--  标签信息 -->
+          <!-- 提示信息 -->
+          <el-tooltip
+            v-if="renderSchema.ui.help.show === true"
+            class="item"
+            effect="dark"
+            placement="right-start"
+          >
+            <template #content>
+              <div v-html="renderSchema.ui.help.content" />
+            </template>
+            <a
+              class="help"
+              href="#"
+            ><span :class="renderSchema.ui.help.iconCls">{{ renderSchema.ui.help.text }}</span></a>
+          </el-tooltip>
 
-            <!-- 提示信息 -->
-            <el-tooltip v-if="renderSchema.ui.help.show === true" class="item" effect="dark" placement="right-start">
-              <template v-slot:content>
-                <div v-html="renderSchema.ui.help.content"></div>
-              </template>
-              <a class="help" href="#"><span :class="renderSchema.ui.help.iconCls">{{renderSchema.ui.help.text}}</span></a>
-            </el-tooltip>
+          <!-- 说明信息 -->
+          <small
+            v-if="renderSchema.ui.description"
+            class="form-text text-muted"
+            v-html="_analyzeVal(renderSchema.ui.description)"
+          />
+        </th>
 
-            <!-- 说明信息 -->
-            <small v-if="renderSchema.ui.description" class="form-text text-muted" v-html="_analyzeVal(renderSchema.ui.description)">
-            </small>
-          </th>
-
-          <th v-if="showActionColumn">{{$nclang('action')}}</th>
+        <th v-if="showActionColumn">
+          {{ $nclang('action') }}
+        </th>
       </thead>
       <tbody>
-        <tr v-for="(dataItem, idx) in schema.value" :key="dataItem.__dataSchema.__id">
-          <td v-for="(fieldSchema, fieldName, fIdx) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})" :key="fieldName" v-show="!analyzeItemVal(renderSchemas[fIdx].ui.hidden, fIdx)"><!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
-            <slot :name="fieldName" :schema="fieldSchema" :idx="idx"></slot>
+        <tr
+          v-for="(dataItem, idx) in schema.value"
+          :key="dataItem.__dataSchema.__id"
+        >
+          <td
+            v-for="(fieldSchema, fieldName, fIdx) in (dataItem.__dataSchema.properties || {__notObjItem: dataItem.__dataSchema})"
+            v-show="!analyzeItemVal(renderSchemas[fIdx].ui.hidden, fIdx)"
+            :key="fieldName"
+          >
+            <!-- 注意：__notObjItem 这个Key为与form-item约定好的值，其它名字不生效 -->
+            <slot
+              :name="fieldName"
+              :schema="fieldSchema"
+              :idx="idx"
+            />
           </td>
 
           <td v-if="showActionColumn">
             <!-- 项控制按钮 -->
             <el-button-group size="small">
-              <el-button @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))" v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))" type="danger" :icon="RemoveFilled" />
-              <el-button @click="itemUp(idx)" v-show="idx !== 0" v-if="!mergeConfig.disableReorder" :icon="SortUp" />
-              <el-button @click="itemDown(idx)" v-show="idx !== schema.value.length - 1" v-if="!mergeConfig.disableReorder" :icon="SortDown" />
+              <el-button
+                v-if="(!mergeConfig.disableDel && !isDelExceptionRow(dataItem.__dataSchema)) || (mergeConfig.disableDel && isDelExceptionRow(dataItem.__dataSchema))"
+                type="danger"
+                :icon="RemoveFilled"
+                @click="delItem(idx, mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.item || $nclang('delItemTips'))"
+              />
+              <el-button
+                v-show="idx !== 0"
+                v-if="!mergeConfig.disableReorder"
+                :icon="SortUp"
+                @click="itemUp(idx)"
+              />
+              <el-button
+                v-show="idx !== schema.value.length - 1"
+                v-if="!mergeConfig.disableReorder"
+                :icon="SortDown"
+                @click="itemDown(idx)"
+              />
             </el-button-group>
           </td>
         </tr>
@@ -57,17 +122,31 @@
         <tr>
           <td :colspan="renderSchemas.length + 1">
             <!-- 列表控制按钮 -->
-            <el-button-group size="small" v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel">
-              <el-button @click="addItem()" v-if="!mergeConfig.disableAdd" :icon="CirclePlusFilled">{{mergeConfig.addTxt || $nclang('add')}}</el-button>
-              <el-button @click="delAllItems(mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.all || $nclang('delAllTips'))" v-if="!mergeConfig.disableDel" type="danger" :icon="RemoveFilled">{{mergeConfig.delAllTxt || $nclang('delAll')}}</el-button>
+            <el-button-group
+              v-if="!mergeConfig.disableAdd || !mergeConfig.disableDel"
+              size="small"
+            >
+              <el-button
+                v-if="!mergeConfig.disableAdd"
+                :icon="CirclePlusFilled"
+                @click="addItem()"
+              >
+                {{ mergeConfig.addTxt || $nclang('add') }}
+              </el-button>
+              <el-button
+                v-if="!mergeConfig.disableDel"
+                type="danger"
+                :icon="RemoveFilled"
+                @click="delAllItems(mergeConfig.requiredDelConfirm, mergeConfig.delConfirmText.all || $nclang('delAllTips'))"
+              >
+                {{ mergeConfig.delAllTxt || $nclang('delAll') }}
+              </el-button>
             </el-button-group>
           </td>
         </tr>
       </tfoot>
     </table>
-
   </div>
-
 </template>
 
 <style lang="scss">
@@ -152,6 +231,12 @@
       }
     },
 
+    data() {
+      return {
+        renderSchemas: []
+      }
+    },
+
     created() {
 
       // 取得表头数据
@@ -163,12 +248,6 @@
         this.$data.renderSchemas = [this.schema.items];
       }
 
-    },
-
-    data() {
-      return {
-        renderSchemas: []
-      }
     },
 
     methods: {

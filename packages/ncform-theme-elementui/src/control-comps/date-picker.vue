@@ -1,18 +1,18 @@
 <template>
-  <el-date-picker class="ncform-date-picker"
+  <el-date-picker
     v-if="type && typeOptions[type]"
+    v-show="!hidden"
+    v-model="modelVal"
+    class="ncform-date-picker"
     :placeholder="placeholder || $nclang(typeOptions[type].placeholder)"
     :disabled="disabled"
     :readonly="readonly"
     :size="mergeConfig.size"
     :clearable="mergeConfig.clearable"
-    v-show="!hidden"
-    v-model="modelVal"
     :type="type"
     :format="mergeConfig.format || $nclang(typeOptions[type].format)"
     :value-format="mergeConfig.valueFormat"
-    >
-  </el-date-picker>
+  />
 </template>
 
 <style lang="scss">
@@ -73,12 +73,6 @@ export default {
     }
   },
 
-  mounted() {
-    if(this.$data.modelVal){
-      this.$data.modelVal = this.mergeConfig.valueFormat ? this.$data.modelVal : new Date(parseInt(this.$data.modelVal));
-    }
-  },
-
   data() {
     return {
       typeOptions: {
@@ -123,6 +117,12 @@ export default {
       } else {
         return this.mergeConfig.type;
       }
+    }
+  },
+
+  mounted() {
+    if(this.$data.modelVal){
+      this.$data.modelVal = this.mergeConfig.valueFormat ? this.$data.modelVal : new Date(parseInt(this.$data.modelVal));
     }
   },
 
