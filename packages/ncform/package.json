@@ -6,7 +6,6 @@
   "module": "dist/vueNcform.es.js",
   "style": "dist/index.css",
   "scripts": {
-    "dev": "vite build --watch",
     "build": "vite build"
   },
   "dependencies": {
