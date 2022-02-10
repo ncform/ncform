@@ -48,7 +48,7 @@
     "mocha": "^4.0.1",
     "nock": "^10.0.1",
     "node-libs-browser": "^1.0.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "postcss-loader": "^0.8.0",
     "postcss-sprites": "^4.0.0",
     "power-assert": "^1.4.4",
