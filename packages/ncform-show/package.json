@@ -60,7 +60,7 @@
     "@ncform/ncform-common": "^1.7.9",
     "@ncform/ncform-theme-elementui": "^1.7.9",
     "ace-builds": "^1.2.9",
-    "lodash-es": "^4.16.2",
+    "lodash-es": "^4.17.21",
     "vue": "^2.1.8"
   }
 }
