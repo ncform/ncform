@@ -66,45 +66,64 @@
         :style="{display: _analyzeVal(fieldSchema.ui.hidden) ? 'none' : ''}"
         class="form-group row"
       >
-        <template>
-          <label
-            v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace"
-            :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"
-            class="col-form-label"
-          >
-            <!-- 必填标识 -->
-            <i
-              v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)"
-              class="text-danger"
-            >*</i>
-            {{ _analyzeVal(fieldSchema.ui.label) }}
+        <label
+          v-if="!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace"
+          :style="{'visibility': fieldSchema.ui.showLabel ? 'visible' : 'hidden', width: mergeConfig.labelWidth}"
+          class="col-form-label"
+        >
+          <!-- 必填标识 -->
+          <i
+            v-if="_analyzeVal(fieldSchema.rules.required) === true || (typeof fieldSchema.rules.required === 'object' && _analyzeVal(fieldSchema.rules.required.value) === true)"
+            class="text-danger"
+          >*</i>
+          {{ _analyzeVal(fieldSchema.ui.label) }}
 
-            <!--  提示信息 -->
-            <a
-              v-if="fieldSchema.ui.help.show === true"
-              :title="fieldSchema.ui.help.content"
-              href="#"
-            ><span :class="fieldSchema.ui.help.iconCls">{{ fieldSchema.ui.help.text }}</span></a>
-            :
-          </label>
-          <div
-            :style="{'margin-left': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}"
-            :class="{'col-md-9': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace)}"
-          >
-            <slot :name="field" />
+          <!--  提示信息 -->
+          <a
+            v-if="fieldSchema.ui.help.show === true"
+            :title="fieldSchema.ui.help.content"
+            href="#"
+          ><span :class="fieldSchema.ui.help.iconCls">{{ fieldSchema.ui.help.text }}</span></a>
+          :
+        </label>
+        <div
+          :style="{'margin-left': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace ? mergeConfig.labelWidth + ';' : '0px;'}"
+          :class="{'col-md-9': !legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace, 'col-md-12': !(!legendEnable(fieldSchema) && !fieldSchema.ui.noLabelSpace)}"
+        >
+          <slot :name="field" />
 
-            <!-- 说明信息 -->
-            <small
-              v-if="fieldSchema.ui.description"
-              class="form-text text-muted"
-              v-html="_analyzeVal(fieldSchema.ui.description)"
-            />
-          </div>
-        </template>
+          <!-- 说明信息 -->
+          <small
+            v-if="fieldSchema.ui.description"
+            class="form-text text-muted"
+            v-html="_analyzeVal(fieldSchema.ui.description)"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { ncformMixins } from '@ncform/ncform-common'
+
+const { layoutObjectMixin } = ncformMixins.vue
+
+export default {
+  mixins: [layoutObjectMixin],
+  props: {
+    showLegend: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    legendEnable (fieldSchema) {
+      return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend
+    }
+  }
+}
+</script>
 
 <style lang="scss">
   .__object-form-item {
@@ -137,24 +156,3 @@
     }
   }
 </style>
-
-<script>
-import { ncformMixins } from '@ncform/ncform-common'
-
-const { layoutObjectMixin } = ncformMixins.vue
-
-export default {
-  mixins: [layoutObjectMixin],
-  props: {
-    showLegend: {
-      type: Boolean,
-      default: true
-    }
-  },
-  methods: {
-    legendEnable (fieldSchema) {
-      return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend
-    }
-  }
-}
-</script>

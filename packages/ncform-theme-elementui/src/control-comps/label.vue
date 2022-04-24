@@ -6,18 +6,6 @@
   >{{ val }}</label>
 </template>
 
-<style lang="scss">
-  .ncform-label {
-    font-size: 14px;
-
-    &:not(.multi-line) {
-      text-overflow:ellipsis;
-      overflow:hidden;
-      white-space:nowrap;
-    }
-  }
-</style>
-
 <script>
   import { ncformMixins } from '@ncform/ncform-common';
 
@@ -29,7 +17,8 @@
 
     props: {
       modelValue: {
-        type: [String, Number]
+        type: [String, Number],
+        default: ''
       }
     },
 
@@ -51,3 +40,15 @@
     },
 	}
 </script>
+
+<style lang="scss">
+  .ncform-label {
+    font-size: 14px;
+
+    &:not(.multi-line) {
+      text-overflow:ellipsis;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+  }
+</style>

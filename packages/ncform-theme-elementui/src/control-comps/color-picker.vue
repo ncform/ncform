@@ -6,9 +6,6 @@
   />
 </template>
 
-<style lang="scss" scoped>
-</style>
-
 <script>
 
   import { ncformMixins } from '@ncform/ncform-common';
@@ -21,7 +18,8 @@
 
     props: {
       modelValue: {
-        type: [String]
+        type: [String],
+        default: ''
       }
     },
 

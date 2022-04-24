@@ -145,17 +145,6 @@
   </div>
 </template>
 
-<style lang="scss" >
-.__array-table-form-item {
-
-  .table thead th{ vertical-align: top; }
-
-  & > legend {
-    cursor: pointer;
-  }
-}
-</style>
-
 <script>
 
 import _map from 'lodash-es/map'
@@ -227,3 +216,14 @@ export default {
 
 }
 </script>
+
+<style lang="scss" >
+.__array-table-form-item {
+
+  .table thead th{ vertical-align: top; }
+
+  & > legend {
+    cursor: pointer;
+  }
+}
+</style>

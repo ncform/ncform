@@ -41,56 +41,6 @@
   </div>
 </template>
 
-<style lang="scss">
-
-  .h-layout {
-    .ncform-checkbox {
-      &.__ncform-control {
-        clear: none;
-      }
-    }
-  }
-
-  .v-layout {
-    .ncform-checkbox {
-      &.__ncform-control {
-        clear: both;
-      }
-    }
-  }
-
-  .ncform-checkbox {
-    .check-all {
-      margin-right: 17px;
-    }
-
-    .el-checkbox-group {
-      display: inline-block;
-    }
-
-    .is-vertical {
-      display: block;
-
-      & + .el-checkbox {
-        margin-left: 0;
-        margin-top: 15px;
-      }
-    }
-
-    .label-read {
-      font-size: 14px;
-
-      &.not[label-vertical] + .label-read {
-        margin-left: 20px;
-      }
-
-      &.label-vertical {
-        display: block;
-      }
-    }
-  }
-</style>
-
 <script>
 
   import { ncformMixins } from '@ncform/ncform-common';
@@ -263,3 +213,53 @@
     },
   }
 </script>
+
+<style lang="scss">
+
+  .h-layout {
+    .ncform-checkbox {
+      &.__ncform-control {
+        clear: none;
+      }
+    }
+  }
+
+  .v-layout {
+    .ncform-checkbox {
+      &.__ncform-control {
+        clear: both;
+      }
+    }
+  }
+
+  .ncform-checkbox {
+    .check-all {
+      margin-right: 17px;
+    }
+
+    .el-checkbox-group {
+      display: inline-block;
+    }
+
+    .is-vertical {
+      display: block;
+
+      & + .el-checkbox {
+        margin-left: 0;
+        margin-top: 15px;
+      }
+    }
+
+    .label-read {
+      font-size: 14px;
+
+      &.not[label-vertical] + .label-read {
+        margin-left: 20px;
+      }
+
+      &.label-vertical {
+        display: block;
+      }
+    }
+  }
+</style>

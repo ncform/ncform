@@ -24,43 +24,6 @@
   </div>
 </template>
 
-<style lang="scss">
-
-  .h-layout {
-    .ncform-radio {
-      &.__ncform-control {
-        clear: none;
-      }
-    }
-  }
-
-  .v-layout {
-    .ncform-radio {
-      &.__ncform-control {
-        clear: both;
-      }
-    }
-  }
-
-  .ncform-radio {
-
-    .is-vertical {
-      display: block;
-
-      & + .el-radio {
-        margin-left: 0;
-        margin-top: 15px;
-      }
-    }
-
-    .label-read {
-      font-size: 14px;
-    }
-  }
-
-
-</style>
-
 <script>
 
   import { ncformMixins } from '@ncform/ncform-common';
@@ -85,7 +48,8 @@
 
     props: {
       modelValue: {
-        type: [String, Number, Boolean]
+        type: [String, Number, Boolean],
+        default: ''
       }
     },
 
@@ -199,3 +163,38 @@
     }
   }
 </script>
+
+<style lang="scss">
+
+  .h-layout {
+    .ncform-radio {
+      &.__ncform-control {
+        clear: none;
+      }
+    }
+  }
+
+  .v-layout {
+    .ncform-radio {
+      &.__ncform-control {
+        clear: both;
+      }
+    }
+  }
+
+  .ncform-radio {
+
+    .is-vertical {
+      display: block;
+
+      & + .el-radio {
+        margin-left: 0;
+        margin-top: 15px;
+      }
+    }
+
+    .label-read {
+      font-size: 14px;
+    }
+  }
+</style>

@@ -23,6 +23,8 @@ export default {
 
   },
 
+  emits: ['update:modelValue'],
+
   props: {
     config: {
       type: Object,

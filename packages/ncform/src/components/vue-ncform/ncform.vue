@@ -42,7 +42,8 @@ export default {
 
   props: {
     formSchema: {
-      type: Object
+      type: Object,
+      required: true
     },
 
     formName: {
@@ -51,7 +52,8 @@ export default {
     },
 
     modelValue: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
 
     isDirty: {
@@ -59,6 +61,8 @@ export default {
       default: false
     }
   },
+
+  emits: ['update:isDirty', 'update:modelValue', 'submit', 'change'],
 
   data () {
     return {

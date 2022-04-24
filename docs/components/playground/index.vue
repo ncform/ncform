@@ -1,31 +1,39 @@
 <template>
-  <br />
+  <br>
   <el-row>
     <el-col :span="12">
       <el-space>
         <div>模板：</div>
-        <el-select v-model="schemaType" @change="handleSchemaSelect">
+        <el-select
+          v-model="schemaType"
+          @change="handleSchemaSelect"
+        >
           <el-option
             v-for="item in schemas"
             :key="item.value"
             :label="item.label.cn"
             :value="item.value"
-          >
-          </el-option>
+          />
         </el-select>
       </el-space>
       <div class="schema-editor">
-        <el-input type="textarea" :rows="30" v-model="formSchemaStr" />
+        <el-input
+          v-model="formSchemaStr"
+          type="textarea"
+          :rows="30"
+        />
       </div>
     </el-col>
     <el-col :span="12">
-      <el-button @click="submit()">获取表单数据</el-button>
+      <el-button @click="submit()">
+        获取表单数据
+      </el-button>
       <client-only>
         <ncform
           v-if="formSchema"
+          v-model="formData"
           :form-schema="formSchema"
           form-name="ncform-playground"
-          v-model="formData"
           @submit="submit()"
         />
       </client-only>

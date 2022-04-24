@@ -121,42 +121,6 @@
   </div>
 </template>
 
-<style lang="scss">
-  .__array-form-item {
-
-    // margin-top: 8px;
-
-    & > legend {
-      border-left: 6px solid #878D99;
-      padding: 6px;
-      background-color: #d8dce5;
-      color: #5a5e66;
-      font-size: 14px;
-      margin-bottom: 0px;
-      border-radius: 4px 4px 0 0;
-
-      .el-collapse-item__arrow {
-        line-height: 22px;
-        cursor: pointer;
-      }
-    }
-
-    .list-item {
-      // border: 1px solid #d8dce5;
-      margin: 0px 0px 8px;
-      .list-item-label {
-        padding: 8px 8px 4px 8px;
-        label {
-          font-size: 14px;
-        }
-      }
-    }
-    .normal-item {
-      padding: 4px 8px 8px 8px;
-    }
-  }
-</style>
-
 <script setup>
   import { ArrowDown, ArrowUp, CirclePlusFilled, RemoveFilled, SortUp, SortDown } from '@element-plus/icons-vue'
 </script>
@@ -215,3 +179,39 @@
 
   }
 </script>
+
+<style lang="scss">
+  .__array-form-item {
+
+    // margin-top: 8px;
+
+    & > legend {
+      border-left: 6px solid #878D99;
+      padding: 6px;
+      background-color: #d8dce5;
+      color: #5a5e66;
+      font-size: 14px;
+      margin-bottom: 0px;
+      border-radius: 4px 4px 0 0;
+
+      .el-collapse-item__arrow {
+        line-height: 22px;
+        cursor: pointer;
+      }
+    }
+
+    .list-item {
+      // border: 1px solid #d8dce5;
+      margin: 0px 0px 8px;
+      .list-item-label {
+        padding: 8px 8px 4px 8px;
+        label {
+          font-size: 14px;
+        }
+      }
+    }
+    .normal-item {
+      padding: 4px 8px 8px 8px;
+    }
+  }
+</style>

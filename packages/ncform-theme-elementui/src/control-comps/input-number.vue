@@ -12,24 +12,6 @@
   </div>
 </template>
 
-<style lang="scss">
-  .h-layout {
-    .ncform-input-number {
-      &.__ncform-control {
-        clear: none;
-      }
-    }
-  }
-
-  .v-layout {
-    .ncform-input-number {
-      &.__ncform-control {
-        clear: both;
-      }
-    }
-  }
-</style>
-
 <script>
 
   import { ncformMixins } from '@ncform/ncform-common';
@@ -70,3 +52,21 @@
 
   }
 </script>
+
+<style lang="scss">
+  .h-layout {
+    .ncform-input-number {
+      &.__ncform-control {
+        clear: none;
+      }
+    }
+  }
+
+  .v-layout {
+    .ncform-input-number {
+      &.__ncform-control {
+        clear: both;
+      }
+    }
+  }
+</style>

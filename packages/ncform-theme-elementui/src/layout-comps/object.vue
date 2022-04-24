@@ -125,6 +125,27 @@
   </div>
 </template>
 
+<script>
+import { ncformMixins } from '@ncform/ncform-common';
+
+const { layoutObjectMixin } = ncformMixins.vue;
+
+export default {
+  mixins: [layoutObjectMixin],
+  props: {
+    showLegend: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    legendEnable(fieldSchema) {
+      return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
+    }
+  }
+};
+</script>
+
 <style lang="scss">
 
   .__object-form-item {
@@ -212,24 +233,3 @@
   }
 
 </style>
-
-<script>
-import { ncformMixins } from '@ncform/ncform-common';
-
-const { layoutObjectMixin } = ncformMixins.vue;
-
-export default {
-  mixins: [layoutObjectMixin],
-  props: {
-    showLegend: {
-      type: Boolean,
-      default: true
-    }
-  },
-  methods: {
-    legendEnable(fieldSchema) {
-      return fieldSchema.ui && fieldSchema.ui.showLegend && fieldSchema.ui.legend;
-    }
-  }
-};
-</script>

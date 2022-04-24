@@ -125,16 +125,6 @@
   </div>
 </template>
 
-<style lang="scss">
-  .__array-form-item {
-
-    & > legend {
-      cursor: pointer;
-    }
-
-  }
-</style>
-
 <script>
 import { ncformMixins } from '@ncform/ncform-common'
 
@@ -189,3 +179,13 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+  .__array-form-item {
+
+    & > legend {
+      cursor: pointer;
+    }
+
+  }
+</style>

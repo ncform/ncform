@@ -63,12 +63,13 @@
     <!-- 4. 不可拖拽，非自动上传 -->
     <template v-if="!readonly && !mergeConfig.drag && !mergeConfig.autoUpload">
       <el-button
-        v-slot:trigger
         :disabled="disabled"
         size="small"
         type="primary"
       >
-        {{ $nclang('chFile') }}
+        <template #trigger>
+          {{ $nclang('chFile') }}
+        </template>
       </el-button>
       <el-button
         :disabled="disabled"
@@ -82,49 +83,6 @@
     </template>
   </el-upload>
 </template>
-
-<style lang="scss">
-
-  .h-layout {
-    .ncform-upload {
-      &.__ncform-control {
-        clear: none;
-      }
-    }
-  }
-
-  .v-layout {
-    .ncform-upload {
-      &.__ncform-control {
-        clear: both;
-      }
-    }
-  }
-
-  .ncform-upload {
-    position: relative;
-
-    .disabled-mask {
-      position: absolute;
-      top: 0;
-      left: -10px;
-      width: 370px;
-      height: 180px;
-      cursor: not-allowed;
-    }
-
-    .upload-btn {
-      margin-left: 10px;
-    }
-
-    &.is-read-only{
-      float: left;
-      .el-upload {
-        display: none;
-      }
-    }
-  }
-</style>
 
 <script>
 
@@ -315,3 +273,45 @@
     }
   }
 </script>
+
+<style lang="scss">
+  .h-layout {
+    .ncform-upload {
+      &.__ncform-control {
+        clear: none;
+      }
+    }
+  }
+
+  .v-layout {
+    .ncform-upload {
+      &.__ncform-control {
+        clear: both;
+      }
+    }
+  }
+
+  .ncform-upload {
+    position: relative;
+
+    .disabled-mask {
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 370px;
+      height: 180px;
+      cursor: not-allowed;
+    }
+
+    .upload-btn {
+      margin-left: 10px;
+    }
+
+    &.is-read-only{
+      float: left;
+      .el-upload {
+        display: none;
+      }
+    }
+  }
+</style>

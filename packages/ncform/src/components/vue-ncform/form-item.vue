@@ -145,47 +145,6 @@
   </div>
 </template>
 
-<style lang="scss">
-  .__ncform-control {
-    width: 100%;
-    display: inline-block;
-  }
-
-  .__ncform-item-preview {
-    margin-top: 6px;
-    position: relative;
-
-    .wrapper {
-      overflow: hidden;
-      height: 100%;
-      width: 100%;
-      &.circle {
-        background-color: #EEEEEE;
-        border-radius: 1000px;
-      }
-      &.rounded {
-        background-color: #EEEEEE;
-        border-radius: 20px;
-      }
-      img, video {
-        max-width: 100%;
-      }
-    }
-    .clear {
-      position: absolute;
-      right: 8px;
-      cursor: pointer;
-      font-size: 21px;
-      font-weight: 700;
-      opacity: 0.2;
-    }
-  }
-
-  .invalid-feedback {
-    color: #f56c6c;
-  }
-</style>
-
 <script>
 import './layout-comps'
 import './control-comps'
@@ -201,38 +160,43 @@ export default {
   props: {
     schema: {
       type: Object,
-      default () {
-        return {}
-      }
+      default: () => ({})
     },
     globalConfig: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     formData: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     tempData: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     completeSchema: {
-      type: Object
+      type: Object,
+      default: () => ({})
     },
     idxChain: {
       // 用于记录在数组中的索引
-      type: String
+      type: String,
+      default: ''
     },
     paths: {
       // 用于记录字段的路径
-      type: String
+      type: String,
+      default: ''
     },
     formName: {
-      type: String
+      type: String,
+      required: true
     }
   },
 
   data () {
     return {
-      _id: Math.random()
+      itemId: Math.random()
         .toString(36)
         .substring(2),
       // 用于保存控件旧值
@@ -337,7 +301,7 @@ export default {
                 idxChain: this.idxChain,
                 globalConfig: this.globalConfig
               },
-              this.$data._id
+              this.$data.itemId
             )
             .then(result => {
               const oldValidationResult = this.schema.__validationResult
@@ -462,3 +426,45 @@ export default {
   }
 }
 </script>
+
+
+<style lang="scss">
+  .__ncform-control {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .__ncform-item-preview {
+    margin-top: 6px;
+    position: relative;
+
+    .wrapper {
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      &.circle {
+        background-color: #EEEEEE;
+        border-radius: 1000px;
+      }
+      &.rounded {
+        background-color: #EEEEEE;
+        border-radius: 20px;
+      }
+      img, video {
+        max-width: 100%;
+      }
+    }
+    .clear {
+      position: absolute;
+      right: 8px;
+      cursor: pointer;
+      font-size: 21px;
+      font-weight: 700;
+      opacity: 0.2;
+    }
+  }
+
+  .invalid-feedback {
+    color: #f56c6c;
+  }
+</style>

@@ -149,56 +149,6 @@
   </div>
 </template>
 
-<style lang="scss">
-
-.__array-table-form-item {
-
-  // margin-top: 8px;
-
-  & > legend {
-    border-left: 6px solid #878D99;
-    padding: 6px;
-    background-color: #d8dce5;
-    color: #5a5e66;
-    font-size: 14px;
-    margin-bottom: 0px;
-    border-radius: 4px 4px 0 0;
-
-    .el-collapse-item__arrow {
-      cursor: pointer;
-      line-height: 22px;
-    }
-  }
-
-  .table-bordered {
-    border: 1px solid #e6ebf5;
-    thead td, thead th {
-      border-bottom-width: 2px;
-      border: 1px solid #e6ebf5;
-    }
-  }
-  .table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-    border-collapse: collapse;
-    thead th {
-      vertical-align: bottom;
-      border-bottom: 1px solid #e6ebf5;
-      text-align: left;
-      color: #878d99;
-    }
-    td, th {
-      padding: .75rem;
-      vertical-align: top;
-      border-top: 1px solid #e6ebf5;
-      border-right: 1px solid #e6ebf5;
-    }
-  }
-}
-</style>
-
 <script setup>
   import { CirclePlusFilled, RemoveFilled, SortUp, SortDown } from '@element-plus/icons-vue'
 </script>
@@ -275,3 +225,52 @@
 
   }
 </script>
+
+<style lang="scss">
+.__array-table-form-item {
+
+  // margin-top: 8px;
+
+  & > legend {
+    border-left: 6px solid #878D99;
+    padding: 6px;
+    background-color: #d8dce5;
+    color: #5a5e66;
+    font-size: 14px;
+    margin-bottom: 0px;
+    border-radius: 4px 4px 0 0;
+
+    .el-collapse-item__arrow {
+      cursor: pointer;
+      line-height: 22px;
+    }
+  }
+
+  .table-bordered {
+    border: 1px solid #e6ebf5;
+    thead td, thead th {
+      border-bottom-width: 2px;
+      border: 1px solid #e6ebf5;
+    }
+  }
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+    thead th {
+      vertical-align: bottom;
+      border-bottom: 1px solid #e6ebf5;
+      text-align: left;
+      color: #878d99;
+    }
+    td, th {
+      padding: .75rem;
+      vertical-align: top;
+      border-top: 1px solid #e6ebf5;
+      border-right: 1px solid #e6ebf5;
+    }
+  }
+}
+</style>

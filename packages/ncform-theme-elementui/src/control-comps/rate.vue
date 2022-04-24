@@ -22,26 +22,6 @@
   />
 </template>
 
-<style lang="scss">
-  .h-layout {
-    .ncform-rate {
-      &.__ncform-control {
-        clear: none;
-        line-height: 50px !important;
-      }
-    }
-  }
-
-  .v-layout {
-    .ncform-rate {
-      &.__ncform-control {
-        clear: both;
-        line-height: unset !important;
-      }
-    }
-  }
-</style>
-
 <script>
 
   import { ncformMixins } from '@ncform/ncform-common';
@@ -92,3 +72,23 @@
 
   }
 </script>
+
+<style lang="scss">
+  .h-layout {
+    .ncform-rate {
+      &.__ncform-control {
+        clear: none;
+        line-height: 50px !important;
+      }
+    }
+  }
+
+  .v-layout {
+    .ncform-rate {
+      &.__ncform-control {
+        clear: both;
+        line-height: unset !important;
+      }
+    }
+  }
+</style>

@@ -16,19 +16,6 @@
   />
 </template>
 
-<style lang="scss">
-  .h-layout {
-    .__ncform-control.ncform-switch {
-      line-height: 35px !important;
-    }
-  }
-  .v-layout {
-    .__ncform-control.ncform-switch {
-      line-height: unset !important;
-    }
-  }
-</style>
-
 <script>
 
   import { ncformMixins } from '@ncform/ncform-common';
@@ -41,7 +28,8 @@
 
     props: {
       modelValue: {
-        type: [Boolean, String, Number]
+        type: [Boolean, String, Number],
+        default: ''
       }
     },
 
@@ -73,3 +61,16 @@
 
   }
 </script>
+
+<style lang="scss">
+  .h-layout {
+    .__ncform-control.ncform-switch {
+      line-height: 35px !important;
+    }
+  }
+  .v-layout {
+    .__ncform-control.ncform-switch {
+      line-height: unset !important;
+    }
+  }
+</style>

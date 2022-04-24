@@ -15,30 +15,6 @@
   />
 </template>
 
-<style lang="scss">
-  .h-layout {
-    .ncform-date-picker {
-      &.__ncform-control {
-        clear: none;
-      }
-    }
-  }
-
-  .v-layout {
-    .ncform-date-picker {
-      &.__ncform-control {
-        clear: both;
-      }
-    }
-  }
-
-  .ncform-date-picker {
-    &.el-date-editor.el-input {
-      width: 100%;
-    }
-  }
-</style>
-
 <script>
 import { ncformMixins } from '@ncform/ncform-common';
 
@@ -134,3 +110,27 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+  .h-layout {
+    .ncform-date-picker {
+      &.__ncform-control {
+        clear: none;
+      }
+    }
+  }
+
+  .v-layout {
+    .ncform-date-picker {
+      &.__ncform-control {
+        clear: both;
+      }
+    }
+  }
+
+  .ncform-date-picker {
+    &.el-date-editor.el-input {
+      width: 100%;
+    }
+  }
+</style>
