@@ -25,7 +25,7 @@
       </div>
     </el-col>
     <el-col :span="12">
-      <el-button @click="submit()">
+      <el-button @click="submit">
         获取表单数据
       </el-button>
       <client-only>
@@ -34,7 +34,7 @@
           v-model="formData"
           :form-schema="formSchema"
           form-name="ncform-playground"
-          @submit="submit()"
+          @submit="submit"
         />
       </client-only>
     </el-col>
