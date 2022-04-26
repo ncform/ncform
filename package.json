@@ -1,6 +1,5 @@
 {
   "name": "root",
-  "private": true,
   "workspaces": [
     "packages/*",
     "docs"
@@ -25,7 +24,8 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
-    "docs:deploy": "sh deploy.sh"
+    "docs:deploy": "sh deploy.sh",
+    "prerelease": "lerna publish prerelease"
   },
   "devDependencies": {
     "element-plus": "^2.1.0",

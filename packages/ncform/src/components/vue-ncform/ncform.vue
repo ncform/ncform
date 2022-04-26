@@ -27,7 +27,7 @@
 import _get from 'lodash-es/get'
 import _cloneDeep from 'lodash-es/cloneDeep'
 import _omit from 'lodash-es/omit'
-import { ncformUtils } from '@ncform/ncform-common'
+import { ncformUtils } from '@ncform-plus/ncform-common'
 import formItem from './form-item.vue'
 
 export default {

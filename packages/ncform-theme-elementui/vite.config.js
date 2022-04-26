@@ -13,14 +13,14 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'vue',
-        '@ncform/ncform-common',
+        '@ncform-plus/ncform-common',
         'sortablejs'
       ],
       output: {
         exports: 'named',
         globals: {
           vue: 'Vue',
-          '@ncform/ncform-common': 'ncformCommon',
+          '@ncform-plus/ncform-common': 'ncformCommon',
           sortablejs: 'Sortable'
         }
       }

@@ -1,4 +1,4 @@
-import { ncformUtils, ValidationRule} from '@ncform/ncform-common'
+import { ncformUtils, ValidationRule} from '@ncform-plus/ncform-common'
 
 const { notEmptyVal, getValType } = ncformUtils
 

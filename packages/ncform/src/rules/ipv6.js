@@ -1,4 +1,4 @@
-import { ValidationRule } from '@ncform/ncform-common'
+import { ValidationRule } from '@ncform-plus/ncform-common'
 
 class Ipv6Rule extends ValidationRule {
   constructor (props) {

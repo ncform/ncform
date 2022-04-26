@@ -1,6 +1,8 @@
-import axios from "axios";
-
 class ValidationRule {
+  name: string;
+  defaultErrMsg: string;
+  errMsg: any;
+
   constructor() {
     this.name = "";
     this.defaultErrMsg = "";
@@ -17,7 +19,7 @@ class ValidationRule {
       if (ruleVal && ruleVal.options) options = ruleVal.options;
     }
 
-    const result = this.validateLogic(val, ruleVal, options);
+    const result: any = this.validateLogic(val, ruleVal, options);
 
     return new Promise(resolve => {
       switch (
@@ -55,10 +57,6 @@ class ValidationRule {
 
   validateLogic(val, ruleVal, options) {
     return false;
-  }
-
-  get $http() {
-    return window.$http || window.$axios || window.axios || axios;
   }
 }
 

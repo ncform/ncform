@@ -1,4 +1,4 @@
-import ncformUtils from "./ncform-utils";
+import * as ncformUtils from "./ncform-utils";
 import ValidationRule from "./validation-rule";
 
 import controlMixin from "./mixins/vue/control-mixin";

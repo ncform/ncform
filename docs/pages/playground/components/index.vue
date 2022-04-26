@@ -43,7 +43,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useNcform } from '@ncform/ncform'
+import { useNcform } from '@ncform-plus/ncform'
 import schemas from './schemas'
 
 const { ncformValidate } = useNcform()

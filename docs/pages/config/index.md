@@ -1,12 +1,7 @@
-[English Version](CONFIG.md)
+---
+---
 
-- 目录
-  - [Schema](#ncform-schema)
-  - [Props](#ncform-props)
-  - [API](#ncform-API)
-  - [Event](#ncform-event)
-
-## ncform schema
+## Schema
 
 ```js
 {
@@ -26,7 +21,6 @@
 
       /* UI */
       ui: {
-
         columns: 6, // 占用列数，共12列。【支持dx表达式】
         label: '', // 标签内容【支持dx表达式】
         showLabel: true, // 是否显示标签（注意：当为 false 时，依然占着空间）
@@ -149,9 +143,9 @@
 
 ```
 
-## ncform props
+## Props
 
-- form-schema
+### form-schema
 
 用于描述表单的schema配置数据，具体数据结构请参考[ncform schema](#ncform-schema)
 
@@ -160,7 +154,7 @@
 <ncform :form-schema="formSchema"></ncform>
 ```
 
-- form-name
+### form-name
 
 表单名称，当使用部分 [ncform API](#ncform-api) 时需要提供该值
 
@@ -190,11 +184,11 @@
 <button :disabled="!isFormDirty">提交</button>
 ```
 
-## ncform API
+## API
 
 ncform API 都是Vue实例级别的方法。
 
-- $ncformGetValue(formName, options)
+### $ncformGetValue
 
 手动获取表单的值。
 
@@ -205,7 +199,7 @@ options.ignoreHiddenField: 是否忽略掉隐藏字段。默认为false
 this.$ncformGetValue('demoForm', {ignoreHiddenField: true});
 ```
 
-- $ncformReset(formName)
+### $ncformReset
 
 重置表单。重置的值为最后一次外部更新 `ncform v-model` 的值
 
@@ -218,7 +212,7 @@ this.$ncformGetValue('demoForm', {ignoreHiddenField: true});
 this.$ncformReset('demoForm');
 ```
 
-- $ncformValidate(formName)
+### $ncformValidate
 
 校验表单的所有字段的规则。
 
@@ -231,7 +225,7 @@ this.$ncformValidate('demoForm').then(data => {
 })
 ```
 
-- $ncformAddWidget({name, widget})
+### $ncformAddWidget
 
 增加自定义表单控件
 
@@ -248,7 +242,7 @@ this.$ncformAddWidget({name: 'sayHi', widget: {
 }});
 ```
 
-- $ncformAddRule({name, rule})
+### $ncformAddRule
 
 增加自定义验证规则
 
@@ -271,7 +265,7 @@ class MyCustomRule extends ncformCommon.ValidationRule {
 this.$ncformAddRule({name: 'myCustom', rule: MyCustomRule});
 ```
 
-- $ncformAllRules()
+### $ncformAllRules
 
 取得ncform所有注册的校验规则
 
@@ -280,7 +274,7 @@ this.$ncformAddRule({name: 'myCustom', rule: MyCustomRule});
 const allRules = this.$ncformAllRules();
 ```
 
-- $ncformAllWidgets()
+### $ncformAllWidgets
 
 取得ncform所有注册的表单组件
 
@@ -289,9 +283,9 @@ const allRules = this.$ncformAllRules();
 const allWidgets = this.$ncformAllWidgets();
 ```
 
-## ncform event
+## Event
 
-- submit
+### submit
 
 提交表单事件。
 
@@ -300,7 +294,7 @@ const allWidgets = this.$ncformAllWidgets();
 <ncform @submit="submit()"></ncform>
 ```
 
-- change
+### change
 
 表单项值更改事件
 

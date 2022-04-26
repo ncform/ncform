@@ -2,7 +2,7 @@ import _cloneDeep from "lodash-es/cloneDeep";
 import _template from "lodash-es/template";
 import _get from "lodash-es/get";
 import extend from "extend";
-import ncformUtils from "../../ncform-utils";
+import * as ncformUtils from "../../ncform-utils";
 
 export default {
 
@@ -124,7 +124,7 @@ export default {
     _analyzeVal(val, extraIndex) {
       return ncformUtils.smartAnalyzeVal(val, {
         idxChain: this.idxChain + (isNaN(extraIndex) ? '' : (this.idxChain ? ',' : '') + extraIndex),
-        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
+        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData, selfData: {} }
       });
     },
 
@@ -245,7 +245,7 @@ export default {
     },
 
     $nclang(key, data) {
-      return Object.prototype.toString.call(data) !== "[object Object]" ? this.$data.i18n[key] : _template(this.$data.i18n[key])(data);
+      return Object.prototype.toString.call(data) !== "[object Object]" ? this.$data.i18n[key] : _template(this.$data.i18n[key], {}, false)(data);
     }
   }
 };

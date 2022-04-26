@@ -1,4 +1,4 @@
-import { ValidationRule } from '@ncform/ncform-common'
+import { ValidationRule } from '@ncform-plus/ncform-common'
 
 class DateTimeRule extends ValidationRule {
   constructor (props) {

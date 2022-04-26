@@ -126,7 +126,7 @@
 </script>
 
 <script>
-  import { ncformMixins } from '@ncform/ncform-common';
+  import { ncformMixins } from '@ncform-plus/ncform-common';
 
   const { layoutArrayMixin } = ncformMixins.vue;
 

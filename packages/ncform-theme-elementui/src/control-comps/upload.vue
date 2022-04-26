@@ -86,7 +86,7 @@
 
 <script>
 
-  import { ncformMixins } from '@ncform/ncform-common';
+  import { ncformMixins } from '@ncform-plus/ncform-common';
   import _get from 'lodash-es/get';
 
   const { controlMixin } = ncformMixins.vue;
@@ -181,6 +181,7 @@
             if (!(modelVal[i].status)) modelVal[i].status = 'success';
           }
         }
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         vm.uploadInfo.numUploaded = numUploaded;
         return modelVal;
       },

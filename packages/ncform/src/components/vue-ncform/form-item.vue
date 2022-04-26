@@ -55,7 +55,7 @@
           :idx-chain="(idxChain ? idxChain + ',' : '') + props.idx"
           :global-config="globalConfig"
           :complete-schema="completeSchema"
-          :paths="paths + '[' + props.idx + ']' + (fieldName === '__notObjItem' ? '' : `.${fieldName}`)"
+          :paths="paths + '[' + props.idx + ']' + (String(fieldName) === '__notObjItem' ? '' : `.${fieldName}`)"
           :form-name="formName"
         />
       </template>
@@ -115,13 +115,13 @@
           <video
             v-if="schema.ui.preview.type === 'video'"
             :src="getPreviewVal(schema.ui.preview.value, schema.value)"
-            controls="controls"
+            controls
           />
           <!-- 音频 -->
           <audio
             v-if="schema.ui.preview.type === 'audio'"
             :src="getPreviewVal(schema.ui.preview.value, schema.value)"
-            controls="controls"
+            controls
           />
           <!-- 链接 -->
           <a
@@ -145,10 +145,10 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import './layout-comps'
 import './control-comps'
-import { ncformUtils } from '@ncform/ncform-common'
+import { ncformUtils } from '@ncform-plus/ncform-common'
 import _get from 'lodash-es/get'
 import _isArray from 'lodash-es/isArray'
 

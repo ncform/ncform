@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ncformCommon from '@ncform/ncform-common'
+import ncformCommon from '@ncform-plus/ncform-common'
 
 export default {
   mixins: [ncformCommon.mixins.vue.controlMixin],

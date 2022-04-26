@@ -1,5 +1,5 @@
 import extend from "extend";
-import ncformUtils from "../../ncform-utils";
+import * as ncformUtils from "../../ncform-utils";
 
 export default {
 
@@ -72,7 +72,7 @@ export default {
     _analyzeVal(val) {
       return ncformUtils.smartAnalyzeVal(val, {
         idxChain: this.idxChain,
-        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData }
+        data: { rootData: this.formData, constData: this.globalConst, tempData: this.tempData, selfData: {} }
       });
     },
     _setTempData(key, value) {

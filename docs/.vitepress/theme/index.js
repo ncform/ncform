@@ -1,12 +1,12 @@
 import DefaultTheme from 'vitepress/theme'
-import vueNcform from '@ncform/ncform'
-import ncformStdComps from '@ncform/ncform-theme-elementui'
+import vueNcform from '@ncform-plus/ncform'
+import ncformStdComps from '@ncform-plus/ncform-theme-elementui'
 import ElementPlus from 'element-plus'
 import 'element-plus/theme-chalk/index.css'
 
 if (import.meta.env.PROD) {
-  import('@ncform/ncform/dist/style.css')
-  import('@ncform/ncform-theme-elementui/dist/style.css')
+  import('@ncform-plus/ncform/dist/style.css')
+  import('@ncform-plus/ncform-theme-elementui/dist/style.css')
 }
 
 export default {

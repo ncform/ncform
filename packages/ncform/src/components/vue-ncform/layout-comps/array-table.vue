@@ -148,7 +148,7 @@
 <script>
 
 import _map from 'lodash-es/map'
-import { ncformUtils, ncformMixins } from '@ncform/ncform-common'
+import { ncformUtils, ncformMixins } from '@ncform-plus/ncform-common'
 
 const { layoutArrayMixin } = ncformMixins.vue
 

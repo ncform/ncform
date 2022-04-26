@@ -1,7 +1,6 @@
 {
-  "name": "@ncform/ncform",
+  "name": "@ncform-plus/ncform",
   "version": "2.0.0",
-  "private": true,
   "main": "dist/vueNcform.umd.js",
   "module": "dist/vueNcform.es.js",
   "style": "dist/index.css",
@@ -9,7 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@ncform/ncform-common": "^2.0.0",
+    "@ncform-plus/ncform-common": "^2.0.0",
     "lodash-es": "^4.17.21",
     "vue": "^3.0.0",
     "vue-scrollto": "^2.20.0"

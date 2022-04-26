@@ -1,14 +1,18 @@
 {
-  "name": "@ncform/ncform-common",
+  "name": "@ncform-plus/ncform-common",
   "version": "2.0.0",
   "description": "ncform common",
   "main": "dist/ncformCommon.umd.js",
   "module": "dist/ncformCommon.es.js",
+  "tpyes": "dist/types/index.d.ts",
   "scripts": {
     "build": "vite build"
   },
   "devDependencies": {
-    "vite": "^2.7.2"
+    "@types/extend": "^3.0.1",
+    "@types/lodash-es": "^4.17.6",
+    "vite": "^2.7.2",
+    "vite-plugin-dts": "^1.1.0"
   },
   "dependencies": {
     "axios": "^0.24.0"

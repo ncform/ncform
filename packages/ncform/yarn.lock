@@ -982,9 +982,9 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@ncform/ncform-common@^1.7.9":
+"@ncform-plus/ncform-common@^1.7.9":
   version "1.7.9"
-  resolved "https://registry.npmjs.org/@ncform/ncform-common/-/ncform-common-1.7.9.tgz#c62fed2cd5a94f8b77e796e357c0652e1787de2b"
+  resolved "https://registry.npmjs.org/@ncform-plus/ncform-common/-/ncform-common-1.7.9.tgz#c62fed2cd5a94f8b77e796e357c0652e1787de2b"
   integrity sha512-LDlCP6pb8Y2fc3rktPymWg7+zjSCsdL2Uy3MK1l6PtosVHyQWeAFdkRm07xSFkzIfhiY9iIkMltLAIPr/ODHaQ==
   dependencies:
     assert "^1.4.1"
