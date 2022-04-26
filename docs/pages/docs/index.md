@@ -9,8 +9,7 @@
 1.install
 
 ``` bash
-npm i @ncform-plus/ncform @ncform-plus/ncform-common --save
-npm i @ncform-plus/ncform-theme-elementui element-ui axios --save 
+yarn add @ncform-plus/ncform @ncform-plus/ncform-theme-elementui element-plus
 ```
 
 2.import
@@ -22,54 +21,57 @@ import ncformStdComps from '@ncform-plus/ncform-theme-elementui'
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import 'element-plus/theme-chalk/index.css'
-import('@ncform-plus/ncform/dist/style.css')
-import('@ncform-plus/ncform-theme-elementui/dist/style.css')
+import '@ncform-plus/ncform/dist/style.css'
+import '@ncform-plus/ncform-theme-elementui/dist/style.css'
 
 createApp(App)
-  .mount('#app')
   .use(ElementPlus)
   .use(vueNcform, { extComponents: ncformStdComps })
+  .mount('#app')
 ```
 
 3.usage
 
 ``` vue
 <template>
-  <div>
-    <ncform :form-schema="formSchema" form-name="your-form-name" v-model="formSchema.value" @submit="submit()"></ncform>
-    <el-button @click="submit()">Submit</el-button>
-  </div>
+  <ncform
+    form-name="your-form-name"
+    v-model="formData"
+    :form-schema="formSchema"
+    @submit="submit"
+  />
+  <el-button @click="submit">Submit</el-button>
 </template>
 
-<script>
-export default {
-  data () {
-    return {
-      formSchema: {
-        type: 'object',
-        properties: {
-          name: {
-            type: 'string'
-          }
-        }
-      }
-    }
-  },
-  methods: {
-    submit () {
-      this.$ncformValidate('your-form-name').then(data => {
-        if (data.result) {
-          console.log(this.$data.formSchema.value)
-          // do what you like to do
-        }
-      })
+<script setup>
+import { ref } from 'vue'
+import { useNcform } from '@ncform-plus/ncform'
+import HelloWorld from './components/HelloWorld.vue'
+
+const formData = ref({})
+const { ncformValidate } = useNcform()
+
+const formSchema = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string'
     }
   }
+}
+
+const submit = () => {
+  ncformValidate('your-form-name').then(data => {
+    if (data.result) {
+      console.log(formData.value)
+      // do what you like to do
+    }
+  })
 }
 </script>
 ```
 
-可参考[ncform-demo](https://github.com/daniel-dx/ncform-demo)项目
+可参考 [ncform-demo](https://github.com/daniel-dx/ncform-demo) 项目
 
 ## 特性
 
@@ -108,27 +110,27 @@ SO，为了提高表单开发效率，减少失误，提高表单规范和健壮
 
 为了解决以上问题，走上了造轮子之路。。。
 
-## 为什么不用标准的json-schema？
+## 为什么不用标准的 json-schema
 
-因为json-schema是面向数据(data)而非表单(ui)，对于声明一个表单不太友好。  
+因为 json-schema 是面向数据 (data) 而非表单 (ui)，对于声明一个表单不太友好。  
 
 对于一个表单，关心的是有哪些表单项，表单项长啥样，校验规则怎样，这些都跟字段相关，在一处管理最直观
 
 来个简单的对比：
 
-- json-schema例子：
+- json-schema 例子：
 
 ![json-schema sample](https://github.com/ncform/ncform/raw/master/docs/images/json-schema-sample.jpg)
 
-- ncform例子：
+- ncform 例子：
 
 ![ncform schema sample](https://github.com/ncform/ncform/raw/master/docs/images/ncform-schema-sample.jpg)
 
-json-schema对于验证规则，声明在各个地方，不好管理。而ncform都集中在rules。这种设计也便于后面开发表单制作IDE
+json-schema 对于验证规则，声明在各个地方，不好管理。而 ncform 都集中在 rules。这种设计也便于后面开发表单制作 IDE
 
 ## dx表达式
 
-通过`dx`表达式，你可以通过`{{$root.xxx}}`取得指定字段的值，然后用原生的JS书写你的任意逻辑表达式
+通过 `dx` 表达式，你可以通过 `{{$root.xxx}}` 取得指定字段的值，然后用原生的 JS 书写你的任意逻辑表达式
 
 - 指定对象中的属性值，例子：
 ``` js
