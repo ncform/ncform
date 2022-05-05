@@ -1,22 +1,21 @@
-import ncformCommon from "@ncform/ncform-common";
+import { ncformUtils, ValidationRule} from '@ncform-plus/ncform-common'
 
-const { notEmptyVal, getValType } = ncformCommon.ncformUtils;
-const { ValidationRule } = ncformCommon;
+const { notEmptyVal, getValType } = ncformUtils
 
 class PatternRule extends ValidationRule {
-  constructor(props) {
-    super(props);
-    this.name = "pattern";
-    this.defaultErrMsg = "pattern validate error";
+  constructor (props) {
+    super(props)
+    this.name = 'pattern'
+    this.defaultErrMsg = 'pattern validate error'
   }
 
-  validateLogic(val, ruleVal) {
-    if (!notEmptyVal(ruleVal) && getValType(ruleVal) !== "regexp") return true;
+  validateLogic (val, ruleVal) {
+    if (!notEmptyVal(ruleVal) && getValType(ruleVal) !== 'regexp') return true
 
-    if (getValType(ruleVal) === "string") ruleVal = new RegExp(ruleVal);
+    if (getValType(ruleVal) === 'string') ruleVal = new RegExp(ruleVal)
 
-    return ruleVal.test(val);
+    return ruleVal.test(val)
   }
 }
 
-module.exports = PatternRule;
+export default PatternRule

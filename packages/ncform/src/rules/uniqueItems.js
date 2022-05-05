@@ -1,20 +1,19 @@
-import ncformCommon from "@ncform/ncform-common";
+import { ncformUtils, ValidationRule } from '@ncform-plus/ncform-common'
 
-const { getValType } = ncformCommon.ncformUtils;
-const { ValidationRule } = ncformCommon;
+const { getValType } = ncformUtils
 
 class UniqueItemsRule extends ValidationRule {
-  constructor(props) {
-    super(props);
-    this.name = "uniqueItems";
-    this.defaultErrMsg = "uniqueItems validate error";
+  constructor (props) {
+    super(props)
+    this.name = 'uniqueItems'
+    this.defaultErrMsg = 'uniqueItems validate error'
   }
 
-  validateLogic(val, ruleVal) {
-    if (!ruleVal) return true;
-    if (getValType(val) !== "array") return true;
-    return new Set(val).size === val.length;
+  validateLogic (val, ruleVal) {
+    if (!ruleVal) return true
+    if (getValType(val) !== 'array') return true
+    return new Set(val).size === val.length
   }
 }
 
-module.exports = UniqueItemsRule;
+export default UniqueItemsRule

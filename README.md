@@ -1,7 +1,7 @@
 # ncform 
 
 [![CircleCI](https://img.shields.io/circleci/project/github/ncform/ncform/master.svg)](https://circleci.com/gh/ncform/ncform/tree/master)
-![vue 2.x](https://img.shields.io/badge/vue-2.x-green.svg)
+![vue 3.x](https://img.shields.io/badge/vue-3.x-green.svg)
 ![license MIT](https://img.shields.io/npm/l/vue.svg)
 [![Cypress.io tests](https://img.shields.io/badge/cypress.io-tests-green.svg?style=flat-square)](https://dashboard.cypress.io/#/projects/enxoqt/runs)
 [![Gitter](https://img.shields.io/badge/GITTER-JOIN%20CHAT%20%E2%86%92-ff69b4.svg?style=flat-square)](https://gitter.im/ncform/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -47,122 +47,69 @@ Experience the charm of ncform on the [Playground](https://ncform.github.io/ncfo
 
 ## Quick Start
 
-### In node.js
-
 1.install
-```
-npm i @ncform/ncform @ncform/ncform-common --save
-npm i @ncform/ncform-theme-elementui element-ui axios --save 
+
+``` bash
+yarn add @ncform-plus/ncform @ncform-plus/ncform-theme-elementui element-plus
 ```
 
 2.import
-```
-import Vue from 'vue';
-import vueNcform from '@ncform/ncform';
 
-import Element from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import ncformStdComps from '@ncform/ncform-theme-elementui';
-import axios from 'axios';
+``` js
+import { createApp } from 'vue';
+import vueNcform from '@ncform-plus/ncform'
+import ncformStdComps from '@ncform-plus/ncform-theme-elementui'
+import ElementPlus from 'element-plus'
+import App from './App.vue'
+import 'element-plus/theme-chalk/index.css'
+import '@ncform-plus/ncform/dist/style.css'
+import '@ncform-plus/ncform-theme-elementui/dist/style.css'
 
-Vue.use(Element);
-Vue.use(vueNcform, { extComponents: ncformStdComps, /*lang: 'zh-cn'*/ });
-window.$http = Vue.prototype.$http = axios;
+createApp(App)
+  .use(ElementPlus)
+  .use(vueNcform, { extComponents: ncformStdComps })
+  .mount('#app')
 ```
 
 3.usage
-```
-# demo.vue
 
+``` vue
 <template>
-  <div>
-    <ncform :form-schema="formSchema" form-name="your-form-name" v-model="formSchema.value" @submit="submit()"></ncform>
-    <el-button @click="submit()">Submit</el-button>
-  </div>
+  <ncform
+    form-name="your-form-name"
+    v-model="formData"
+    :form-schema="formSchema"
+    @submit="submit"
+  />
+  <el-button @click="submit">Submit</el-button>
 </template>
-<script>
-export default {
-  data () {
-    return {
-      formSchema: {
-        type: 'object',
-        properties: {
-          name: {
-            type: 'string'
-          }
-        }
-      }
-    }
-  },
-  methods: {
-    submit () {
-      this.$ncformValidate('your-form-name').then(data => {
-        if (data.result) {
-          console.log(this.$data.formSchema.value)
-          // do what you like to do
-        }
-      })
+
+<script setup>
+import { ref } from 'vue'
+import { useNcform } from '@ncform-plus/ncform'
+import HelloWorld from './components/HelloWorld.vue'
+
+const formData = ref({})
+const { ncformValidate } = useNcform()
+
+const formSchema = {
+  type: 'object',
+  properties: {
+    name: {
+      type: 'string'
     }
   }
 }
+
+const submit = () => {
+  ncformValidate('your-form-name').then(data => {
+    if (data.result) {
+      console.log(formData.value)
+      // do what you like to do
+    }
+  })
+}
 </script>
-```
-You can refer to the [ncform-demo](https://github.com/daniel-dx/ncform-demo) project
-
-### In browser
-
-```
-<html>
-
-<head>
-  <link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.3/lib/theme-chalk/index.css">
-</head>
-
-<body>
-  <div id="demo">
-    <ncform :form-schema="formSchema" form-name="your-form-name" v-model="formSchema.value" @submit="submit()"></ncform>
-    <el-button @click="submit()">Submit</el-button>
-  </div>
-
-  <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-common/dist/ncformCommon.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform/dist/vueNcform.min.js"></script>
-
-  <script type="text/javascript" src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/@ncform/ncform-theme-elementui/dist/ncformStdComps.min.js"></script>
-
-  <script type="text/javascript">
-    Vue.use(vueNcform, { extComponents: ncformStdComps, /*lang: 'zh-cn'*/ });
-
-    // Bootstrap the app
-    new Vue({
-      el: '#demo',
-      data: {
-        formSchema: {
-          type: 'object',
-          properties: {
-            name: {
-              type: 'string'
-            }
-          }
-        }
-      },
-      methods: {
-        submit() {
-          this.$ncformValidate('your-form-name').then(data => {
-            if (data.result) {
-              // do what you like to do
-            }
-          });
-        }
-      }
-    });
-  </script>
-</body>
-
-</html>
 ```
 
 ## Features

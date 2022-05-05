@@ -1,72 +1,20 @@
 {
-  "name": "@ncform/ncform-common",
-  "version": "1.7.9",
+  "name": "@ncform-plus/ncform-common",
+  "version": "2.0.0",
   "description": "ncform common",
-  "main": "dist/ncformCommon.min.js",
+  "main": "dist/ncformCommon.umd.js",
+  "module": "dist/ncformCommon.es.js",
+  "tpyes": "dist/types/index.d.ts",
   "scripts": {
-    "test": "mocha --recursive --require ./test/unit/testHelper.js -t 5000",
-    "build": "gulp build",
-    "watch": "gulp watch",
-    "watch-build": "gulp watch-build",
-    "release": "cross-env NODE_ENV=production gulp build"
+    "build": "vite build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ncform/ncform.git"
-  },
-  "keywords": [
-    "json",
-    "form",
-    "automatic",
-    "json-schema",
-    "ncform"
-  ],
-  "author": "daniel.xiao",
-  "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-polyfill": "6.13.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-power-assert": "^1.0.0",
-    "babel-register": "^6.26.0",
-    "chai": "3.5.0",
-    "cross-env": "^5.2.0",
-    "del": "2.2.2",
-    "glob": "7.0.6",
-    "gulp": "^4.0.0",
-    "gulp-eslint": "3.0.1",
-    "gulp-filter": "4.0.0",
-    "gulp-istanbul": "^1.1.3",
-    "gulp-livereload": "^4.0.1",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-mocha": "^6.0.0",
-    "gulp-plumber": "^1.2.1",
-    "gulp-rename": "1.2.2",
-    "gulp-sourcemaps": "1.6.0",
-    "gulp-uglify": "2.0.0",
-    "isparta": "^4.1.1",
-    "json-loader": "0.5.4",
-    "mocha": "^6.0.2",
-    "sinon": "1.17.5",
-    "sinon-chai": "2.8.0",
-    "webpack-stream": "^5.1.0"
-  },
-  "files": [
-    "src",
-    "dist"
-  ],
-  "babelBoilerplateOptions": {
-    "entryFileName": "index.js",
-    "mainVarName": "ncformCommon"
+    "@types/extend": "^3.0.1",
+    "@types/lodash-es": "^4.17.6",
+    "vite": "^2.7.2",
+    "vite-plugin-dts": "^1.1.0"
   },
   "dependencies": {
-    "assert": "^1.4.1",
-    "axios": "^0.21.1",
-    "extend": "^3.0.2",
-    "lodash-es": "^4.17.4",
-    "power-assert": "^1.4.4"
-  },
-  "publishConfig": {
-    "access": "public"
+    "axios": "^0.24.0"
   }
 }
