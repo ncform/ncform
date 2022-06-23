@@ -42,7 +42,7 @@
     "gulp-notify": "^3.2.0",
     "gulp-sequence": "^0.4.6",
     "html-loader": "^0.5.1",
-    "jsdom": "^14.0.0",
+    "jsdom": "^16.5.0",
     "jsdom-global": "3.0.2",
     "map-stream": "0.0.6",
     "mocha": "^4.0.1",
